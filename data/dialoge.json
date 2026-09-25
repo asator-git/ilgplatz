@@ -42,7 +42,8 @@
     "naechstesEvent": "{zeit}: {name}",
     "du": "Du: {n}",
     "fuehrung": "Du führst mit {n}! Bleib dran bis 23:00.",
-    "rueckstand": "Dir fehlen {n} auf {rivale} – mach Aufträge (gelbes !)."
+    "rueckstand": "Dir fehlen {n} auf {rivale} – mach Aufträge (gelbes !).",
+    "aktuellerAuftrag": "Aktueller Auftrag"
   },
   "raenge": {
     "zuagraster": "Zuagraster",

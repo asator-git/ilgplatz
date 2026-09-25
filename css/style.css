@@ -86,8 +86,20 @@ button { font-family: inherit; }
 #wait .bar { height: 14px; margin: 8px 0; }
 #waitBar { background: linear-gradient(#ffd166, #f77f00) !important; transition: width .15s linear !important; }
 #waitHint { color: var(--green); font-size: var(--fs-s); animation: blink 1.2s infinite; }
-.quest.now { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold) inset; }
+/* Aktueller Auftrag: groß und deutlich */
+.quest.now {
+  display: block; border: 3px solid #000; border-left: 8px solid var(--gold); outline: 2px solid var(--gold);
+  background: #1b1733f2; padding: 10px 14px; margin-bottom: 6px; font-size: calc(var(--fs) * 1.25); line-height: 1.6;
+  box-shadow: 4px 4px 0 #0009; animation: nowpulse 2.4s ease-in-out infinite;
+}
+.quest.now.must { border-left-color: var(--red); outline-color: var(--red); }
+.quest.now .qhead { display: flex; justify-content: space-between; font-size: var(--fs-s); color: #bde0fe; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 1px; }
+.quest.now .qt { font-size: calc(var(--fs) * 1.45); color: var(--gold); margin-bottom: 3px; }
 .quest.now .qt::before { content: '▶ '; }
+.quest.now .qtext { color: #fff; }
+.quest.now .timer { font-size: calc(var(--fs) * 1.1); }
+@keyframes nowpulse { 50% { outline-color: #fff8e7; } }
+.quest.must.now { animation-duration: 1.2s; }
 .iconbtn {
   pointer-events: auto; width: 34px; height: 30px; font-size: 10px; color: var(--ink);
   background: #3d3a5c; border: 2px solid #000; border-radius: 4px; box-shadow: 2px 2px 0 #0008; cursor: pointer;
@@ -111,7 +123,7 @@ button { font-family: inherit; }
 
 #bottomBox {
   position: absolute; left: 50%; bottom: max(8px, env(safe-area-inset-bottom)); transform: translateX(-50%);
-  width: min(96vw, 620px); display: flex; flex-direction: column; align-items: center; gap: 4px;
+  width: min(96vw, 760px); display: flex; flex-direction: column; align-items: center; gap: 4px;
 }
 #prompt { background: #000c; border: 2px solid var(--gold); color: var(--gold); padding: 4px 8px; font-size: var(--fs-s); border-radius: 3px; }
 #quests { width: 100%; }
@@ -241,7 +253,13 @@ input.name {
   .cards { grid-template-columns: 1fr 1fr; }
   .card img { width: 32px; height: 48px; }
 }
+@media (max-width: 700px) {
+  .quest.now { font-size: var(--fs); padding: 6px 10px; }
+  .quest.now .qt { font-size: calc(var(--fs) * 1.2); }
+}
 @media (max-height: 460px) and (orientation: landscape) {
+  .quest.now { font-size: var(--fs-s); padding: 4px 8px; }
+  .quest.now .qt { font-size: var(--fs); }
   #toasts .toast:nth-last-child(n+3) { display: none; }
   #toasts { max-width: 24vw; }
   .quest { padding: 2px 6px; }

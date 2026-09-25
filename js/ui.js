@@ -125,7 +125,12 @@ const UI = {
     list.slice(0, 3).forEach(q => {
       const d = document.createElement('div');
       d.className = 'quest' + (q.must ? ' must' : '') + (q.now ? ' now' : '');
-      d.innerHTML = `<span><span class="qt">${escapeHtml(q.title)}:</span> ${escapeHtml(q.text)}</span>` + (q.timer ? `<span class="timer">${escapeHtml(q.timer)}</span>` : '');
+      if (q.now) {
+        d.innerHTML = `<div class="qhead"><span>${escapeHtml(T('ui.aktuellerAuftrag', null, 'Aktueller Auftrag'))}</span>` + (q.timer ? `<span class="timer">⏱ ${escapeHtml(q.timer)}</span>` : '') + `</div>`
+          + `<div class="qt">${escapeHtml(q.title)}</div><div class="qtext">${escapeHtml(q.text)}</div>`;
+      } else {
+        d.innerHTML = `<span><span class="qt">${escapeHtml(q.title)}:</span> ${escapeHtml(q.text)}</span>` + (q.timer ? `<span class="timer">${escapeHtml(q.timer)}</span>` : '');
+      }
       el.appendChild(d);
     });
     if (list.length > 3) {
