@@ -23,7 +23,8 @@ const server = http.createServer((req, res) => {
 await new Promise(r => server.listen(0, r));
 const port = server.address().port;
 const args = process.argv.slice(2);
-const mobile = args.includes('--mobile');
+const mobile = args.includes('--mobile') || args.includes('--landscape');
+const MOBILE_VP = args.includes('--landscape') ? { width: 844, height: 390 } : { width: 390, height: 844 };
 const pos = args.filter(a => !a.startsWith('--'));
 const query = pos[0] || '';
 const secs = parseFloat(pos[1] || '10');
@@ -33,7 +34,7 @@ const evalFile = (args.find(a => a.startsWith('--eval=')) || '').slice(7);
 let browser;
 try { browser = await pw.chromium.launch({ channel: 'chrome', headless: true }); }
 catch (e) { browser = await pw.chromium.launch({ headless: true }); }
-const ctx = await browser.newContext(mobile ? { viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, isMobile: true, hasTouch: true } : { viewport: { width: 1280, height: 760 } });
+const ctx = await browser.newContext(mobile ? { viewport: MOBILE_VP, deviceScaleFactor: 2, isMobile: true, hasTouch: true } : { viewport: { width: 1280, height: 760 } });
 const page = await ctx.newPage();
 const errors = [];
 page.on('console', m => { if (m.type() === 'error') errors.push('console: ' + m.text()); if (m.type() === 'log' && m.text().startsWith('[T]')) console.log(m.text()); });
