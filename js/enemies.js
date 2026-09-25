@@ -5,6 +5,18 @@
 
 const EXES = ['sandra', 'bianca', 'kathi', 'melli'];
 
+// Erwin springt von Thema zu Thema – nie zweimal dasselbe hintereinander
+const Erwin = {
+  last: {},
+  next(key) {
+    const list = TL('npc.erwin.' + key, ['Kennst du Gipsy-Jazz?']);
+    let i = Math.floor(Math.random() * list.length);
+    if (list.length > 1 && i === this.last[key]) i = (i + 1 + Math.floor(Math.random() * (list.length - 1))) % list.length;
+    this.last[key] = i;
+    return fmt(list[i]);
+  }
+};
+
 const Enemies = {
   cars: [],
   puddles: [],
@@ -44,11 +56,12 @@ const Enemies = {
     // Erwins Monologe werden immer länger
     e.lineOverride = () => {
       if (e.state !== 'normal') return null;
-      // Jedes zweite Mal: Carbon-Rad, Stimmung, Ulli, Auto im Burgenland …
-      if (!G.flags.konzert && e.talkIdx % 2 === 1) { e.talkIdx++; return TN('npc.erwin.themen', Math.floor(e.talkIdx / 2)); }
-      const list = TL('npc.erwin.' + (G.flags.konzert ? 'konzert' : 'normal'));
-      const i = Math.min(e.talkIdx++, list.length - 1);
-      return fmt(list[i]);
+      if (G.flags.konzert) return TN('npc.erwin.konzert', e.talkIdx++);
+      // Wild durcheinander: Gitarre, Carbon-Radl, Auto, Burgenland, Ulli, Klavier …
+      // Jedes vierte Mal ein langer Monolog (wird immer länger)
+      e.talkIdx++;
+      if (e.talkIdx % 4 === 0) { const list = TL('npc.erwin.normal'); return fmt(list[Math.min(Math.floor(e.talkIdx / 4) - 1, list.length - 1)]); }
+      return Erwin.next('themen');
     };
     this.erwinRing = scene.add.graphics().setDepth(5);
     // Marco
@@ -481,7 +494,9 @@ const Enemies = {
       g.strokeCircle(e.x, e.y - 4, R);
       g.fillStyle(0xe9c46a, 0.06);
       g.fillCircle(e.x, e.y - 4, R);
-      if (Math.random() < dt / 2500) scene.say(e, G.flags.konzert ? TN('npc.erwin.konzert', e.talkIdx) : T('npc.erwin.themenKurz', null, 'Kennst du Gipsy-Jazz?'), 2600);
+      // Plappert vor sich hin – und wechselt ständig das Thema
+      const near = dist(e.x, e.y, scene.player.x, scene.player.y) < 150;
+      if (!e.bubble && Math.random() < dt / (near ? B('gegner.erwinPlapperMsNah', 3500) : 9000)) scene.say(e, G.flags.konzert ? TN('npc.erwin.konzert', e.talkIdx++) : Erwin.next('themenKurz'), 3200);
       if (G.flags.konzert && Math.random() < dt / 1500) Sfx.play('guitar');
     }
     e.extraIcon = active ? 'ic_note' : null;

@@ -170,7 +170,8 @@
     "nadjaKummerTempo": 0.55,
     "nadjaKummerTorkeln": 0.7,
     "nadjaWartenMin": 25,
-    "nadjaKummerNpcMin": 30
+    "nadjaKummerNpcMin": 30,
+    "erwinPlapperMsNah": 3500
   },
   "auftraege": {
     "maxOffen": 3,
