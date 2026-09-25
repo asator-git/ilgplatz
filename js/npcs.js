@@ -54,6 +54,9 @@ const NPCs = {
       });
     }
     scene.actors.daniel.shopId = 'cafe';
+    // Daniel ist unfreundlich zu Jewi (und nach der Doppler-Aktion zu allen)
+    const dan = scene.actors.daniel;
+    dan.lineOverride = () => (dan.state === 'normal' && (G.figur === 'jewi' || G.flags.dopplerImCafe || G.flags.derb)) ? TN('npc.daniel.unfreundlich', dan.talkIdx++) : null;
     // Über die Theke mit Daniel reden
     const c = LOC.counter;
     scene.interactables.push({

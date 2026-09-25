@@ -12,6 +12,7 @@ const QL = (id, k, fb) => TL('quests.' + id + '.' + k, fb ? [fb] : undefined);
 const Quests = {
   init(scene) {
     this.scene = scene;
+    if (typeof Shops !== 'undefined') Shops.kickCd = 0;
     G.q = {};
     for (const id of QUEST_ORDER) G.q[id] = { status: 'locked', step: null, data: {}, readyAt: 0 };
     G.q.start.status = 'active';
@@ -225,6 +226,8 @@ const Quests = {
       const d = QDEF[id];
       if (this.isActive(id) && d && d.update) d.update(scene, G.q[id], dt);
     }
+    // „Guten Morgen“ verfällt still, wenn der Countdown beginnt
+    if (this.isActive('start') && m >= parseClock(B('auftraege.americanoStart', '10:40'), 640)) G.q.start.status = 'done';
     if (typeof Shops !== 'undefined') Shops.update(scene);
     // Schlosser „packt“ jede zweite halbe Stunde
     G.flags.schlosserPackt = Math.floor(m / 30) % 2 === 0;

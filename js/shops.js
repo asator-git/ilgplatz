@@ -97,7 +97,8 @@ const Shops = {
   update(scene) {
     const p = scene.player;
     if (G.ended || p.state === 'hospital' || UI.isBlocking()) return;
-    if (G.money < B('ansehen.ohneGeldSchwelle', 1) && isCafeFloor(p.x, p.y) && tileAt(scene.grid, p.x, p.y) !== TI.DOOR && G.realMs > this.kickCd) {
+    const exempt = scene.hasItem('kleber') || G.flags.geklebt || (scene.actors.doppler && scene.actors.doppler.data.led && !scene.actors.doppler.data.done);
+    if (!exempt && G.money < B('ansehen.ohneGeldSchwelle', 1) && isCafeFloor(p.x, p.y) && tileAt(scene.grid, p.x, p.y) !== TI.DOOR && G.realMs > this.kickCd) {
       this.kickCd = G.realMs + 30000;
       scene.addRep(-B('ansehen.ohneGeldImCafe', 10), T('shops.rausKurz', null, 'Ohne Geld im Café'));
       UI.dialog([{ who: scene.actors.daniel.name, text: T('shops.raus', null, 'Ohne Geld? In MEINER Society? Raus!') }], {

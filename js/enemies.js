@@ -13,6 +13,7 @@ const Enemies = {
     this.scene = scene;
     this.cars = [];
     this.puddles = [];
+    this.pimpCd = 0; this.slipCd = 0;
     const px = (t) => ({ x: t.x * TILE + 8, y: t.y * TILE + 13 });
     const add = (id, opts) => {
       const a = new Actor(scene, id, opts);

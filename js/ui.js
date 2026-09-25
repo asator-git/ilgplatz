@@ -327,6 +327,7 @@ const UI = {
     const html = `<div class="menu">
       <div class="title">${escapeHtml(T('ui.titel', null, 'Bürgermeister vom Stuwerviertel'))}</div>
       <div class="subtitle">${escapeHtml(T('ui.untertitel', null, 'Ein Tag am Ilgplatz'))}</div>
+      ${DATA.dialoge && DATA.dialoge.ui ? '' : '<div class="box" style="color:#ef476f">Achtung: Die Texte (data/dialoge.json) konnten nicht geladen werden. Starte das Spiel bitte über einen Webserver, z. B. im Ordner: python3 -m http.server 8000 → http://localhost:8000</div>'}
       <div class="box" style="text-align:center">${escapeHtml(T('ui.waehleFigur', null, 'Wähle deine Figur:'))}</div>
       <div class="cards">${cards}</div>
       <div class="box"><h3>${escapeHtml(T('ui.steuerungTitel', null, 'Steuerung'))}</h3>${TL('ui.steuerung', ['Pfeiltasten/WASD: gehen', 'Leertaste: Aktion', 'E: Spezial', 'Esc: Pause']).map(escapeHtml).join('<br>')}</div>
