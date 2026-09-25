@@ -37,7 +37,7 @@ const Shops = {
         }
         break;
       }
-      case 'wirt': {
+      case 'bernd': {
         const open = G.minute >= parseClock(B('events.nachtStart', '21:00'), 1260);
         if (open && !G.flags.spritzer) {
           const c = B('preise.spritzer', 4);

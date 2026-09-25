@@ -446,59 +446,130 @@ const UI = {
     $('endAgain').addEventListener('click', () => { save(); onAgain(); });
   },
 
-  // ---- Minispiel: Schrauben in Reihenfolge ----
+  // ---- Minispiel: Radl-Notdienst (Schrauben lockern sich – schnell festziehen!) ----
   minigameScrews(cb) {
-    const n = B('minispiele.schraubenAnzahl', 5);
-    let time = B('minispiele.schraubenSekunden', 20);
-    const html = `<div class="mg"><h2>${escapeHtml(T('minispiele.schrauben.titel', null, 'Schrauben in der richtigen Reihenfolge!'))}</h2>
-      <div>${escapeHtml(T('minispiele.schrauben.hilfe', null, 'Tippe 1 bis 5 der Reihe nach an (oder Tasten 1–5).'))}</div>
-      <div class="mgtimer" id="mgT">${time}</div><div class="mgarea" id="mgA"></div></div>`;
-    let next = 1, done = false;
-    const finish = (ok) => {
+    const need = B('minispiele.schraubenZiel', 12), maxMiss = B('minispiele.schraubenFehler', 3);
+    let time = B('minispiele.schraubenSekunden', 25);
+    let windowMs = B('minispiele.schraubenFensterStartMs', 1400);
+    const minWin = B('minispiele.schraubenFensterMinMs', 600);
+    const html = `<div class="mg"><h2>${escapeHtml(T('minispiele.schrauben.titel', null, 'Radl-Notdienst!'))}</h2>
+      <div>${escapeHtml(T('minispiele.schrauben.hilfe', null, 'Schrauben lockern sich! Antippen (oder Taste 1–6), bevor sie rausfallen.'))}</div>
+      <div class="mgstat"><span id="mgOk">0/${need}</span><span class="mgtimer" id="mgT">${time}</span><span id="mgMiss">${'♥'.repeat(maxMiss)}</span></div>
+      <div class="wheelwrap"><div class="wheel" id="mgW"><div class="hub"></div></div></div></div>`;
+    let ok = 0, miss = 0, done = false;
+    const bolts = [];
+    const finish = (win) => {
       if (done) return; done = true;
-      clearInterval(iv);
+      clearInterval(iv); clearTimeout(spawnT);
       if (this.overlayMode !== 'minigame' || (G && G.ended)) return;
-      this.hideOverlay();
-      Sfx.play(ok ? 'good' : 'bad');
-      cb(ok);
+      this.hideOverlay(); Sfx.play(win ? 'good' : 'bad'); cb(win);
     };
-    const hit = (k) => {
-      if (done) return;
-      if (k === next) {
-        Sfx.play('blip');
-        const el = document.querySelector(`.screw[data-n="${k}"]`);
-        if (el) el.classList.add('done');
-        next++;
-        if (next > n) finish(true); else place();
-      } else { Sfx.play('bad'); time = Math.max(0, time - 2); }
+    const tighten = (i) => {
+      const b = bolts[i];
+      if (done || !b || !b.loose) { if (!done) { Sfx.play('blip'); } return; }
+      b.loose = false; clearTimeout(b.t);
+      b.el.className = 'bolt tight';
+      ok++; $('mgOk').textContent = ok + '/' + need;
+      Sfx.play('type');
+      windowMs = Math.max(minWin, windowMs - 60);
+      if (ok >= need) finish(true);
     };
-    this.showOverlay(html, 'minigame', (ev, arg) => { if (ev === 'num') hit(arg); }, true);
-    const area = $('mgA');
-    const place = () => {
-      // Positionen neu würfeln (nicht erledigte)
-      const W = area.clientWidth - 50, H = area.clientHeight - 50;
-      document.querySelectorAll('.screw').forEach(s => {
-        if (s.classList.contains('done')) return;
-        s.style.left = Math.floor(Math.random() * W) + 'px';
-        s.style.top = Math.floor(Math.random() * H) + 'px';
-      });
-    };
-    for (let i = 1; i <= n; i++) {
-      const s = document.createElement('div');
-      s.className = 'screw'; s.dataset.n = i; s.textContent = i;
-      const h = (e) => { e.preventDefault(); e.stopPropagation(); hit(i); };
-      s.addEventListener('mousedown', h);
-      s.addEventListener('touchstart', h, { passive: false });
-      area.appendChild(s);
+    this.showOverlay(html, 'minigame', (ev, arg) => { if (ev === 'num' && arg >= 1 && arg <= 6) tighten(arg - 1); }, true);
+    const wheel = $('mgW');
+    for (let i = 0; i < 6; i++) {
+      const el = document.createElement('div');
+      el.className = 'bolt tight';
+      const a = i / 6 * Math.PI * 2 - Math.PI / 2;
+      el.style.left = (50 + Math.cos(a) * 36) + '%'; el.style.top = (50 + Math.sin(a) * 36) + '%';
+      el.textContent = i + 1;
+      const h = (e) => { e.preventDefault(); e.stopPropagation(); tighten(i); };
+      el.addEventListener('mousedown', h); el.addEventListener('touchstart', h, { passive: false });
+      wheel.appendChild(el);
+      bolts.push({ el, loose: false, t: null });
     }
-    place();
+    let spawnT = null;
+    const spawn = () => {
+      if (done) return;
+      const free = bolts.map((b, i) => i).filter(i => !bolts[i].loose);
+      if (free.length) {
+        const i = pick(free), b = bolts[i];
+        b.loose = true; b.el.className = 'bolt loose';
+        b.el.style.animationDuration = windowMs + 'ms';
+        b.t = setTimeout(() => {
+          if (done || !b.loose) return;
+          b.loose = false; b.el.className = 'bolt lost';
+          miss++; $('mgMiss').textContent = '♥'.repeat(Math.max(0, maxMiss - miss));
+          Sfx.play('bad');
+          setTimeout(() => { if (!done) b.el.className = 'bolt tight'; }, 500);
+          if (miss >= maxMiss) finish(false);
+        }, windowMs);
+      }
+      spawnT = setTimeout(spawn, Math.max(350, windowMs * 0.55));
+    };
+    spawnT = setTimeout(spawn, 600);
     const iv = setInterval(() => {
       if (G && G.paused) return;
       time -= 0.1;
-      const t = $('mgT');
-      if (t) t.textContent = Math.max(0, Math.ceil(time)) + ' s';
+      const t = $('mgT'); if (t) t.textContent = Math.max(0, Math.ceil(time)) + ' s';
       if (time <= 0) finish(false);
     }, 100);
+  },
+
+  // ---- Minispiel: willhaben-Feilschen (im richtigen Moment zuschlagen) ----
+  // cb(endpreis)
+  minigameHaggle(opts, cb) {
+    const rounds = B('minispiele.feilschRunden', 3);
+    let price = opts.price, round = 0, pos = 0, dir = 1, done = false, locked = false;
+    let zone = B('minispiele.feilschZoneStart', 30); // Breite der grünen Zone in %
+    let zoneX = rnd(10, 90 - zone);
+    let speed = B('minispiele.feilschTempo', 90);    // % pro Sekunde
+    const html = `<div class="mg"><h2>${escapeHtml(T('minispiele.feilschen.titel', { item: opts.item }, 'Feilschen: {item}'))}</h2>
+      <div>${escapeHtml(opts.line || '')}</div>
+      <div class="bigprice" id="hgP">${euro(price)}</div>
+      <div class="haggle"><div class="hzone" id="hgZ"></div><div class="hneedle" id="hgN"></div></div>
+      <div id="hgMsg">${escapeHtml(T('minispiele.feilschen.hilfe', null, 'Drück A / Leertaste, wenn die Nadel im grünen Bereich ist!'))}</div>
+      <div class="mgstat"><span id="hgR">${T('minispiele.feilschen.runde', { n: 1, max: rounds }, 'Runde {n}/{max}')}</span></div>
+      <button class="bigbtn" id="hgB">${escapeHtml(T('minispiele.feilschen.bieten', null, 'BIETEN!'))}</button></div>`;
+    const setZone = () => { const z = $('hgZ'); if (z) { z.style.left = zoneX + '%'; z.style.width = zone + '%'; } };
+    const finish = () => {
+      if (done) return; done = true; clearInterval(iv);
+      if (this.overlayMode !== 'minigame' || (G && G.ended)) return;
+      setTimeout(() => { if (this.overlayMode === 'minigame') this.hideOverlay(); cb(price); }, 900);
+    };
+    const bid = () => {
+      if (done || locked) return;
+      locked = true;
+      const center = zoneX + zone / 2;
+      let msg, cut;
+      if (pos >= zoneX && pos <= zoneX + zone) {
+        const perfect = Math.abs(pos - center) < zone * 0.18;
+        cut = perfect ? B('minispiele.feilschPerfekt', 0.35) : B('minispiele.feilschGut', 0.2);
+        msg = perfect ? T('minispiele.feilschen.perfekt', null, 'PERFEKT! „Na guat, weil du’s bist.“') : T('minispiele.feilschen.gut', null, 'Gut! „Passt, a bissl runter.“');
+        Sfx.play(perfect ? 'good' : 'coin');
+      } else { cut = 0; msg = T('minispiele.feilschen.daneben', null, 'Daneben! „Na, sicher ned.“'); Sfx.play('bad'); }
+      price = Math.max(opts.min, Math.round(price * (1 - cut) * 2) / 2);
+      $('hgP').textContent = euro(price); $('hgMsg').textContent = msg;
+      round++;
+      if (round >= rounds) { $('hgMsg').textContent = msg + ' ' + T('minispiele.feilschen.deal', { preis: euro(price) }, 'Deal: {preis}'); finish(); return; }
+      setTimeout(() => {
+        if (done) return;
+        locked = false;
+        zone = Math.max(10, zone - 7); zoneX = rnd(5, 95 - zone); speed *= 1.25; setZone();
+        $('hgR').textContent = T('minispiele.feilschen.runde', { n: round + 1, max: rounds }, 'Runde {n}/{max}');
+      }, 700);
+    };
+    this.showOverlay(html, 'minigame', (ev) => { if (ev === 'action' || ev === 'confirm') bid(); }, true);
+    setZone();
+    const btn = $('hgB');
+    btn.addEventListener('mousedown', (e) => { e.preventDefault(); bid(); });
+    btn.addEventListener('touchstart', (e) => { e.preventDefault(); e.stopPropagation(); bid(); }, { passive: false });
+    const iv = setInterval(() => {
+      if ((G && G.paused) || locked) return;
+      pos += dir * speed * 0.016;
+      if (pos >= 100) { pos = 100; dir = -1; }
+      if (pos <= 0) { pos = 0; dir = 1; }
+      const n = $('hgN'); if (n) n.style.left = pos + '%';
+    }, 16);
   },
 
   // ---- Minispiel: Tastenfolge (Hacken) ----

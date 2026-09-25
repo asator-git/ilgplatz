@@ -105,7 +105,7 @@ const Abilities = {
 
   eat(scene, fromShop) {
     const p = scene.player;
-    const food = ['essen', 'kipferl'].find(k => scene.hasItem(k));
+    const food = FOOD_ITEMS.find(k => scene.hasItem(k));
     if (!food) { UI.toast(T('spezialText.nixZumEssen', null, 'Nix zum Jausnen dabei. Ab zum Deewan!'), 'bad'); return false; }
     scene.takeItem(food);
     this.feedAndi(scene, food === 'kipferl' ? B('figuren.andi.kipferlSaettigung', 60) : 100);

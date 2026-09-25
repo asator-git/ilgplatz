@@ -44,6 +44,8 @@ const Enemies = {
     // Erwins Monologe werden immer länger
     e.lineOverride = () => {
       if (e.state !== 'normal') return null;
+      // Jedes zweite Mal: Carbon-Rad, Stimmung, Ulli, Auto im Burgenland …
+      if (!G.flags.konzert && e.talkIdx % 2 === 1) { e.talkIdx++; return TN('npc.erwin.themen', Math.floor(e.talkIdx / 2)); }
       const list = TL('npc.erwin.' + (G.flags.konzert ? 'konzert' : 'normal'));
       const i = Math.min(e.talkIdx++, list.length - 1);
       return fmt(list[i]);
@@ -54,12 +56,12 @@ const Enemies = {
     m.talkRep = false;
     m.customUpdate = (dt) => this.marcoUpdate(m, dt);
     m.data.nextKo = 0;
-    m.lineOverride = () => (G.marcoHired && m.state === 'normal') ? TN('npc.marco.angeheuert', m.talkIdx++) : null;
+    m.lineOverride = () => (m.state !== 'normal') ? null : (G.marcoHired ? TN('npc.marco.angeheuert', m.talkIdx++) : (Specials.marcoAtBar() ? TN('npc.marco.bier', m.talkIdx++) : null));
     // Kiwara (ab 19 Uhr)
     for (let i = 1; i <= 4; i++) {
-      const k = add('kiwara' + i, { kind: 'police', tex: 'kiwara', name: T('npc.kiwara.name', null, 'Kiwara'), pos: px(LOC.lanterns[(i * 2) % 8]), speed: B('gegner.kiwaraTempo', 38), labelColor: '#90e0ef' });
+      const k = add('kiwara' + i, { kind: 'police', tex: 'kiwara', name: T('npc.kiwara.name', null, 'Kiwara'), pos: px(LOC.lanterns[(i * 2) % LOC.lanterns.length]), speed: B('gegner.kiwaraTempo', 38), labelColor: '#90e0ef' });
       k.isKiwara = true; k.talkRep = false;
-      k.data.wp = (i * 2) % 8;
+      k.data.wp = (i * 2) % LOC.lanterns.length;
       k.setPresent(false);
       k.customUpdate = (dt) => this.kiwaraUpdate(k, dt);
       k.dialogId = 'kiwara';
@@ -87,6 +89,7 @@ const Enemies = {
       this.cars.push({ sprite: s, ang: i * (Math.PI * 2 / n2) + 0.3, r: 8.3 * TILE, wait: 0, x: 0, y: 0 });
     }
     this.updateCars(0);
+    if (typeof Specials !== 'undefined') Specials.init(scene);
   },
 
   // Kann der Spieler gerade „erwischt“ werden?
@@ -237,6 +240,15 @@ const Enemies = {
       return false; // Folgen übernimmt Actor.update
     }
     m.follow = null; m.speed = B('gegner.marcoTempo', 22);
+    if (G.flags.marcoWild) return Specials.marcoRage(scene, m, dt);
+    // Oft sitzt er beim Buffalo auf a Bier
+    m.extraIcon = null;
+    if (Specials.marcoAtBar()) {
+      const b = LOC.marcoBar;
+      m.extraIcon = 'ic_beer';
+      if (!m.atTile(b.x, b.y)) { if (!m.path) m.goToTile(b.x, b.y); m.moving = m.stepPath(dt); if (!m.path && !m.atTile(b.x, b.y)) m.setTile(b.x, b.y); }
+      return true;
+    }
     const tesla = { x: (LOC.tesla.x + 1) * TILE, y: (LOC.tesla.y + 1) * TILE };
     const guard = dist(p.x, p.y, tesla.x, tesla.y) < B('gegner.marcoWachRadius', 56) && p.state !== 'hospital';
     if (guard) { m.path = null; m.moving = m.stepToward(p.x, p.y, dt); return true; }
@@ -249,6 +261,7 @@ const Enemies = {
 
   kiwaraUpdate(k, dt) {
     const scene = this.scene, p = scene.player;
+    if (k.data.eventCop && G.flags.marcoWild) return Specials.copDuty(k, dt);
     const contraband = scene.hasItem('paket') || scene.hasItem('shit');
     const d = dist(k.x, k.y, p.x, p.y);
     k.extraIcon = null;
@@ -355,6 +368,7 @@ const Enemies = {
   update(scene, dt) {
     const p = scene.player;
     this.updateCars(dt);
+    if (typeof Specials !== 'undefined') Specials.update(scene, dt);
     const m = G.minute;
     // Anwesenheit nach Uhrzeit
     const nadja = scene.actors.nadja;
@@ -434,12 +448,12 @@ const Enemies = {
       g.strokeCircle(e.x, e.y - 4, R);
       g.fillStyle(0xe9c46a, 0.06);
       g.fillCircle(e.x, e.y - 4, R);
-      if (Math.random() < dt / 2500) scene.say(e, TN('npc.erwin.' + (G.flags.konzert ? 'konzert' : 'normal'), Math.min(e.talkIdx, 3)), 2200);
+      if (Math.random() < dt / 2500) scene.say(e, G.flags.konzert ? TN('npc.erwin.konzert', e.talkIdx) : T('npc.erwin.themenKurz', null, 'Kennst du Gipsy-Jazz?'), 2600);
       if (G.flags.konzert && Math.random() < dt / 1500) Sfx.play('guitar');
     }
     e.extraIcon = active ? 'ic_note' : null;
     const rate = dt / (B('gegner.erwinSekBisStein', 5) * 1000);
-    const victims = [scene.player].concat(scene.npcs.filter(a => a.present && !a.isEnemy && !a.isDog && a.kind !== 'event'));
+    const victims = [scene.player].concat(scene.npcs.filter(a => a.present && !a.isEnemy && !a.isDog && a.kind !== 'event' && !a.stoneImmune));
     for (const v of victims) {
       if (v === e) continue;
       const inR = active && dist(v.x, v.y, e.x, e.y) < R && !isCafeFloor(v.x, v.y);

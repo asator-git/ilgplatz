@@ -3,7 +3,7 @@
 // ---------------------------------------------------------------
 'use strict';
 
-const QUEST_ORDER = ['start', 'americano', 'andi', 'rad', 'schrauben', 'paket', 'nase', 'barista', 'baden', 'demo', 'steckdose', 'gruesse', 'foto', 'erwin', 'lieferung'];
+const QUEST_ORDER = ['start', 'bernd', 'marcoWild', 'americano', 'andi', 'rad', 'schrauben', 'paket', 'nase', 'barista', 'baden', 'demo', 'steckdose', 'gruesse', 'foto', 'erwin', 'lieferung', 'ulli', 'leiter'];
 
 // Kurzformen
 const QT = (id, k, v, fb) => T('quests.' + id + '.' + k, v, fb);
@@ -47,16 +47,18 @@ const Quests = {
       case 'barista': return 'lena';
       case 'erwin': return 'daniel';
       case 'lieferung': return 'koch';
+      case 'ulli': return 'ulli';
+      case 'leiter': return 'slady';
       default: return null;
     }
   },
 
   availableFrom(id) {
-    const m = { rad: '08:30', schrauben: '08:00', paket: '08:00', nase: '09:00', barista: '08:00', baden: '09:30', demo: B('auftraege.demoAb', '13:00'), steckdose: '09:00', gruesse: '08:30', foto: '09:00', erwin: B('auftraege.erwinAb', '12:00'), lieferung: B('auftraege.lieferungAb', '11:30') };
+    const m = { rad: '08:30', schrauben: '08:00', paket: '08:00', nase: '09:00', barista: '08:00', baden: '09:30', demo: B('auftraege.demoAb', '13:00'), steckdose: '09:00', gruesse: '08:30', foto: '09:00', erwin: B('auftraege.erwinAb', '12:00'), lieferung: B('auftraege.lieferungAb', '11:30'), ulli: B('ulli.ab', '10:00'), leiter: '09:00' };
     return parseClock(m[id], 99999);
   },
 
-  isMust(id) { return id === 'americano' || id === 'andi'; },
+  isMust(id) { return ['americano', 'andi', 'bernd', 'marcoWild'].includes(id); },
   isInstant(id) { return id === 'schrauben'; },
 
   openCount() {
@@ -80,6 +82,7 @@ const Quests = {
     if (rep) this.scene.addRep(rep, QT(id, 'titel', null, id), { quest: true });
     if (money) this.scene.addMoney(money, QT(id, 'titel', null, id));
     G.questsDone++;
+    if (id === 'ulli') for (const n of ['verk1', 'verk2', 'verk3']) this.scene.actors[n].setPresent(false);
     if (d && d.repeat) { st.status = 'cooldown'; st.readyAt = G.minute + (d.cooldown ? d.cooldown() : 20); }
     else st.status = 'done';
     st.data = {};
@@ -88,6 +91,7 @@ const Quests = {
   },
 
   fail(id, msg, cooldown) {
+    if (id === 'ulli') for (const n of ['verk1', 'verk2', 'verk3']) this.scene.actors[n].setPresent(false);
     const st = G.q[id];
     const d = QDEF[id];
     if (d && d.onEnd) d.onEnd(this.scene, st);
@@ -286,6 +290,26 @@ function benchPx(i) { const b = LOC.benches[i]; return { x: (b.x + 1.5) * TILE, 
 
 // ---- Auftragsdefinitionen ----
 const QDEF = {
+  // Bernd speit Feuer (ausweichen!)
+  bernd: {
+    hud() { const w = G.flags.berndWut; const s = w ? Math.max(0, Math.ceil((w.until - G.realMs) / 1000)) : 0; return { text: QT('bernd', 'hud', { n: w ? w.hits : 0 }, 'Weich den Feuerbällen aus!'), timer: s + ' s' }; },
+    target() { return null; }
+  },
+  // Marco dreht durch – mit Eiswasser abkühlen
+  marcoWild: {
+    hud(scene) {
+      const w = G.flags.marcoWild;
+      if (!w) return { text: '' };
+      if (!scene.hasItem('wasserpistole')) return { text: QT('marcoWild', 'hudHolen'), timer: timerText(w.until) };
+      return { text: QT('marcoWild', 'hud', { n: w.hits, max: B('marco.wasserTreffer', 6) }), timer: timerText(w.until) };
+    },
+    target(scene) {
+      if (!G.flags.marcoWild) return null;
+      if (!scene.hasItem('wasserpistole')) { const k = scene.actors.kiwara1.present ? scene.actors.kiwara1 : scene.actors.kiwara2; return k.present ? { actor: k } : null; }
+      return tgtActor('marco');
+    }
+  },
+
   start: {
     hud: () => ({ text: QT('start', 'hud', null, 'Geh ins Café und red mit Daniel.') }),
     target: () => tgtActor('daniel')
@@ -352,18 +376,18 @@ const QDEF = {
     },
     hud(scene, st) {
       if (G.figur === 'andi') return { text: QT('andi', 'hudSelbst'), timer: timerText(this.deadline(st)) };
-      const food = scene.hasItem('essen') || scene.hasItem('kipferl');
+      const food = FOOD_ITEMS.some(k => scene.hasItem(k));
       if (st.data.late) return { text: QT('andi', food ? 'hudSpaetBringen' : 'hudSpaet') };
       return { text: QT('andi', food ? 'hudBringen' : 'hudHolen'), timer: timerText(this.deadline(st)) };
     },
     target(scene) {
-      const food = scene.hasItem('essen') || scene.hasItem('kipferl');
+      const food = FOOD_ITEMS.some(k => scene.hasItem(k));
       if (G.figur === 'andi') return food ? null : tgtActor('koch');
       return food ? tgtActor('andi') : tgtActor('koch');
     },
     options(scene, st, a) {
       if (a.id !== 'andi' || G.figur === 'andi') return [];
-      const food = scene.hasItem('essen') ? 'essen' : (scene.hasItem('kipferl') ? 'kipferl' : null);
+      const food = FOOD_ITEMS.find(k => scene.hasItem(k)) || null;
       if (!food) return [];
       return [{ label: QT('andi', 'geben', null, 'Da, iss was!'), fn: () => {
         scene.takeItem(food);
@@ -640,7 +664,7 @@ const QDEF = {
   // 11) Juliette kennt jeden
   gruesse: {
     onStart(scene, st) {
-      const pool = ['didi', 'michi', 'koch', 'schlosser', 'opa', 'stern1', 'wirt', 'bobo'];
+      const pool = ['didi', 'michi', 'koch', 'schlosser', 'opa', 'stern1', 'hausmasta', 'bobo', 'pizzaiolo', 'slady'];
       st.data.todo = shuffle(pool).slice(0, B('auftraege.grussAnzahl', 4));
     },
     hud(scene, st) {
@@ -789,6 +813,78 @@ const QDEF = {
       if (k !== 'lieferung') return;
       while (scene.takeItem('lieferung')) { /* Rest weg */ }
       Quests.fail('lieferung', QT('lieferung', 'verloren', null, 'Eine Portion verloren – die Lieferung ist geplatzt!'), 15);
+    }
+  }
+};
+
+// 15) Ulli: willhaben-Tour (Erwins Auto is im Burgenland)
+QDEF.ulli = {
+  items() {
+    return [
+      { key: 'kallax', seller: 'verk1', spot: LOC.streetEnds.hiller, price: B('ulli.preisKallax', 18), min: 6 },
+      { key: 'lampe', seller: 'verk2', spot: LOC.streetEnds.feuerbach, price: B('ulli.preisLampe', 12), min: 4 },
+      { key: 'yogamatte', seller: 'verk3', spot: LOC.streetEnds.schrotzberg, price: B('ulli.preisYoga', 9), min: 3 }
+    ];
+  },
+  onStart(scene, st) {
+    st.data.got = {}; st.data.saved = 0;
+    scene.addMoney(B('ulli.budget', 30), QT('ulli', 'budgetKurz', null, 'Budget von Ulli'));
+    for (const it of this.items()) { const v = scene.actors[it.seller]; v.setPresent(true); v.setTile(it.spot.x, it.spot.y); v.homeX = v.x; v.homeY = v.y; v.data.item = it.key; }
+  },
+  hud(scene, st) {
+    const m = (k) => st.data.got[k] ? '✓' : '✗';
+    if (this.items().every(it => st.data.got[it.key])) return { text: QT('ulli', 'hudZurueck') };
+    return { text: QT('ulli', 'hud', { k: m('kallax'), l: m('lampe'), y: m('yogamatte') }) };
+  },
+  target(scene, st) {
+    const p = scene.player;
+    let best = null, bd = 1e9;
+    for (const it of this.items()) { if (st.data.got[it.key]) continue; const v = scene.actors[it.seller]; const d = dist(p.x, p.y, v.x, v.y); if (d < bd) { bd = d; best = v; } }
+    return best ? { actor: best } : tgtActor('ulli');
+  },
+  options(scene, st, a) {
+    const it = this.items().find(i => i.seller === a.id);
+    if (it && !st.data.got[it.key]) {
+      return [{ label: QT('ulli', 'feilschen', { item: T('items.' + it.key, null, it.key), preis: euro(it.price) }), fn: () => {
+        UI.minigameHaggle({ item: T('items.' + it.key, null, it.key), price: it.price, min: it.min, line: TN('npc.verkaeufer.normal', a.talkIdx++) }, (final) => {
+          if (!scene.pay(final, T('items.' + it.key, null, it.key))) return;
+          st.data.got[it.key] = true;
+          st.data.saved += it.price - final;
+          scene.giveItem(it.key);
+          scene.say(a, QT('ulli', 'verkauft', null, 'Viel Spaß damit!'), 2000);
+          scene.time.delayedCall(2200, () => a.setPresent(false));
+        });
+      } }];
+    }
+    if (a.id === 'ulli' && this.items().every(i => st.data.got[i.key])) {
+      return [{ label: QT('ulli', 'abgeben'), fn: () => {
+        for (const i of this.items()) scene.takeItem(i.key);
+        const bonus = Math.min(B('ulli.maxSparBonus', 25), Math.round(st.data.saved * B('ulli.sparFaktor', 1.5)));
+        UI.dialog(QL('ulli', 'danke').map(t => ({ who: a.name, text: fmt(t, { n: euro(st.data.saved) }) })));
+        Quests.complete('ulli', B('ulli.belohnung', 25) + bonus, 0, QT('ulli', 'erfolg', { n: euro(st.data.saved) }, 'Ulli ist happy!'));
+      } }];
+    }
+    return [];
+  },
+  onLost(scene, st, k) { if (st.data.got && st.data.got[k]) { st.data.got[k] = false; const it = this.items().find(i => i.key === k); if (it) { const v = scene.actors[it.seller]; v.setPresent(true); } } }
+};
+
+// 16) Maler Slady: Leiter halten
+QDEF.leiter = {
+  repeat: true,
+  cooldown: () => B('slady.pauseMin', 40),
+  onStart(scene, st) { st.data.progress = 0; },
+  hud(scene, st) { return { text: QT('leiter', 'hud', { n: Math.floor(st.data.progress), max: B('slady.halteMin', 3) }) }; },
+  target: () => tgtActor('slady'),
+  update(scene, st, dt) {
+    const p = scene.player, s = scene.actors.slady;
+    if (!s || UI.isBlocking()) return;
+    const d = dist(p.x, p.y, s.x, s.y);
+    if (d < 28 && p.state === 'normal') {
+      if (p.moving) { if (Math.random() < dt / 1500) scene.say(s, QT('leiter', 'wackelt', null, 'NED WACKELN!'), 1200); return; }
+      st.data.progress += dt / (B('zeit.sekundenProStunde', 240) * 1000 / 60) * G.speed;
+      if (Math.random() < dt / 4000) scene.say(s, TN('npc.slady.malen', s.talkIdx++), 2200);
+      if (st.data.progress >= B('slady.halteMin', 3)) Quests.complete('leiter', B('slady.ansehen', 15), B('slady.geld', 10), QT('leiter', 'erfolg', null, 'Wand gestrichen! Slady ist zufrieden.'));
     }
   }
 };

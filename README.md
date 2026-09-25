@@ -16,7 +16,8 @@ Sammle **Ansehen** im Grätzl – um 23:00 musst du mehr haben als der Titelvert
 Nach der echten Lage (OpenStreetMap): Hillerstraße nach Nordost (dort der Deewan), Feuerbachstraße nach Nordwest,
 Obermüllnerstraße nach Westen Richtung Praterstern („Stern“, ganz am Rand), Schrotzbergstraße nach Süden.
 Dezentral im Norden, The Good Coffee Society im Osten, gleich daneben das Clown-Museum,
-Radbande und Schlosserei (Ilgplatz 1 und 2) im Südwesten.
+Radbande und Schlosserei (Ilgplatz 1 und 2) im Südwesten. Im Südosten Maler Slady, Pizzeria Maradona und
+Buffalo Hot Wings (Schrotzbergstraße 1). Zwischen Café und Museum: Hubis Büro und – in der Ecke – das echte Klo.
 
 ## Steuerung
 
@@ -48,6 +49,17 @@ Radbande und Schlosserei (Ilgplatz 1 und 2) im Südwesten.
 | Juliette | +25 % auf Aufträge, 1 Gratis-Kaffee | Gespräche kosten doppelt Zeit |
 | Markus | Terminals hacken (Minispiel) | Bleibt an Bildschirmen hängen |
 | Jewi | Foto friert Gegner ein, Beweisfotos | Daniel verlangt 50 % mehr |
+
+### Extra-Spiele
+
+- **Bernd, der Dezentral-Drache:** Sprichst du ihn zu oft an oder gehst zu oft an ihm vorbei (manchmal auch einfach so),
+  wird er todesgrantig und speit 30 Sekunden lang Feuerbälle. Ausweichen! Im Café bist du sicher.
+- **Marco dreht durch:** Am späten Nachmittag trinkt Marco beim Buffalo zu viel Bier und schmeißt mit Flaschen.
+  Die Kiwara geben dir eine Wasserpistole mit Eiswasser – kühl ihn ab (8 Treffer), bis er seinen Rausch ausschläft.
+- **Radl-Notdienst (Didi):** Schrauben lockern sich am Rad – rechtzeitig antippen / Taste 1–6.
+- **Hilf Ulli bei willhaben:** Drei Sachen am Stadtrand abholen und im richtigen Moment feilschen.
+- **Klo-Held:** Café-Gäste wollen in Hubis Büro aufs Klo – zeig ihnen das echte, Hubi ist dir ewig dankbar.
+- **Slady:** Leiter halten (ruhig stehen bleiben).
 
 ### Tagesablauf
 

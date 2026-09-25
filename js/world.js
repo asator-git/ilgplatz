@@ -115,6 +115,10 @@ class WorldScene extends Phaser.Scene {
       if (p.state === 'held' && G.minute >= p.stateUntilMin) p.updateState();
       return;
     }
+    if (ev === 'action' && G.flags.marcoWild && this.hasItem('wasserpistole') && this.playerCanAct()) {
+      const m = this.actors.marco;
+      if (dist(m.x, m.y, p.x, p.y) < B('marco.wasserReichweite', 140) + 40) { Specials.shootWater(this); return; }
+    }
     if (ev === 'action') this.doAction();
     if (ev === 'special') this.doSpecial();
   }

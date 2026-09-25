@@ -71,6 +71,26 @@ const NPCs = {
     const opa = add('opa', { kind: 'extra', pos: px({ x: 3, y: 22 }), speed: 14, routine: routineHome });
     opa.data.home = { x: 3, y: 22 };
     add('bobo', { kind: 'extra', tex: 'fremder', pos: px(LOC.spawns.bobo), speed: 30, routine: routineWander });
+    add('hausmasta', { kind: 'extra', pos: px(LOC.spawns.hausmasta), speed: 20, routine: routineWander });
+    // Ulli (Erwins Ex – oder doch nicht?)
+    const ulli = add('ulli', { kind: 'extra', pos: px(LOC.spawns.bobo), speed: 30, routine: routineWander, labelColor: '#ff70a6' });
+    ulli.stoneImmune = true;
+    // Café-Gäste, die aufs Klo wollen
+    for (let i = 1; i <= 3; i++) {
+      const g = add('gast' + i, { kind: 'extra', pos: px(LOC.cafeSeats[i]), speed: 30, name: T('npc.gast.name', null, 'Café-Gast') });
+      g.dialogId = 'gast'; g.setPresent(false); g.talkRep = false;
+    }
+    // willhaben-Verkäufer (nur während Ullis Auftrag)
+    for (let i = 1; i <= 3; i++) {
+      const v = add('verk' + i, { kind: 'extra', tex: 'verkaeufer', pos: px(LOC.spawns.markus), speed: 10, routine: routineHome, name: T('npc.verkaeufer.name', null, 'willhaben-Verkäufer') });
+      v.dialogId = 'verkaeufer'; v.setPresent(false); v.talkRep = false;
+    }
+    // Hubis Büro und das echte Klo
+    const off = LOC.office, wc = LOC.wc;
+    scene.interactables.push({ x: off.x * TILE - 2, y: (off.y + 0.5) * TILE, r: 18, prio: 8, label: () => T('ui.buero', null, 'Hubis Büro'),
+      fn: () => UI.dialog(TL('buero.tuer', ['Hubis Büro. Zutritt verboten.']).map(t => ({ who: '', text: t }))) });
+    scene.interactables.push({ x: wc.x * TILE - 2, y: (wc.y + 0.5) * TILE, r: 18, prio: 8, label: () => T('ui.wc', null, 'WC'),
+      fn: () => UI.dialog([{ who: '', text: T('buero.wc', null, 'Das echte Klo. Sauberer als erwartet.') }]) });
   },
 
   // Begehbare Kachel vor einer Tür
@@ -116,6 +136,7 @@ const NPCs = {
     if (typeof Shops !== 'undefined' && Shops.optionsFor) options = options.concat(Shops.optionsFor(scene, a) || []);
     if (typeof Abilities !== 'undefined' && Abilities.optionsFor) options = options.concat(Abilities.optionsFor(scene, a) || []);
     if (typeof Events !== 'undefined' && Events.optionsFor) options = options.concat(Events.optionsFor(scene, a) || []);
+    if (typeof Specials !== 'undefined' && Specials.optionsFor) options = options.concat(Specials.optionsFor(scene, a) || []);
 
     let text;
     let rep = 0;

@@ -58,7 +58,10 @@
     "dopplerFaktor": 1.5,
     "derbFaktor": 1.3,
     "hackFaktor": 0.5,
-    "hackDauerMin": 60
+    "hackDauerMin": 60,
+    "pizza": 6,
+    "wings": 7,
+    "bier": 3.5
   },
   "ansehen": {
     "gespraech": 2,
@@ -71,7 +74,8 @@
     "sternAnnehmen": 15,
     "hubiHolenKosten": 5,
     "hubiBegleitungMin": 60,
-    "maschaRettet": 5
+    "maschaRettet": 5,
+    "bier": 3
   },
   "npc": {
     "cafeAnteilAb10": 0.55,
@@ -220,10 +224,18 @@
     "reifenKiwaraVerlust": 60
   },
   "minispiele": {
-    "schraubenAnzahl": 5,
-    "schraubenSekunden": 20,
+    "schraubenSekunden": 25,
     "hackLaenge": 6,
-    "hackSekunden": 9
+    "hackSekunden": 9,
+    "schraubenZiel": 12,
+    "schraubenFehler": 3,
+    "schraubenFensterStartMs": 1400,
+    "schraubenFensterMinMs": 600,
+    "feilschRunden": 3,
+    "feilschZoneStart": 30,
+    "feilschTempo": 90,
+    "feilschPerfekt": 0.35,
+    "feilschGut": 0.2
   },
   "nacht": {
     "daemmerung": "19:00",
@@ -235,5 +247,64 @@
     "youtubeId": "FIQAlpVSRcc",
     "titel": "Der Nino aus Wien – Praterlied",
     "lautstaerke": 45
+  },
+  "bernd": {
+    "wutGrenze": 3,
+    "dauerSek": 30,
+    "tempo": 50,
+    "feuerAlleMs": 1100,
+    "feuerTempo": 100,
+    "vorhalten": 14,
+    "trefferVerlust": 8,
+    "ueberlebt": 20,
+    "ueberlebtSchlecht": 5,
+    "maxTrefferFuerBonus": 2,
+    "pauseMin": 45,
+    "vorbeiCooldownSek": 8,
+    "zufallProSek": 0.012
+  },
+  "marco": {
+    "wildFrueh": "17:00",
+    "wildSpaet": "20:30",
+    "wildMin": 45,
+    "wurfAlleMs": 1300,
+    "flaschenTempo": 95,
+    "flascheVerlust": 5,
+    "wasserReichweite": 140,
+    "wasserCooldownMs": 450,
+    "wasserTempo": 170,
+    "wasserTreffer": 8,
+    "belohnung": 40,
+    "ausnuechternMin": 120,
+    "streuung": 0.18,
+    "wildTempo": 55
+  },
+  "ulli": {
+    "ab": "10:00",
+    "budget": 30,
+    "preisKallax": 18,
+    "preisLampe": 12,
+    "preisYoga": 9,
+    "belohnung": 25,
+    "sparFaktor": 1.5,
+    "maxSparBonus": 25,
+    "dramaMinMin": 90,
+    "dramaMaxMin": 180
+  },
+  "slady": {
+    "halteMin": 3,
+    "ansehen": 15,
+    "geld": 10,
+    "pauseMin": 40
+  },
+  "klo": {
+    "alleMinMin": 30,
+    "alleMinMax": 50,
+    "wartenMin": 12,
+    "ansehen": 10,
+    "hubiDank": 5,
+    "ansehenHubi": 3,
+    "bonusAb": 3,
+    "bonus": 15
   }
 }

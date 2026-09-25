@@ -33,6 +33,8 @@ const LOC = {
   cafeSeats: [{ x: 34, y: 17 }, { x: 36, y: 18 }, { x: 38, y: 17 }, { x: 37, y: 15 }, { x: 33, y: 18 }, { x: 34, y: 15 }, { x: 37, y: 18 }],
   cafeTables: [{ x: 35, y: 17 }, { x: 38, y: 16 }],
   cafeFront: { x: 30, y: 15 },
+  office: { x: 33, y: 20 },   // Hubis Büro (rechts vom Café, Erwins Klavier)
+  wc: { x: 33, y: 21 },       // das echte Klo, in der Ecke zwischen Café und Museum
   tesla: { x: 30, y: 19 },
   marcoHome: { x: 30, y: 20 },
   benches: [{ x: 16, y: 15 }, { x: 21, y: 24 }, { x: 2, y: 23 }],
@@ -41,8 +43,11 @@ const LOC = {
   concert: { x: 21, y: 17 },
   // Winkel = echte Richtung vom Platz aus
   shops: {
-    dezentral:   { ang: 13,  keeper: 'wirt',      name: 'Dezentral' },          // Ilgplatz 5, Nord
-    museum:      { ang: 106, keeper: 'michi',     name: 'Zirkus & Clown Museum' }, // Ilgplatz 7, Ost-Südost
+    dezentral:   { ang: 13,  keeper: 'bernd',     name: 'Dezentral' },          // Ilgplatz 5, Nord
+    museum:      { ang: 104, keeper: 'michi',     name: 'Zirkus & Clown Museum' }, // Ilgplatz 7, Ost-Südost
+    slady:       { ang: 128, keeper: 'slady',     name: 'Maler Slady' },           // Ilgplatz 7, Südost
+    maradona:    { ang: 148, keeper: 'pizzaiolo', name: 'Pizzeria Maradona' },     // Schrotzbergstraße 1
+    buffalo:     { street: 'schrotzberg', along: 12.5, side: -1, keeper: 'wingswirt', name: 'Buffalo Hot Wings' },     // Schrotzbergstraße 1
     schlosserei: { ang: 236, keeper: 'schlosser', name: 'Schlosserei' },         // Ilgplatz 1, neben Radbande
     radbande:    { ang: 252, keeper: 'didi',      name: 'Radbande' },            // Ilgplatz 2, West-Südwest
     deewan:      { street: 'hiller', along: 18, side: 1, keeper: 'koch', name: 'Deewan' }, // Hillerstraße 4
@@ -127,6 +132,7 @@ function buildGrid() {
     else if (walkable(x, y - 1) || walkable(x - 1, y) || walkable(x + 1, y)) ground[y][x] = TI.WALL + quadrantOf(x, y);
   }
   computeLocations(ground, solid);
+  for (const t of [LOC.office, LOC.wc]) if (solid[t.y] && solid[t.y][t.x]) ground[t.y][t.x] = TI.SHOPDOOR;
   // Ladentüren (nicht betretbar, nur Deko + Interaktion)
   for (const id in LOC.shops) {
     if (id === 'cafe') continue;
@@ -216,8 +222,12 @@ function computeLocations(ground, solid) {
     erwin: ring(200), bobo: ring(35), markus: ring(160),
     nadja: { x: 1, y: 22 }, opa: { x: 3, y: 22 },
     doppler: LOC.streetEnds.hiller, gassi: LOC.streetEnds.feuerbach,
-    rasiererin: { x: 18, y: 21 }
+    rasiererin: { x: 18, y: 21 },
+    hausmasta: nearWalk(ringTile(300, 13), 3)   // wohnt im Haus von Carla & Andi (Feuerbachstraße)
   };
+  // Marcos Stammplatz beim Buffalo (Bier)
+  const bf = LOC.shops.buffalo.front;
+  LOC.marcoBar = nearWalk({ x: bf.x + (bf.x < MCX ? 1 : -1), y: bf.y }, 2);
 }
 
 // ---- Wegfindung (A*, 8 Richtungen, keine Ecken schneiden) ----------------
@@ -410,6 +420,11 @@ function placeObjects(scene, grid) {
     fontFamily: '"Press Start 2P", monospace', fontSize: '6px', color: '#ffd166', backgroundColor: '#000000aa', padding: { x: 2, y: 2 }
   }).setOrigin(0.5, 1).setDepth(5000).setResolution(4);
   objs.signs.push(stern);
+  for (const [t, key, fb, col] of [[LOC.office, 'orte.buero', 'Hubis Büro', '#fff8e7'], [LOC.wc, 'orte.wc', 'WC', '#90e0ef']]) {
+    objs.signs.push(scene.add.text(t.x * TILE - 1, (t.y + 0.5) * TILE, T(key, null, fb), {
+      fontFamily: '"Press Start 2P", monospace', fontSize: '4px', color: col, backgroundColor: '#1b1b2fdd', padding: { x: 1, y: 1 }
+    }).setOrigin(1, 0.5).setDepth(4950).setResolution(6));
+  }
   for (const st of STREETS) {
     if (st.id === 'obermuellner') continue; // dort hängt das Praterstern-Schild
     const t = ringTile(st.ang, 15);

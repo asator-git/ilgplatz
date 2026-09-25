@@ -43,7 +43,9 @@
     "du": "Du: {n}",
     "fuehrung": "Du führst mit {n}! Bleib dran bis 23:00.",
     "rueckstand": "Dir fehlen {n} auf {rivale} – mach Aufträge (gelbes !).",
-    "aktuellerAuftrag": "Aktueller Auftrag"
+    "aktuellerAuftrag": "Aktueller Auftrag",
+    "buero": "Hubis Büro",
+    "wc": "WC"
   },
   "raenge": {
     "zuagraster": "Zuagraster",
@@ -105,7 +107,12 @@
     "museum": "Zirkus & Clown Museum",
     "deewan": "Deewan",
     "dezentral": "Dezentral",
-    "stern": "← Praterstern (Stern)"
+    "stern": "← Praterstern (Stern)",
+    "slady": "Maler Slady",
+    "maradona": "Pizzeria Maradona",
+    "buffalo": "Buffalo Hot Wings",
+    "buero": "Hubis Büro",
+    "wc": "WC"
   },
   "zustaende": {
     "stone": "versteinert",
@@ -130,7 +137,9 @@
         "Und die Tesla-Reifen? Nur amoi kurz… Nur a bissl Luft auslassen…",
         "Bürgermeister wird ma ned. Bürgermeister is ma. So wie i.",
         "I hab heit a Date. Eigentlich drei. Wird eng.",
-        "Der Andi sagt, er is Bürgermeister. Der Andi sagt a, dass er Tofu mag."
+        "Der Andi sagt, er is Bürgermeister. Der Andi sagt a, dass er Tofu mag.",
+        "Scho wieder wer, der in mei Büro aufs Klo will! Des is a BÜRO! Da steht Erwins Klavier drin!",
+        "In mei Büro rechts vom Café wollen alle aufs Klo. Das echte Klo is in der Ecke! IN DER ECKE!"
       ],
       "grantig": [
         "Ohne Americano bin i ka Mensch.",
@@ -138,6 +147,16 @@
       ],
       "gassi": [
         "Bin grad Gassi. Mascha hat a Meeting mit an Baum."
+      ],
+      "buero": [
+        "DES IS MEI BÜRO! Ka Klo!",
+        "Na! Da drin steht a Klavier, ka Häusl!",
+        "Scho wieder! Das Klo is in der ECKE!"
+      ],
+      "dankbar": [
+        "DANKE! Endlich zeigt wer den Leuten das echte Klo!",
+        "Du bist a Held! Mei Büro bleibt trocken!",
+        "I könnt di bussln! Mach i aber ned."
       ]
     },
     "andi": {
@@ -290,19 +309,6 @@
         "(Der Koch schaut dich traurig an. So traurig, dass das Dal kalt wird.)"
       ]
     },
-    "wirt": {
-      "name": "Türsteher Bernd",
-      "normal": [
-        "Zua. Erst ab neune. Und dann a ned für jeden.",
-        "Komm später. Viel später.",
-        "Vor neun is da nur der Putztrupp. Und der is a zua."
-      ],
-      "offen": [
-        "Rein mit dir. Aber benimm di.",
-        "Heut spielt wer. Keiner weiß wer. Wie immer.",
-        "Im Dezentral kennt jeder jeden. Und keiner redet drüber."
-      ]
-    },
     "stern1": {
       "name": "Typ vom Stern",
       "normal": [
@@ -423,6 +429,38 @@
       "konzert": [
         "Und jetzt, meine Damen und Herren: 'Minor Swing'. Die 45-Minuten-Fassung.",
         "Das nächste Stück hab ich selbst geschrieben. Es heißt 'Erwin'. Es dauert."
+      ],
+      "themen": [
+        "Hast mein neues Carbon-Radl gsehn? 7,2 Kilo. Mit Flasche. Ohne Flasche 6,9. Weißt, was des bei am Anstieg ausmacht?",
+        "Carbon is steifer als Alu, aber es dämpft. Des is ka Widerspruch, des is Physik. Soll i's dir erklären? I erklär's dir.",
+        "Die Gitarre muss PERFEKT gestimmt sein. A Viertelton daneben und die ganze La Pompe is a Katastrophe. A KATASTROPHE.",
+        "I stimm vor jedem Lied. Und nach jedem Lied. Und manchmal währenddessen. Die Leut verstehn des ned.",
+        "Die Ulli… die Ulli liest ma ChatGPT-Chats vor. Mit Feedback. Über mi. Punkt für Punkt.",
+        "Die Ulli will, dass i sie fahr. Zu willhaben-Abholungen. Aber mei Auto is im Burgenland.",
+        "Mei Auto. Des muss i jetzt wieder ins Burgenland bringen, zum Reparieren. Da gibt's an Mechaniker, der versteht's. Nur der.",
+        "Des Auto hat a Geräusch. So a 'kchk-kchk'. Im Burgenland sagen's, des is der Charakter vom Auto.",
+        "Kennst du Gipsy-Jazz? Und Carbon? Des passt zamm: leicht, schnell, und kaner versteht's."
+      ],
+      "themenKurz": [
+        "Kennst du Gipsy-Jazz?",
+        "Mei Carbon-Radl: 7,2 Kilo!",
+        "Die Gitarre muss PERFEKT gestimmt sein!",
+        "Mei Auto muss ins Burgenland…",
+        "Die Ulli hat ma wieder ChatGPT vorglesen…"
+      ],
+      "antwortUlli": [
+        "Aber ChatGPT kennt mei Gitarre ned!",
+        "I hör eh zu! … Was hast gsagt?",
+        "Ich-Botschaft: ICH muss mei Gitarre stimmen.",
+        "Des Auto is im Burgenland, Ulli! Im BURGENLAND!"
+      ],
+      "wiederZusammen": [
+        "Ulli! I hab's eh immer gwusst.",
+        "Na gut. Aber die Gitarre bleibt."
+      ],
+      "getrennt": [
+        "Dann geh halt! I hab eh mei Gitarre!",
+        "Die Gitarre versteht mi wenigstens. Wenn's gstimmt is."
       ]
     },
     "marco": {
@@ -440,6 +478,24 @@
         "Wer? Der da? … Ich hab schon mal…",
         "Du zahlst. Ich geh mit.",
         "Hm. Gut."
+      ],
+      "bier": [
+        "Bier. Gut.",
+        "Wings. Bier. Ruhe.",
+        "Setz di ned her.",
+        "Buffalo. Meins."
+      ],
+      "wild": [
+        "ICH HAB SCHON MAL…!",
+        "WER HAT MEI BIER?!",
+        "KOMMT'S HER!",
+        "BUFFALO IS MEINS!"
+      ],
+      "nass": [
+        "BRRR!",
+        "Kalt!",
+        "He… des is kalt…",
+        "Hm… müde…"
       ]
     },
     "kiwara": {
@@ -475,6 +531,148 @@
         "Des Wasser is kalt, aber ehrlich. Wie ich.",
         "Früher war i Tänzerin. Im Prater. Glaubst ma ned? Is eh wurscht.",
         "Wennst zuhörst, erzähl i dir, warum der Mond über dem Stuwerviertel immer a bissl schief hängt."
+      ]
+    },
+    "bernd": {
+      "name": "Bernd (Dezentral)",
+      "normal": [
+        "WAS?",
+        "Zua is. ZUA. Kannst lesen?",
+        "I hab des Dezentral gegründet. Ned, damit du mi anredst.",
+        "Red ned. Geh weiter.",
+        "Mei Laune? Die is im Keller. Und der Keller is zua."
+      ],
+      "offen": [
+        "Jetzt is offen. Freu di ned zu früh.",
+        "Rein oder raus. Ned in der Tür stehen.",
+        "Spritzer gibt's. Lächeln ned."
+      ],
+      "gereizt": [
+        "Du. Nervst.",
+        "Noch EINMAL…",
+        "I spür, wie's in mir brodelt…"
+      ],
+      "wut": [
+        "RAAAAH!",
+        "FEUER FREI!",
+        "I HAB DI GWARNT!",
+        "GRANTIG IS A LEBENSGEFÜHL!",
+        "DAS DEZENTRAL GEHÖRT MIR!"
+      ]
+    },
+    "hausmasta": {
+      "name": "Da Hausmasta",
+      "normal": [
+        "Grüß Gott! I bin da Hausmasta vom Haus, wo die Carla und der Andi wohnen. *mampf*",
+        "Die Mülltonnen san heit wieder a Katastrophe. *mampf*",
+        "Wer hat schon wieder a Radl im Stiegenhaus abgstellt? … Ah, die Carla. Na dann.",
+        "I grüß jeden. Des is mei Job. Und essen. Des is mei Hobby.",
+        "Hast du den Lift heut schon gesehen? I a ned. Der is kaputt. Seit 2019."
+      ],
+      "gruss": [
+        "Grüß Gott, {name}!",
+        "Servas, {name}! *mampf*",
+        "Habe die Ehre, {name}!",
+        "Grüß di, {name}! Guten Appetit!",
+        "Morgen, {name}! Oder is scho Mittag? Egal, i iss."
+      ],
+      "mampf": [
+        "*mampf*",
+        "*schmatz* Leberkäs.",
+        "*kau* Die Semmel is guat.",
+        "*mampf mampf*"
+      ]
+    },
+    "pizzaiolo": {
+      "name": "Pizzaiolo Diego",
+      "normal": [
+        "Pizzeria Maradona! Die Hand Gottes hat diesen Teig geknetet.",
+        "Maradona hat mit der Hand ein Tor gemacht. Ich mach mit der Hand Pizza. Beides Kunst.",
+        "Ananas auf Pizza? Hier nicht. Das ist eine Frage der Ehre.",
+        "Der Marco bestellt immer beim Buffalo nebenan. Verräter."
+      ]
+    },
+    "wingswirt": {
+      "name": "Wings-Chef",
+      "normal": [
+        "Buffalo Hot Wings! Scharf, schärfer, Stuwerviertel.",
+        "Der Marco sitzt eh fast jeden Tag da. Bier, Wings, Bier.",
+        "Wer die Extra-Hot-Wings schafft, kriegt a Foto an der Wand. Bis jetzt: niemand.",
+        "Servietten gibt's genug. Glaub ma, du brauchst sie."
+      ]
+    },
+    "slady": {
+      "name": "Maler Slady",
+      "normal": [
+        "Maler Slady, Ilgplatz 7. Wir streichen alles. Außer Termine.",
+        "Weiß is ned gleich Weiß. Es gibt 400 Weiß. I kenn olle.",
+        "Hast kurz Zeit? I brauchat wen, der ma die Leiter halt.",
+        "Der Daniel will sein Café in 'Hafermilch-Beige'. Ich hab gsagt: Des is ka Farb, des is a Lebenseinstellung."
+      ],
+      "malen": [
+        "Scho fast fertig…",
+        "Links a bissl höher… passt.",
+        "Schön ruhig halten!",
+        "Des wird a Meisterwerk."
+      ]
+    },
+    "ulli": {
+      "name": "Ulli",
+      "normal": [
+        "Der Erwin und ich? Kompliziert. Heute. Morgen vielleicht wieder einfach.",
+        "Ich hab ChatGPT gefragt, ob der Erwin der Richtige ist. Es hat gesagt: 'Das kommt darauf an.' Typisch.",
+        "Kannst du Auto fahren? Der Erwin kann ned, sein Auto is im Burgenland. Schon wieder.",
+        "Auf willhaben gibt's so schöne Sachen. Man muss sie nur abholen. Das ist der Haken."
+      ],
+      "chatgpt": [
+        "Erwin, hör zu, ich les dir vor, was ChatGPT sagt: 'Dein Partner könnte aktiver zuhören.' Siehst?",
+        "'Punkt 3: Weniger über Gitarren reden, mehr über Gefühle.' Hat ChatGPT gsagt, ned ich.",
+        "ChatGPT meint, du sollst 'Ich-Botschaften' verwenden. Also: ICH will, dass du mich zum willhaben-Abholen fährst.",
+        "'Feedback in fünf Punkten' – Erwin, setz dich, des dauert."
+      ],
+      "allein": [
+        "Getrennt. Wieder mal. Aber diesmal wirklich. Glaub ich.",
+        "Ich brauch wen, der mir die willhaben-Sachen holt. Ohne Drama.",
+        "Der Erwin schreibt mir eh gleich wieder. Wetten?"
+      ],
+      "wiederZusammen": [
+        "Erwin! Komm her, wir sind wieder zusammen!",
+        "Ok, ok. Letzte Chance, Erwin. Wirklich die letzte."
+      ],
+      "getrennt": [
+        "ES IS AUS, ERWIN! Aus!",
+        "Mit dir und deiner Gitarre halt ich's ned aus!"
+      ]
+    },
+    "gast": {
+      "name": "Café-Gast",
+      "normal": [
+        "Entschuldigung, wo is'n do des Klo?",
+        "I muss dringend…",
+        "Is des da das WC? Da steht 'Büro'…"
+      ],
+      "klo": [
+        "Is des da des Klo? Da steht 'Büro'…",
+        "Hallo? Klo? Irgendwer?",
+        "I muss SO dringend. Is des des WC?"
+      ],
+      "danke": [
+        "Ah! Danke! Dringend!",
+        "Du bist a Held!",
+        "Endlich!"
+      ],
+      "aufgeben": [
+        "Dann halt ned…",
+        "I geh ins Museum. Da gibt's sicher was."
+      ]
+    },
+    "verkaeufer": {
+      "name": "willhaben-Verkäufer",
+      "normal": [
+        "Des is fix a Schnäppchen. Preis is aber a fix. Eh ned.",
+        "Abholung nur heute. Nur Barzahlung. Nur mit Lächeln.",
+        "Des hab i um 80 gekauft. Für di: a Freundschaftspreis.",
+        "Ned verhandelbar! … Na gut, a bissl."
       ]
     }
   },
@@ -672,7 +870,14 @@
     "rad": "Carlas Rad",
     "beweisfoto": "Beweisfoto",
     "lieferung": "Lieferung (heiß!)",
-    "laptop": "Laptop"
+    "laptop": "Laptop",
+    "pizza": "Pizza Maradona",
+    "wings": "Buffalo Wings",
+    "semmel": "Wurstsemmel vom Hausmasta",
+    "wasserpistole": "Wasserpistole (Eiswasser)",
+    "kallax": "IKEA-Kallax (gebraucht)",
+    "lampe": "Vintage-Stehlampe",
+    "yogamatte": "Yogamatte (kaum benutzt)"
   },
   "quests": {
     "neu": "Neuer Auftrag: {titel}",
@@ -802,8 +1007,8 @@
     },
     "schrauben": {
       "titel": "Räder schrauben",
-      "label": "Räder schrauben (Minispiel, +15 Ansehen, +10 €)",
-      "intro": "Fünf Schrauben, der Reihe nach. Und schnell, der Kunde wartet!",
+      "label": "Radl-Notdienst (Minispiel, +15 Ansehen, +10 €)",
+      "intro": "Das Radl fällt ausanand! Die Schrauben lockern sich – zieh sie fest, bevor sie rausfliegen!",
       "erfolg": "Sauber gschraubt! Didi ist zufrieden.",
       "fail": "Schraube verloren. Probier's nochmal."
     },
@@ -991,6 +1196,51 @@
       "geliefert": "Geliefert ({n}/3)",
       "erfolg": "Alles heiß angekommen! Der Koch strahlt.",
       "kalt": "Zu spät – das Essen ist kalt!"
+    },
+    "bernd": {
+      "titel": "Bernd speit Feuer!",
+      "hud": "Weich den Feuerbällen aus! Treffer: {n}"
+    },
+    "marcoWild": {
+      "titel": "Marco dreht durch",
+      "hudHolen": "Marco schmeißt mit Bierflaschen! Hol dir bei der Kiwara die Wasserpistole.",
+      "hud": "Kühl Marco mit Eiswasser ab (Leertaste / A): {n}/{max} Treffer"
+    },
+    "ulli": {
+      "titel": "Hilf Ulli bei willhaben",
+      "angebot": [
+        "Der Erwin kann mi ned fahren – sein Auto is wieder im Burgenland. Typisch.",
+        "Holst du ma drei Sachen von willhaben ab? A Kallax, a Stehlampe und a Yogamatte. Hier hast 30 Euro. Und FEILSCH! Was übrig bleibt, gehört dir."
+      ],
+      "budgetKurz": "Budget von Ulli",
+      "hud": "willhaben-Tour: Kallax {k} · Lampe {l} · Yogamatte {y} – feilschen!",
+      "hudZurueck": "Alles da! Bring die Sachen zu Ulli.",
+      "feilschen": "{item} abholen – feilschen! (verlangt {preis})",
+      "verkauft": [
+        "Viel Spaß damit!",
+        "Deal is Deal.",
+        "Und bitte a gute Bewertung!"
+      ],
+      "abgeben": "Da san deine willhaben-Sachen!",
+      "danke": [
+        "Du bist SO viel verlässlicher als der Erwin!",
+        "Und du hast {n} rausgehandelt? ChatGPT hätt's ned besser gmacht."
+      ],
+      "erfolg": "Ulli ist happy! Rausgehandelt: {n}"
+    },
+    "leiter": {
+      "titel": "Slady: Leiter halten",
+      "angebot": [
+        "I muss die Fassade da oben streichen. Hältst ma kurz die Leiter?",
+        "Einfach neben mir stehen bleiben und ned wackeln. Drei Minuten. 10 Euro."
+      ],
+      "hud": "Halt Slady die Leiter – bleib ruhig neben ihm stehen: {n}/{max} Min.",
+      "wackelt": [
+        "NED WACKELN!",
+        "Ruhig! RUHIG!",
+        "Wennst wackelst, mal i di an!"
+      ],
+      "erfolg": "Wand gestrichen! Slady ist zufrieden."
     }
   },
   "quelle": {
@@ -1062,7 +1312,21 @@
       "Ohne Geld? In MEINER Society? Raus!",
       "Kein Geld, kein Kaffee, kein Platz. Raus!"
     ],
-    "rausKurz": "Ohne Geld im Café"
+    "rausKurz": "Ohne Geld im Café",
+    "pizza": "Pizza Maradona ({preis})",
+    "pizzaKurz": "Pizza",
+    "wings": "Buffalo Wings ({preis})",
+    "wingsKurz": "Wings",
+    "bier": "A Bier ({preis})",
+    "bierKurz": "Bier",
+    "prost": [
+      "Prost! *hicks*",
+      "Zum Wohl!",
+      "Ahh. Bier."
+    ],
+    "bierAnsehen": "Runde mit den Stammgästen",
+    "semmel": "Hast was zum Essen für mi?",
+    "semmelText": "Na freilich! A Wurstsemmel. I hab eh drei."
   },
   "intro": [
     "Es ist 8 Uhr früh am Ilgplatz. Die Blutpflaumen leuchten, die Quelle plätschert, und der Americano kostet schon wieder mehr als gestern.",
@@ -1232,5 +1496,59 @@
     "feuerbach": "Feuerbachstraße",
     "obermuellner": "Obermüllnerstraße → Praterstern",
     "schrotzberg": "Schrotzbergstraße"
+  },
+  "buero": {
+    "tuer": [
+      "Hubis Büro. Klein, aber seins.",
+      "Drin steht Erwins Klavier. Und Kartons. Und ein Schild: 'KEIN KLO!!!'"
+    ],
+    "wc": "Das echte Klo. In der Ecke zwischen Café und Museum. Sauberer als erwartet."
+  },
+  "klo": {
+    "zeigen": "Des echte Klo is glei daneben, in der Ecke!",
+    "kurz": "Klo gezeigt",
+    "dankKurz": "Hubi ist dir dankbar",
+    "kurzHubi": "Ruhe im Büro",
+    "hubiSelbst": "Scho wieder wer vor deinem Büro, der aufs Klo will!",
+    "bonusKurz": "Hubis ewige Dankbarkeit",
+    "bonusBanner": "Hubi ist dir SUPER dankbar: „Du bist mei Klo-Held!“"
+  },
+  "bernd": {
+    "wirdGrantiger": "Bernd wird grantiger ({n}/{max})",
+    "start": "BERND IST TODESGRANTIG! Er speit Feuer wie ein Drache – weich den Feuerbällen aus! (Im Café bist du sicher.)",
+    "brueller": "RAAAAH!",
+    "getroffen": "Angekokelt",
+    "ende": "Pfff. Geh ma aus da Sonn.",
+    "gut": "Bernd überlebt! Kaum angekokelt.",
+    "schlecht": "Überlebt – aber {n}× angekokelt."
+  },
+  "marco": {
+    "start": "MARCO HAT ZU VIEL BIER! Er schmeißt beim Buffalo mit Flaschen – die Kiwara rücken an!",
+    "brueller": "ICH HAB SCHON MAL…!",
+    "getroffen": "Bierflasche",
+    "zuWeit": "Zu weit weg – geh näher an Marco ran!",
+    "kiwaraHilfe": "Sie da! Helfen S' uns! Da, a Wasserpistole mit Eiswasser – kühlen S' den Herrn ab! (Leertaste / A zum Spritzen)",
+    "erfolg": "Marco ist abgekühlt und schläft seinen Rausch aus. Die Kiwara sagen Danke!",
+    "verpasst": "Die Kiwara haben Marco selbst eingefangen – ohne dich."
+  },
+  "ulli": {
+    "wiederZusammen": "Erwin und Ulli sind wieder zusammen! (Für wie lang?)",
+    "getrennt": "Erwin und Ulli haben sich getrennt. Schon wieder."
+  },
+  "minispiele": {
+    "schrauben": {
+      "titel": "Radl-Notdienst!",
+      "hilfe": "Schrauben lockern sich (rot, drehend) – antippen oder Taste 1–6, bevor sie rausfallen! 12 schaffen, max. 3 verlieren."
+    },
+    "feilschen": {
+      "titel": "willhaben-Feilschen: {item}",
+      "hilfe": "Drück A / Leertaste, wenn die Nadel im grünen Bereich ist – Mitte = perfekt!",
+      "runde": "Runde {n}/{max}",
+      "bieten": "BIETEN!",
+      "perfekt": "PERFEKT! „Na guat, weil du’s bist.“",
+      "gut": "Gut! „Passt, a bissl runter.“",
+      "daneben": "Daneben! „Na, sicher ned.“",
+      "deal": "Deal: {preis}"
+    }
   }
 }

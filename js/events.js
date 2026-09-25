@@ -73,10 +73,9 @@ const Events = {
     // Opa-Spruch beim Zuhälter-Event
     const opa = scene.actors.opa;
     opa.lineOverride = G.flags.zuhaelter ? () => T('events.zuhaelter.zuschauer', null, 'Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee.') : null;
-    const s1 = scene.actors.stern1, wirt = scene.actors.wirt;
+    const s1 = scene.actors.stern1;
     const night = m >= parseClock(B('events.nachtStart', '21:00'), 1260);
     s1.lineOverride = night ? () => TN('npc.stern1.nacht', s1.talkIdx++) : null;
-    wirt.lineOverride = night ? () => TN('npc.wirt.offen', wirt.talkIdx++) : null;
   },
 
   fire(scene, id) {

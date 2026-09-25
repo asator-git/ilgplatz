@@ -28,7 +28,16 @@ const CHAR_STYLES = {
   schlosser:{ skin: '#e0ac69', hair: '#999', hairStyle: 'bald', mustache: '#555', shirt: '#6c757d', pants: '#495057', shoes: '#222', overall: true },
   michi:    { skin: '#ffffff', hair: '#ff006e', hairStyle: 'clown', shirt: '#ffbe0b', stripes: '#3a86ff', pants: '#8338ec', shoes: '#ff006e', extra: ['clownnose'] },
   koch:     { skin: '#a86b3c', hair: '#111', hairStyle: 'chef', beard: '#111', shirt: '#f8f9fa', pants: '#2b2d42', shoes: '#111', extra: ['apron'], apron: '#2a9d8f' },
-  wirt:     { skin: '#e8b88a', hair: '#222', hairStyle: 'hood', hood: '#3c096c', shirt: '#3c096c', pants: '#111', shoes: '#111' },
+  bernd:    { skin: '#e8a07a', hair: '#2b2b2b', hairStyle: 'bald', beard: '#2b2b2b', shirt: '#3c096c', pants: '#111', shoes: '#111', extra: ['angrybrows'] },
+  hausmasta:{ skin: '#f0c090', hair: '#8a8a8a', hairStyle: 'short', mustache: '#6b6b6b', shirt: '#3d5a80', pants: '#293241', shoes: '#222', fat: true, extra: ['semmel', 'keys'] },
+  ulli:     { skin: '#f6cfa8', hair: '#e9c46a', hairStyle: 'long', shirt: '#ff70a6', pants: '#70d6ff', shoes: '#ffd670', extra: ['phone', 'sunglassesTop'] },
+  gast1:    { skin: '#f0c8a0', hair: '#6b4423', hairStyle: 'bun', shirt: '#a7c957', pants: '#386641', shoes: '#fff' },
+  gast2:    { skin: '#d9a066', hair: '#111', hairStyle: 'short', beard: '#111', shirt: '#ffafcc', pants: '#3a0ca3', shoes: '#fff', glasses: 'nerd' },
+  gast3:    { skin: '#f7d2b0', hair: '#e76f51', hairStyle: 'ponytail', shirt: '#264653', pants: '#e9c46a', shoes: '#111' },
+  verkaeufer:{ skin: '#e0ac69', hair: '#555', hairStyle: 'cap', cap: '#2a9d8f', shirt: '#8d99ae', pants: '#2b2d42', shoes: '#111' },
+  pizzaiolo:{ skin: '#d9a066', hair: '#1a1a1a', hairStyle: 'curly', mustache: '#1a1a1a', shirt: '#74acdf', stripes: '#ffffff', pants: '#222', shoes: '#111', extra: ['apron'], apron: '#ffffff' },
+  wingswirt:{ skin: '#f1c9a5', hair: '#c1121f', hairStyle: 'cap', cap: '#f77f00', shirt: '#d62828', pants: '#222', shoes: '#111', extra: ['apron'], apron: '#f77f00' },
+  slady:    { skin: '#efc39b', hair: '#6b4423', hairStyle: 'cap', cap: '#f8f9fa', shirt: '#f8f9fa', pants: '#e9ecef', shoes: '#495057', overall: true, extra: ['paint', 'roller'] },
   sandra:   { skin: '#ffd6b0', hair: '#ffe066', hairStyle: 'long', shirt: '#ff4d9d', pants: '#3a0ca3', shoes: '#fff', dress: true },
   bianca:   { skin: '#f2c49b', hair: '#101010', hairStyle: 'long', shirt: '#00c2d1', pants: '#222', shoes: '#00c2d1' },
   kathi:    { skin: '#ffdcb5', hair: '#7f4f24', hairStyle: 'ponytail', shirt: '#ff8c00', pants: '#2f3e46', shoes: '#fff' },
@@ -147,6 +156,13 @@ function drawPerson(p, s, frame, ox) {
   if (ex.includes('chains')) { P(bx1 + 1, 17, 1, 1, '#adb5bd'); P(bx1 + 2, 18, 1, 1, '#ced4da'); P(bx1 + 1, 19, 1, 1, '#adb5bd'); P(bx1 + 2, 20, 1, 1, '#ced4da'); }
   if (ex.includes('bottle')) { P(12, 11, 2, 1, '#ddd'); P(12, 12, 3, 6, '#2d6a4f'); P(12, 14, 3, 2, '#f1faee'); }
   if (ex.includes('wrench')) { P(12, 15, 1, 4, '#adb5bd'); P(11, 19, 3, 1, '#adb5bd'); }
+  if (ex.includes('angrybrows')) { P(5, 5, 2, 1, '#1a1a1a'); P(9, 5, 2, 1, '#1a1a1a'); P(6, 4, 1, 1, '#1a1a1a'); P(9, 4, 1, 1, '#1a1a1a'); P(5, 7, 1, 1, '#ff6b6b'); P(10, 7, 1, 1, '#ff6b6b'); }
+  if (ex.includes('phone')) { P(bx1 + 1, 13, 2, 3, '#222'); P(bx1 + 1, 13, 2, 1, '#48cae4'); }
+  if (ex.includes('sunglassesTop')) { P(5, 2, 6, 1, '#111'); }
+  if (ex.includes('semmel')) { P(bx1, 14, 4, 3, '#e9a44c'); P(bx1 + 1, 14, 2, 1, '#c1121f'); }
+  if (ex.includes('keys')) { P(bx0 + 1, 16, 2, 2, '#ffd166'); }
+  if (ex.includes('paint')) { P(bx0 + 2, 12, 1, 1, '#e63946'); P(bx1 - 2, 14, 1, 1, '#118ab2'); P(lx + 1, 19, 1, 1, '#06d6a0'); P(rx, 18, 1, 1, '#ffd166'); }
+  if (ex.includes('roller')) { P(13, 9, 1, 8, '#6b4423'); P(11, 7, 4, 2, '#ffd166'); }
   if (ex.includes('cane')) { P(13, 15, 1, 9, '#6b4423'); P(12, 15, 1, 1, '#6b4423'); }
   if (ex.includes('razor')) { P(12, 16, 1, 3, '#e0e0e0'); P(12, 15, 2, 1, '#48cae4'); }
 }
@@ -361,6 +377,10 @@ function makeObjects(scene) {
     p(6, 6, 28, 18, '#d6ccc2'); p(2, 10, 36, 10, '#d6ccc2'); p(10, 2, 20, 24, '#d6ccc2');
     p(8, 8, 8, 6, '#f5ebe0'); p(22, 14, 8, 6, '#f5ebe0'); p(14, 18, 4, 4, '#adb5bd'); p(26, 6, 5, 3, '#adb5bd');
   }, true);
+  // Geschosse: Feuerball (Bernd), Bierflasche (Marco), Eiswasser (Spieler)
+  makeCanvasTex(scene, 'fireball', 10, 10, (p) => { p(2, 1, 6, 8, '#ff7b00'); p(1, 2, 8, 6, '#ff7b00'); p(3, 3, 4, 4, '#ffd000'); p(4, 4, 2, 2, '#fff3b0'); }, true);
+  makeCanvasTex(scene, 'bottle', 6, 10, (p) => { p(2, 0, 2, 3, '#2d6a4f'); p(1, 3, 4, 7, '#40916c'); p(1, 5, 4, 2, '#f1faee'); }, true);
+  makeCanvasTex(scene, 'waterdrop', 8, 8, (p) => { p(3, 0, 2, 2, '#90e0ef'); p(2, 2, 4, 2, '#4cc9f0'); p(1, 4, 6, 3, '#4cc9f0'); p(2, 4, 2, 2, '#caf0f8'); }, true);
   // Pfeil (Auftragsrichtung)
   makeCanvasTex(scene, 'arrow', 12, 12, (p) => { p(0, 4, 7, 4, '#ffd166'); p(6, 1, 2, 10, '#ffd166'); p(8, 2, 1, 8, '#ffd166'); p(9, 3, 1, 6, '#ffd166'); p(10, 4, 1, 4, '#ffd166'); p(11, 5, 1, 2, '#ffd166'); }, true);
   // Kleber-Fleck
@@ -385,6 +405,8 @@ function makeIcons(scene) {
   ic('ic_laugh', (p) => { p(1, 1, 7, 7, '#ffd166'); p(2, 3, 1, 1, '#333'); p(6, 3, 1, 1, '#333'); p(2, 5, 5, 2, '#9d0208'); });
   ic('ic_zzz', (p) => { p(1, 1, 5, 1, '#e0e1dd'); p(4, 2, 1, 1, '#e0e1dd'); p(3, 3, 1, 1, '#e0e1dd'); p(1, 4, 5, 1, '#e0e1dd'); p(6, 6, 3, 1, '#e0e1dd'); p(7, 7, 1, 1, '#e0e1dd'); p(6, 8, 3, 1, '#e0e1dd'); });
   ic('ic_fear', (p) => { p(3, 0, 3, 6, '#90e0ef'); p(3, 7, 3, 2, '#90e0ef'); });
+  ic('ic_beer', (p) => { p(1, 2, 5, 7, '#f4a261'); p(1, 1, 5, 2, '#ffffff'); p(6, 3, 2, 4, '#f4a261'); p(2, 4, 1, 3, '#ffd166'); });
+  ic('ic_fire', (p) => { p(3, 0, 2, 2, '#ffd000'); p(2, 2, 5, 3, '#ff7b00'); p(1, 5, 7, 4, '#e63946'); p(3, 5, 3, 2, '#ffd000'); });
   ic('ic_camera', (p) => { p(0, 2, 9, 6, '#222'); p(3, 3, 3, 3, '#48cae4'); p(1, 1, 3, 1, '#222'); });
 }
 
@@ -405,6 +427,9 @@ function makeItems(scene) {
   it('rad', (p) => { p(0, 8, 6, 6, '#222'); p(10, 8, 6, 6, '#222'); p(3, 7, 10, 2, '#06d6a0'); p(7, 3, 2, 5, '#06d6a0'); });
   it('beweisfoto', (p) => { p(2, 2, 12, 12, '#f8f9fa'); p(3, 3, 10, 8, '#6c757d'); p(6, 5, 3, 3, '#a47148'); p(10, 7, 2, 4, '#495057'); });
   it('lieferung', (p) => { p(2, 7, 12, 6, '#ffffff'); p(3, 5, 10, 3, '#f4a261'); p(4, 1, 2, 3, '#adb5bd'); p(9, 2, 2, 3, '#adb5bd'); });
+  it('pizza', (p) => { p(2, 3, 12, 3, '#e9a44c'); p(3, 6, 10, 2, '#f4d35e'); p(5, 8, 6, 2, '#f4d35e'); p(7, 10, 2, 2, '#f4d35e'); p(5, 6, 2, 1, '#c1121f'); p(9, 7, 2, 1, '#c1121f'); });
+  it('wings', (p) => { p(2, 8, 12, 5, '#ffffff'); p(3, 5, 4, 4, '#d9480f'); p(8, 4, 4, 5, '#e8590c'); p(6, 7, 3, 3, '#c2410c'); });
+  it('wasserpistole', (p) => { p(2, 5, 10, 4, '#4cc9f0'); p(10, 6, 4, 2, '#118ab2'); p(3, 9, 3, 5, '#118ab2'); p(4, 3, 4, 2, '#ffd166'); });
   it('laptop', (p) => { p(2, 3, 12, 8, '#495057'); p(3, 4, 10, 6, '#48cae4'); p(1, 11, 14, 2, '#adb5bd'); });
 }
 
