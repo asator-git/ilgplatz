@@ -12,7 +12,7 @@ const Input = {
 
   init() {
     const down = (e) => {
-      const k = e.key;
+      const k = e.key || '';
       if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', ' ', 'Spacebar'].includes(k)) {
         // Nicht scrollen – außer beim Tippen in Eingabefeldern
         if (!(e.target && e.target.tagName === 'INPUT')) e.preventDefault();
@@ -31,7 +31,7 @@ const Input = {
       if (kl === 'arrowright' || kl === 'd') this.fire('right');
       if (/^[1-9]$/.test(kl)) this.fire('num', parseInt(kl, 10));
     };
-    const up = (e) => { this.keys[e.key.toLowerCase()] = false; };
+    const up = (e) => { this.keys[(e.key || '').toLowerCase()] = false; };
     window.addEventListener('keydown', down, { passive: false });
     window.addEventListener('keyup', up);
     window.addEventListener('blur', () => { this.keys = {}; this.joyReset(); });
@@ -80,6 +80,10 @@ const Input = {
     btn('btnPause', 'pause');
     // Erstes Touch-Event irgendwo → Touch-Modus
     window.addEventListener('touchstart', () => { this.touchUsed = true; document.body.classList.add('touch'); }, { passive: true });
+    // iOS: Audio darf nur nach echter Geste starten/weiterlaufen
+    const unlock = () => { try { Sfx.unlock(); } catch (e) { /* egal */ } };
+    window.addEventListener('touchend', unlock, { passive: true });
+    window.addEventListener('click', unlock);
     // Kein Doppeltipp-Zoom / Scrollen
     document.addEventListener('gesturestart', (e) => e.preventDefault());
     document.addEventListener('dblclick', (e) => e.preventDefault());

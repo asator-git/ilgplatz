@@ -199,6 +199,8 @@ const Abilities = {
 
   startCompanion(scene, paid) {
     const h = scene.actors.hubi;
+    // Läuft Hubi gerade Gassi? Dann bricht er den Spaziergang ab.
+    if (h.data.gassi) { h.data.gassi = false; if (typeof Events !== 'undefined') Events.hubiGassiState = null; }
     if (paid) scene.addRep(-B('ansehen.hubiHolenKosten', 5), T('begleiter.gefallen', null, 'Gefallen'));
     G.companion = { until: G.minute + B('ansehen.hubiBegleitungMin', 60) };
     h.follow = scene.player; h.followDist = 20; h.override = null; h.path = null;

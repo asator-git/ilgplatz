@@ -785,7 +785,11 @@ const QDEF = {
         Quests.fail('lieferung', QT('lieferung', 'kalt', null, 'Zu spät – das Essen ist kalt!'), 15);
       }
     },
-    onLost(scene, st, k) { /* Carla verliert eine Portion – dann wird's halt knapp */ }
+    onLost(scene, st, k) {
+      if (k !== 'lieferung') return;
+      while (scene.takeItem('lieferung')) { /* Rest weg */ }
+      Quests.fail('lieferung', QT('lieferung', 'verloren', null, 'Eine Portion verloren – die Lieferung ist geplatzt!'), 15);
+    }
   }
 };
 
