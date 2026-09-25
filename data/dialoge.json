@@ -49,7 +49,9 @@
     "tonAn": "♪ Ton: an",
     "tonAus": "♪ Ton: aus",
     "smsVon": "SMS von {name}",
-    "hunger": "Hunger"
+    "hunger": "Hunger",
+    "festhaengen": "Ich hänge fest!",
+    "befreit": "Befreit! Weiter geht's."
   },
   "raenge": {
     "zuagraster": "Zuagraster",

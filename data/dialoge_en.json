@@ -49,7 +49,9 @@
     "tonAn": "♪ Sound: on",
     "tonAus": "♪ Sound: off",
     "smsVon": "Text from {name}",
-    "hunger": "Hunger"
+    "hunger": "Hunger",
+    "festhaengen": "I'm stuck!",
+    "befreit": "Unstuck! Off you go."
   },
   "raenge": {
     "zuagraster": "Blow-in",

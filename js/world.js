@@ -414,6 +414,10 @@ class WorldScene extends Phaser.Scene {
   updatePlayer(dt) {
     const p = this.player;
     p.updateState();
+    // Sicherheitsnetz: Lähmende Zustände ohne Ablaufzeit gibt es nicht → sofort lösen
+    if (p.isImmobile() && !p.stateUntilMin && !p.stateUntilMs) { p.clearState(); p.onStateEnd = null; UI.unfade(); }
+    // Sicherheitsnetz: Dialog offen, aber unsichtbar → schließen
+    if (UI.dlg && document.getElementById('dialog').classList.contains('hidden')) UI.closeAllDialogs();
     p.moving = false;
     if (!UI.isBlocking() && !p.isImmobile() && !G.ended) {
       const a = Input.axis();
@@ -467,6 +471,17 @@ class WorldScene extends Phaser.Scene {
     this.tweens.add({ targets: p, x: tx, y: ty, duration: 260, ease: 'Quad.easeOut' });
     this.cameras.main.shake(150, 0.004);
     Sfx.play('punch');
+  }
+
+  // Notfall aus dem Pausemenü: Figur befreien
+  unstuck() {
+    const p = this.player;
+    UI.closeAllDialogs(); UI.unfade(); UI.hideWait();
+    Input.keys = {}; Input.joyReset();
+    if (p.isImmobile() && !['hospital', 'glued'].includes(p.state)) { p.clearState(); p.onStateEnd = null; }
+    p.sprite.setVisible(true); p.label.setVisible(true);
+    if (this.playerBlocked(p.x, p.y)) this.teleportPlayer(p.tx, p.ty);
+    UI.toast(T('ui.befreit', null, 'Befreit! Weiter geht\'s.'), 'good');
   }
 
   // Spieler an eine freie Stelle setzen

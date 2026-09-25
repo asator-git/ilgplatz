@@ -231,6 +231,7 @@ const UI = {
 
   openDialog(d) {
     this.dlg = d;
+    d.openedMs = Date.now();
     document.body.classList.add('dialog-open');
     $('dialog').classList.remove('hidden');
     if (typeof G !== 'undefined' && G) G.dialogStartMs = G.realMs;
@@ -417,6 +418,7 @@ const UI = {
       <div class="title">${escapeHtml(T('ui.pause', null, 'Pause'))}</div>
       <button class="bigbtn" id="pResume">${escapeHtml(T('ui.weiter', null, 'Weiter'))}</button>
       <button class="bigbtn alt" id="pHelp">${escapeHtml(T('ui.anleitungTitel', null, 'Anleitung'))}</button>
+      <button class="bigbtn alt" id="pUnstuck">${escapeHtml(T('ui.festhaengen', null, 'Ich hänge fest!'))}</button>
       <button class="bigbtn alt" id="pRestart">${escapeHtml(T('ui.neustart', null, 'Neustart'))}</button>
       <div id="pHelpBox"></div></div>`;
     this.showOverlay(html, 'pause', (ev) => {
@@ -425,6 +427,7 @@ const UI = {
     $('pResume').addEventListener('click', () => { this.hideOverlay(); onResume(); });
     $('pHelp').addEventListener('click', () => { $('pHelpBox').innerHTML = this.helpHTML(); });
     $('pRestart').addEventListener('click', () => { this.hideOverlay(); onRestart(); });
+    $('pUnstuck').addEventListener('click', () => { this.hideOverlay(); if (window.WORLD) window.WORLD.unstuck(); onResume(); });
   },
 
   showEnd(res, onAgain) {

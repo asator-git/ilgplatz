@@ -35,6 +35,9 @@ const Input = {
     window.addEventListener('keydown', down, { passive: false });
     window.addEventListener('keyup', up);
     window.addEventListener('blur', () => { this.keys = {}; this.joyReset(); });
+    document.addEventListener('visibilitychange', () => { if (document.hidden) { this.keys = {}; this.joyReset(); } });
+    // Kein Finger mehr am Bildschirm → Joystick sicher loslassen
+    window.addEventListener('touchend', (e) => { if (this.joy.active && !Array.from(e.touches).some(t => t.identifier === this.joy.id)) { this.joyReset(); const b = document.getElementById('joybase'), k = document.getElementById('joyknob'); if (b) b.classList.remove('on'); if (k) k.style.transform = 'translate(-50%,-50%)'; } }, { passive: true });
 
     // Touch-Steuerung
     const zone = document.getElementById('joyzone');
@@ -44,6 +47,8 @@ const Input = {
       const start = (e) => {
         this.touchUsed = true;
         document.body.classList.add('touch');
+        // Hat der Browser das Loslassen verschluckt? Dann den alten Finger vergessen.
+        if (this.joy.active && !Array.from(e.touches).some(t => t.identifier === this.joy.id)) { this.joyReset(); base.classList.remove('on'); }
         for (const t of e.changedTouches) {
           if (this.joy.active) break;
           const r = zone.getBoundingClientRect();
