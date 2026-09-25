@@ -69,6 +69,7 @@ class WorldScene extends Phaser.Scene {
     this.npcs = [];
     this.actors = {};
     this.interactables = [];
+    if (typeof Abilities !== 'undefined') Abilities.reset();
     if (typeof NPCs !== 'undefined' && NPCs.init) NPCs.init(this);
     if (typeof Enemies !== 'undefined' && Enemies.init) Enemies.init(this);
     if (typeof Quests !== 'undefined' && Quests.init) Quests.init(this);
@@ -129,7 +130,6 @@ class WorldScene extends Phaser.Scene {
   }
 
   doSpecial() {
-    if (!this.playerCanAct()) return;
     if (typeof Abilities !== 'undefined') Abilities.special(this);
   }
 

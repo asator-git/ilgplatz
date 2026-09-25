@@ -86,7 +86,8 @@
     "carla": "Quassel",
     "juliette": "Bussi",
     "markus": "Hack",
-    "jewi": "Foto"
+    "jewi": "Foto",
+    "mascha": "Mascha"
   },
   "orte": {
     "cafe": "The Good Coffee Society",
@@ -520,5 +521,80 @@
       "Ah, du suchst was? Hinter der Quelle! Da is immer alles."
     ],
     "falschGelaufen": "Carla rennt einem falschen Hinweis nach: −{n} Minuten."
+  },
+  "mascha": {
+    "geheilt": [
+      "Oh, Mascha! Danke! I war ganz weg.",
+      "Mascha! Du Engerl!",
+      "*wird abgeschleckt* Igitt. Und danke."
+    ],
+    "selbst": "Mascha schleckt dich ab. Du bist wieder da!",
+    "rettungKonzert": "Konzert-Opfer gerettet",
+    "rettung": "Mascha hilft",
+    "bellen": [
+      "WUFF! WUFF!",
+      "WAU! WAU! WAU!",
+      "GRRR-WUFF!"
+    ]
+  },
+  "spezialText": {
+    "warten": "Moment, gleich wieder…",
+    "keineMascha": "Mascha is grad ned bei dir!",
+    "exenFliehen": "{n} Ex(en) ergreifen die Flucht!",
+    "nixZumEssen": "Nix zum Jausnen dabei. Ab zum Deewan oder ins Café!",
+    "mampf": [
+      "Mampf. Jetzt bin i wieder a Mensch.",
+      "Mmmh. Der Bürgermeister is wieder im Amt.",
+      "*schmatz* Wos host gsagt? Egal, i bin satt."
+    ],
+    "niemandDa": "Da is niemand zum Anquasseln.",
+    "quasseln": [
+      "Und dann in Graz, da hab ich, also eigentlich die Tante, und das Rad, und dann der Schlossberg…",
+      "Weißt du, was ich heut schon erlebt hab? Also: Zuerst…",
+      "Kennst du Graz? Nein? Dann erzähl ich dir alles. ALLES."
+    ],
+    "bisou": [
+      "Bisou, bisou, {name}!",
+      "Ah, {name}! Comment ça va? Bisou!"
+    ],
+    "bisouLeer": "Bisou… an niemanden. Tant pis.",
+    "bisouAntwort": [
+      "Oh là là!",
+      "Hihi, merci!",
+      "Bussi zurück!"
+    ],
+    "keinTerminal": "Kein Terminal in der Nähe. Die stehen neben den Läden.",
+    "schonGehackt": "Das Terminal hast schon gehackt. Das könnt ma automatisieren, aber ned zweimal.",
+    "hackFail": "ACCESS DENIED. Nochmal probieren.",
+    "hackCafe": "GEHACKT! Daniels Preise sind eine Stunde lang halbiert.",
+    "hackKurz": "Hack",
+    "hackLaden": "Laden gehackt: {laden}",
+    "fotoLeer": "Schönes Foto vom Ilgplatz. Leider niemand drauf, der sich ärgert.",
+    "fotoOpfer": [
+      "He! Ka Foto!",
+      "Mei Gsicht! Mei Gsicht!",
+      "Lösch des sofort!"
+    ],
+    "andiGrantig": "Andi ist GRANTIG! Iss was (E), sonst verlierst du jede Minute Ansehen!",
+    "grantigKurz": "grantig",
+    "carlaVerliert": "Hoppala! Carla hat was verloren: {item}",
+    "nurKurz": [
+      "Nur kurz was checken…",
+      "Moment, da is a Update…",
+      "Oh, a neues Paper über Transformer…"
+    ]
+  },
+  "begleiter": {
+    "entlassen": "Danke, Hubi. Du kannst gehen.",
+    "holen": "Hubi, kumm mit – mit Mascha! (−{n} Ansehen)",
+    "gefallen": "Gefallen",
+    "ja": [
+      "Passt. Mascha, bei Fuß!",
+      "Na guat. Aber nur, weil du's bist."
+    ],
+    "ende": [
+      "I muss weiter. Mascha will hoam.",
+      "So, Dienstschluss. Servus!"
+    ]
   }
 }
