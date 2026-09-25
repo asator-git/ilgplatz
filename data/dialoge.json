@@ -51,7 +51,8 @@
     "smsVon": "SMS von {name}",
     "hunger": "Hunger",
     "festhaengen": "Ich hänge fest!",
-    "befreit": "Befreit! Weiter geht's."
+    "befreit": "Befreit! Weiter geht's.",
+    "tschuldigung": "Tschuldigung!"
   },
   "raenge": {
     "zuagraster": "Zuagraster",
@@ -938,7 +939,8 @@
     "nadjaDaAndere": "Nadja ist am Platz. Hubi versteckt sich im Café.",
     "nadjaWeg": "Nadja geht. Durchatmen, Hubi.",
     "liebeskummerKurz": "Liebeskummer",
-    "kummerVorbei": "Puh. Der Liebeskummer lässt nach."
+    "kummerVorbei": "Puh. Der Liebeskummer lässt nach.",
+    "schonfrist": "Du hast {n} Sekunden Ruhe vor den Exen – lauf!"
   },
   "items": {
     "americano": "Americano",
@@ -1639,5 +1641,15 @@
       "gewonnen": "Alle Radln gefressen! Didi ist begeistert.",
       "crash": "Bumm! Crash."
     }
+  },
+  "speichern": {
+    "weiterspielen": "Weiterspielen",
+    "weiterBeschreibung": "{figur} · {zeit} · Ansehen {n}",
+    "neuHinweis": "Oder wähle unten eine Figur für einen neuen Tag (der alte Spielstand wird dann überschrieben).",
+    "button": "Spielstand speichern",
+    "gespeichert": "Spielstand gespeichert!",
+    "fehler": "Speichern ging leider nicht.",
+    "geladen": "Weiter geht's um {zeit}!",
+    "autoHinweis": "Das Spiel speichert auch automatisch. Beim nächsten Start: „Weiterspielen“."
   }
 }

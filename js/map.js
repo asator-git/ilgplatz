@@ -218,7 +218,7 @@ function computeLocations(ground, solid) {
   // Spawnpunkte
   const ring = (ang) => nearWalk(ringTile(ang, 11.6), 3);
   LOC.spawns = {
-    ex: [ring(300), ring(150), ring(200), ring(30)],
+    ex: [ring(345), ring(135), ring(215), ring(60)],
     erwin: ring(200), bobo: ring(35), markus: ring(160),
     nadja: { x: 1, y: 22 },
     doppler: LOC.streetEnds.hiller, gassi: LOC.streetEnds.feuerbach,

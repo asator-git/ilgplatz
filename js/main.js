@@ -45,11 +45,11 @@ class BootScene extends Phaser.Scene {
 
 const FIGUREN = ['hubi', 'andi', 'carla', 'juliette', 'markus', 'jewi'];
 
-function startGame(figur) {
+function startGame(figur, save) {
   const game = window.GAME;
   UI.hideOverlay();
   if (game.scene.isActive('World') || game.scene.isPaused('World')) game.scene.stop('World');
-  game.scene.start('World', { figur });
+  game.scene.start('World', { figur, save: save || null });
 }
 
 function backToTitle() {

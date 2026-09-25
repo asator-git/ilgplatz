@@ -30,6 +30,12 @@ Buffalo Hot Wings (Schrotzbergstraße 1). Zwischen Café und Museum: Hubis Büro
 | Musik an/aus | ♫ oben rechts oder am Startbildschirm | ♫ |
 | Dialog-Antwort | Pfeile + Leertaste oder Zahl 1–9 | antippen |
 
+## Speichern
+
+Das Spiel speichert automatisch (alle 20 Sekunden und beim Pausieren) – im Pausemenü gibt's zusätzlich
+„Spielstand speichern“. Beim nächsten Öffnen erscheint am Startbildschirm **„▶ Weiterspielen“**.
+Ein Speicherplatz pro Browser/Gerät; nach 23:00 (Abrechnung) wird der Stand gelöscht.
+
 ## So geht's
 
 - Leute mit gelbem **!** haben Aufträge. Unten stehen deine offenen Aufträge (max. 3), der gelbe Pfeil zeigt zum nächsten Ziel.

@@ -135,7 +135,7 @@ const Enemies = {
     // Nicht im Café herumstehen
     if (isCafeFloor(a.x, a.y) && !a.path) { a.goToTile(LOC.cafeFront.x, LOC.cafeFront.y + 2); }
     if (G.figur !== 'hubi') return false;
-    if (G.realMs < (a.data.nextChase || 0) || !this.catchable(scene)) { if (a.data.chasing) { a.data.chasing = false; a.path = null; } return false; }
+    if (G.realMs < (a.data.nextChase || 0) || G.realMs < (G.flags.exSchonfrist || 0) || !this.catchable(scene)) { if (a.data.chasing) { a.data.chasing = false; a.path = null; } return false; }
     const d = dist(a.x, a.y, p.x, p.y);
     if (d < B('gegner.exJagdRadius', 70) && lineOfSight(scene.grid, a.x, a.y - 4, p.x, p.y - 4)) {
       if (!a.data.chasing) {
@@ -409,6 +409,8 @@ const Enemies = {
       p.onStateEnd = null;
       p.data.heldBy = null;
       a.clearState();
+      G.flags.exSchonfrist = G.realMs + B('gegner.exSchonfristSek', 25) * 1000;
+      UI.toast(T('gegnerText.schonfrist', { n: B('gegner.exSchonfristSek', 25) }, 'Du hast {n} Sekunden Ruhe vor den Exen – lauf!'), 'good');
       a.data.fleeUntil = G.realMs + 4000;
       UI.toast(T('gegnerText.frei', null, 'Endlich frei!'), 'good');
     };
@@ -435,7 +437,7 @@ const Enemies = {
       for (const a of scene.npcs) {
         if (!a.present || a.isImmobile()) continue;
         const d = dist(a.x, a.y, p.x, p.y);
-        if (a.isEx && !a.isNadja && G.figur === 'hubi' && d < 10 && G.realMs > (a.data.nextChase || 0) && G.realMs > (a.data.fleeUntil || 0)) {
+        if (a.isEx && !a.isNadja && G.figur === 'hubi' && d < 10 && G.realMs > (a.data.nextChase || 0) && G.realMs > (a.data.fleeUntil || 0) && G.realMs > (G.flags.exSchonfrist || 0)) {
           this.holdPlayer(scene, a, B('gegner.exFesthaltenMin', 15), B('gegner.exVerlust', 10));
           break;
         }

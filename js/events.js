@@ -32,7 +32,7 @@ const Events = {
     this.spray = null;
     this.hubiGassiState = null;
     // Intro
-    if (G.minute <= G.startMinute + 1) {
+    if (G.minute <= G.startMinute + 1 && !G.loaded) {
       scene.time.delayedCall(400, () => {
         const rivalInfo = T('rivalInfo.' + G.rivalId, null, '');
         UI.dialog(TL('intro', ['Es ist 8 Uhr früh am Ilgplatz.']).map(t => ({ who: '', text: fmt(t, { rivalInfo }) })), {
@@ -164,6 +164,17 @@ const Events = {
     }
   },
 
+  // Nach dem Laden: laufende Zeitfenster (Konzert, Doppler, Zuhälter, Nacht) wieder herstellen
+  restoreWindows(scene) {
+    const m = G.minute, C = (k, d) => parseClock(B(k, d), 0);
+    const ks = C('events.konzertStart', '15:00');
+    if (m >= ks && m < ks + B('events.konzertMin', 30)) this.fire(scene, 'konzert');
+    if (m >= C('events.dopplerStart', '17:00') && m < C('events.dopplerEnde', '19:30') && !G.flags.dopplerErledigt) this.fire(scene, 'doppler');
+    const zs = C('events.zuhaelterStart', '19:00');
+    if (m >= zs && m < zs + B('events.zuhaelterMin', 30)) this.fire(scene, 'zuhaelter');
+    if (m >= C('events.nachtStart', '21:00')) { const r = scene.actors.rasiererin; r.setPresent(true); r.setTile(LOC.spawns.rasiererin.x, LOC.spawns.rasiererin.y); r.homeX = r.x; r.homeY = r.y; }
+  },
+
   // ---- Erdbeben (Americano verpasst) ----
   earthquake(scene) {
     const secs = B('auftraege.erdbebenSek', 5);
@@ -247,7 +258,7 @@ const Events = {
     if (isCafeFloor(d.x, d.y) && tileAt(scene.grid, d.x, d.y) !== TI.DOOR) {
       d.data.done = true; d.follow = null; d.path = null; d.routine = null;
       d.setState('sitting');
-      G.flags.dopplerImCafe = true;
+      G.flags.dopplerImCafe = true; G.flags.dopplerErledigt = true;
       scene.addRep(B('events.dopplerCafe', 40), this.E('doppler.cafeKurz', null, 'Doppler-Frau im Café'), { quest: true });
       scene.say(scene.actors.daniel, this.E('doppler.daniel', null, 'DIE da? In MEINER Society?! Für euch kostet heute alles mehr!'), 4000);
       UI.toast(this.E('doppler.teurer', null, 'Daniel ist sauer: Preise +50 % für den Rest des Tages.'), 'bad');
@@ -260,6 +271,7 @@ const Events = {
         d.data.done = true; d.follow = null; d.path = null; d.routine = null;
         d.setPos(c.x, c.y - 2);
         d.setState('sitting');
+        G.flags.dopplerErledigt = true;
         scene.addRep(B('events.dopplerBank', 25), this.E('doppler.bankKurz', null, 'Doppler-Frau aufs Bankerl'), { quest: true });
         scene.say(d, this.E('doppler.bankDanke', null, 'A Bankerl! Du bist a Schatz! *schnarch*'), 3500);
         G.questsDone++;

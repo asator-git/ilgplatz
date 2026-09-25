@@ -385,6 +385,7 @@ const UI = {
       <div class="subtitle">${escapeHtml(T('ui.untertitel', null, 'Ein Tag am Ilgplatz'))}</div>
       <div class="langsw"><button class="bigbtn ${Lang.cur === 'de' ? 'sel' : 'alt'}" id="lDe">Deutsch</button><button class="bigbtn ${Lang.cur === 'en' ? 'sel' : 'alt'}" id="lEn">English</button></div>
       ${DATA.dialoge && DATA.dialoge.ui ? '' : '<div class="box" style="color:#ef476f">Achtung / Warning: data/dialoge.json konnte nicht geladen werden / could not be loaded. Bitte über einen Webserver starten / please start via a web server: python3 -m http.server 8000 → http://localhost:8000</div>'}
+      ${(() => { const sv = SaveGame.load(); return sv ? `<div class="box" style="text-align:center"><button class="bigbtn" id="tContinue">▶ ${escapeHtml(T('speichern.weiterspielen', null, 'Weiterspielen'))}: ${escapeHtml(SaveGame.describe(sv))}</button><div class="small" style="margin-top:6px">${escapeHtml(T('speichern.neuHinweis', null, 'Oder wähle unten eine Figur für einen neuen Tag (der alte Spielstand wird dann überschrieben).'))}</div></div>` : ''; })()}
       <div class="box" style="text-align:center">${escapeHtml(T('ui.waehleFigur', null, 'Wähle deine Figur:'))}</div>
       <div class="cards">${cards}</div>
       <div class="box"><h3>${escapeHtml(T('ui.steuerungTitel', null, 'Steuerung'))}</h3>${TL('ui.steuerung', ['Pfeiltasten/WASD: gehen', 'Leertaste: Aktion', 'E: Spezial', 'Esc: Pause']).map(escapeHtml).join('<br>')}</div>
@@ -400,6 +401,8 @@ const UI = {
     });
     mark();
     document.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => { Sfx.unlock(); Music.resumeIfWanted(); Sfx.play('good'); startGame(c.dataset.id); }));
+    const tc = $('tContinue');
+    if (tc) tc.addEventListener('click', () => { const sv = SaveGame.load(); if (!sv) return; Sfx.unlock(); Music.resumeIfWanted(); Sfx.play('good'); if (sv.lang && sv.lang !== Lang.cur) Lang.set(sv.lang); startGame(sv.figur, sv); });
     const mu = $('tMusic');
     if (mu) mu.addEventListener('click', () => { Sfx.unlock(); Music.toggle(); });
     const m = $('tMute');
@@ -418,8 +421,10 @@ const UI = {
       <div class="title">${escapeHtml(T('ui.pause', null, 'Pause'))}</div>
       <button class="bigbtn" id="pResume">${escapeHtml(T('ui.weiter', null, 'Weiter'))}</button>
       <button class="bigbtn alt" id="pHelp">${escapeHtml(T('ui.anleitungTitel', null, 'Anleitung'))}</button>
+      <button class="bigbtn alt" id="pSave">${escapeHtml(T('speichern.button', null, 'Spielstand speichern'))}</button>
       <button class="bigbtn alt" id="pUnstuck">${escapeHtml(T('ui.festhaengen', null, 'Ich hänge fest!'))}</button>
       <button class="bigbtn alt" id="pRestart">${escapeHtml(T('ui.neustart', null, 'Neustart'))}</button>
+      <div class="small" style="margin-top:8px">${escapeHtml(T('speichern.autoHinweis', null, 'Das Spiel speichert auch automatisch. Beim nächsten Start: „Weiterspielen“.'))}</div>
       <div id="pHelpBox"></div></div>`;
     this.showOverlay(html, 'pause', (ev) => {
       if (ev === 'pause' || ev === 'confirm') { this.hideOverlay(); onResume(); }
@@ -427,6 +432,7 @@ const UI = {
     $('pResume').addEventListener('click', () => { this.hideOverlay(); onResume(); });
     $('pHelp').addEventListener('click', () => { $('pHelpBox').innerHTML = this.helpHTML(); });
     $('pRestart').addEventListener('click', () => { this.hideOverlay(); onRestart(); });
+    $('pSave').addEventListener('click', () => { if (window.WORLD) SaveGame.save(window.WORLD, true); });
     $('pUnstuck').addEventListener('click', () => { this.hideOverlay(); if (window.WORLD) window.WORLD.unstuck(); onResume(); });
   },
 

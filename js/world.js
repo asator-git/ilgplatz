@@ -8,6 +8,7 @@ class WorldScene extends Phaser.Scene {
 
   init(data) {
     this.figur = (data && data.figur) || 'hubi';
+    this.saveData = (data && data.save) || null;
   }
 
   create() {
@@ -39,6 +40,7 @@ class WorldScene extends Phaser.Scene {
       speed: parseFloat(URLP.speed) || 1,
       onDialogClosed: () => this.onDialogClosed()
     };
+    if (this.saveData) { G.minute = this.saveData.minute; G.loaded = true; }
     TEXT_VARS.spieler = T('figuren.' + fig + '.name', null, fig);
     TEXT_VARS.rivale = G.rivalName;
     TEXT_VARS.preis = () => euro(this.price('americano'));
@@ -75,6 +77,10 @@ class WorldScene extends Phaser.Scene {
     if (typeof Quests !== 'undefined' && Quests.init) Quests.init(this);
     if (typeof Events !== 'undefined' && Events.init) Events.init(this);
 
+    if (this.saveData) { try { SaveGame.apply(this, this.saveData); } catch (e) { console.error(e); } }
+    this.saveT = 0;
+    this.onHide = () => { if (document.hidden) SaveGame.save(this); };
+    document.addEventListener('visibilitychange', this.onHide);
     Input.handlers.world = (ev, arg) => this.onInput(ev, arg);
     UI.showHUD(true);
     UI.setSpecialLabel(T('spezial.' + fig, null, 'E'));
@@ -83,6 +89,7 @@ class WorldScene extends Phaser.Scene {
   }
 
   cleanup() {
+    document.removeEventListener('visibilitychange', this.onHide);
     Input.handlers.world = null;
     UI.closeAllDialogs();
     UI.unfade();
@@ -128,6 +135,7 @@ class WorldScene extends Phaser.Scene {
     if (G.paused) return;
     G.paused = true;
     this.tweens.pauseAll();
+    SaveGame.save(this);
     UI.showPause(() => { G.paused = false; this.tweens.resumeAll(); }, () => { G.paused = false; backToTitle(); });
   }
 
@@ -318,6 +326,9 @@ class WorldScene extends Phaser.Scene {
     if (this.hudT <= 0) { this.hudT = 200; this.refreshHUD(); }
 
     if (!G.ended && G.minute >= G.endMinute) this.endDay();
+    // Automatisch speichern
+    this.saveT += dt;
+    if (this.saveT > B('speichern.autoSek', 20) * 1000 && !G.ended) { this.saveT = 0; SaveGame.save(this); }
   }
 
   advanceClock(dt) {
@@ -399,12 +410,13 @@ class WorldScene extends Phaser.Scene {
     const hw = 4.5, top = 6;
     if (isSolidPx(g, px - hw, py - top) || isSolidPx(g, px + hw, py - top) ||
       isSolidPx(g, px - hw, py - 1) || isSolidPx(g, px + hw, py - 1)) return true;
+    if (G.realMs < (this.slipThroughUntil || 0)) return false;
     for (const a of this.npcs) {
       if (!a.present || !a.solidForPlayer || !a.solidForPlayer()) continue;
       if (Math.abs(a.x - px) < 9 && Math.abs(a.y - py) < 6) {
         // Nur blockieren, wenn man sich nicht schon überlappt (sonst festkleben)
         if (Math.abs(a.x - this.player.x) < 9 && Math.abs(a.y - this.player.y) < 6) continue;
-        a._bumped = true;
+        this._bumpNpc = a;
         return true;
       }
     }
@@ -419,6 +431,15 @@ class WorldScene extends Phaser.Scene {
     // Sicherheitsnetz: Dialog offen, aber unsichtbar → schließen
     if (UI.dlg && document.getElementById('dialog').classList.contains('hidden')) UI.closeAllDialogs();
     p.moving = false;
+    // Länger gegen eine Ex gedrückt? Dann durchschlüpfen („Tschuldigung!“)
+    if (this._bumpNpc) {
+      if (!this.bumpSince) this.bumpSince = G.realMs;
+      if (G.realMs - this.bumpSince > B('spieler.durchschluepfenMs', 500)) {
+        this.slipThroughUntil = G.realMs + 900; this.bumpSince = 0;
+        this.say(p, T('ui.tschuldigung', null, 'Tschuldigung!'), 1200);
+      }
+    } else this.bumpSince = 0;
+    this._bumpNpc = null;
     if (!UI.isBlocking() && !p.isImmobile() && !G.ended) {
       const a = Input.axis();
       if (p.state === 'liebeskummer' && (a.x || a.y)) {
@@ -494,6 +515,7 @@ class WorldScene extends Phaser.Scene {
   // Tagesende
   endDay() {
     G.ended = true;
+    SaveGame.clear();
     G.minute = G.endMinute;
     if (typeof Events !== 'undefined' && Events.finale) Events.finale(this);
   }

@@ -51,7 +51,8 @@
     "smsVon": "Text from {name}",
     "hunger": "Hunger",
     "festhaengen": "I'm stuck!",
-    "befreit": "Unstuck! Off you go."
+    "befreit": "Unstuck! Off you go.",
+    "tschuldigung": "Sorry, coming through!"
   },
   "raenge": {
     "zuagraster": "Blow-in",
@@ -938,7 +939,8 @@
     "nadjaDaAndere": "Nadja is on the square. Hubi hides in the café.",
     "nadjaWeg": "Nadja leaves. Breathe, Hubi.",
     "liebeskummerKurz": "Heartbroken",
-    "kummerVorbei": "Phew. The heartbreak is fading."
+    "kummerVorbei": "Phew. The heartbreak is fading.",
+    "schonfrist": "You've got {n} seconds of peace from the exes – run!"
   },
   "items": {
     "americano": "Americano",
@@ -1639,5 +1641,15 @@
       "gewonnen": "All bikes eaten! Didi is thrilled.",
       "crash": "Bam! Crash."
     }
+  },
+  "speichern": {
+    "weiterspielen": "Continue",
+    "weiterBeschreibung": "{figur} · {zeit} · Reputation {n}",
+    "neuHinweis": "Or pick a character below for a new day (this will overwrite the old save).",
+    "button": "Save game",
+    "gespeichert": "Game saved!",
+    "fehler": "Sorry, saving didn't work.",
+    "geladen": "Back at it – it's {zeit}!",
+    "autoHinweis": "The game also saves automatically. Next time, just hit “Continue”."
   }
 }

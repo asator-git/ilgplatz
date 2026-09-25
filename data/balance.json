@@ -17,7 +17,8 @@
     "startAnsehen": 0,
     "aktionsRadius": 22,
     "krankenhausMin": 30,
-    "nassMin": 12
+    "nassMin": 12,
+    "durchschluepfenMs": 500
   },
   "rivale": {
     "start": 150,
@@ -171,7 +172,8 @@
     "nadjaKummerTorkeln": 0.7,
     "nadjaWartenMin": 25,
     "nadjaKummerNpcMin": 30,
-    "erwinPlapperMsNah": 3500
+    "erwinPlapperMsNah": 3500,
+    "exSchonfristSek": 25
   },
   "auftraege": {
     "maxOffen": 3,
@@ -328,5 +330,8 @@
     "cafeAb": "15:40",
     "therapieAb": "16:10",
     "zurueckAb": "17:20"
+  },
+  "speichern": {
+    "autoSek": 20
   }
 }
