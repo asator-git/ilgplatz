@@ -623,14 +623,14 @@ const QDEF = {
   steckdose: {
     onStart(scene, st) { st.step = 'suchen'; },
     hud(scene, st) { return { text: QT('steckdose', st.step === 'suchen' ? (G.figur === 'markus' ? 'hudSelbst' : 'hud') : 'hudZurueck') }; },
-    target(scene, st) { return st.step === 'suchen' ? tgtTile({ x: LOC.socket.x, y: LOC.socket.y - 1 }) : tgtActor('markus'); },
+    target(scene, st) { return st.step === 'suchen' ? tgtTile(LOC.socketFront) : tgtActor('markus'); },
     options(scene, st, a) {
       if (st.step !== 'zurueck' || a.id !== 'markus') return [];
       return [{ label: QT('steckdose', 'melden'), fn: () => { UI.dialog(QL('steckdose', 'danke').map(t => ({ who: a.name, text: fmt(t) }))); Quests.complete('steckdose', B('auftraege.steckdose', 15)); } }];
     },
     inter(scene, st) {
       if (st.step !== 'suchen') return [];
-      return [{ x: (LOC.socket.x + 0.5) * TILE, y: LOC.socket.y * TILE, r: 26, label: QT('steckdose', 'label', null, 'Steckdose prüfen'), fn: () => {
+      return [{ x: (LOC.socketFront.x + 0.5) * TILE, y: (LOC.socketFront.y + 0.5) * TILE, r: 24, label: QT('steckdose', 'label', null, 'Steckdose prüfen'), fn: () => {
         if (G.figur === 'markus') { UI.dialog(QL('steckdose', 'selbst').map(t => ({ who: scene.player.name, text: fmt(t) }))); Quests.complete('steckdose', B('auftraege.steckdose', 15)); }
         else { st.step = 'zurueck'; UI.toast(QT('steckdose', 'gefunden', null, 'Steckdose gefunden! Sag\'s dem Markus.'), 'good'); }
       } }];

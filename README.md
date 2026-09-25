@@ -11,6 +11,13 @@ Sammle **Ansehen** im Grätzl – um 23:00 musst du mehr haben als der Titelvert
 - **Lokal:** Im Ordner `python3 -m http.server 8000` ausführen und <http://localhost:8000> öffnen.
   (Direkt per Doppelklick auf `index.html` geht's nicht, weil der Browser die JSON-Dateien dann blockiert.)
 
+## Die Karte
+
+Nach der echten Lage (OpenStreetMap): Hillerstraße nach Nordost (dort der Deewan), Feuerbachstraße nach Nordwest,
+Obermüllnerstraße nach Westen Richtung Praterstern („Stern“, ganz am Rand), Schrotzbergstraße nach Süden.
+Dezentral im Norden, The Good Coffee Society im Osten, gleich daneben das Clown-Museum,
+Radbande und Schlosserei (Ilgplatz 1 und 2) im Südwesten.
+
 ## Steuerung
 
 | | PC | Handy |

@@ -125,7 +125,7 @@ const Events = {
         break;
       case 'doppler': {
         const d = scene.actors.doppler;
-        d.setPresent(true); d.setTile(37, 20);
+        d.setPresent(true); d.setTile(LOC.spawns.doppler.x, LOC.spawns.doppler.y);
         d.data.nextPuke = G.minute + 1; d.data.led = false; d.data.done = false;
         G.flags.doppler = true;
         b('doppler.start', 5000);
@@ -153,7 +153,7 @@ const Events = {
         break;
       case 'nacht': {
         const r = scene.actors.rasiererin;
-        r.setPresent(true); r.setTile(18, 21); r.homeX = r.x; r.homeY = r.y;
+        r.setPresent(true); r.setTile(LOC.spawns.rasiererin.x, LOC.spawns.rasiererin.y); r.homeX = r.x; r.homeY = r.y;
         b('nacht.start', 5000, 'info');
         UI.dialog(TL('events.nacht.zitat', ['Im Stuwerviertel in da Nocht.']).map(t => ({ who: T('events.nacht.zitatWer', null, 'Nino aus Wien'), text: t })));
         break;
@@ -210,7 +210,8 @@ const Events = {
     if (h === scene.player) return;
     if (G.companion) Abilities.endCompanion(scene);
     h.data.gassi = true;
-    h.override = { tx: 19, ty: 1, until: 99999 };
+    const gs = LOC.spawns.gassi;
+    h.override = { tx: gs.x, ty: gs.y, until: 99999 };
     h.path = null;
     this.hubiGassiState = { phase: 'weg', back: G.minute + 60 };
   },
@@ -219,10 +220,10 @@ const Events = {
     const s = this.hubiGassiState;
     if (!s) return;
     const h = scene.actors.hubi, m = scene.actors.mascha;
-    if (s.phase === 'weg' && h.atTile(19, 1, 1)) { h.setPresent(false); m.setPresent(false); s.phase = 'aus'; }
+    if (s.phase === 'weg' && h.atTile(LOC.spawns.gassi.x, LOC.spawns.gassi.y, 1)) { h.setPresent(false); m.setPresent(false); s.phase = 'aus'; }
     if (s.phase === 'aus' && G.minute >= s.back) {
       h.setPresent(true); m.setPresent(true);
-      h.setTile(19, 1); m.setTile(20, 1);
+      h.setTile(LOC.spawns.gassi.x, LOC.spawns.gassi.y); m.setTile(LOC.spawns.gassi.x, LOC.spawns.gassi.y);
       h.override = null; h.data.gassi = false; h.idleUntil = 0;
       this.hubiGassiState = null;
     }

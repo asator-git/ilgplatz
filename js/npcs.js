@@ -20,7 +20,7 @@ const NPCs = {
     // Freunde (alle außer der Spielfigur)
     const spawn = {
       hubi: LOC.meadow[0], andi: LOC.cafeSeats[0], carla: { x: 17, y: 16 },
-      juliette: LOC.cafeSeats[2], markus: { x: 12, y: 27 }, jewi: LOC.cafeSeats[3]
+      juliette: LOC.cafeSeats[2], markus: LOC.spawns.markus, jewi: LOC.cafeSeats[3]
     };
     for (const id of FRIENDS) {
       if (id === G.figur) { scene.actors[id] = scene.player; continue; }
@@ -70,7 +70,7 @@ const NPCs = {
     // Statisten
     const opa = add('opa', { kind: 'extra', pos: px({ x: 3, y: 22 }), speed: 14, routine: routineHome });
     opa.data.home = { x: 3, y: 22 };
-    add('bobo', { kind: 'extra', tex: 'fremder', pos: px({ x: 24, y: 11 }), speed: 30, routine: routineWander });
+    add('bobo', { kind: 'extra', tex: 'fremder', pos: px(LOC.spawns.bobo), speed: 30, routine: routineWander });
   },
 
   // Begehbare Kachel vor einer Tür

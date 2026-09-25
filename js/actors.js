@@ -230,7 +230,7 @@ function routineFriend(a) {
   if (r < cafeBias) spot = pick(LOC.cafeSeats);
   else if (r < cafeBias + 0.25) { const b = pick(LOC.benches.slice(0, 2)); spot = { x: b.x + rndInt(0, 2), y: b.y + 1 }; }
   else if (r < cafeBias + 0.4) spot = pick(LOC.meadow);
-  else { const s = LOC.shops[pick(Object.keys(LOC.shops))]; spot = { x: s.door.x, y: s.door.y + 2 }; }
+  else { const s = LOC.shops[pick(Object.keys(LOC.shops))]; spot = s.front || { x: s.door.x, y: s.door.y + 1 }; }
   const free = randomWalkableNear(a.scene.grid, spot.x, spot.y, 0);
   a.goToTile(free.x, free.y);
   a.idleUntil = G.realMs + rnd(B('npc.pauseMin', 8), B('npc.pauseMax', 25)) * 1000;
@@ -238,7 +238,7 @@ function routineFriend(a) {
 
 // Herumwandern über den ganzen Platz (nicht ins Café)
 function routineWander(a) {
-  const spots = [].concat(LOC.meadow, [{ x: 12, y: 13 }, { x: 27, y: 27 }, { x: 12, y: 27 }, { x: 24, y: 12 }, { x: 34, y: 17 }, { x: 5, y: 22 }, { x: 20, y: 30 }, { x: 22, y: 36 }, { x: 17, y: 4 }]);
+  const spots = [].concat(LOC.meadow, LOC.wander);
   const s = pick(spots);
   const free = randomWalkableNear(a.scene.grid, s.x, s.y, 1);
   if (isCafeFloorTile(a.scene.grid, free.x, free.y)) return;

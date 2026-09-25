@@ -6,55 +6,74 @@
 const MAP_W = 40, MAP_H = 40, MCX = 20, MCY = 20;
 const R_ISLAND = 6.6, R_ROAD = 10, R_WALK = 13.2;
 
-// Orte in Kachel-Koordinaten
+// Echte Lage am Ilgplatz (laut OpenStreetMap), Kompass-Grad: 0 = Nord, 90 = Ost
+const STREETS = [
+  { id: 'hiller', name: 'Hillerstraße', ang: 45 },
+  { id: 'feuerbach', name: 'Feuerbachstraße', ang: 315 },
+  { id: 'obermuellner', name: 'Obermüllnerstraße', ang: 270 },   // → Praterstern (weit weg)
+  { id: 'schrotzberg', name: 'Schrotzbergstraße', ang: 180 }
+];
+const ROAD_HALF = 2.0, WALK_HALF = 3.6;
+
+function dirOf(ang) { const r = ang * Math.PI / 180; return { x: Math.sin(r), y: -Math.cos(r) }; }
+// Punkt (Kachel) in Richtung ang mit Abstand r von der Platzmitte
+function ringTile(ang, r) { const u = dirOf(ang); return { x: Math.floor(MCX + u.x * r), y: Math.floor(MCY + u.y * r) }; }
+
+// Orte in Kachel-Koordinaten (Türen etc. werden in buildGrid() aus den Winkeln berechnet)
 const LOC = {
   fountain: { x: 19, y: 19, w: 2, h: 2 },
-  cafeRoom: { x0: 25, y0: 3, x1: 32, y1: 8 },
-  cafeDoorCols: [28, 29],
-  cafeZone: { x0: 25, y0: 3, x1: 32, y1: 11 },
-  counter: { x: 26, y: 4, w: 5 },
-  daniel: { x: 28, y: 3 },
-  lena: { x: 32, y: 4 },
-  glue: { x: 28, y: 6 },
-  cafeSeats: [{ x: 25, y: 6 }, { x: 26, y: 8 }, { x: 31, y: 7 }, { x: 32, y: 6 }, { x: 30, y: 8 }, { x: 25, y: 8 }, { x: 27, y: 7 }],
-  cafeTables: [{ x: 26, y: 7 }, { x: 31, y: 6 }],
-  cafeFront: { x: 27, y: 11 },
-  tesla: { x: 29, y: 13 },
-  marcoHome: { x: 30, y: 14 },
+  // Café liegt im Osten (Ilgplatz 6), Tür nach Westen zum Platz
+  cafeRoom: { x0: 33, y0: 13, x1: 38, y1: 18 },
+  cafeDoor: [{ x: 32, y: 15 }, { x: 32, y: 16 }],
+  cafeZone: { x0: 32, y0: 13, x1: 38, y1: 18 },
+  counter: { x: 34, y: 14, w: 5 },
+  daniel: { x: 36, y: 13 },
+  lena: { x: 38, y: 15 },
+  glue: { x: 36, y: 16 },
+  cafeSeats: [{ x: 34, y: 17 }, { x: 36, y: 18 }, { x: 38, y: 17 }, { x: 37, y: 15 }, { x: 33, y: 18 }, { x: 34, y: 15 }, { x: 37, y: 18 }],
+  cafeTables: [{ x: 35, y: 17 }, { x: 38, y: 16 }],
+  cafeFront: { x: 30, y: 15 },
+  tesla: { x: 30, y: 19 },
+  marcoHome: { x: 30, y: 20 },
   benches: [{ x: 16, y: 15 }, { x: 21, y: 24 }, { x: 2, y: 23 }],
   hubiWait: { x: 16, y: 21 },
   meadow: [{ x: 15, y: 18 }, { x: 17, y: 16 }, { x: 23, y: 17 }, { x: 24, y: 21 }, { x: 18, y: 24 }, { x: 22, y: 22 }, { x: 16, y: 22 }, { x: 20, y: 16 }],
   concert: { x: 21, y: 17 },
+  // Winkel = echte Richtung vom Platz aus
   shops: {
-    radbande:   { door: { x: 10, y: 10 }, keeper: 'didi',      name: 'Radbande' },
-    schlosserei:{ door: { x: 29, y: 29 }, keeper: 'schlosser', name: 'Schlosserei' },
-    museum:     { door: { x: 10, y: 29 }, keeper: 'michi',     name: 'Zirkus & Clown Museum' },
-    deewan:     { door: { x: 24, y: 34 }, keeper: 'koch',      name: 'Deewan' },
-    dezentral:  { door: { x: 34, y: 15 }, keeper: 'wirt',      name: 'Dezentral' },
-    cafe:       { door: { x: 28, y: 9 }, keeper: 'daniel',    name: 'The Good Coffee Society' }
+    dezentral:   { ang: 13,  keeper: 'wirt',      name: 'Dezentral' },          // Ilgplatz 5, Nord
+    museum:      { ang: 106, keeper: 'michi',     name: 'Zirkus & Clown Museum' }, // Ilgplatz 7, Ost-Südost
+    schlosserei: { ang: 236, keeper: 'schlosser', name: 'Schlosserei' },         // Ilgplatz 1, neben Radbande
+    radbande:    { ang: 252, keeper: 'didi',      name: 'Radbande' },            // Ilgplatz 2, West-Südwest
+    deewan:      { street: 'hiller', along: 18, side: 1, keeper: 'koch', name: 'Deewan' }, // Hillerstraße 4
+    cafe:        { door: { x: 32, y: 15 }, keeper: 'daniel', name: 'The Good Coffee Society' }
   },
-  stern: { x0: 0, y0: 16, x1: 7, y1: 23 },
+  stern: { x0: 0, y0: 16, x1: 7, y1: 23 },     // Richtung Praterstern (weit weg im Westen)
   sternSpots: [{ x: 3, y: 17 }, { x: 6, y: 22 }],
   bikeSpot: { x: 1, y: 17 },
-  socket: { x: 11, y: 30 },
-  fightZone: { x: 27, y: 26, r: 2.6 },
-  opaSpot: { x: 31, y: 24 },
+  socket: { x: 0, y: 0 },
+  fightZone: { x: 0, y: 0, r: 2.6 },
+  opaSpot: { x: 0, y: 0 },
   spawnMeadow: { x: 17, y: 20 },
-  start: { x: 26, y: 11 },
-  lanterns: [], // wird berechnet
+  start: { x: 30, y: 16 },
+  lanterns: [],
   plums: [{ x: 15, y: 17 }, { x: 24, y: 16 }, { x: 16, y: 23 }, { x: 23, y: 23 }],
   greens: [{ x: 19, y: 14 }, { x: 14, y: 20 }, { x: 25, y: 20 }, { x: 20, y: 25 }],
-  mapEdgeSpots: [{ x: 19, y: 1 }, { x: 38, y: 19 }, { x: 20, y: 38 }, { x: 1, y: 20 }]
+  mapEdgeSpots: [],
+  wander: [],
+  spawns: {}
 };
-
-function isBuildingQuadrant(x, y) {
-  const inV = x >= 16 && x <= 23, inH = y >= 16 && y <= 23;
-  return !inV && !inH;
-}
 
 function quadrantOf(x, y) { return (x < MCX ? 0 : 1) + (y < MCY ? 0 : 2); }
 
-// Reiner Karten-Aufbau (ohne Phaser) → { ground, solid, cost }
+// Abstand einer Kachelmitte zu einer Straße (entlang / quer)
+function streetMetrics(x, y, st) {
+  const u = dirOf(st.ang);
+  const dx = x + 0.5 - MCX, dy = y + 0.5 - MCY;
+  return { along: dx * u.x + dy * u.y, perp: Math.abs(dx * u.y - dy * u.x) };
+}
+
+// Reiner Karten-Aufbau (ohne Phaser) → { ground, solid, cost }; berechnet auch Türen & Orte in LOC
 function buildGrid() {
   const ground = [], solid = [];
   for (let y = 0; y < MAP_H; y++) {
@@ -63,52 +82,51 @@ function buildGrid() {
   }
   for (let y = 0; y < MAP_H; y++) for (let x = 0; x < MAP_W; x++) {
     const dx = x + 0.5 - MCX, dy = y + 0.5 - MCY, d = Math.hypot(dx, dy);
-    const inV = x >= 16 && x <= 23, inH = y >= 16 && y <= 23;
-    let t;
+    let t, road = false, walk = false, zebra = null;
+    for (const st of STREETS) {
+      const m = streetMetrics(x, y, st);
+      if (m.along <= 0) continue;
+      if (m.perp <= ROAD_HALF) road = true;
+      else if (m.perp <= WALK_HALF) walk = true;
+      if (d > R_ISLAND && d <= R_ROAD && m.perp < 1.3) zebra = st.ang % 180 === 90 ? TI.ZEBRA : TI.ZEBRA_H;
+    }
     if (d <= R_ISLAND) {
       const n = (x * 7 + y * 13) % 11;
       t = n === 0 ? TI.FLOWERS : (n < 4 ? TI.GRASS2 : TI.GRASS);
-      const ring = Math.abs(d - 3.6) < 0.55;
-      if (ring && (x + y) % 2 === 0) t = TI.PLATE;
+      if (Math.abs(d - 3.6) < 0.55 && (x + y) % 2 === 0) t = TI.PLATE;
     } else if (d <= R_ROAD) {
-      t = Math.abs(dx) < 1.1 ? TI.ZEBRA_H : (Math.abs(dy) < 1.1 ? TI.ZEBRA : TI.ROAD);
-    } else if (inV || inH) {
-      const roadV = inV && x >= 18 && x <= 21 && (y < 16 || y > 23);
-      const roadH = inH && y >= 18 && y <= 21 && (x < 16 || x > 23);
-      t = (roadV || roadH) ? TI.ROAD : TI.SIDEWALK;
-      if (inH && x <= LOC.stern.x1 && !roadH) t = TI.STERN;
-    } else if (d <= R_WALK) {
+      t = zebra !== null ? zebra : TI.ROAD;
+    } else if (road) {
+      t = TI.ROAD;
+    } else if (walk || d <= R_WALK) {
       t = TI.SIDEWALK;
+      if (x <= LOC.stern.x1 && y >= LOC.stern.y0 && y <= LOC.stern.y1) t = TI.STERN;
     } else {
       t = TI.ROOF + quadrantOf(x, y);
       solid[y][x] = true;
     }
     ground[y][x] = t;
   }
-  // Café-Raum ausschneiden
+  // Café-Raum ausschneiden, Rahmen erzwingen, Tür nach Westen
   const cr = LOC.cafeRoom;
-  for (let y = cr.y0; y <= cr.y1; y++) for (let x = cr.x0; x <= cr.x1; x++) { ground[y][x] = TI.FLOOR; solid[y][x] = false; }
-  // Rahmen um das Café erzwingen (Wände), Tür unten
   for (let y = cr.y0 - 1; y <= cr.y1 + 1; y++) for (let x = cr.x0 - 1; x <= cr.x1 + 1; x++) {
-    if (x >= cr.x0 && x <= cr.x1 && y >= cr.y0 && y <= cr.y1) continue;
-    solid[y][x] = true; ground[y][x] = TI.ROOF + 1;
+    if (x < 0 || y < 0 || x >= MAP_W || y >= MAP_H) continue;
+    const inside = x >= cr.x0 && x <= cr.x1 && y >= cr.y0 && y <= cr.y1;
+    solid[y][x] = !inside; ground[y][x] = inside ? TI.FLOOR : TI.ROOF + 1;
   }
-  for (const cx of LOC.cafeDoorCols) {
-    ground[cr.y1 + 1][cx] = TI.DOOR; solid[cr.y1 + 1][cx] = false;
-    let y = cr.y1 + 2;
-    while (y < MAP_H && solid[y][cx]) { ground[y][cx] = TI.SIDEWALK; solid[y][cx] = false; y++; }
+  for (const c of LOC.cafeDoor) {
+    ground[c.y][c.x] = TI.DOOR; solid[c.y][c.x] = false;
+    let x = c.x - 1;
+    while (x >= 0 && solid[c.y][x]) { ground[c.y][x] = TI.SIDEWALK; solid[c.y][x] = false; x--; }
   }
   // Fassaden: Gebäude neben begehbarer Fläche
-  const walk = (x, y) => x >= 0 && y >= 0 && x < MAP_W && y < MAP_H && !solid[y][x];
+  const walkable = (x, y) => x >= 0 && y >= 0 && x < MAP_W && y < MAP_H && !solid[y][x];
   for (let y = 0; y < MAP_H; y++) for (let x = 0; x < MAP_W; x++) {
     if (!solid[y][x]) continue;
-    const inCafe = x >= cr.x0 - 1 && x <= cr.x1 + 1 && y >= cr.y0 - 1 && y <= cr.y1 + 1;
-    if (walk(x, y + 1)) {
-      ground[y][x] = (inCafe && walk(x, y + 1) && ground[y + 1][x] === TI.FLOOR) ? TI.INWALL : TI.WALL + quadrantOf(x, y);
-    } else if (walk(x, y - 1) || walk(x - 1, y) || walk(x + 1, y)) {
-      ground[y][x] = TI.WALL + quadrantOf(x, y);
-    }
+    if (walkable(x, y + 1)) ground[y][x] = ground[y + 1][x] === TI.FLOOR ? TI.INWALL : TI.WALL + quadrantOf(x, y);
+    else if (walkable(x, y - 1) || walkable(x - 1, y) || walkable(x + 1, y)) ground[y][x] = TI.WALL + quadrantOf(x, y);
   }
+  computeLocations(ground, solid);
   // Ladentüren (nicht betretbar, nur Deko + Interaktion)
   for (const id in LOC.shops) {
     if (id === 'cafe') continue;
@@ -124,13 +142,83 @@ function buildGrid() {
   return { ground, solid, cost };
 }
 
-// Laternen auf dem Gehsteig-Ring
-(function () {
-  for (let i = 0; i < 8; i++) {
-    const a = (i + 0.5) * Math.PI / 4;
-    LOC.lanterns.push({ x: Math.round(MCX + Math.cos(a) * 11.4 - 0.5), y: Math.round(MCY + Math.sin(a) * 11.4 - 0.5) });
+// Türen, Standplätze, Laternen, Spawnpunkte aus der echten Geografie ableiten
+function computeLocations(ground, solid) {
+  const walkable = (x, y) => x >= 0 && y >= 0 && x < MAP_W && y < MAP_H && !solid[y][x];
+  const isWalk = (x, y) => walkable(x, y) && ![TI.ROAD, TI.ZEBRA, TI.ZEBRA_H].includes(ground[y][x]);
+  // Vom Punkt p in Richtung u laufen, bis eine Wand kommt → Tür + Standplatz davor
+  const march = (px, py, u) => {
+    let last = null;
+    for (let r = 0; r < 30; r += 0.25) {
+      const x = Math.floor(px + u.x * r), y = Math.floor(py + u.y * r);
+      if (x < 0 || y < 0 || x >= MAP_W || y >= MAP_H) break;
+      if (solid[y][x]) { if (last) return { door: { x, y }, front: last }; }
+      else if (isWalk(x, y)) last = { x, y };
+    }
+    return null;
+  };
+  for (const id in LOC.shops) {
+    const sh = LOC.shops[id];
+    let res = null;
+    if (id === 'cafe') { sh.front = { x: 31, y: 15 }; continue; }
+    if (sh.street) {
+      const st = STREETS.find(s => s.id === sh.street);
+      const u = dirOf(st.ang), n = dirOf(st.ang + 90 * sh.side);
+      res = march(MCX + u.x * sh.along, MCY + u.y * sh.along, n);
+    } else {
+      res = march(MCX, MCY, dirOf(sh.ang));
+    }
+    if (res) { sh.door = res.door; sh.front = res.front; }
+    else { sh.door = { x: 1, y: 1 }; sh.front = { x: 1, y: 2 }; }
   }
-})();
+  // Nächste begehbare Nicht-Straßen-Kachel
+  const nearWalk = (t, r) => {
+    for (let rr = 0; rr <= (r || 4); rr++)
+      for (let y = t.y - rr; y <= t.y + rr; y++) for (let x = t.x - rr; x <= t.x + rr; x++)
+        if (isWalk(x, y)) return { x, y };
+    return { x: LOC.spawnMeadow.x, y: LOC.spawnMeadow.y };
+  };
+  // Steckdose: Wand neben der Museumstür
+  const md = LOC.shops.museum.door, mf = LOC.shops.museum.front;
+  const side = [[0, 1], [0, -1], [1, 0], [-1, 0]].map(([a, b]) => ({ x: md.x + a, y: md.y + b }))
+    .find(t => solid[t.y] && solid[t.y][t.x] && (t.x !== md.x || t.y !== md.y) && (walkable(t.x + (mf.x - md.x), t.y + (mf.y - md.y))));
+  LOC.socket = side || md;
+  LOC.socketFront = { x: LOC.socket.x + (mf.x - md.x), y: LOC.socket.y + (mf.y - md.y) };
+  // Zuhälter raufen vor der Schlosserei
+  const sf = LOC.shops.schlosserei.front;
+  const fz = ringTile(LOC.shops.schlosserei.ang, 9.6);
+  LOC.fightZone = { x: fz.x, y: fz.y, r: 2.6 };
+  LOC.opaSpot = nearWalk(ringTile(LOC.shops.schlosserei.ang - 30, 11.6), 3);
+  // Laternen auf dem Gehsteig-Ring (nicht vor Türen)
+  LOC.lanterns = [];
+  for (let i = 0; i < 8; i++) {
+    const t = ringTile(i * 45 + 22, 11.6);
+    const busy = Object.values(LOC.shops).some(sh => sh.front && Math.abs(sh.front.x - t.x) + Math.abs(sh.front.y - t.y) < 3);
+    if (isWalk(t.x, t.y) && !busy) LOC.lanterns.push(t);
+  }
+  // Straßenenden (Kiwara, Hubi-Gassi, Doppler)
+  LOC.streetEnds = {};
+  for (const st of STREETS) {
+    let best = null;
+    for (let r = 12; r < 30; r += 0.5) { const t = ringTile(st.ang, r); if (walkable(t.x, t.y)) best = t; }
+    LOC.streetEnds[st.id] = best || { x: MCX, y: 1 };
+  }
+  LOC.mapEdgeSpots = STREETS.map(st => LOC.streetEnds[st.id]);
+  // Spaziergänge: Punkte rund um den Platz + auf den Straßen
+  LOC.wander = [];
+  for (let i = 0; i < 12; i++) { const t = ringTile(i * 30 + 15, 11.6); if (isWalk(t.x, t.y)) LOC.wander.push(t); }
+  for (const st of STREETS) { const u = dirOf(st.ang), n = dirOf(st.ang + 90); LOC.wander.push(nearWalk({ x: Math.floor(MCX + u.x * 16 + n.x * 3), y: Math.floor(MCY + u.y * 16 + n.y * 3) }, 3)); }
+  LOC.wander.push({ x: 5, y: 22 });
+  // Spawnpunkte
+  const ring = (ang) => nearWalk(ringTile(ang, 11.6), 3);
+  LOC.spawns = {
+    ex: [ring(300), ring(150), ring(200), ring(30)],
+    erwin: ring(200), bobo: ring(35), markus: ring(160),
+    nadja: { x: 1, y: 22 }, opa: { x: 3, y: 22 },
+    doppler: LOC.streetEnds.hiller, gassi: LOC.streetEnds.feuerbach,
+    rasiererin: { x: 18, y: 21 }
+  };
+}
 
 // ---- Wegfindung (A*, 8 Richtungen, keine Ecken schneiden) ----------------
 function findPath(grid, sx, sy, tx, ty, maxIter) {
@@ -202,7 +290,7 @@ function lineOfSight(grid, x0, y0, x1, y1) {
 }
 
 function inRect(tx, ty, r) { return tx >= r.x0 && tx <= r.x1 && ty >= r.y0 && ty <= r.y1; }
-function inCafe(px, py) { return inRect(Math.floor(px / TILE), Math.floor(py / TILE), LOC.cafeZone) && Math.floor(py / TILE) <= LOC.cafeRoom.y1 + 2 && isCafeFloor(px, py); }
+function inCafe(px, py) { return isCafeFloor(px, py); }
 let _gridRef = null;
 function isCafeFloor(px, py) {
   if (!_gridRef) return false;
@@ -282,17 +370,22 @@ function placeObjects(scene, grid) {
   for (let i = 0; i < c.w; i++) setSolid(c.x + i, c.y);
   objs.tables = LOC.cafeTables.map(tb => { setSolid(tb.x, tb.y); return img('table', (tb.x + 0.5) * TILE, (tb.y + 1) * TILE - 1); });
   // Radständer, Mistkübel
-  img('bikerack', 13 * TILE, 12 * TILE);
-  [{ x: 13, y: 26 }, { x: 26, y: 26 }, { x: 13, y: 13 }, { x: 22, y: 31 }].forEach(b => { if (!grid.solid[b.y][b.x]) { img('bin', (b.x + 0.5) * TILE, (b.y + 1) * TILE); setSolid(b.x, b.y); } });
+  { const rf = LOC.shops.radbande.front; img('bikerack', (rf.x + 0.5) * TILE, (rf.y + 2) * TILE); }
+  [ringTile(80, 12.4), ringTile(170, 12.2), ringTile(290, 12.2), ringTile(20, 12.4)].forEach(b => { if (!grid.solid[b.y][b.x]) { img('bin', (b.x + 0.5) * TILE, (b.y + 1) * TILE); setSolid(b.x, b.y); } });
   // Steckdose am Museum
-  objs.socket = img('socket', (LOC.socket.x + 0.5) * TILE, LOC.socket.y * TILE + 10);
+  objs.socket = img('socket', (LOC.socket.x + 0.5) * TILE, LOC.socket.y * TILE + 12);
   objs.socket.setDepth(LOC.socket.y * TILE + 20);
   // Terminals neben den Läden
   objs.terminals = [];
-  const termSpots = {
-    cafe: { x: 32, y: 3 }, radbande: { x: 12, y: 12 }, schlosserei: { x: 27, y: 28 },
-    museum: { x: 9, y: 27 }, deewan: { x: 23, y: 36 }, dezentral: { x: 36, y: 16 }
-  };
+  const termSpots = { cafe: { x: 33, y: 13 } };
+  for (const id in LOC.shops) {
+    if (id === 'cafe') continue;
+    const f = LOC.shops[id].front, d = LOC.shops[id].door;
+    const cand = [[d.y - f.y, d.x - f.x], [f.y - d.y, f.x - d.x], [1, 0], [-1, 0], [0, 1], [0, -1]]
+      .map(([a, b]) => ({ x: f.x + a, y: f.y + b }))
+      .find(t => grid.solid[t.y] && grid.solid[t.y][t.x] === false && ![TI.ROAD, TI.ZEBRA, TI.ZEBRA_H].includes(grid.ground[t.y][t.x]));
+    if (cand) termSpots[id] = cand;
+  }
   for (const id in termSpots) {
     const p = termSpots[id];
     if (grid.solid[p.y][p.x]) continue;
@@ -307,18 +400,27 @@ function placeObjects(scene, grid) {
     const sh = LOC.shops[id];
     const label = T('orte.' + id, null, sh.name);
     const isCafe = id === 'cafe';
-    const tx = scene.add.text((sh.door.x + (isCafe ? 1 : 0.5)) * TILE, sh.door.y * TILE + (isCafe ? 1 : -2), label, {
+    const tx = scene.add.text((sh.door.x + 0.5) * TILE, sh.door.y * TILE - 2, label, {
       fontFamily: '"Press Start 2P", monospace', fontSize: isCafe ? '5px' : '6px', color: isCafe ? '#ffd166' : '#fff8e7',
       backgroundColor: isCafe ? '#1b1b2fdd' : '#3d2b1fcc', padding: { x: 2, y: 2 }
-    }).setOrigin(0.5, isCafe ? 0 : 1).setDepth(isCafe ? (sh.door.y + 1) * TILE + 1 : 5000).setResolution(6);
+    }).setOrigin(0.5, 1).setDepth(5000).setResolution(6);
     objs.signs.push(tx);
   }
-  const stern = scene.add.text(3.5 * TILE, 16 * TILE - 2, T('orte.stern', null, 'Stern'), {
+  const stern = scene.add.text(4 * TILE, 16 * TILE - 2, T('orte.stern', null, '← Praterstern'), {
     fontFamily: '"Press Start 2P", monospace', fontSize: '6px', color: '#ffd166', backgroundColor: '#000000aa', padding: { x: 2, y: 2 }
   }).setOrigin(0.5, 1).setDepth(5000).setResolution(4);
   objs.signs.push(stern);
+  for (const st of STREETS) {
+    if (st.id === 'obermuellner') continue; // dort hängt das Praterstern-Schild
+    const t = ringTile(st.ang, 15);
+    const n = dirOf(st.ang + (st.id === 'hiller' ? -90 : 90));
+    const sx = (t.x + 0.5 + n.x * 4.2) * TILE, sy = (t.y + 0.5 + n.y * 4.2) * TILE;
+    objs.signs.push(scene.add.text(sx, sy, T('strassen.' + st.id, null, st.name), {
+      fontFamily: '"Press Start 2P", monospace', fontSize: '4px', color: '#ffffff', backgroundColor: '#1d3557dd', padding: { x: 2, y: 1 }
+    }).setOrigin(0.5).setDepth(4900).setResolution(6));
+  }
   return objs;
 }
 
 // Node-Export für Tests
-if (typeof module !== 'undefined') module.exports = { buildGrid, findPath, LOC, MAP_W, MAP_H };
+if (typeof module !== 'undefined') module.exports = { buildGrid, findPath, LOC, MAP_W, MAP_H, STREETS };

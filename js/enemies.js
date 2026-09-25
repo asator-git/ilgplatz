@@ -22,7 +22,7 @@ const Enemies = {
       scene.actors[id] = a;
       return a;
     };
-    const exSpawns = [{ x: 12, y: 13 }, { x: 27, y: 27 }, { x: 12, y: 27 }, { x: 34, y: 17 }];
+    const exSpawns = LOC.spawns.ex;
     EXES.forEach((id, i) => {
       const a = add(id, { kind: 'ex', pos: px(exSpawns[i]), speed: B('gegner.exTempo', 40), routine: routineWander, labelColor: '#ff8fab' });
       a.isEx = true;
@@ -31,14 +31,14 @@ const Enemies = {
       a.customUpdate = (dt) => this.exUpdate(a, dt);
     });
     // Nadja (ab 14 Uhr)
-    const n = add('nadja', { kind: 'ex', pos: px({ x: 2, y: 20 }), speed: B('gegner.exTempo', 40), routine: routineWander, labelColor: '#ff4d6d' });
+    const n = add('nadja', { kind: 'ex', pos: px(LOC.spawns.nadja), speed: B('gegner.exTempo', 40), routine: routineWander, labelColor: '#ff4d6d' });
     n.isNadja = true;
     n.setPresent(false);
     n.data.nextAsk = 0;
     n.customUpdate = (dt) => this.nadjaUpdate(n, dt);
     n.solidForPlayer = () => false;
     // Erwin
-    const e = add('erwin', { kind: 'enemy', pos: px({ x: 12, y: 24 }), speed: B('gegner.erwinTempo', 16), routine: routineWander, labelColor: '#e9c46a' });
+    const e = add('erwin', { kind: 'enemy', pos: px(LOC.spawns.erwin), speed: B('gegner.erwinTempo', 16), routine: routineWander, labelColor: '#e9c46a' });
     e.talkRep = false;
     e.talkIdx = 0;
     // Erwins Monologe werden immer länger
@@ -73,11 +73,11 @@ const Enemies = {
     }
     this.dust = scene.add.image(LOC.fightZone.x * TILE + 8, LOC.fightZone.y * TILE + 8, 'dust').setDepth(LOC.fightZone.y * TILE + 20).setVisible(false);
     // Doppler-Frau (Event 17:00)
-    const d = add('doppler', { kind: 'event', pos: px({ x: 38, y: 19 }), speed: 22, routine: routineWander, labelColor: '#ff85a1' });
+    const d = add('doppler', { kind: 'event', pos: px(LOC.spawns.doppler), speed: 22, routine: routineWander, labelColor: '#ff85a1' });
     d.setPresent(false); d.isEnemy = false; d.talkRep = false;
     d.data.nextPuke = 0;
     // Rasiererin (nachts an der Quelle)
-    const r = add('rasiererin', { kind: 'event', pos: px({ x: 18, y: 21 }), speed: 10, routine: routineHome, labelColor: '#c9c9c9' });
+    const r = add('rasiererin', { kind: 'event', pos: px(LOC.spawns.rasiererin), speed: 10, routine: routineHome, labelColor: '#c9c9c9' });
     r.setPresent(false); r.isEnemy = false; r.talkRep = false;
     // Autos
     const n2 = B('gegner.autoAnzahl', 2);
@@ -359,7 +359,7 @@ const Enemies = {
     // Anwesenheit nach Uhrzeit
     const nadja = scene.actors.nadja;
     if (!nadja.present && m >= parseClock(B('gegner.nadjaAb', '14:00'), 840) && !G.ended) {
-      nadja.setPresent(true); nadja.setTile(1, 22);
+      nadja.setPresent(true); nadja.setTile(LOC.spawns.nadja.x, LOC.spawns.nadja.y);
     }
     const kAb = parseClock(B('gegner.kiwaraAb', '19:00'), 1140), kV = parseClock(B('gegner.kiwaraVerstaerktAb', '21:00'), 1260);
     for (let i = 1; i <= 4; i++) {

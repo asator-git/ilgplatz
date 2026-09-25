@@ -104,7 +104,7 @@
     "museum": "Zirkus & Clown Museum",
     "deewan": "Deewan",
     "dezentral": "Dezentral",
-    "stern": "Stern"
+    "stern": "← Praterstern (Stern)"
   },
   "zustaende": {
     "stone": "versteinert",
@@ -810,9 +810,9 @@
       "titel": "Paket für den Schlosser",
       "angebot": [
         "Du schaust aus wie wer, der a Paket tragen kann.",
-        "Bring des zum Stern, zum Typen dort. 25 Euro. Ka Fragen. Und wennst die Kiwara siehst: Du kennst mi ned."
+        "Bring des zum Stern – die Obermüllnerstraße ganz hinaus, Richtung Praterstern. Zum Typen dort. 25 Euro. Ka Fragen. Und wennst die Kiwara siehst: Du kennst mi ned."
       ],
-      "hud": "Bring das Paket zum Typen am Stern.",
+      "hud": "Bring das Paket zum Typen am Stern (ganz im Westen, Richtung Praterstern).",
       "hudKiwara": "Bring das Paket zum Stern – Vorsicht, die Kiwara patrouillieren!",
       "abgeben": "Paket vom Schlosser",
       "uebergabe": [
@@ -911,7 +911,7 @@
         "Mein Laptop is leer. Null Prozent. Ich fühl mich nackt.",
         "Kannst du mir a Steckdose finden? Irgendwo muss es doch Strom geben am Platz. Das könnt ma automatisieren, aber ohne Strom halt ned."
       ],
-      "hud": "Such eine Steckdose (angeblich beim Museum).",
+      "hud": "Such eine Steckdose (angeblich beim Clown-Museum, gleich neben dem Café).",
       "hudSelbst": "Laptop leer! Such eine Steckdose (beim Museum?).",
       "hudZurueck": "Sag Markus, wo die Steckdose ist.",
       "label": "Steckdose prüfen",
@@ -983,7 +983,7 @@
       "titel": "Deewan-Lieferung",
       "angebot": [
         "Drei Essen, drei Bankerl. Die Leute warten!",
-        "Zwei Bankerl auf der Wiese, eins beim Stern. Du hast eine Minute, dann ist es kalt. Kaltes Dal ist traurig."
+        "Zwei Bankerl auf der Wiese, eins ganz draußen am Stern. Du hast eine Minute, dann ist es kalt. Kaltes Dal ist traurig."
       ],
       "hud": "Bring die Essen zu den Bänken ({n}/3)",
       "label": "Essen abliefern",
@@ -1225,5 +1225,11 @@
   "rivalInfo": {
     "hubi": "Hubi wohnt ewig hier und ist der Titelverteidiger – sein Ansehen wächst von ganz allein.",
     "andi": "Andi nennt sich selbst Bürgermeister vom Stuwerviertel – und weil er das jedem erzählt, wächst sein Ansehen von ganz allein. Zeig ihm, wer hier wirklich wohnt!"
+  },
+  "strassen": {
+    "hiller": "Hillerstraße",
+    "feuerbach": "Feuerbachstraße",
+    "obermuellner": "Obermüllnerstraße → Praterstern",
+    "schrotzberg": "Schrotzbergstraße"
   }
 }
