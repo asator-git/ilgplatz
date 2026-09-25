@@ -480,7 +480,7 @@ const QDEF = {
     offerOptions(scene, st, a) {
       return [{ label: QT('schrauben', 'label', null, 'Räder schrauben (Minispiel)'), fn: () => {
         UI.dialog([{ who: a.name, text: QT('schrauben', 'intro', null, 'Fünf Schrauben, der Reihe nach. Los!') }], {
-          onClose: () => UI.minigameScrews((ok) => {
+          onClose: () => UI.minigameSnake((ok) => {
             if (ok) Quests.complete('schrauben', B('auftraege.schrauben', 15), B('auftraege.schraubenGeld', 10), QT('schrauben', 'erfolg', null, 'Sauber gschraubt!'));
             else UI.toast(QT('schrauben', 'fail', null, 'Schraube verloren. Nochmal?'), 'bad');
           })

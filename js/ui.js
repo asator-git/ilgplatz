@@ -446,73 +446,104 @@ const UI = {
     $('endAgain').addEventListener('click', () => { save(); onAgain(); });
   },
 
-  // ---- Minispiel: Radl-Notdienst (Schrauben lockern sich – schnell festziehen!) ----
-  minigameScrews(cb) {
-    const need = B('minispiele.schraubenZiel', 12), maxMiss = B('minispiele.schraubenFehler', 3);
-    let time = B('minispiele.schraubenSekunden', 25);
-    let windowMs = B('minispiele.schraubenFensterStartMs', 1400);
-    const minWin = B('minispiele.schraubenFensterMinMs', 600);
-    const html = `<div class="mg"><h2>${escapeHtml(T('minispiele.schrauben.titel', null, 'Radl-Notdienst!'))}</h2>
-      <div>${escapeHtml(T('minispiele.schrauben.hilfe', null, 'Schrauben lockern sich! Antippen (oder Taste 1–6), bevor sie rausfallen.'))}</div>
-      <div class="mgstat"><span id="mgOk">0/${need}</span><span class="mgtimer" id="mgT">${time}</span><span id="mgMiss">${'♥'.repeat(maxMiss)}</span></div>
-      <div class="wheelwrap"><div class="wheel" id="mgW"><div class="hub"></div></div></div></div>`;
-    let ok = 0, miss = 0, done = false;
-    const bolts = [];
-    const finish = (win) => {
-      if (done) return; done = true;
-      clearInterval(iv); clearTimeout(spawnT);
-      if (this.overlayMode !== 'minigame' || (G && G.ended)) return;
-      this.hideOverlay(); Sfx.play(win ? 'good' : 'bad'); cb(win);
-    };
-    const tighten = (i) => {
-      const b = bolts[i];
-      if (done || !b || !b.loose) { if (!done) { Sfx.play('blip'); } return; }
-      b.loose = false; clearTimeout(b.t);
-      b.el.className = 'bolt tight';
-      ok++; $('mgOk').textContent = ok + '/' + need;
-      Sfx.play('type');
-      windowMs = Math.max(minWin, windowMs - 60);
-      if (ok >= need) finish(true);
-    };
-    this.showOverlay(html, 'minigame', (ev, arg) => { if (ev === 'num' && arg >= 1 && arg <= 6) tighten(arg - 1); }, true);
-    const wheel = $('mgW');
-    for (let i = 0; i < 6; i++) {
-      const el = document.createElement('div');
-      el.className = 'bolt tight';
-      const a = i / 6 * Math.PI * 2 - Math.PI / 2;
-      el.style.left = (50 + Math.cos(a) * 36) + '%'; el.style.top = (50 + Math.sin(a) * 36) + '%';
-      el.textContent = i + 1;
-      const h = (e) => { e.preventDefault(); e.stopPropagation(); tighten(i); };
-      el.addEventListener('mousedown', h); el.addEventListener('touchstart', h, { passive: false });
-      wheel.appendChild(el);
-      bolts.push({ el, loose: false, t: null });
-    }
-    let spawnT = null;
-    const spawn = () => {
-      if (done) return;
-      const free = bolts.map((b, i) => i).filter(i => !bolts[i].loose);
-      if (free.length) {
-        const i = pick(free), b = bolts[i];
-        b.loose = true; b.el.className = 'bolt loose';
-        b.el.style.animationDuration = windowMs + 'ms';
-        b.t = setTimeout(() => {
-          if (done || !b.loose) return;
-          b.loose = false; b.el.className = 'bolt lost';
-          miss++; $('mgMiss').textContent = '♥'.repeat(Math.max(0, maxMiss - miss));
-          Sfx.play('bad');
-          setTimeout(() => { if (!done) b.el.className = 'bolt tight'; }, 500);
-          if (miss >= maxMiss) finish(false);
-        }, windowMs);
+  // ---- Minispiel: Radl-Snake (bei Didi) – friss die Fahrräder! ----
+  // Startet erst mit dem ersten Richtungsdruck. cb(gewonnen)
+  minigameSnake(cb) {
+    const COLS = 16, ROWS = 12, CELL = 20;
+    const goal = B('minispiele.snakeZiel', 8);
+    let stepMs = B('minispiele.snakeStartMs', 240);
+    const minStep = B('minispiele.snakeMinMs', 120);
+    const html = `<div class="mg"><h2>${escapeHtml(T('minispiele.snake.titel', null, 'Radl-Snake'))}</h2>
+      <div>${escapeHtml(T('minispiele.snake.hilfe', { n: goal }, 'Friss {n} Fahrräder! Nicht in die Wand oder in dich selbst fahren.'))}</div>
+      <div class="mgstat"><span id="snB">🚲 0/${goal}</span><span id="snMsg">${escapeHtml(T('minispiele.snake.start', null, 'Drück eine Richtung zum Starten!'))}</span></div>
+      <canvas id="snC" width="${COLS * CELL}" height="${ROWS * CELL}" class="snake"></canvas>
+      <div class="arrows"><span></span><button data-d="up">↑</button><span></span><button data-d="left">←</button><button data-d="down">↓</button><button data-d="right">→</button></div></div>`;
+    const DIRS = { up: [0, -1], down: [0, 1], left: [-1, 0], right: [1, 0] };
+    let snake = [{ x: 5, y: 6 }, { x: 4, y: 6 }, { x: 3, y: 6 }];
+    let dir = null, queued = [], eaten = 0, done = false, started = false, timer = null;
+    const free = () => {
+      for (let i = 0; i < 200; i++) {
+        const f = { x: rndInt(1, COLS - 2), y: rndInt(1, ROWS - 2) };
+        if (!snake.some(s => s.x === f.x && s.y === f.y)) return f;
       }
-      spawnT = setTimeout(spawn, Math.max(350, windowMs * 0.55));
+      return { x: 1, y: 1 };
     };
-    spawnT = setTimeout(spawn, 600);
-    const iv = setInterval(() => {
-      if (G && G.paused) return;
-      time -= 0.1;
-      const t = $('mgT'); if (t) t.textContent = Math.max(0, Math.ceil(time)) + ' s';
-      if (time <= 0) finish(false);
-    }, 100);
+    let bike = free();
+    const bikeImg = new Image(); bikeImg.src = this.itemIcon('rad');
+    const ctx = () => { const c = $('snC'); return c ? c.getContext('2d') : null; };
+    const draw = () => {
+      const g = ctx(); if (!g) return;
+      g.imageSmoothingEnabled = false;
+      g.fillStyle = '#3d405b'; g.fillRect(0, 0, COLS * CELL, ROWS * CELL);
+      g.fillStyle = '#343850';
+      for (let y = 0; y < ROWS; y++) for (let x = (y % 2); x < COLS; x += 2) g.fillRect(x * CELL, y * CELL, CELL, CELL);
+      g.strokeStyle = '#ef476f'; g.lineWidth = 4; g.strokeRect(2, 2, COLS * CELL - 4, ROWS * CELL - 4);
+      const pulse = 0.75 + Math.sin(Date.now() / 150) * 0.2;
+      g.fillStyle = '#ffd166'; g.globalAlpha = pulse;
+      g.beginPath(); g.arc(bike.x * CELL + CELL / 2, bike.y * CELL + CELL / 2, CELL / 2, 0, Math.PI * 2); g.fill();
+      g.globalAlpha = 1;
+      if (bikeImg.complete) g.drawImage(bikeImg, bike.x * CELL - 2, bike.y * CELL - 2, CELL + 4, CELL + 4);
+      else { g.fillStyle = '#06d6a0'; g.fillRect(bike.x * CELL + 4, bike.y * CELL + 4, CELL - 8, CELL - 8); }
+      snake.forEach((s, i) => {
+        g.fillStyle = i === 0 ? '#ffd166' : (i % 2 ? '#2a9d8f' : '#21867a');
+        g.fillRect(s.x * CELL + 1, s.y * CELL + 1, CELL - 2, CELL - 2);
+        if (i === 0) { g.fillStyle = '#111'; g.fillRect(s.x * CELL + 5, s.y * CELL + 5, 3, 3); g.fillRect(s.x * CELL + 12, s.y * CELL + 5, 3, 3); }
+      });
+    };
+    const finish = (win) => {
+      if (done) return; done = true; clearTimeout(timer);
+      if (this.overlayMode !== 'minigame' || (G && G.ended)) return;
+      $('snMsg').textContent = win ? T('minispiele.snake.gewonnen', null, 'Alle Radln gefressen!') : T('minispiele.snake.crash', null, 'Bumm! Crash.');
+      Sfx.play(win ? 'good' : 'bad');
+      setTimeout(() => { if (this.overlayMode === 'minigame') this.hideOverlay(); cb(win); }, 1100);
+    };
+    const tick = () => {
+      if (done) return;
+      if (G && G.paused) { timer = setTimeout(tick, stepMs); return; }
+      if (queued.length) dir = queued.shift();
+      const d = DIRS[dir];
+      const head = { x: snake[0].x + d[0], y: snake[0].y + d[1] };
+      if (head.x < 0 || head.y < 0 || head.x >= COLS || head.y >= ROWS || snake.some((s, i) => i < snake.length - 1 && s.x === head.x && s.y === head.y)) { draw(); finish(false); return; }
+      snake.unshift(head);
+      if (head.x === bike.x && head.y === bike.y) {
+        eaten++; Sfx.play('coin');
+        $('snB').textContent = '🚲 ' + eaten + '/' + goal;
+        stepMs = Math.max(minStep, stepMs - B('minispiele.snakeSchnellerMs', 14));
+        if (eaten >= goal) { draw(); finish(true); return; }
+        bike = free();
+      } else snake.pop();
+      draw();
+      timer = setTimeout(tick, stepMs);
+    };
+    const press = (d) => {
+      if (done || !DIRS[d]) return;
+      const last = queued.length ? queued[queued.length - 1] : dir;
+      if (last && DIRS[last][0] === -DIRS[d][0] && DIRS[last][1] === -DIRS[d][1]) return; // nicht umdrehen
+      if (last === d) return;
+      if (queued.length < 2) queued.push(d);
+      if (!started) {
+        if (d === 'left') { queued = []; return; } // Kopf zeigt nach rechts
+        started = true; dir = queued.shift();
+        $('snMsg').textContent = T('minispiele.snake.los', null, 'Los!');
+        timer = setTimeout(tick, 250);
+      }
+    };
+    this.showOverlay(html, 'minigame', (ev) => { if (DIRS[ev]) press(ev); }, true);
+    document.querySelectorAll('.mg .arrows button').forEach(bt => {
+      const h = (e) => { e.preventDefault(); e.stopPropagation(); press(bt.dataset.d); };
+      bt.addEventListener('mousedown', h); bt.addEventListener('touchstart', h, { passive: false });
+    });
+    // Wischen auf dem Spielfeld
+    const c = $('snC'); let t0 = null;
+    c.addEventListener('touchstart', (e) => { const t = e.changedTouches[0]; t0 = { x: t.clientX, y: t.clientY }; e.preventDefault(); }, { passive: false });
+    c.addEventListener('touchend', (e) => {
+      if (!t0) return; const t = e.changedTouches[0]; const dx = t.clientX - t0.x, dy = t.clientY - t0.y; t0 = null;
+      if (Math.max(Math.abs(dx), Math.abs(dy)) < 18) return;
+      press(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
+      e.preventDefault();
+    }, { passive: false });
+    bikeImg.onload = draw;
+    draw();
   },
 
   // ---- Minispiel: willhaben-Feilschen (im richtigen Moment zuschlagen) ----

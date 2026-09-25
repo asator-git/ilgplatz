@@ -236,18 +236,17 @@
     "reifenKiwaraVerlust": 60
   },
   "minispiele": {
-    "schraubenSekunden": 25,
     "hackLaenge": 6,
     "hackSekunden": 9,
-    "schraubenZiel": 12,
-    "schraubenFehler": 3,
-    "schraubenFensterStartMs": 1400,
-    "schraubenFensterMinMs": 600,
     "feilschRunden": 3,
     "feilschZoneStart": 30,
     "feilschTempo": 90,
     "feilschPerfekt": 0.35,
-    "feilschGut": 0.2
+    "feilschGut": 0.2,
+    "snakeZiel": 8,
+    "snakeStartMs": 240,
+    "snakeMinMs": 120,
+    "snakeSchnellerMs": 14
   },
   "nacht": {
     "daemmerung": "19:00",

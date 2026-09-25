@@ -1085,11 +1085,11 @@
       "verloren": "Das Rad ist weg… es steht bestimmt wieder am Stern."
     },
     "schrauben": {
-      "titel": "Räder schrauben",
-      "label": "Radl-Notdienst (Minispiel, +15 Ansehen, +10 €)",
-      "intro": "Das Radl fällt ausanand! Die Schrauben lockern sich – zieh sie fest, bevor sie rausfliegen!",
-      "erfolg": "Sauber gschraubt! Didi ist zufrieden.",
-      "fail": "Schraube verloren. Probier's nochmal."
+      "titel": "Radl-Snake",
+      "label": "Radl-Snake spielen (+15 Ansehen, +10 €)",
+      "intro": "Mir san die Radln ausbüxt! Friss s' alle ein – ah, i mein: fang s' ein! Radl-Snake!",
+      "erfolg": "Alle Radln eingefangen! Didi ist begeistert.",
+      "fail": "Crash! Probier's nochmal."
     },
     "paket": {
       "titel": "Paket für den Schlosser",
@@ -1615,10 +1615,6 @@
     "getrennt": "Erwin und Ulli haben sich getrennt. Schon wieder."
   },
   "minispiele": {
-    "schrauben": {
-      "titel": "Radl-Notdienst!",
-      "hilfe": "Schrauben lockern sich (rot, drehend) – antippen oder Taste 1–6, bevor sie rausfallen! 12 schaffen, max. 3 verlieren."
-    },
     "feilschen": {
       "titel": "willhaben-Feilschen: {item}",
       "hilfe": "Drück A / Leertaste, wenn die Nadel im grünen Bereich ist – Mitte = perfekt!",
@@ -1628,6 +1624,14 @@
       "gut": "Gut! „Passt, a bissl runter.“",
       "daneben": "Daneben! „Na, sicher ned.“",
       "deal": "Deal: {preis}"
+    },
+    "snake": {
+      "titel": "Radl-Snake",
+      "hilfe": "Friss {n} Fahrräder! Steuern mit Pfeiltasten / WASD, am Handy wischen oder die Pfeile. Nicht in die Wand oder in dich selbst!",
+      "start": "Drück eine Richtung zum Starten!",
+      "los": "Los!",
+      "gewonnen": "Alle Radln gefressen! Didi ist begeistert.",
+      "crash": "Bumm! Crash."
     }
   }
 }
