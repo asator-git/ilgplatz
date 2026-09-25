@@ -367,6 +367,8 @@ const UI = {
 
   showEnd(res, onAgain) {
     const win = res.win;
+    this.showHUD(false);
+    this.setPrompt(null);
     const html = `<div class="menu">
       <div class="title">${escapeHtml(win ? T('ende.sieg', null, 'BÜRGERMEISTER VOM STUWERVIERTEL!') : T('ende.niederlage', null, 'Knapp daneben…'))}</div>
       <div id="endArt" style="font-size:40px;margin:8px">${win ? '🏅' : '☕'}</div>
@@ -380,7 +382,7 @@ const UI = {
       <button class="bigbtn" id="endAgain">${escapeHtml(T('ende.nochmal', null, 'Nochmal – mit anderer Figur'))}</button>
     </div>`;
     this.showOverlay(html, 'end', (ev) => { if (ev === 'confirm' && document.activeElement !== $('hsName')) onAgain(); });
-    if (res.artUrl) { $('endArt').innerHTML = `<img src="${res.artUrl}" style="width:96px;image-rendering:pixelated">`; }
+    if (res.artHtml) $('endArt').innerHTML = res.artHtml;
     let saved = false;
     const save = () => {
       if (saved) return;
@@ -406,6 +408,7 @@ const UI = {
     const finish = (ok) => {
       if (done) return; done = true;
       clearInterval(iv);
+      if (this.overlayMode !== 'minigame' || (G && G.ended)) return;
       this.hideOverlay();
       Sfx.play(ok ? 'good' : 'bad');
       cb(ok);
@@ -463,7 +466,7 @@ const UI = {
       <div class="seq" id="mgS">${seq.map((d, i) => `<span data-i="${i}">${sym[d]}</span>`).join('')}</div>
       <div class="arrows"><span></span><button data-d="up">↑</button><span></span><button data-d="left">←</button><button data-d="down">↓</button><button data-d="right">→</button></div></div>`;
     const render = () => document.querySelectorAll('#mgS span').forEach((s, i) => { s.className = i < pos ? 'ok' : (i === pos ? 'cur' : ''); });
-    const finish = (ok) => { if (done) return; done = true; clearInterval(iv); this.hideOverlay(); Sfx.play(ok ? 'good' : 'bad'); cb(ok); };
+    const finish = (ok) => { if (done) return; done = true; clearInterval(iv); if (this.overlayMode !== 'minigame' || (G && G.ended)) return; this.hideOverlay(); Sfx.play(ok ? 'good' : 'bad'); cb(ok); };
     const press = (d) => {
       if (done) return;
       if (seq[pos] === d) { pos++; Sfx.play('type'); render(); if (pos >= len) finish(true); }

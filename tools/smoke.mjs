@@ -48,6 +48,8 @@ if (evalFile) {
 }
 await page.waitForTimeout(secs * 1000);
 if (shot) await page.screenshot({ path: shot });
+const blog = await page.evaluate(() => window.__log || []); if (blog.length) console.log(blog.join('\n'));
+const endShown = await page.evaluate(() => (typeof UI !== 'undefined' && UI.overlayMode) || null); console.log('Overlay:', endShown);
 const state = await page.evaluate(() => {
   try { return G ? { minute: G.minute, rep: G.rep, rival: G.rivalRep, money: G.money, ended: G.ended } : null; } catch (e) { return String(e); }
 });

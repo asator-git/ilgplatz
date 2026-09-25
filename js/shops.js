@@ -80,7 +80,11 @@ const Shops = {
       fn: () => {
         if (p > 0 && !scene.pay(p, T('shops.deewanKurz', null, 'Deewan'))) return;
         scene.giveItem('essen');
-        if (i === prices.length - 1) { scene.addRep(B('ansehen.deewan15', 10), T('shops.grosszuegig', null, 'großzügig')); scene.say(a, T('shops.deewanDanke', null, 'Oh! Danke, mein Freund!')); }
+        if (i === prices.length - 1) {
+          const hour = Math.floor(G.minute / 60);
+          if (G.flags.deewanHour !== hour) { G.flags.deewanHour = hour; scene.addRep(B('ansehen.deewan15', 10), T('shops.grosszuegig', null, 'großzügig')); }
+          scene.say(a, T('shops.deewanDanke', null, 'Oh! Danke, mein Freund!'));
+        }
         else if (p === 0) { scene.addRep(B('ansehen.deewan0', -10), T('shops.geizig', null, 'geizig')); UI.dialog([{ who: a.name, text: T('npc.koch.traurig', null, '(Der Koch schaut traurig.)') }]); }
         else scene.say(a, T('shops.deewanNormal', null, 'Passt. Guten Appetit!'));
         if (G.figur === 'andi') UI.toast(T('shops.andiHinweis', null, 'Tipp: E drücken = jausnen'), '');

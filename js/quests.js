@@ -696,8 +696,8 @@ const QDEF = {
       if (!this.canShoot(scene)) return [];
       const l = [];
       const d = st.data.done;
-      if (!d.quelle) { const f = FOUNTAIN_PX(); l.push({ x: f.x, y: f.y, r: 32, prio: -6, label: QT('foto', 'label_quelle', null, 'Foto: Quelle'), fn: () => this.shoot(scene, st, 'quelle') }); }
-      if (!d.pflaume) for (const t of scene.objs.trees) if (t.kind === 'plum') l.push({ x: t.x, y: t.y - 4, r: 26, prio: -6, label: QT('foto', 'label_pflaume', null, 'Foto: Blutpflaume'), fn: () => this.shoot(scene, st, 'pflaume') });
+      if (!d.quelle) { const f = FOUNTAIN_PX(); l.push({ x: f.x, y: f.y, r: 32, prio: -30, label: QT('foto', 'label_quelle', null, 'Foto: Quelle'), fn: () => this.shoot(scene, st, 'quelle') }); }
+      if (!d.pflaume) for (const t of scene.objs.trees) if (t.kind === 'plum') l.push({ x: t.x, y: t.y - 4, r: 26, prio: -30, label: QT('foto', 'label_pflaume', null, 'Foto: Blutpflaume'), fn: () => this.shoot(scene, st, 'pflaume') });
       if (!d.tesla) { const t = LOC.tesla; l.push({ x: (t.x + 1) * TILE, y: (t.y + 0.5) * TILE, r: 34, prio: -30, label: QT('foto', 'label_tesla', null, 'Foto: Tesla'), fn: () => { this.shoot(scene, st, 'tesla'); scene.say(scene.actors.marco, QT('foto', 'marco', null, 'Tesla. MEINS. Weg.'), 2000); } }); }
       return l;
     }

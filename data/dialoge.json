@@ -282,7 +282,7 @@
       ]
     },
     "wirt": {
-      "name": "Dezentral",
+      "name": "Türsteher Bernd",
       "normal": [
         "Zua. Erst ab neune. Und dann a ned für jeden.",
         "Komm später. Viel später.",
@@ -1048,5 +1048,113 @@
       "Kein Geld, kein Kaffee, kein Platz. Raus!"
     ],
     "rausKurz": "Ohne Geld im Café"
+  },
+  "intro": [
+    "Es ist 8 Uhr früh am Ilgplatz. Die Blutpflaumen leuchten, die Quelle plätschert, und der Americano kostet schon wieder mehr als gestern.",
+    "Heute wird abgerechnet: Um 23 Uhr zählt das Grätzl. Wer mehr Ansehen hat als {rivale}, ist Bürgermeister vom Stuwerviertel. {rivale} wohnt hier seit Ewigkeiten – sein Ansehen wächst von ganz allein.",
+    "Erster Schritt: Geh ins Café und red mit Daniel. Der gelbe Pfeil zeigt dir den Weg. Leute mit einem gelben ! haben Aufträge für dich."
+  ],
+  "figurTipp": {
+    "hubi": "Tipp: E = Mascha bellt (Exen flüchten) oder kuschelt Versteinerte gesund.",
+    "andi": "Tipp: Behalte deinen Hungerbalken im Blick. Essen gibt's beim Deewan und im Café, E = jausnen.",
+    "carla": "Tipp: E = Niederquasseln. Funktioniert sogar beim Schlosser…",
+    "juliette": "Tipp: Daniel spendiert dir einen Gratis-Americano. Aber fass dich kurz!",
+    "markus": "Tipp: E an einem Terminal (neben den Läden) = hacken. Aber nicht zu nah vorbeigehen…",
+    "jewi": "Tipp: E = Foto. Friert Gegner ein. Der Schlosser mit Paket = Beweisfoto!"
+  },
+  "events": {
+    "nass": "Waschelnass! Halbe Geschwindigkeit.",
+    "americano": {
+      "ankuendigung": "Um {zeit}: Hubi braucht seinen Americano! Halt dich bereit.",
+      "start": "COUNTDOWN! Hubi braucht bis 11:05 seinen Americano – er muss mit Mascha Gassi! Kauf einen im Café und bring ihn auf die Wiese.",
+      "startHubi": "COUNTDOWN! Du brauchst bis 11:05 deinen Americano! Mascha wartet auf der Wiese – hol dir den Kaffee und sei pünktlich bei ihr."
+    },
+    "erdbeben": {
+      "text": "ERDBEBEN! Hubi ohne Kaffee ist eine Naturgewalt. Die Bänke fliegen, die Quelle spritzt!",
+      "kurz": "Erdbeben",
+      "hubi": "KA KAFFEE! KA GNADE!"
+    },
+    "andi": {
+      "ankuendigung": "Um {zeit}: Andis Magen meldet sich…",
+      "start": "Andi hat HUNGER! Bring ihm in 20 Minuten was vom Deewan, sonst wird er grantig.",
+      "startSelbst": "Dein Magen knurrt wie ein Moped! Iss in den nächsten 20 Minuten was, sonst wirst du grantig."
+    },
+    "nadja": {
+      "ankuendigung": "Um {zeit}: Jemand ist im Anmarsch. Jemand Gefährliches.",
+      "start": "Nadja ist am Platz. Sie sucht Hubi. Sie wird dich fragen.",
+      "startHubi": "NADJA ist am Platz. Wenn sie dich sieht, rennt sie. Nur im Café bist du sicher!"
+    },
+    "konzert": {
+      "ankuendigung": "Um {zeit}: Erwins Gipsy-Konzert auf der Mittelwiese! Abstand halten!",
+      "start": "ERWINS GIPSY-KONZERT! Sein Versteinerungsradius ist dreimal so groß. Wer auf der Wiese steht, versteinert – Mascha kann sie retten (+10 pro Person).",
+      "ende": "Das Konzert ist aus. Die Versteinerten warten auf Mascha…",
+      "erwinWeg": "Erwin ist zum Konzert abgerauscht – Auftrag erledigt!"
+    },
+    "doppler": {
+      "ankuendigung": "Um {zeit}: Besuch mit Doppler kündigt sich an…",
+      "start": "Die Doppler-Frau ist da! Zwei Liter Wein, viel Liebe, wenig Magen. Vorsicht, Pfützen! Führ sie zu einer Bank.",
+      "fuehren": "Komm, i bring di wohin.",
+      "jaa": "Oh, a Kavalier! *hicks*",
+      "hinweis": "Führ sie zu einer Bank (+25) oder ins Café (+40, aber Daniel wird sauer).",
+      "cafeKurz": "Doppler-Frau im Café",
+      "daniel": "DIE da? In MEINER Society?! Für euch kostet heute alles mehr!",
+      "teurer": "Daniel ist sauer: Preise +50 % für den Rest des Tages.",
+      "bankKurz": "Doppler-Frau aufs Bankerl",
+      "bankDanke": "A Bankerl! Du bist a Schatz! *schnarch*"
+    },
+    "zuhaelter": {
+      "ankuendigung": "Um {zeit}: Die Zuhälter kehren zurück. Wie jedes Jahr.",
+      "start": "RÜCKKEHR DER ZUHÄLTER! Vor der Schlosserei wird mit Ketten gerauft. Geh außen herum!",
+      "ende": "Die Zuhälter sind abgezogen. Bis nächstes Jahr.",
+      "zuschauer": "Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee."
+    },
+    "nacht": {
+      "ankuendigung": "Um {zeit} wird's Nacht im Stuwerviertel.",
+      "start": "Nacht am Ilgplatz. Das Dezentral hat offen, die Kiwara sind doppelt unterwegs, am Stern wird was angeboten.",
+      "zitatWer": "Nino aus Wien",
+      "zitat": [
+        "„Im Stuwerviertel in da Nocht.\nDie Kiwara sand immer woch.\nDes Dezentral hod meistens offen.\nAm Stern woins da an Shit verkaufen.“"
+      ]
+    },
+    "finale": {
+      "ankuendigung": "Um {zeit}: Das große Finale!",
+      "startGut": "FINALE! Du hast genug Ansehen: Hol dir beim Schlosser Kleber und pick dich im Café an den Boden! (Oder, mit Marco: die Tesla-Reifen…)",
+      "startSchwach": "FINALE! Kleber gibt's beim Schlosser erst ab 450 Ansehen. Vielleicht geht noch was – oder du heuerst Marco an und kümmerst dich um den Tesla…",
+      "kleben": "An den Boden picken!",
+      "kleberKaufen": "Kleber kaufen ({preis})",
+      "kleberZuWenig": "Kleber gibt's erst ab {n} Ansehen. „Di kennt ja no kaner.“",
+      "kleberKurz": "Kleber",
+      "kleberText": "Superkleber. Hält ewig. Frag ned, wofür i den brauch.",
+      "klebenKurz": "Am Boden angepickt",
+      "sms": "Hiermit kündige ich den Boden. Fristlos. LG Daniel",
+      "jubel": [
+        "BRAVO!",
+        "DER BODEN IS UNSER!",
+        "Kaffee is ka Luxus!",
+        "Hoch soll er leben!"
+      ],
+      "klebenBanner": "Du klebst am Boden! Das ganze Café jubelt!",
+      "reifen": "Tesla-Reifen aufstechen",
+      "reifenKurz": "Tesla-Reifen",
+      "marcoWache": "Ich pass auf.",
+      "kiwaraKurz": "Kiwara beim Tesla",
+      "kiwara": "Halt! Sachbeschädigung! Das gibt a Anzeige! Und Sie, Herr Marco, Sie kennen wir eh.",
+      "reifenGlueck": "Pssssst… Keiner hat was gesehen. Der Tesla steht schief."
+    },
+    "abrechnung": {
+      "ankuendigung": "Um {zeit} wird abgerechnet! Letzte Chance!",
+      "text": "23:00 – Abrechnung am Ilgplatz.\nDas Grätzl zählt…"
+    }
+  },
+  "ende": {
+    "sieg": "BÜRGERMEISTER VOM STUWERVIERTEL!",
+    "niederlage": "Knapp daneben is a vorbei…",
+    "vergleich": "Du: {du} – {rivale}: {r}",
+    "siegText": "Das Grätzl hat entschieden: Du bist Bürgermeister vom Stuwerviertel! Die Amtskette glänzt, Mascha bellt, und sogar Daniel senkt für eine Sekunde die Preise. Für eine.",
+    "niederlageText": "{rivale} hebt grinsend den Americano: „Bürgermeister wird ma ned. Bürgermeister is ma.“ Morgen ist auch noch ein Tag am Ilgplatz.",
+    "statistik": "Aufträge erledigt: {n} · Rang: {rang}",
+    "nameEingeben": "Dein Name für die Ehrentafel:",
+    "speichern": "Eintragen",
+    "nochmal": "Nochmal – mit anderer Figur"
   }
 }
