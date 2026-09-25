@@ -83,7 +83,10 @@
     "pauseMax": 25,
     "tempoFreunde": 34,
     "hinweisFalschChance": 0.25,
-    "hinweisFalschMin": 6
+    "hinweisFalschMin": 6,
+    "hausmastaTempo": 9,
+    "hausmastaSitzenMin": 25,
+    "hausmastaSitzenMax": 50
   },
   "figuren": {
     "hubi": {
@@ -306,5 +309,16 @@
     "ansehenHubi": 3,
     "bonusAb": 3,
     "bonus": 15
+  },
+  "bobos": {
+    "alleMinMin": 35,
+    "alleMinMax": 70,
+    "zurueckMinMin": 60,
+    "zurueckMinMax": 120
+  },
+  "jewi": {
+    "cafeAb": "15:40",
+    "therapieAb": "16:10",
+    "zurueckAb": "17:20"
   }
 }

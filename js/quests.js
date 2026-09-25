@@ -664,7 +664,7 @@ const QDEF = {
   // 11) Juliette kennt jeden
   gruesse: {
     onStart(scene, st) {
-      const pool = ['didi', 'michi', 'koch', 'schlosser', 'opa', 'stern1', 'hausmasta', 'bobo', 'pizzaiolo', 'slady'];
+      const pool = ['didi', 'michi', 'koch', 'schlosser', 'stern1', 'hausmasta', 'bobo', 'pizzaiolo', 'slady', 'wingswirt'];
       st.data.todo = shuffle(pool).slice(0, B('auftraege.grussAnzahl', 4));
     },
     hud(scene, st) {

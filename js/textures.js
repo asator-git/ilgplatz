@@ -35,6 +35,11 @@ const CHAR_STYLES = {
   gast2:    { skin: '#d9a066', hair: '#111', hairStyle: 'short', beard: '#111', shirt: '#ffafcc', pants: '#3a0ca3', shoes: '#fff', glasses: 'nerd' },
   gast3:    { skin: '#f7d2b0', hair: '#e76f51', hairStyle: 'ponytail', shirt: '#264653', pants: '#e9c46a', shoes: '#111' },
   verkaeufer:{ skin: '#e0ac69', hair: '#555', hairStyle: 'cap', cap: '#2a9d8f', shirt: '#8d99ae', pants: '#2b2d42', shoes: '#111' },
+  bobo1:    { skin: '#f3d2b5', hair: '#8d5524', hairStyle: 'bun', beard: '#8d5524', shirt: '#dde5b6', pants: '#6c584c', shoes: '#fff', glasses: 'nerd', extra: ['tote'] },
+  bobo2:    { skin: '#f7d9c4', hair: '#e9c46a', hairStyle: 'short', shirt: '#a8dadc', pants: '#1d3557', shoes: '#fff', extra: ['tote'] },
+  bobo3:    { skin: '#f0c8a0', hair: '#3a3a3a', hairStyle: 'beret', beret: '#6a994e', beard: '#3a3a3a', shirt: '#f2cc8f', pants: '#3d405b', shoes: '#e07a5f', extra: ['tote'] },
+  sw1:      { skin: '#e8b98f', hair: '#6a040f', hairStyle: 'long', shirt: '#370617', pants: '#03071e', shoes: '#9d0208', extra: ['jacket'] },
+  sw2:      { skin: '#c68b59', hair: '#111', hairStyle: 'curly', shirt: '#3c096c', pants: '#10002b', shoes: '#e0aaff', extra: ['jacket'] },
   pizzaiolo:{ skin: '#d9a066', hair: '#1a1a1a', hairStyle: 'curly', mustache: '#1a1a1a', shirt: '#74acdf', stripes: '#ffffff', pants: '#222', shoes: '#111', extra: ['apron'], apron: '#ffffff' },
   wingswirt:{ skin: '#f1c9a5', hair: '#c1121f', hairStyle: 'cap', cap: '#f77f00', shirt: '#d62828', pants: '#222', shoes: '#111', extra: ['apron'], apron: '#f77f00' },
   slady:    { skin: '#efc39b', hair: '#6b4423', hairStyle: 'cap', cap: '#f8f9fa', shirt: '#f8f9fa', pants: '#e9ecef', shoes: '#495057', overall: true, extra: ['paint', 'roller'] },
@@ -50,7 +55,6 @@ const CHAR_STYLES = {
   zuhaelter:{ skin: '#e3b47f', hair: '#1a1a1a', hairStyle: 'short', shirt: '#0a0a0a', pants: '#2a2a2a', shoes: '#000', glasses: 'sun', extra: ['goldchain', 'chains'] },
   doppler:  { skin: '#f4b6a0', hair: '#c9c9c9', hairStyle: 'curly', shirt: '#ff85a1', pants: '#6d597a', shoes: '#333', extra: ['bottle'] },
   rasiererin:{ skin: '#d9b08c', hair: '#8e8e8e', hairStyle: 'long', shirt: '#6b4f3a', pants: '#4a3b2d', shoes: '#222', dress: true, extra: ['razor'] },
-  opa:      { skin: '#f0c8a0', hair: '#dddddd', hairStyle: 'short', shirt: '#c2a878', pants: '#6b705c', shoes: '#333', extra: ['cane'] },
   fremder:  { skin: '#f0c8a0', hair: '#4a3000', hairStyle: 'short', shirt: '#8ecae6', pants: '#023047', shoes: '#111' }
 };
 
@@ -157,6 +161,8 @@ function drawPerson(p, s, frame, ox) {
   if (ex.includes('bottle')) { P(12, 11, 2, 1, '#ddd'); P(12, 12, 3, 6, '#2d6a4f'); P(12, 14, 3, 2, '#f1faee'); }
   if (ex.includes('wrench')) { P(12, 15, 1, 4, '#adb5bd'); P(11, 19, 3, 1, '#adb5bd'); }
   if (ex.includes('angrybrows')) { P(5, 5, 2, 1, '#1a1a1a'); P(9, 5, 2, 1, '#1a1a1a'); P(6, 4, 1, 1, '#1a1a1a'); P(9, 4, 1, 1, '#1a1a1a'); P(5, 7, 1, 1, '#ff6b6b'); P(10, 7, 1, 1, '#ff6b6b'); }
+  if (ex.includes('tote')) { P(bx0 - 2, 13, 3, 4, '#f1faee'); P(bx0 - 1, 11, 1, 2, '#f1faee'); P(bx0 - 2, 14, 3, 1, '#2a9d8f'); }
+  if (ex.includes('jacket')) { P(bx0, 11, 2, 6, '#212529'); P(bx1 - 1, 11, 2, 6, '#212529'); P(bx0 - 1, 11 + la, 1, 5, '#212529'); P(bx1 + 1, 11 + ra, 1, 5, '#212529'); }
   if (ex.includes('phone')) { P(bx1 + 1, 13, 2, 3, '#222'); P(bx1 + 1, 13, 2, 1, '#48cae4'); }
   if (ex.includes('sunglassesTop')) { P(5, 2, 6, 1, '#111'); }
   if (ex.includes('semmel')) { P(bx1, 14, 4, 3, '#e9a44c'); P(bx1 + 1, 14, 2, 1, '#c1121f'); }

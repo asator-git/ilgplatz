@@ -68,21 +68,28 @@ const NPCs = {
     add('stern1', { kind: 'extra', tex: 'sterntyp', pos: px(LOC.sternSpots[0]), speed: 20, routine: routineHome });
     add('stern2', { kind: 'extra', tex: 'sterntyp', pos: px(LOC.sternSpots[1]), speed: 20, routine: routineHome });
     // Statisten
-    const opa = add('opa', { kind: 'extra', pos: px({ x: 3, y: 22 }), speed: 14, routine: routineHome });
-    opa.data.home = { x: 3, y: 22 };
-    add('bobo', { kind: 'extra', tex: 'fremder', pos: px(LOC.spawns.bobo), speed: 30, routine: routineWander });
-    add('hausmasta', { kind: 'extra', pos: px(LOC.spawns.hausmasta), speed: 20, routine: routineWander });
+    // Bobos (drei Stück) – „Das ist jetzt unser Viertel“
+    ['bobo', 'bobo2', 'bobo3'].forEach((id, i) => {
+      const b = add(id, { kind: 'extra', tex: 'bobo' + (i + 1), pos: px(LOC.wander[(i * 5) % LOC.wander.length]), speed: 30, routine: routineWander, name: T('npc.bobo.name', null, 'Bobo') });
+      b.dialogId = 'bobo'; b.isBobo = true;
+    });
+    // Sexarbeiterinnen, die von den Bobos verjagt werden
+    LOC.swSpots.forEach((spot, i) => {
+      const w = add('sw' + (i + 1), { kind: 'extra', tex: 'sw' + (i + 1), pos: px(spot), speed: 28, routine: routineHome, name: T('npc.sw.name', null, 'Sexarbeiterin') });
+      w.dialogId = 'sw'; w.talkRep = true; w.data.spot = spot;
+    });
+    add('hausmasta', { kind: 'extra', pos: px(LOC.spawns.hausmasta), speed: B('npc.hausmastaTempo', 9), routine: routineHausmasta });
     // Ulli (Erwins Ex – oder doch nicht?)
     const ulli = add('ulli', { kind: 'extra', pos: px(LOC.spawns.bobo), speed: 30, routine: routineWander, labelColor: '#ff70a6' });
     ulli.stoneImmune = true;
     // Café-Gäste, die aufs Klo wollen
     for (let i = 1; i <= 3; i++) {
-      const g = add('gast' + i, { kind: 'extra', pos: px(LOC.cafeSeats[i]), speed: 30, name: T('npc.gast.name', null, 'Café-Gast') });
+      const g = add('gast' + i, { kind: 'extra', tex: 'bobo' + i, pos: px(LOC.cafeSeats[i]), speed: 30, name: T('npc.bobo.name', null, 'Bobo') });
       g.dialogId = 'gast'; g.setPresent(false); g.talkRep = false;
     }
     // willhaben-Verkäufer (nur während Ullis Auftrag)
     for (let i = 1; i <= 3; i++) {
-      const v = add('verk' + i, { kind: 'extra', tex: 'verkaeufer', pos: px(LOC.spawns.markus), speed: 10, routine: routineHome, name: T('npc.verkaeufer.name', null, 'willhaben-Verkäufer') });
+      const v = add('verk' + i, { kind: 'extra', tex: 'bobo' + i, pos: px(LOC.spawns.markus), speed: 10, routine: routineHome, name: T('npc.verkaeufer.name', null, 'Bobo (willhaben)') });
       v.dialogId = 'verkaeufer'; v.setPresent(false); v.talkRep = false;
     }
     // Hubis Büro und das echte Klo

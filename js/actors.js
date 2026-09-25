@@ -252,6 +252,26 @@ function routineHome(a) {
   a.idleUntil = G.realMs + rnd(4, 10) * 1000;
 }
 
+// Hausmasta: ganz langsam zur nächsten Bank, hinsetzen, essen, weiter
+function routineHausmasta(a) {
+  const seats = LOC.benchSeats || [];
+  if (!seats.length) return routineWander(a);
+  if (a.data.seat && a.atTile(a.data.seat.front.x, a.data.seat.front.y)) {
+    const s = a.data.seat;
+    a.data.seat = null;
+    a.data.sitUntil = G.realMs + rnd(B('npc.hausmastaSitzenMin', 25), B('npc.hausmastaSitzenMax', 50)) * 1000;
+    a.data.standUp = s.front;
+    a.setPos(s.px, s.py + 1);
+    a.setState('sitting');
+    a.data.sitting = true;
+    return;
+  }
+  const s = pick(seats);
+  a.data.seat = s;
+  a.goToTile(s.front.x, s.front.y);
+  a.idleUntil = G.realMs + 500;
+}
+
 function isCafeFloorTile(grid, tx, ty) {
   const t = grid.ground[ty] && grid.ground[ty][tx];
   return t === TI.FLOOR || t === TI.DOOR;

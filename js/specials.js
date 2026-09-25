@@ -389,7 +389,80 @@ const Specials = {
     } }];
   },
 
+  // Hausmasta steht nach der Jause wieder auf
+  updateHausmasta(scene) {
+    const h = scene.actors.hausmasta;
+    if (!h || !h.data.sitting) return;
+    if (G.flags.zuhaelter) { h.data.sitting = false; h.clearState(); if (h.data.standUp) h.setTile(h.data.standUp.x, h.data.standUp.y); return; }
+    if (!h.bubble && Math.random() < 1 / 300) scene.say(h, TN('npc.hausmasta.mampf', h.talkIdx++), 1800);
+    if (G.realMs > h.data.sitUntil) { h.data.sitting = false; h.clearState(); if (h.data.standUp) h.setTile(h.data.standUp.x, h.data.standUp.y); h.idleUntil = G.realMs + 1000; }
+  },
+
+  // Bobos verjagen die Sexarbeiterinnen („Des is jetzt unser Viertel!“) – die kommen aber immer wieder
+  updateBobos(scene) {
+    if (G.ended) return;
+    if (!G.flags.boboNext) G.flags.boboNext = G.minute + rnd(20, 40);
+    for (const id of ['sw1', 'sw2']) {
+      const w = scene.actors[id];
+      if (!w) continue;
+      const d = w.data;
+      if (d.phase === 'geht' && w.atTile(d.exit.x, d.exit.y, 1)) { w.setPresent(false); w.override = null; d.phase = 'weg'; d.back = G.minute + rnd(B('bobos.zurueckMinMin', 60), B('bobos.zurueckMinMax', 120)); }
+      if (d.phase === 'weg' && G.minute >= d.back) { w.setPresent(true); w.clearState(); w.setTile(d.exit.x, d.exit.y); w.override = { tx: d.spot.x, ty: d.spot.y, until: G.minute + 30 }; d.phase = null; scene.say(w, TN('npc.sw.zurueck', w.talkIdx++), 3000); }
+    }
+    // Ein Bobo macht sich auf den Weg
+    if (G.minute >= G.flags.boboNext) {
+      G.flags.boboNext = G.minute + rnd(B('bobos.alleMinMin', 35), B('bobos.alleMinMax', 70));
+      const w = ['sw1', 'sw2'].map(i => scene.actors[i]).find(x => x.present && !x.data.phase && x.state === 'normal');
+      const bobos = ['bobo', 'bobo2', 'bobo3'].map(i => scene.actors[i]).filter(b => b.present && b.state === 'normal' && !b.data.target);
+      if (w && bobos.length) { const b = pick(bobos); b.data.target = w; w.data.phase = 'ziel'; }
+    }
+    for (const id of ['bobo', 'bobo2', 'bobo3']) {
+      const b = scene.actors[id];
+      const w = b && b.data.target;
+      if (!w) continue;
+      if (!w.present || b.isImmobile()) { b.data.target = null; b.override = null; if (w.data.phase === 'ziel') w.data.phase = null; continue; }
+      if (dist(b.x, b.y, w.x, w.y) > 20) { b.override = { tx: w.tx, ty: w.ty + 1, until: G.minute + 30 }; continue; }
+      // Verjagen
+      b.override = null; b.data.target = null;
+      scene.say(b, TN('npc.bobo.verjagen', b.talkIdx++), 3000);
+      scene.time.delayedCall(1500, () => scene.say(w, TN('npc.sw.antwort', w.talkIdx++), 3200));
+      const exits = [LOC.streetEnds.feuerbach, LOC.streetEnds.obermuellner];
+      w.data.exit = exits.reduce((a, c) => dist(w.tx, w.ty, c.x, c.y) < dist(w.tx, w.ty, a.x, a.y) ? c : a);
+      w.data.phase = 'geht';
+      scene.time.delayedCall(2600, () => { if (w.data.phase === 'geht') w.override = { tx: w.data.exit.x, ty: w.data.exit.y, until: 99999 }; });
+      scene.time.delayedCall(4000, () => scene.say(b, TN('npc.bobo.danach', b.talkIdx++), 2800));
+    }
+  },
+
+  // Jewi geht vor der Therapie ins Café (nur wenn sie NPC ist)
+  updateJewi(scene) {
+    const j = scene.actors.jewi;
+    if (!j || j === scene.player || G.ended) return;
+    const m = G.minute, ph = G.flags.jewiPhase || 'frei';
+    const cafeAt = parseClock(B('jewi.cafeAb', '15:40'), 940), goAt = parseClock(B('jewi.therapieAb', '16:10'), 970), backAt = parseClock(B('jewi.zurueckAb', '17:20'), 1040);
+    if (ph === 'frei' && m >= cafeAt && m < goAt && j.state === 'normal') {
+      G.flags.jewiPhase = 'cafe';
+      const seat = LOC.cafeSeats[4];
+      j.override = { tx: seat.x, ty: seat.y, until: goAt }; j.path = null;
+      scene.say(j, TN('npc.jewi.vorTherapie', j.talkIdx++), 3000);
+    } else if ((ph === 'cafe' || ph === 'frei') && m >= goAt && m < backAt && j.state === 'normal') {
+      G.flags.jewiPhase = 'geht';
+      const e = LOC.streetEnds.feuerbach;
+      j.override = { tx: e.x, ty: e.y, until: backAt }; j.path = null;
+      scene.say(j, T('npc.jewi.gehtTherapie', null, 'So, Therapie. Bis später!'), 2500);
+    } else if (ph === 'geht' && j.atTile(LOC.streetEnds.feuerbach.x, LOC.streetEnds.feuerbach.y, 1)) {
+      G.flags.jewiPhase = 'weg'; j.setPresent(false);
+    } else if ((ph === 'weg' || ph === 'geht') && m >= backAt) {
+      G.flags.jewiPhase = 'fertig'; j.setPresent(true); j.override = null; j.clearState();
+      if (ph === 'weg') j.setTile(LOC.streetEnds.feuerbach.x, LOC.streetEnds.feuerbach.y);
+      scene.say(j, T('npc.jewi.nachTherapie', null, 'Therapie war… intensiv. Jetzt brauch ich Licht und Motive.'), 3000);
+    }
+  },
+
   update(scene, dt) {
+    this.updateHausmasta(scene);
+    this.updateBobos(scene);
+    this.updateJewi(scene);
     this.updateUlli(scene);
     this.updateKlo(scene);
     this.updateShots(scene, dt);

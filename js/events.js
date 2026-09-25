@@ -71,8 +71,8 @@ const Events = {
       }
     } else if (this.spray) { this.spray.stop(); this.spray = null; }
     // Opa-Spruch beim Zuhälter-Event
-    const opa = scene.actors.opa;
-    opa.lineOverride = G.flags.zuhaelter ? () => T('events.zuhaelter.zuschauer', null, 'Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee.') : null;
+    const hm = scene.actors.hausmasta;
+    if (hm) hm.lineOverride = G.flags.zuhaelter ? () => T('events.zuhaelter.zuschauer', null, 'Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee.') : null;
     const s1 = scene.actors.stern1;
     const night = m >= parseClock(B('events.nachtStart', '21:00'), 1260);
     s1.lineOverride = night ? () => TN('npc.stern1.nacht', s1.talkIdx++) : null;
@@ -139,8 +139,8 @@ const Events = {
       case 'zuhaelter': {
         G.flags.zuhaelter = true;
         for (let i = 1; i <= 4; i++) { const z = scene.actors['zuh' + i]; z.setPresent(true); z.setTile(LOC.fightZone.x + (i % 2 ? -1 : 1), LOC.fightZone.y + (i > 2 ? 1 : 0)); }
-        const opa = scene.actors.opa;
-        opa.override = { tx: LOC.opaSpot.x, ty: LOC.opaSpot.y, until: G.minute + B('events.zuhaelterMin', 30) + 15 };
+        const hm = scene.actors.hausmasta;
+        if (hm) { hm.data.sitting = false; hm.clearState(); hm.override = { tx: LOC.opaSpot.x, ty: LOC.opaSpot.y, until: G.minute + B('events.zuhaelterMin', 30) + 15 }; }
         b('zuhaelter.start', 6000);
         Sfx.play('punch');
         break;

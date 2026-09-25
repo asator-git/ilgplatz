@@ -221,8 +221,17 @@
         "Das Licht hier um fünf am Nachmittag? Göttlich. Die Leute um fünf? Gemischt.",
         "Ich bin nur zweimal die Woche hier. Das reicht, um alles zu wissen.",
         "Der Schlosser hat 'Pakete'. Ich hab Fotos. Sag ich nur.",
-        "Die Blutpflaumen sind das Schönste am Platz. Gleich nach meinem Objektiv."
-      ]
+        "Die Blutpflaumen sind das Schönste am Platz. Gleich nach meinem Objektiv.",
+        "Ich hab heut noch Therapie. Vorher brauch ich einen Kaffee. Das ist Teil der Therapie.",
+        "Meine Therapeutin sagt, ich soll weniger durch die Linse schauen. Ich hab sie fotografiert."
+      ],
+      "vorTherapie": [
+        "Schnell an Kaffee vor der Therapie.",
+        "Koffein vor den Gefühlen. So mach ich das.",
+        "Therapie ohne Kaffee? Undenkbar."
+      ],
+      "gehtTherapie": "So, Therapie. Bis später!",
+      "nachTherapie": "Therapie war… intensiv. Jetzt brauch ich Licht und Motive."
     },
     "mascha": {
       "name": "Mascha",
@@ -330,24 +339,27 @@
         "Was? Na. Nix. Geh weiter."
       ]
     },
-    "opa": {
-      "name": "Opa Franz",
-      "normal": [
-        "Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee.",
-        "I wohn do seit 1961. Da war da Hubi no ned amoi a Gedanke.",
-        "Der Kreisverkehr war früher a Kreuzung. Des war lustiger.",
-        "Weißt, was a Viertel kost hat? Vier Schilling! Und heit? Frag ned.",
-        "Die Zuhälter kommen jedes Jahr wieder. Wie die Schwalben. Nur mit Ketten."
-      ]
-    },
     "bobo": {
-      "name": "Bobo Konstantin",
+      "name": "Bobo",
       "normal": [
         "Ist der Kaffee hier Fair Trade? Nein? Egal, ich nehm zwei.",
         "Ich hab mir hier eine Altbauwohnung gekauft. Das Viertel ist so… authentisch.",
         "Mein Lastenrad heißt Gustav. Er ist vegan.",
         "Kennst du ein gutes Yoga hier? Nein? Das ist ja so roh hier. Ich liebe es.",
-        "Sechs Euro für einen Americano? Das ist doch fair. Für mich."
+        "Sechs Euro für einen Americano? Das ist doch fair. Für mich.",
+        "Wir haben eine Petition für mehr Hochbeete gestartet. Und weniger… du weißt schon."
+      ],
+      "verjagen": [
+        "Entschuldigung, aber das ist jetzt UNSER Viertel.",
+        "Wir haben hier eine Kita geplant. Also… bitte?",
+        "Ich hab schon dreimal bei der Hausverwaltung angerufen. Das ist jetzt unser Grätzl!",
+        "Hier kommt bald ein Concept Store hin. Tschüssi!"
+      ],
+      "danach": [
+        "Wieder a Stück Lebensqualität.",
+        "Jetzt noch a Hafer-Flat-White.",
+        "Das Grätzl wird so schön ruhig.",
+        "Ich poste das gleich in die Nachbarschafts-Gruppe."
       ]
     },
     "sandra": {
@@ -645,7 +657,7 @@
       ]
     },
     "gast": {
-      "name": "Café-Gast",
+      "name": "Bobo",
       "normal": [
         "Entschuldigung, wo is'n do des Klo?",
         "I muss dringend…",
@@ -667,12 +679,32 @@
       ]
     },
     "verkaeufer": {
-      "name": "willhaben-Verkäufer",
+      "name": "Bobo (willhaben)",
       "normal": [
-        "Des is fix a Schnäppchen. Preis is aber a fix. Eh ned.",
-        "Abholung nur heute. Nur Barzahlung. Nur mit Lächeln.",
-        "Des hab i um 80 gekauft. Für di: a Freundschaftspreis.",
-        "Ned verhandelbar! … Na gut, a bissl."
+        "Des Kallax war nur als Deko im Loft. Quasi neu.",
+        "Die Lampe passt nimmer zu unserem Japandi-Stil.",
+        "Die Yogamatte? Nur einmal benutzt. Für ein Instagram-Foto.",
+        "Preis is fix. Na gut, bissl was geht immer."
+      ]
+    },
+    "sw": {
+      "name": "Sexarbeiterin",
+      "normal": [
+        "I steh da seit dreißig Jahr. Die Bobos seit drei Wochen.",
+        "Früher war des a Rotlichtviertel. Jetzt is a Hafermilch-Viertel.",
+        "Die Kiwara kennen mi mit Vornamen. Die Bobos grüßen ned amoi.",
+        "Wennst was wissen willst übers Viertel: frag mi. Ned die mit dem Lastenrad."
+      ],
+      "antwort": [
+        "Euer Viertel? Schatzi, i war vor dir da.",
+        "Kauf da an Hafer-Latte und lass mi in Ruh.",
+        "Gentrifizierung hat an Namen: du.",
+        "Na guat. I geh. Aber i komm wieder – wie jedes Jahr."
+      ],
+      "zurueck": [
+        "Da bin i wieder. Überraschung.",
+        "Die Bobos kommen und gehen. I bleib.",
+        "Hab i was versäumt? A neuer Concept Store? Na bravo."
       ]
     }
   },
@@ -1189,9 +1221,9 @@
       "titel": "Deewan-Lieferung",
       "angebot": [
         "Drei Essen, drei Bankerl. Die Leute warten!",
-        "Zwei Bankerl auf der Wiese, eins ganz draußen am Stern. Du hast eine Minute, dann ist es kalt. Kaltes Dal ist traurig."
+        "Bring's zu drei verschiedenen Bankerln am Platz – such dir aus, welche. Du hast eine Minute, dann ist es kalt. Kaltes Dal ist traurig."
       ],
-      "hud": "Bring die Essen zu den Bänken ({n}/3)",
+      "hud": "Bring die Essen zu drei verschiedenen Bänken ({n}/3)",
       "label": "Essen abliefern",
       "geliefert": "Geliefert ({n}/3)",
       "erfolg": "Alles heiß angekommen! Der Koch strahlt.",

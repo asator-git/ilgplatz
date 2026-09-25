@@ -37,7 +37,7 @@ const LOC = {
   wc: { x: 33, y: 21 },       // das echte Klo, in der Ecke zwischen Café und Museum
   tesla: { x: 30, y: 19 },
   marcoHome: { x: 30, y: 20 },
-  benches: [{ x: 16, y: 15 }, { x: 21, y: 24 }, { x: 2, y: 23 }],
+  benches: [{ x: 16, y: 15 }, { x: 21, y: 24 }, { x: 2, y: 23 }, { x: 21, y: 18 }, { x: 15, y: 20 }, { x: 16, y: 8 }],
   hubiWait: { x: 16, y: 21 },
   meadow: [{ x: 15, y: 18 }, { x: 17, y: 16 }, { x: 23, y: 17 }, { x: 24, y: 21 }, { x: 18, y: 24 }, { x: 22, y: 22 }, { x: 16, y: 22 }, { x: 20, y: 16 }],
   concert: { x: 21, y: 17 },
@@ -220,11 +220,19 @@ function computeLocations(ground, solid) {
   LOC.spawns = {
     ex: [ring(300), ring(150), ring(200), ring(30)],
     erwin: ring(200), bobo: ring(35), markus: ring(160),
-    nadja: { x: 1, y: 22 }, opa: { x: 3, y: 22 },
+    nadja: { x: 1, y: 22 },
     doppler: LOC.streetEnds.hiller, gassi: LOC.streetEnds.feuerbach,
     rasiererin: { x: 18, y: 21 },
     hausmasta: nearWalk(ringTile(300, 13), 3)   // wohnt im Haus von Carla & Andi (Feuerbachstraße)
   };
+  // Sitzplätze auf den Bänken (Kachel davor/dahinter)
+  LOC.benchSeats = LOC.benches.map(b => {
+    const c = { x: b.x + 1, y: b.y };
+    const front = isWalk(c.x, c.y + 1) ? { x: c.x, y: c.y + 1 } : nearWalk({ x: c.x, y: c.y - 1 }, 2);
+    return { bench: b, front, px: (b.x + 1.5) * TILE, py: (b.y + 1) * TILE - 1 };
+  });
+  // Wo die Sexarbeiterinnen stehen (Feuerbachstraße, Richtung Stern) – bis die Bobos kommen
+  LOC.swSpots = [nearWalk(ringTile(305, 14.5), 3), nearWalk({ x: 8, y: 16 }, 2)];
   // Marcos Stammplatz beim Buffalo (Bier)
   const bf = LOC.shops.buffalo.front;
   LOC.marcoBar = nearWalk({ x: bf.x + (bf.x < MCX ? 1 : -1), y: bf.y }, 2);
