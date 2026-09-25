@@ -108,9 +108,10 @@ class WorldScene extends Phaser.Scene {
     if (p.state === 'held' && (ev === 'action' || ev === 'special') && !UI.isBlocking()) {
       p.stateUntilMin -= B('gegner.ausredeMin', 1.5);
       Sfx.play('blip');
-      const a = p.data.heldBy;
-      if (a) this.say(a, TN('npc.' + a.id + '.fang', (a.talkIdx++)), 1500);
-      this.say(p, T('warten.ausreden', null, 'Äh… i muss… mei Hund…'), 900);
+      if (!p.bubble || G.realMs - (this.lastExcuse || 0) > 2500) {
+        this.lastExcuse = G.realMs;
+        this.say(p, T('warten.ausreden', null, 'Äh… i muss… mei Hund…'), 2500);
+      }
       if (p.state === 'held' && G.minute >= p.stateUntilMin) p.updateState();
       return;
     }
@@ -345,7 +346,7 @@ class WorldScene extends Phaser.Scene {
     if (!WAIT[st] || G.ended) { if (this.waitState) { this.waitState = null; UI.hideWait(); } return; }
     if (this.waitState !== st) {
       this.waitState = st;
-      this.waitStartMin = G.minute; this.waitStartMs = G.realMs;
+      this.waitStartMin = G.minute; this.waitStartMs = G.realMs; this.waitLineIdx = -1;
       const who = p.data.heldBy ? p.data.heldBy.name : '';
       let hint = T('warten.' + st + '.hinweis', { name: who }, '');
       if (st === 'stone') hint = (G.figur === 'hubi' && typeof Abilities !== 'undefined' && Abilities.maschaWithPlayer(this))
@@ -357,8 +358,11 @@ class WorldScene extends Phaser.Scene {
     else if (p.stateUntilMs) frac = (p.stateUntilMs - G.realMs) / Math.max(1, p.stateUntilMs - this.waitStartMs);
     else frac = 1;
     let text;
-    if (st === 'held' && p.data.heldBy && Math.floor(G.realMs / 1800) !== this.waitLineIdx) {
-      this.waitLineIdx = Math.floor(G.realMs / 1800);
+    // Sprüche langsam wechseln, damit man mitlesen kann
+    const lineMs = B('gegner.festhaltenZeileSek', 5) * 1000;
+    const li = Math.floor((G.realMs - this.waitStartMs) / lineMs);
+    if (st === 'held' && p.data.heldBy && li !== this.waitLineIdx) {
+      this.waitLineIdx = li;
       text = '„' + TN('npc.' + p.data.heldBy.id + '.fang', this.waitLineIdx) + '“';
     }
     UI.updateWait(frac, text);

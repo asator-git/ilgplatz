@@ -1065,7 +1065,7 @@
   },
   "intro": [
     "Es ist 8 Uhr früh am Ilgplatz. Die Blutpflaumen leuchten, die Quelle plätschert, und der Americano kostet schon wieder mehr als gestern.",
-    "Heute ist Abrechnung: Oben in der Mitte siehst du das DUELL – dein Ansehen (grün) gegen {rivale} (rot). {rivale} wohnt ewig hier, sein Ansehen wächst von allein. Wer um 23 Uhr vorne liegt, ist Bürgermeister vom Stuwerviertel.",
+    "Heute ist Abrechnung: Oben in der Mitte siehst du das DUELL – dein Ansehen (grün) gegen {rivale} (rot). {rivalInfo} Wer um 23 Uhr vorne liegt, ist Bürgermeister vom Stuwerviertel.",
     "Ansehen kriegst du für Aufträge: Leute mit gelbem ! haben welche. Dein aktueller Auftrag steht unten (▶), der gelbe Pfeil zeigt den Weg. Links oben: Uhr, Geld und das nächste Tages-Event. Erster Schritt: Geh ins Café und red mit Daniel."
   ],
   "figurTipp": {
@@ -1221,5 +1221,9 @@
     "keinNetz": "YouTube ist nicht erreichbar – keine Musik.",
     "gesperrt": "Das Lied darf leider nicht in fremde Seiten eingebettet werden.",
     "fehler": "Musik konnte nicht geladen werden."
+  },
+  "rivalInfo": {
+    "hubi": "Hubi wohnt ewig hier und ist der Titelverteidiger – sein Ansehen wächst von ganz allein.",
+    "andi": "Andi nennt sich selbst Bürgermeister vom Stuwerviertel – und weil er das jedem erzählt, wächst sein Ansehen von ganz allein. Zeig ihm, wer hier wirklich wohnt!"
   }
 }

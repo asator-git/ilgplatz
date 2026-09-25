@@ -154,7 +154,8 @@
     "autoAnzahl": 2,
     "autoTempo": 30,
     "zuhaelterWegSchleudern": 3,
-    "ausredeMin": 1.5
+    "ausredeMin": 1.5,
+    "festhaltenZeileSek": 5
   },
   "auftraege": {
     "maxOffen": 3,

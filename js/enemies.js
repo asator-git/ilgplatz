@@ -340,7 +340,7 @@ const Enemies = {
     scene.addRep(-loss, T('gegnerText.festgequatscht', { name: a.name }, '{name} quatscht dich fest'));
     Sfx.play('bad');
     const lines = TL('npc.' + a.id + '.fang', ['HUBI! Wir müssen reden.']);
-    scene.say(a, lines[0], 5000);
+
     p.data.heldBy = a;
     p.onStateEnd = (old) => {
       if (old !== 'held') return;

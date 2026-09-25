@@ -34,7 +34,8 @@ const Events = {
     // Intro
     if (G.minute <= G.startMinute + 1) {
       scene.time.delayedCall(400, () => {
-        UI.dialog(TL('intro', ['Es ist 8 Uhr früh am Ilgplatz.']).map(t => ({ who: '', text: fmt(t) })), {
+        const rivalInfo = T('rivalInfo.' + G.rivalId, null, '');
+        UI.dialog(TL('intro', ['Es ist 8 Uhr früh am Ilgplatz.']).map(t => ({ who: '', text: fmt(t, { rivalInfo }) })), {
           onClose: () => UI.toast(T('figurTipp.' + G.figur, null, ''), '')
         });
       });
