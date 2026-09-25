@@ -136,7 +136,7 @@ body.dialog-open #bottomBox { visibility: hidden; }
 .menu { width: min(96vw, 900px); text-align: center; }
 .title { font-size: clamp(14px, 3.6vw, 34px); color: var(--gold); text-shadow: 3px 3px 0 #9d0208, 6px 6px 0 #000; margin: 10px 0 4px; line-height: 1.4; }
 .subtitle { font-size: var(--fs); color: #bde0fe; margin-bottom: 14px; }
-.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin: 10px 0; }
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 10px; margin: 10px 0; }
 .card {
   background: #1d1a3acc; border: 3px solid #000; outline: 2px solid #fff8e744; border-radius: 6px; padding: 8px;
   cursor: pointer; text-align: left; color: var(--ink); font-size: var(--fs-s); line-height: 1.6;
@@ -144,7 +144,8 @@ body.dialog-open #bottomBox { visibility: hidden; }
 .card:hover, .card.sel { outline-color: var(--gold); background: #3a2d6ecc; transform: translateY(-2px); }
 .card .top { display: flex; gap: 8px; align-items: center; margin-bottom: 4px; }
 .card img { width: 48px; height: 72px; image-rendering: pixelated; }
-.card .nm { color: var(--gold); font-size: var(--fs); }
+.card .nm { color: var(--gold); font-size: var(--fs-l); }
+.card .info { color: #e0e1dd; margin-bottom: 4px; }
 .card .plus { color: var(--green); }
 .card .minus { color: var(--red); }
 .bigbtn {

@@ -8,7 +8,7 @@ const Input = {
   joy: { active: false, id: null, x: 0, y: 0, cx: 0, cy: 0 },
   pressed: { action: false, special: false, pause: false, up: false, down: false, left: false, right: false, confirm: false },
   touchUsed: false,
-  listeners: [],
+  handlers: { ui: null, world: null },
 
   init() {
     const down = (e) => {
@@ -98,13 +98,13 @@ const Input = {
   },
   joyReset() { this.joy.active = false; this.joy.id = null; this.joy.x = 0; this.joy.y = 0; },
 
-  // Ereignis an alle Listener (UI hat Vorrang, siehe ui.js)
-  on(fn) { this.listeners.push(fn); },
+  // Ereignis: zuerst UI (Dialoge/Menüs), dann Welt
   fire(ev, arg) {
     try { if (typeof Sfx !== 'undefined') Sfx.unlock(); } catch (e) { /* egal */ }
-    for (let i = this.listeners.length - 1; i >= 0; i--) {
-      if (this.listeners[i](ev, arg) === true) return; // verbraucht
-    }
+    try {
+      if (this.handlers.ui && this.handlers.ui(ev, arg) === true) return;
+      if (this.handlers.world) this.handlers.world(ev, arg);
+    } catch (e) { console.error(e); }
   },
 
   // Bewegungsvektor (-1..1)

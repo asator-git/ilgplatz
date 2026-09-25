@@ -1,1 +1,110 @@
-{}
+{
+  "_info": "ALLE Texte des Spiels. Platzhalter in {geschwungenen Klammern} werden automatisch ersetzt: {spieler}, {rivale}, {preis} (aktueller Americano-Preis) und je nach Stelle weitere. Listen [ ... ] = es wird zufällig bzw. der Reihe nach gewählt.",
+  "ui": {
+    "titel": "Bürgermeister vom Stuwerviertel",
+    "untertitel": "Ein Tag am Ilgplatz",
+    "waehleFigur": "Wer bist du heute? Such dir wen aus:",
+    "steuerungTitel": "Steuerung",
+    "steuerung": [
+      "PC: Pfeiltasten / WASD = gehen · Leertaste = Aktion / weiter · E = Spezialfähigkeit · Esc = Pause",
+      "Handy: Joystick links unten · A = Aktion · E = Spezialfähigkeit · II = Pause",
+      "Ziel: Um 23:00 mehr Ansehen haben als dein Rivale. Die Uhr läuft immer – auch beim Quatschen."
+    ],
+    "highscoreTitel": "Ehrentafel vom Ilgplatz",
+    "keineHighscores": "Noch niemand eingetragen. Der Platz wartet auf dich.",
+    "ansehen": "Ansehen {n}",
+    "ansehenKurz": "Ansehen",
+    "rivale": "{name}: {n}",
+    "weitereAuftraege": "+{n} weitere Aufträge",
+    "reden": "Reden: {name}",
+    "leertaste": "Leertaste",
+    "zuWenigGeld": "Zu wenig Geld! Brauchst {preis}.",
+    "bekommen": "Eingesteckt: {item}",
+    "verloren": "Verloren: {item}",
+    "versteinerung": "Versteinerung {n}%",
+    "pause": "Pause",
+    "weiter": "Weiter",
+    "neustart": "Neustart (zurück zur Auswahl)",
+    "anleitungTitel": "Anleitung",
+    "anleitung": [
+      "Es ist 8 Uhr früh am Ilgplatz. Um 23 Uhr wird abgerechnet: Wer mehr Ansehen im Grätzl hat als der Titelverteidiger, ist Bürgermeister vom Stuwerviertel.",
+      "Ansehen kriegst du für Aufträge (unten eingeblendet, der gelbe Pfeil zeigt die Richtung), fürs Tratschen (+2, einmal pro Stunde pro Person) und für die großen Tages-Events. Leute mit gelbem ! haben einen Auftrag für dich.",
+      "Pass auf: Hubis Exen, Nadja, Erwin (versteinert dich mit Gitarren-Monologen), Marco (schiebt dich weg), die Kiwara (ab 19 Uhr) und die Autos im Kreisverkehr. Geh nie ohne Geld ins Café!",
+      "Jede Figur hat eine Stärke (Taste E) und eine Schwäche. Versteinerte, grantige oder niedergequasselte Leute rettet nur Mascha – Hubis Hund.",
+      "Die Zeit läuft immer: in Gesprächen, Minispielen und sogar im Krankenhaus. Quatschen kostet."
+    ]
+  },
+  "raenge": {
+    "zuagraster": "Zuagraster",
+    "stammgast": "Stammgast",
+    "graetzlkaiser": "Grätzlkaiser",
+    "anwaerter": "Bürgermeister-Anwärter"
+  },
+  "figuren": {
+    "hubi": {
+      "name": "Hubi",
+      "info": "Wohnt ewig hier. Der wahre Bürgermeister. Datet ständig wen.",
+      "staerke": "Mascha ist immer dabei: E = bellen (Exen flüchten) oder kuscheln (heilt versteinerte, grantige, benommene Leute).",
+      "schwaeche": "Die Exen jagen nur ihn. Ab 14 Uhr ist Nadja hinter ihm her – sicher ist er nur im Café."
+    },
+    "andi": {
+      "name": "Andi",
+      "info": "Nennt sich selbst Bürgermeister vom Stuwerviertel.",
+      "staerke": "Bürgermeister-Schmäh: +50 % Ansehen aus Gesprächen.",
+      "schwaeche": "Hungerbalken! Leer = grantig: Gespräche scheitern, −5 Ansehen pro Minute, bis er isst (E = jausnen)."
+    },
+    "carla": {
+      "name": "Carla",
+      "info": "Andis Freundin, frisch aus Graz. Schusselig, glaubt jedem.",
+      "staerke": "Niederquasseln (E): Wer neben ihr steht, ist 30 Sek. wehrlos – sogar Marco.",
+      "schwaeche": "Verliert alle 45 Min. was aus der Tasche und glaubt falschen Hinweisen. Eigene Sidequest: ihr geklautes Rad."
+    },
+    "juliette": {
+      "name": "Juliette",
+      "info": "Französin, Ex-Barista im Café, kennt jeden.",
+      "staerke": "Alle mögen sie: Aufträge geben +25 % Ansehen, Daniel spendiert einmal am Tag einen Kaffee.",
+      "schwaeche": "Redet zu viel: Gespräche kosten doppelt so viel Zeit."
+    },
+    "markus": {
+      "name": "Markus",
+      "info": "Juliettes Freund. Steirer. KI-Nerd.",
+      "staerke": "Hacken (E an einem Terminal): Minispiel – Erfolg halbiert Daniels Preise oder bringt Bonus.",
+      "schwaeche": "Bleibt an Bildschirmen hängen: Geht er an einem Terminal vorbei, friert er 5 Sek. ein."
+    },
+    "jewi": {
+      "name": "Jewi",
+      "info": "Fotografin, zweimal die Woche im Café.",
+      "staerke": "Foto (E): friert Gegner 8 Sek. ein. Beweisfoto vom Schlosser bei den „Paketen“ = +40.",
+      "schwaeche": "Daniel mag sie nicht: Kaffee kostet für sie 50 % mehr."
+    }
+  },
+  "spezial": {
+    "hubi": "Mascha",
+    "andi": "Jause",
+    "carla": "Quassel",
+    "juliette": "Bussi",
+    "markus": "Hack",
+    "jewi": "Foto"
+  },
+  "orte": {
+    "cafe": "The Good Coffee Society",
+    "radbande": "Radbande",
+    "schlosserei": "Schlosserei",
+    "museum": "Zirkus & Clown Museum",
+    "deewan": "Deewan",
+    "dezentral": "Dezentral",
+    "stern": "Stern"
+  },
+  "zustaende": {
+    "stone": "versteinert",
+    "talked": "benommen",
+    "grantig": "grantig",
+    "wet": "nass",
+    "held": "festgequatscht",
+    "frozen": "hängt am Bildschirm",
+    "slipped": "ausgerutscht",
+    "glued": "angepickt",
+    "hospital": "im Krankenhaus",
+    "laughing": "lacht"
+  }
+}
