@@ -641,5 +641,412 @@
       "In da Doppler-Lacke ausgrutscht. Pfui!",
       "Mei Hosn!"
     ]
+  },
+  "items": {
+    "americano": "Americano",
+    "essen": "Deewan-Essen",
+    "kipferl": "Kipferl",
+    "paket": "Paket vom Schlosser",
+    "nase": "Clownnase",
+    "kamera": "Jewis Kamera",
+    "karton": "Karton",
+    "stift": "Stift",
+    "transparent": "Transparent",
+    "kleber": "Kleber",
+    "shit": "„Shit“ vom Stern",
+    "rad": "Carlas Rad",
+    "beweisfoto": "Beweisfoto",
+    "lieferung": "Lieferung (heiß!)",
+    "laptop": "Laptop"
+  },
+  "quests": {
+    "neu": "Neuer Auftrag: {titel}",
+    "erledigt": "Auftrag erledigt: {titel}",
+    "angebotLabel": "Auftrag: {titel}",
+    "annehmen": "Passt, mach i!",
+    "spaeter": "Später vielleicht.",
+    "zuViele": "Du hast schon 3 Aufträge offen. Erledig zuerst was!",
+    "angebotHud": "Angebot",
+    "angebotHudText": "{name} hätte was für dich: {titel} (!)",
+    "beweisfoto": "Beweisfoto vom Schlosser!",
+    "beweisfotoText": "Erwischt – mit Paket in der Hand! Das ist ein Beweisfoto.",
+    "keinBeweis": "Kein Beweis drauf – er hat grad nix in der Hand. Warte, bis er packt (Kiste neben ihm).",
+    "start": {
+      "titel": "Guten Morgen, Ilgplatz",
+      "hud": "Geh ins Café und red mit Daniel.",
+      "daniel": [
+        "Guten Morgen! Willkommen in der Good Coffee Society.",
+        "Der Americano kostet heute {preis}. Inflation, weißt eh. Alle zwei Stunden wird's teurer – das ist Marktwirtschaft.",
+        "Und bitte: Komm nie ohne Geld herein. Nie. Ich hab einen Ruf zu verlieren. Und du auch."
+      ],
+      "danielJuliette": [
+        "Juliette! Ma chérie! Dich hab ich ja ewig nicht gesehen!",
+        "Du hast bei mir gelernt, wie man Milchschaum macht. Ich hab bei dir gelernt, wie man flucht. Fair.",
+        "Heute ein Kaffee aufs Haus. Einmal. Der Americano kostet sonst {preis}."
+      ],
+      "danielJewi": [
+        "Oh. Du. Die Fotografin.",
+        "Der Americano kostet für dich heute {preis}. Stammkundenrabatt gibt's nur für Stammkunden.",
+        "Und fotografier bitte nicht meine Siebträger. Die sind privat."
+      ],
+      "fertig": "Der Tag kann beginnen! Schau, wer ein gelbes ! über dem Kopf hat."
+    },
+    "americano": {
+      "titel": "Americano für Hubi",
+      "hudKaufen": "Kauf einen Americano bei Daniel ({preis})!",
+      "hudZuHubi": "Bring den Americano zu Hubi auf die Wiese!",
+      "hudZuMascha": "Schnell zurück zu Mascha auf die Wiese!",
+      "erfolg": "Rechtzeitig! Hubi geht mit Mascha Gassi.",
+      "erfolgDialog": [
+        "Ahhh. Americano. Jetzt bin i wieder a Mensch.",
+        "Danke, Oida! Mascha und i gehn jetzt Gassi. Der Platz ist gerettet."
+      ],
+      "erfolgHubi": [
+        "Ahhh. Americano. Mascha, wir san pünktlich!",
+        "*Mascha wedelt stolz*"
+      ],
+      "zuSpaet": "ZU SPÄT! Hubi hat keinen Kaffee…"
+    },
+    "andi": {
+      "titel": "Andi hat Hunger",
+      "hudSelbst": "Dein Magen knurrt! Iss was (E), bevor du grantig wirst.",
+      "hudHolen": "Hol Essen beim Deewan (oder ein Kipferl im Café) für Andi!",
+      "hudBringen": "Bring Andi das Essen – er sitzt im Café!",
+      "hudSpaet": "Andi ist grantig! Hol trotzdem was zum Essen.",
+      "hudSpaetBringen": "Andi ist grantig! Bring ihm das Essen.",
+      "geben": "Da, Andi, iss was!",
+      "danke": [
+        "*mampf* Oh ja. OH JA.",
+        "Jetzt bin i wieder Bürgermeister. Danke, Oida!"
+      ],
+      "verpasst": "Andi ist GRANTIG! Gespräche in seiner Nähe scheitern.",
+      "verpasstKurz": "Andi verhungert",
+      "selbstVerpasst": "Zu spät gegessen. Der Bürgermeister ist grantig."
+    },
+    "rad": {
+      "titel": "Carlas Rad",
+      "angebot": [
+        "Mein RAD. Mein geliebtes Rad. Bei Didi gekauft. Weg.",
+        "Kannst du mir helfen? Der Didi weiß vielleicht was. Der weiß immer was über Räder."
+      ],
+      "hud_michi": "Jemand hat gesagt, der Michi weiß, wo dein Rad ist. Frag ihn!",
+      "hud_quelle": "Michi sagt: „Wo das Wasser nie schläft.“ Such bei der Quelle!",
+      "hud_didi": "Frag Didi bei der Radbande nach dem Rad.",
+      "hud_schlosser": "Didi sagt, der Schlosser weiß was. Frag ihn!",
+      "hudBeweis": "Der Schlosser leugnet! Frag Jewi nach einem Beweisfoto.",
+      "hudBeweisCarla": "Der Schlosser leugnet! Quassel ihn nieder (E) und frag nochmal.",
+      "hudBeweisJewi": "Der Schlosser leugnet! Fotografier ihn (E), wenn er ein Paket packt.",
+      "hud_stern": "Das Rad steht am Stern! Hol es.",
+      "hud_zurueck": "Bring Carla ihr Rad zurück!",
+      "hud_zurueckCarla": "Bring das Rad zu Didi, damit er ein Schloss dranmacht!",
+      "frageMichi": "Michi, weißt du was über mein Rad?",
+      "michi": [
+        "Ein Rad hat zwei Räder. Ein Einrad hat eins. Ein Clown hat keins.",
+        "Dein Rad ist dort, wo das Wasser nie schläft. … Oder war das mein Schlüssel? Egal. Geh zur Quelle."
+      ],
+      "sucheQuelle": "Nach dem Rad suchen",
+      "quelle": [
+        "Nix. Nur Wasser. Und a Tschick. Und a Zwanzgerl.",
+        "Vielleicht hätt ich doch gleich den Didi fragen sollen…"
+      ],
+      "frageDidi": "Didi, weißt du was über Carlas Rad?",
+      "didi": [
+        "Das türkise? A guates Rad. Hab i ihr verkauft.",
+        "I hab gestern gsehn, wie der Schlosser so a Rad um die Eck'n gschoben hat. Frag den amoi."
+      ],
+      "frageSchlosser": "Wo ist Carlas Rad, Schlosser?",
+      "leugnet": [
+        "Welches Rad? I kenn ka Rad. I kenn nur Schlösser.",
+        "Beweise? Hast Beweise? Na eben."
+      ],
+      "gestaendnisFoto": [
+        "… Woher hast du das Foto?! Des is Privatsphäre!",
+        "Guat, guat! Des Rad steht am Stern. I wollt's nur… verwahren. Sicher is sicher."
+      ],
+      "gestaendnisQuassel": [
+        "BITTE. Hör auf zu reden. I sag alles!",
+        "Des Rad steht am Stern! Nimm's, aber HÖR AUF MIT GRAZ!"
+      ],
+      "frageJewi": "Jewi, hast du ein Foto vom Schlosser mit einem Rad?",
+      "jewiFoto": [
+        "Natürlich. Ich hab von jedem ein Foto. Vom Schlosser sogar drei.",
+        "Hier. Da sieht man ihn mit einem türkisen Rad. Beweisfoto."
+      ],
+      "nehmen": "Carlas Rad nehmen",
+      "genommen": "Carlas Rad eingesteckt! Also… geschoben.",
+      "zurueckgeben": "Da is dein Rad!",
+      "ende_carla": [
+        "MEIN RAD! Mein geliebtes Rad! Du bist die Beste! Der Beste! Egal!",
+        "Ich erzähl's allen. In Graz UND in Wien."
+      ],
+      "ende_didi": [
+        "Da is es ja! I mach da glei a gscheites Schloss drauf.",
+        "Und du, Carla: Nächstes Mal ned beim Stern parken."
+      ],
+      "verloren": "Das Rad ist weg… es steht bestimmt wieder am Stern."
+    },
+    "schrauben": {
+      "titel": "Räder schrauben",
+      "label": "Räder schrauben (Minispiel, +15 Ansehen, +10 €)",
+      "intro": "Fünf Schrauben, der Reihe nach. Und schnell, der Kunde wartet!",
+      "erfolg": "Sauber gschraubt! Didi ist zufrieden.",
+      "fail": "Schraube verloren. Probier's nochmal."
+    },
+    "paket": {
+      "titel": "Paket für den Schlosser",
+      "angebot": [
+        "Du schaust aus wie wer, der a Paket tragen kann.",
+        "Bring des zum Stern, zum Typen dort. 25 Euro. Ka Fragen. Und wennst die Kiwara siehst: Du kennst mi ned."
+      ],
+      "hud": "Bring das Paket zum Typen am Stern.",
+      "hudKiwara": "Bring das Paket zum Stern – Vorsicht, die Kiwara patrouillieren!",
+      "abgeben": "Paket vom Schlosser",
+      "uebergabe": [
+        "Passt. Du hast nix gsehn.",
+        "Und i hab di nie gsehn."
+      ],
+      "verloren": "Paket weg!"
+    },
+    "nase": {
+      "titel": "Michis Clownnase",
+      "angebot": [
+        "Die Welt ist ernst. Deshalb gibt es Nasen.",
+        "Setz diese Nase auf und bring drei Menschen zum Lachen. Wer nicht lacht, hat verloren. Außer Marco. Marco gewinnt immer."
+      ],
+      "hud": "Bring Leute zum Lachen (red sie an): {n}/{max}",
+      "hudVerloren": "Nase verloren! Hol dir eine neue bei Michi.",
+      "neueNase": "Michi, i hab die Nase verloren…",
+      "aufsetzen": "Clownnase aufsetzen: Lach amoi!",
+      "lachen": [
+        "HAHAHA! Die Nase!",
+        "Hihihi! Hör auf!",
+        "PRUST! Was is DES?!",
+        "Hahaha, du schaust aus wie der Michi!"
+      ],
+      "marco": "Nein.",
+      "erfolg": "Drei Leute gelacht! Michi ist stolz auf dich."
+    },
+    "barista": {
+      "titel": "Die weinende Ex-Barista",
+      "angebot": [
+        "*schnief* Der Daniel hat mich per SMS gekündigt. Mit Daumen-hoch-Emoji.",
+        "Ich will nur einen Kaffee, den ich nicht selber machen muss. Und dass ihm wer die Meinung sagt."
+      ],
+      "hud": "Kaffee für Lena {c} · Daniel zur Rede stellen {t}",
+      "kaffee": "Lena einen Kaffee ausgeben",
+      "kaffeeFehlt": "Du brauchst zuerst einen Americano von Daniel.",
+      "kaffeeDanke": [
+        "Für mich? *schnief* Danke!",
+        "Zum ersten Mal in drei Jahren trink ich einen Kaffee, den ich nicht selber gemacht hab."
+      ],
+      "kaffeeKurz": "Kaffee für Lena",
+      "zurRede": "Warum hast du Lena per SMS gekündigt?!",
+      "danielAusrede": "Das war keine Kündigung. Das war eine… Neuorientierung ihrer Karriere. Per SMS. Mit Emoji. Modern halt.",
+      "hoeflich": "„Daniel, das war nicht fair. Denk drüber nach.“ (höflich)",
+      "hoeflichAntwort": "Hm. Vielleicht. Ich denk drüber nach. Bei einem Americano.",
+      "hoeflichKurz": "höflich",
+      "derb": "„Du bist a Oaschloch, Daniel. A teures noch dazu.“ (derb)",
+      "derbAntwort": "WAS?! Für dich kostet ab jetzt alles 30 Prozent mehr! Raus! Nein, bleib, zahl vorher.",
+      "derbKurz": "derb",
+      "derbPreise": "Daniels Preise für dich: +30 %",
+      "fertig": "Lena lächelt wieder!"
+    },
+    "baden": {
+      "titel": "Mascha baden",
+      "angebot": [
+        "Mascha stinkt. Also, sie riecht… nach Abenteuer.",
+        "Gehst du mit mir und Mascha zur Quelle? Sie badet so gern!"
+      ],
+      "hud": "Führ Mascha zur Quelle und bade sie (Aktion bei der Quelle).",
+      "hudHolen": "Hol Hubi und Mascha (red mit Hubi).",
+      "nochmal": "Komm, gemma Mascha baden!",
+      "label": "Mascha baden",
+      "suess": [
+        "Ooooh, wie süß!",
+        "Schau, der Hund badet!",
+        "Ich sterb, is DES süß!"
+      ],
+      "erfolg": "Mascha ist sauber. Alle finden's süß!"
+    },
+    "demo": {
+      "titel": "Demo gegen die Kaffeepreis",
+      "angebot": [
+        "Ma, i kleb mi an den Boden! … Aber zuerst: DEMO!",
+        "Wir brauchen a Transparent. Karton gibt's beim Deewan, an Stift beim Michi. Dann stell di damit vors Café. Der Daniel wird toben!"
+      ],
+      "hudBasteln": "Transparent basteln: Karton (Deewan) {k} · Stift (Michi) {s}",
+      "hudStehen": "Stell dich mit dem Transparent vors Café! {n}/{max} Min.",
+      "karton": "Hast an alten Karton für mi?",
+      "kartonText": "Nimm. Aber ned gegen mi demonstrieren!",
+      "stift": "Borgst ma an Stift?",
+      "stiftText": "Ein Stift schreibt. Ein Clown schweigt. Nimm ihn.",
+      "gebastelt": "Transparent gebastelt: „KAFFEE IS KA LUXUS!“",
+      "ruf": [
+        "KAFFEE IS KA LUXUS!",
+        "SECHS EURO? NA DANKE!",
+        "WIR SAN DA GRÄTZL!",
+        "AMERICANO FÜR ALLE!"
+      ],
+      "danielTobt": "WAS SOLL DES?! Des is MEIN Gehsteig!",
+      "sms": "Wer vor meinem Café demonstriert, zahlt ab morgen doppelt. LG Daniel",
+      "erfolg": "Demo gelungen! Daniel tobt, das Grätzl jubelt."
+    },
+    "steckdose": {
+      "titel": "Markus' Steckdose",
+      "angebot": [
+        "Mein Laptop is leer. Null Prozent. Ich fühl mich nackt.",
+        "Kannst du mir a Steckdose finden? Irgendwo muss es doch Strom geben am Platz. Das könnt ma automatisieren, aber ohne Strom halt ned."
+      ],
+      "hud": "Such eine Steckdose (angeblich beim Museum).",
+      "hudSelbst": "Laptop leer! Such eine Steckdose (beim Museum?).",
+      "hudZurueck": "Sag Markus, wo die Steckdose ist.",
+      "label": "Steckdose prüfen",
+      "gefunden": "Steckdose gefunden! Sag's dem Markus.",
+      "melden": "Markus! Steckdose beim Museum!",
+      "danke": [
+        "Strom! STROM! Du bist mein Held.",
+        "Das könnt ma automatisieren. Also, dass du mir immer Steckdosen suchst."
+      ],
+      "selbst": [
+        "*steckt an* 1 Prozent. 2 Prozent. Das Leben kehrt zurück.",
+        "Das könnt ma automatisieren."
+      ]
+    },
+    "gruesse": {
+      "titel": "Juliette kennt jeden",
+      "angebot": [
+        "Ah, du gehst eh herum? Parfait!",
+        "Sag bitte ein paar Leuten schöne Grüße von mir. Ich schaff's heute nicht, ich muss noch dreimal Bisou machen und einmal fluchen."
+      ],
+      "hud": "Grüße ausrichten an: {namen}",
+      "label": "Schöne Grüße von Juliette!",
+      "labelSelbst": "Bisou! Ich wollt nur Hallo sagen!",
+      "antwort": [
+        "Ah, die Juliette! Grüß sie zurück!",
+        "Juliette! Die kennt echt jeden.",
+        "Oh, Grüße von der Juliette? Wie lieb!",
+        "Sag ihr, sie soll wieder mal vorbeischauen!"
+      ],
+      "kurz": "Gruß",
+      "erfolg": "Alle gegrüßt! Juliette kennt wirklich jeden."
+    },
+    "foto": {
+      "titel": "Jewis Fotoauftrag",
+      "angebot": [
+        "Ich brauch drei Motive für meine Ausstellung: 'Ilgplatz – Zwischen Pflaume und Tesla'.",
+        "Die Quelle, eine Blutpflaume und den schwarzen Tesla. Hier, nimm meine Kamera. Pass auf den Marco auf."
+      ],
+      "hud": "Fotografiere: Quelle {q} · Blutpflaume {p} · Tesla {t}",
+      "hudKamera": "Kamera verloren! Frag Jewi nach einer neuen.",
+      "neueKamera": "Jewi, i hab die Kamera… verlegt.",
+      "label_quelle": "Foto: Quelle",
+      "label_pflaume": "Foto: Blutpflaume",
+      "label_tesla": "Foto: Tesla",
+      "klick_quelle": "Klick! Die Quelle glitzert.",
+      "klick_pflaume": "Klick! Dunkelrot wie ein Zweigelt.",
+      "klick_tesla": "Klick! Schwarz, glänzend, bewacht.",
+      "marco": "Tesla. MEINS. Weg.",
+      "erfolg": "Alle Motive im Kasten! Jewi ist begeistert."
+    },
+    "erwin": {
+      "titel": "Erwin ablenken",
+      "angebot": [
+        "Der Erwin steht schon wieder vor meinem Café und erklärt allen seine Gitarre. Die Gäste versteinern!",
+        "Lock ihn weg. Weit weg. Geh nah ran, dann folgt er dir. Aber pass auf, dass du nicht selber versteinerst."
+      ],
+      "hud": "Geh zu Erwin vor dem Café, damit er dir folgt.",
+      "hudLocken": "Lock Erwin weg vom Café: {n}/{max} Kacheln. Pass auf den Balken auf!",
+      "folgt": "Wo gehst hin? Wart, i erzähl da no was über Django!",
+      "wartet": [
+        "He! I war no ned fertig!",
+        "Wart! Die Bridge kommt erst!",
+        "Du versäumst das Beste!"
+      ],
+      "ende": "Wo is mei Publikum hin?",
+      "erfolg": "Erwin ist weit weg vom Café. Daniel atmet auf."
+    },
+    "lieferung": {
+      "titel": "Deewan-Lieferung",
+      "angebot": [
+        "Drei Essen, drei Bankerl. Die Leute warten!",
+        "Zwei Bankerl auf der Wiese, eins beim Stern. Du hast eine Minute, dann ist es kalt. Kaltes Dal ist traurig."
+      ],
+      "hud": "Bring die Essen zu den Bänken ({n}/3)",
+      "label": "Essen abliefern",
+      "geliefert": "Geliefert ({n}/3)",
+      "erfolg": "Alles heiß angekommen! Der Koch strahlt.",
+      "kalt": "Zu spät – das Essen ist kalt!"
+    }
+  },
+  "quelle": {
+    "label": "Quelle",
+    "frage": "Die Quelle plätschert einladend. Reinsteigen?",
+    "rein": "Rein da! (−{n} Ansehen)",
+    "nein": "Lieber ned.",
+    "kurz": "In der Quelle gebadet",
+    "grauslich": [
+      "Grauslich!",
+      "Pfui Teufel!",
+      "Des is a Brunnen, ka Badewanne!",
+      "Oida, NA!"
+    ]
+  },
+  "shops": {
+    "americanoGratis": "Americano (gratis – aufs Haus für Juliette)",
+    "gratisDanke": "Für dich, ma chérie. Einmal. Sag's keinem.",
+    "americano": "Americano ({preis})",
+    "americanoKurz": "Americano",
+    "bitteschoen": [
+      "Bitte. Trinkgeld geht extra.",
+      "Bitteschön. Hafermilch hätt 80 Cent gekostet.",
+      "Genieß ihn. Er kostet mehr als er wert ist."
+    ],
+    "kipferl": "Kipferl ({preis})",
+    "kipferlKurz": "Kipferl",
+    "deewanEssen": "Essen holen – zahl, was du willst",
+    "deewanFrage": "Pay as you wish! Was ist es dir wert?",
+    "deewanPreis0": "Ich zahl nix. ({preis})",
+    "deewanPreis1": "Ich zahl {preis}.",
+    "deewanPreis2": "Ich zahl {preis}. Das Dal ist es wert!",
+    "deewanKurz": "Deewan",
+    "deewanDanke": [
+      "Oh! Danke, mein Freund!",
+      "Du bist ein guter Mensch. Nimm noch Papadam!"
+    ],
+    "deewanNormal": "Passt. Guten Appetit!",
+    "grosszuegig": "großzügig",
+    "geizig": "geizig",
+    "andiHinweis": "Tipp: E drücken = jausnen",
+    "marcoEntlassen": "Marco, geh ham. Danke.",
+    "marcoTschuess": "Hm.",
+    "marcoAnheuern": "Marco als Bodyguard anheuern ({preis})",
+    "marcoKurz": "Marco",
+    "marcoJa": "Gut. Ich geh mit. Wer dich anschaut… Ich hab schon mal…",
+    "marcoHinweis": "Marco beschützt dich vor Exen und Nadja. Aber er „erledigt“ ab und zu wen…",
+    "spritzer": "An Spritzer, bitte ({preis})",
+    "spritzerKurz": "Spritzer",
+    "dezentralKurz": "Im Dezentral",
+    "spritzerText": [
+      "Prost. Jetzt gehörst dazu.",
+      "G'sund. Du bist jetzt offiziell Nachtschwärmer."
+    ],
+    "shitAnnehmen": "„An Shit? … Ja, gib her.“",
+    "shitAblehnen": "„Na danke, passt scho.“",
+    "shitDanke": "Passt. Und lass di ned von der Kiwara erwischen.",
+    "shitOk": "Wie du willst.",
+    "sternKurz": "Respekt am Stern",
+    "zuhoeren": "Hinsetzen und zuhören",
+    "zuhoerenKurz": "Zugehört",
+    "rasiererinGeschichte": [
+      "Weißt, warum der Mond über dem Stuwerviertel schief hängt?",
+      "Weil er sich jede Nacht zum Stern runterbeugt und schaut, ob die Kiwara wach san. Und die san immer wach.",
+      "Und i sitz da und rasier ma die Haxn, weil a Dame is a Dame. Auch um Mitternacht. Auch am Brunnen.",
+      "Danke fürs Zuhören, Schatzi. Des macht heut kaum wer."
+    ],
+    "raus": [
+      "Ohne Geld? In MEINER Society? Raus!",
+      "Kein Geld, kein Kaffee, kein Platz. Raus!"
+    ],
+    "rausKurz": "Ohne Geld im Café"
   }
 }

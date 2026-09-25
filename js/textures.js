@@ -411,6 +411,7 @@ function makeItems(scene) {
 function generateAllTextures(scene) {
   makeTiles(scene);
   for (const id in CHAR_STYLES) makeCharacter(scene, 'ch_' + id, CHAR_STYLES[id]);
+  makeCharacter(scene, 'ch_lena_ok', Object.assign({}, CHAR_STYLES.lena, { extra: ['apron'] }));
   makeDog(scene);
   makeObjects(scene);
   makeIcons(scene);

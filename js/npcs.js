@@ -112,6 +112,7 @@ const NPCs = {
     if (typeof Quests !== 'undefined' && Quests.optionsFor) options = options.concat(Quests.optionsFor(scene, a) || []);
     if (typeof Shops !== 'undefined' && Shops.optionsFor) options = options.concat(Shops.optionsFor(scene, a) || []);
     if (typeof Abilities !== 'undefined' && Abilities.optionsFor) options = options.concat(Abilities.optionsFor(scene, a) || []);
+    if (typeof Events !== 'undefined' && Events.optionsFor) options = options.concat(Events.optionsFor(scene, a) || []);
 
     let text;
     let rep = 0;
