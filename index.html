@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#1b1b2f">
+  <title>Bürgermeister vom Stuwerviertel – Ein Tag am Ilgplatz</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game"></div>
+
+  <div id="ui">
+    <!-- HUD -->
+    <div id="hud" class="hidden">
+      <div id="hudLeft" class="panel">
+        <div class="row"><span id="hudClock">08:00</span><span id="hudRank">Zuagraster</span></div>
+        <div class="bar"><div id="hudRepBar"></div><span id="hudRep">0</span></div>
+        <div class="row small"><span id="hudMoney">40,00 €</span><span id="hudStatus"></span></div>
+        <div id="hudHunger" class="bar hunger hidden"><div id="hudHungerBar"></div><span>Hunger</span></div>
+        <div id="hudInv"></div>
+      </div>
+      <div id="hudRight" class="panel">
+        <div id="hudRival">Hubi: 150</div>
+        <div class="hudBtns">
+          <button id="btnMute" class="iconbtn" aria-label="Ton">♪</button>
+          <button id="btnPause" class="iconbtn" aria-label="Pause">II</button>
+        </div>
+      </div>
+      <div id="banner" class="hidden"></div>
+      <div id="toasts"></div>
+      <div id="bottomBox">
+        <div id="prompt" class="hidden"></div>
+        <div id="quests"></div>
+      </div>
+    </div>
+
+    <!-- Dialog -->
+    <div id="dialog" class="hidden">
+      <div id="dlgWho"></div>
+      <div id="dlgText"></div>
+      <div id="dlgOpts"></div>
+      <div id="dlgNext">▼</div>
+    </div>
+
+    <!-- Touch -->
+    <div id="touch">
+      <div id="joyzone"><div id="joybase"><div id="joyknob"></div></div></div>
+      <button id="btnE" class="tbtn">E</button>
+      <button id="btnA" class="tbtn">A</button>
+    </div>
+
+    <!-- Menüs / Minispiele -->
+    <div id="overlay" class="hidden"></div>
+    <div id="fade" class="hidden"></div>
+    <div id="loading">Lade Ilgplatz…</div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/textures.js"></script>
+  <script src="js/map.js"></script>
+  <script src="js/input.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/actors.js"></script>
+  <script src="js/enemies.js"></script>
+  <script src="js/quests.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
