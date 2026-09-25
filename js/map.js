@@ -306,10 +306,11 @@ function placeObjects(scene, grid) {
   for (const id in LOC.shops) {
     const sh = LOC.shops[id];
     const label = T('orte.' + id, null, sh.name);
-    const tx = scene.add.text((sh.door.x + 0.5) * TILE, sh.door.y * TILE - 2, label, {
-      fontFamily: '"Press Start 2P", monospace', fontSize: '6px', color: '#fff8e7',
-      backgroundColor: '#3d2b1fcc', padding: { x: 2, y: 2 }
-    }).setOrigin(0.5, 1).setDepth(5000).setResolution(4);
+    const isCafe = id === 'cafe';
+    const tx = scene.add.text((sh.door.x + (isCafe ? 1 : 0.5)) * TILE, sh.door.y * TILE + (isCafe ? 1 : -2), label, {
+      fontFamily: '"Press Start 2P", monospace', fontSize: isCafe ? '5px' : '6px', color: isCafe ? '#ffd166' : '#fff8e7',
+      backgroundColor: isCafe ? '#1b1b2fdd' : '#3d2b1fcc', padding: { x: 2, y: 2 }
+    }).setOrigin(0.5, isCafe ? 0 : 1).setDepth(isCafe ? (sh.door.y + 1) * TILE + 1 : 5000).setResolution(6);
     objs.signs.push(tx);
   }
   const stern = scene.add.text(3.5 * TILE, 16 * TILE - 2, T('orte.stern', null, 'Stern'), {

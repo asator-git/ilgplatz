@@ -32,7 +32,9 @@
       "Pass auf: Hubis Exen, Nadja, Erwin (versteinert dich mit Gitarren-Monologen), Marco (schiebt dich weg), die Kiwara (ab 19 Uhr) und die Autos im Kreisverkehr. Geh nie ohne Geld ins Café!",
       "Jede Figur hat eine Stärke (Taste E) und eine Schwäche. Versteinerte, grantige oder niedergequasselte Leute rettet nur Mascha – Hubis Hund.",
       "Die Zeit läuft immer: in Gesprächen, Minispielen und sogar im Krankenhaus. Quatschen kostet."
-    ]
+    ],
+    "tratsch": "Tratsch",
+    "tschuess": "Pfiat di."
   },
   "raenge": {
     "zuagraster": "Zuagraster",
@@ -106,5 +108,417 @@
     "glued": "angepickt",
     "hospital": "im Krankenhaus",
     "laughing": "lacht"
+  },
+  "npc": {
+    "hubi": {
+      "name": "Hubi",
+      "normal": [
+        "Servus! I wohn do seit Ewigkeiten. Die Bäume da? Hab i praktisch selber gossen.",
+        "Ma, i kleb mi an den Boden! Bei dem Kaffeepreis bleibt ma eh nix anderes übrig.",
+        "Siehst die Blonde dort drüben? Nein, schau ned hin! Des is a Ex.",
+        "Mascha, sitz! … Na guat, dann ned.",
+        "Und die Tesla-Reifen? Nur amoi kurz… Nur a bissl Luft auslassen…",
+        "Bürgermeister wird ma ned. Bürgermeister is ma. So wie i.",
+        "I hab heit a Date. Eigentlich drei. Wird eng.",
+        "Der Andi sagt, er is Bürgermeister. Der Andi sagt a, dass er Tofu mag."
+      ],
+      "grantig": [
+        "Ohne Americano bin i ka Mensch.",
+        "Heit ned. Mascha und i san beleidigt."
+      ],
+      "gassi": [
+        "Bin grad Gassi. Mascha hat a Meeting mit an Baum."
+      ]
+    },
+    "andi": {
+      "name": "Andi",
+      "normal": [
+        "Grüß di! I bin der Bürgermeister vom Stuwerviertel. Inoffiziell. Aber mit Kette.",
+        "Ma, i kleb mi an den Boden! Ernsthaft, i hab schon an Kleber gsehn beim Schlosser.",
+        "Und die Tesla-Reifen? Nur amoi kurz… da Hubi hält Wache.",
+        "Hast was zum Essen? Nur so gfragt. Ganz unverbindlich.",
+        "Der Hubi glaubt, er is Bürgermeister. Süß.",
+        "Wennst an Wahlkampf machen willst, fang beim Deewan an. Da san die Leit ehrlich.",
+        "Die Carla hat ihr Rad verloren. Schon wieder. Also zum ersten Mal, aber gefühlt schon wieder."
+      ],
+      "grantig": [
+        "I hab HUNGER. Red ned mit mir.",
+        "Ka Essen, ka Schmäh. So einfach is des.",
+        "Wenn ma no amoi wer 'Hafermilch' sagt…",
+        "Grrr. Deewan. Jetzt."
+      ]
+    },
+    "carla": {
+      "name": "Carla",
+      "normal": [
+        "Mein RAD. Mein geliebtes Rad. Bei Didi gekauft. Weg.",
+        "In Graz war mein Rad nie weg. Gut, in Graz hatte ich kein Rad.",
+        "Stimmt's, dass der Schlosser Geld wäscht? Wo hat er denn die Waschmaschine?",
+        "Jemand hat mir erzählt, der Brunnen erfüllt Wünsche. Ich hab 2 Euro reingeworfen. Jetzt hab ich 2 Euro weniger.",
+        "Ich hab mich heut schon dreimal verlaufen. Und ich wohn da.",
+        "Weißt du, wo mein Rad is? Nein, sag nix, ich rat: beim Michi!",
+        "Der Andi sagt, Wien ist wie Graz, nur größer. Ich find, es ist wie Graz, nur teurer."
+      ]
+    },
+    "juliette": {
+      "name": "Juliette",
+      "normal": [
+        "Putain, der Daniel schon wieder. Hat die Preise erhöht, während ich geredet hab.",
+        "Bonjour! Ah, du kennst die Kathi? Natürlich kennst du die Kathi. Jeder kennt die Kathi.",
+        "Ich hab drei Jahre hier Kaffee gemacht. Ich weiß Dinge. Schlimme Dinge. Über Hafermilch.",
+        "Der Markus sagt, eine KI kann meinen Job machen. Ich sag: Dann soll die KI mit dem Daniel reden. Bon courage.",
+        "Oh là là, der Erwin kommt. Schnell, red weiter, sonst merkt er, dass wir Zeit haben!",
+        "In Paris hat ein Kaffee 2 Euro gekostet. Gut, das war 2009. Aber trotzdem: Putain.",
+        "Weißt du, was das Problem mit dem Stuwerviertel ist? Nichts. Das ist das Problem. Man will nie weg."
+      ]
+    },
+    "markus": {
+      "name": "Markus",
+      "normal": [
+        "Das könnt ma automatisieren.",
+        "Weißt, was ma da machen könnten? Automatisieren. Den ganzen Platz.",
+        "Der Kreisverkehr is eigentlich nur a while(true)-Schleife mit Autos.",
+        "I hab a KI trainiert, die Erwins Gitarrensoli vorhersagt. Sie hat sich selber abgeschaltet.",
+        "Daheim in der Steiermark hamma a Kernöl-API. Das könnt ma da a automatisieren.",
+        "Nur kurz was checken… … … Sorry, was hast gsagt?",
+        "Der Daniel erhöht alle zwei Stunden die Preise. Das is ka Café, das is a Cronjob."
+      ]
+    },
+    "jewi": {
+      "name": "Jewi",
+      "normal": [
+        "Halt, nicht bewegen! … Zu spät. Du hast geblinzelt.",
+        "Der Daniel schaut mich an, als hätt ich seinen Tesla fotografiert. Hab ich auch.",
+        "Das Licht hier um fünf am Nachmittag? Göttlich. Die Leute um fünf? Gemischt.",
+        "Ich bin nur zweimal die Woche hier. Das reicht, um alles zu wissen.",
+        "Der Schlosser hat 'Pakete'. Ich hab Fotos. Sag ich nur.",
+        "Die Blutpflaumen sind das Schönste am Platz. Gleich nach meinem Objektiv."
+      ]
+    },
+    "mascha": {
+      "name": "Mascha",
+      "normal": [
+        "Wuff!",
+        "*wedelt*",
+        "*schnüffelt an deinem Schuh*",
+        "Wuff wuff! (Übersetzung: Hast a Leberkäs?)",
+        "*legt sich auf den Rücken und verlangt Bauchkraulen*"
+      ]
+    },
+    "daniel": {
+      "name": "Daniel",
+      "normal": [
+        "Der Americano kostet heute {preis}. Inflation, weißt eh.",
+        "Hafermilch kostet 80 Cent extra. Das ist keine Gier, das ist Nachhaltigkeit.",
+        "Ich hab grad wieder wen per SMS gekündigt. Effizient, oder?",
+        "Später fahr ich mit meiner Frau Tesla. Wennst den Marco siehst: Der passt auf.",
+        "Wir sind kein Café. Wir sind eine Society. Deshalb kostet's mehr."
+      ],
+      "unfreundlich": [
+        "Ah. Du. Der Kaffee kostet für dich {preis}. Weil ich dich so mag.",
+        "Stammkunden zahlen weniger. Du bist keine Stammkundin. Rechne selber.",
+        "Fotografier bitte nicht meine Siebträger. Die sind privat."
+      ],
+      "grantig": [
+        "Raus. Alle. Nein, bleibt's, zahlt's vorher."
+      ]
+    },
+    "lena": {
+      "name": "Lena",
+      "weinend": [
+        "*schnief* Der Daniel hat mich per SMS gekündigt. Per SMS! Mit Daumen-hoch-Emoji!",
+        "*schluchz* Drei Jahre Milchschaum. Und dann: 'Danke für alles 👍'.",
+        "Ich wollt nur einmal einen Kaffee, den ich nicht selber machen muss…"
+      ],
+      "normal": [
+        "Danke, echt. Du bist a Guter.",
+        "Ich mach jetzt a eigenes Café auf. Mit normalen Preisen. Revolutionär, ich weiß.",
+        "Wenn der Daniel wieder wen per SMS kündigt, schick ich ihm a SMS zurück. Mit zwei Daumen."
+      ]
+    },
+    "didi": {
+      "name": "Didi",
+      "normal": [
+        "Servus! Radbande – wir schrauben alles, was zwei Räder hat. Und manchmal Autos, wenn keiner schaut.",
+        "Die Carla? Der hab i a Rad verkauft. A guates. Jetzt hat's wer anderer.",
+        "Kette geölt, Seele geölt. So is des bei mir.",
+        "Ich hab da no fünf Räder, die a Schraubn locker ham. Wie der Erwin.",
+        "Das Stuwerviertel ohne Räder wär wie der Hubi ohne Exen. Unvorstellbar."
+      ]
+    },
+    "schlosser": {
+      "name": "Der Schlosser",
+      "normal": [
+        "Schlösser, Schlüssel, Pakete. Frag ned, was drin is.",
+        "I bin Schlosser. Offiziell. Steht eh auf der Tür.",
+        "Geldwäsche? I? I wasch höchstens meine Händ. In Unschuld.",
+        "Wennst an Job suchst: Pakete tragen. Gut bezahlt. Ka Fragen.",
+        "Die Kiwara? Kenn i ned. Nie gsehn. Wer is des?"
+      ]
+    },
+    "michi": {
+      "name": "Michi",
+      "normal": [
+        "Was hat drei Nasen und lacht nie? … Die Zeit. Denk drüber nach.",
+        "Im Zirkus lernt ma: Wer hoch fliegt, fällt ins Netz. Wer kein Netz hat, fällt ins Stuwerviertel.",
+        "Die Manege ist rund. Der Platz ist rund. Zufall? Ich glaube nicht.",
+        "Ein Clown ohne Nase ist nur ein Mann mit Schminke. Merk dir das.",
+        "Der Elefant vergisst nie. Der Daniel vergisst nie, was du ihm schuldest.",
+        "Wer lacht, verliert. Wer nicht lacht, verliert auch. Das ist Zirkus."
+      ]
+    },
+    "koch": {
+      "name": "Deewan-Koch",
+      "normal": [
+        "Willkommen im Deewan! Zahl, was du willst. Aber wir sehen, was du willst.",
+        "Heute Dal, morgen Dal, übermorgen: Überraschung! Auch Dal.",
+        "Pay as you wish. Nicht pay as you wisch-und-weg.",
+        "Der Andi war heut schon dreimal da. Er sagt, er ist 'im Wahlkampf'.",
+        "Scharf? Bei uns ist alles scharf. Außer die Preise."
+      ],
+      "traurig": [
+        "(Der Koch schaut dich traurig an. So traurig, dass das Dal kalt wird.)"
+      ]
+    },
+    "wirt": {
+      "name": "Dezentral",
+      "normal": [
+        "Zua. Erst ab neune. Und dann a ned für jeden.",
+        "Komm später. Viel später.",
+        "Vor neun is da nur der Putztrupp. Und der is a zua."
+      ],
+      "offen": [
+        "Rein mit dir. Aber benimm di.",
+        "Heut spielt wer. Keiner weiß wer. Wie immer.",
+        "Im Dezentral kennt jeder jeden. Und keiner redet drüber."
+      ]
+    },
+    "stern1": {
+      "name": "Typ vom Stern",
+      "normal": [
+        "Was schaust? Ah, du bist von do. Passt.",
+        "Früher war hier mehr los. Jetzt nur mehr Bobos mit Lastenrad.",
+        "I steh do nur. Stehen is ned verboten.",
+        "Der Stern hat fünf Zacken. I kenn olle."
+      ],
+      "nacht": [
+        "Psst. Brauchst was? Nur so gfragt.",
+        "Heit Nacht is a guate Nacht. Für Geschäfte."
+      ]
+    },
+    "stern2": {
+      "name": "Anderer Typ",
+      "normal": [
+        "Der Schlosser schickt dich? Dann gib her.",
+        "Ka Paket, ka Gespräch.",
+        "Was? Na. Nix. Geh weiter."
+      ]
+    },
+    "opa": {
+      "name": "Opa Franz",
+      "normal": [
+        "Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee.",
+        "I wohn do seit 1961. Da war da Hubi no ned amoi a Gedanke.",
+        "Der Kreisverkehr war früher a Kreuzung. Des war lustiger.",
+        "Weißt, was a Viertel kost hat? Vier Schilling! Und heit? Frag ned.",
+        "Die Zuhälter kommen jedes Jahr wieder. Wie die Schwalben. Nur mit Ketten."
+      ]
+    },
+    "bobo": {
+      "name": "Bobo Florian",
+      "normal": [
+        "Ist der Kaffee hier Fair Trade? Nein? Egal, ich nehm zwei.",
+        "Ich hab mir hier eine Altbauwohnung gekauft. Das Viertel ist so… authentisch.",
+        "Mein Lastenrad heißt Gustav. Er ist vegan.",
+        "Kennst du ein gutes Yoga hier? Nein? Das ist ja so roh hier. Ich liebe es.",
+        "Sechs Euro für einen Americano? Das ist doch fair. Für mich."
+      ]
+    },
+    "sandra": {
+      "name": "Sandra",
+      "normal": [
+        "Der Hubi? Der hat mir drei Wochen lang 'Guten Morgen' geschrieben. Um zwei am Nachmittag.",
+        "Sag dem Hubi, i hab sein Leiberl no. I hab's verbrannt.",
+        "Wennst den Hubi siehst, sag ihm: Die Sandra is drüber hinweg. KOMPLETT."
+      ],
+      "fang": [
+        "HUBI! Setz di. Wir müssen über uns reden.",
+        "Weißt, was du mir angetan hast? Na? NA? Des dauert jetzt.",
+        "Und dann hast gsagt, du rufst an! Und dann? NIX!"
+      ]
+    },
+    "bianca": {
+      "name": "Bianca",
+      "normal": [
+        "Hubi hat gsagt, er meldet sich. Des war 2019.",
+        "Der Hund war der einzige Grund, warum i blieben bin.",
+        "I schau ned, ob der Hubi da is. I schau nur so herum. Ganz zufällig."
+      ],
+      "fang": [
+        "Hubi! So a Zufall! I hab NUR auf di gwartet.",
+        "Weißt noch, unser erstes Date? I schon. Jede Minute. Jetzt erzähl i's dir.",
+        "Du schuldest ma no a Pizza. Und a Erklärung. Die Erklärung zuerst."
+      ]
+    },
+    "kathi": {
+      "name": "Kathi",
+      "normal": [
+        "I kenn den Hubi. Jeder kennt den Hubi. Des is ja des Problem.",
+        "Wenn du den Hubi siehst: I bin NICHT hier.",
+        "Die Juliette kennt mi. Die Juliette kennt alle. Unheimlich."
+      ],
+      "fang": [
+        "HUUUBIII! Wir sind doch Freunde geblieben, oder? ODER?",
+        "I hab a Therapeutin. Die will di kennenlernen. I erzähl dir jetzt alles, was sie gsagt hat.",
+        "Bleib stehen! I hab a Liste mit Punkten!"
+      ]
+    },
+    "melli": {
+      "name": "Melli",
+      "normal": [
+        "Hubi und i, des war was Besonderes. Hat er gsagt. Zu uns allen.",
+        "I hab a Liste. Hubi steht drauf. Ganz oben. Mit Rufzeichen.",
+        "Wennst mit dem Hubi befreundet bist, tuast ma leid."
+      ],
+      "fang": [
+        "Hubi, du Schlingel! Jetzt erwisch i di!",
+        "Wir ham doch was Besonderes! Du, i und die anderen vier!",
+        "I hab uns a Horoskop gmacht. Setz di, des is lang."
+      ]
+    },
+    "nadja": {
+      "name": "Nadja",
+      "normal": [
+        "HUBI. Wir müssen reden. … Ah, du bist gar ned der Hubi.",
+        "Ich hab Zeit. Ich hab so viel Zeit.",
+        "Nadja vergisst nicht. Nadja vergibt nicht. Nadja wartet."
+      ],
+      "fang": [
+        "HUBI. Wir müssen reden.",
+        "Setz dich. Nein, steh. Nein, setz dich. HUBI.",
+        "Zwei Jahre, Hubi. ZWEI JAHRE. Und jetzt reden wir über jedes einzelne Monat."
+      ]
+    },
+    "erwin": {
+      "name": "Erwin",
+      "normal": [
+        "Kennst du Gipsy-Jazz?",
+        "Kennst du Gipsy-Jazz? Django Reinhardt. Zwei Finger. ZWEI!",
+        "Meine Gitarre ist eine Selmer-Kopie, handgemacht, von einem Mann in Ottakring, der mir gesagt hat, dass eine Gitarre wie eine Frau ist, und ich hab gesagt: Dann hätt ich lieber zwei Gitarren.",
+        "…und dann hab ich gesagt, das ist keine Pompe, das ist LA Pompe, verstehst du, der Rhythmus, bam-ba-bam-ba, und die rechte Hand, die rechte Hand muss locker sein wie ein nasser Waschlappen, aber ein motivierter Waschlappen, verstehst?",
+        "…wie gesagt, Django, 1928, der Wohnwagen brennt, die Hand verbrannt, und trotzdem, TROTZDEM, und das sag ich auch immer meinen Schülern, also ich hab keine Schüler, aber wenn ich welche hätte, würde ich sagen: Saiten wechseln alle drei Wochen, außer man ist ein Künstler, dann nie, weil der Klang, der Klang von alten Saiten, das ist wie Patina auf einer Kirchenglocke in…",
+        "…und das ist der Grund, warum ich nie die Seiten wechsle, weder die Saiten noch die Seiten, verstehst, Wortspiel, ha, und dann in Samois-sur-Seine, das Festival, da war ich fast, also fast wäre ich dort gewesen, 2004, aber der Zug, der Zug nach Paris, und in Paris dann die Gitarre, die ich nicht gekauft habe, weil der Verkäufer gesagt hat, sie ist zu gut für mich, und ich hab gesagt, NICHTS ist zu gut für mich, außer vielleicht…",
+        "(Erwin redet seit zwanzig Minuten. Du hast vergessen, wie du heißt. Irgendwo stirbt ein Stern. Erwin erklärt gerade den Unterschied zwischen zwei Plektren, die gleich aussehen.)"
+      ],
+      "konzert": [
+        "Und jetzt, meine Damen und Herren: 'Minor Swing'. Die 45-Minuten-Fassung.",
+        "Das nächste Stück hab ich selbst geschrieben. Es heißt 'Erwin'. Es dauert."
+      ]
+    },
+    "marco": {
+      "name": "Marco",
+      "normal": [
+        "Geh weg.",
+        "Tesla. Meins.",
+        "Ich hab schon mal…",
+        "Nein.",
+        "Hm.",
+        "Du. Weg. Jetzt."
+      ],
+      "angeheuert": [
+        "Ich pass auf.",
+        "Wer? Der da? … Ich hab schon mal…",
+        "Du zahlst. Ich geh mit.",
+        "Hm. Gut."
+      ]
+    },
+    "kiwara": {
+      "name": "Kiwara",
+      "normal": [
+        "Guten Abend. Allgemeine Fußgängerkontrolle.",
+        "Weitergehen, bitte. Hier gibt's nix zu sehen.",
+        "Wir sind immer wach. Das steht so im Lied.",
+        "Haben Sie heute schon etwas Verdächtiges gesehen? Außer den Kaffeepreisen?"
+      ]
+    },
+    "zuhaelter": {
+      "name": "Zuhälter",
+      "normal": [
+        "Schleich di!",
+        "Des geht di nix an!",
+        "Des is a Privatgespräch. Mit Ketten."
+      ]
+    },
+    "doppler": {
+      "name": "Doppler-Frau",
+      "normal": [
+        "Hallo Schatzi! Magst an Schluck? Is a Doppler, der reicht für uns alle!",
+        "Hihi, der Platz dreht sich. Oder bin des i?",
+        "I bin so glücklich heut! *hicks*",
+        "Wo is do a Bankerl? I brauch a Bankerl."
+      ]
+    },
+    "rasiererin": {
+      "name": "Die Rasiererin",
+      "normal": [
+        "Ah, a Besuch. Setz di. I rasier ma grad die Haxn.",
+        "Des Wasser is kalt, aber ehrlich. Wie ich.",
+        "Früher war i Tänzerin. Im Prater. Glaubst ma ned? Is eh wurscht.",
+        "Wennst zuhörst, erzähl i dir, warum der Mond über dem Stuwerviertel immer a bissl schief hängt."
+      ]
+    }
+  },
+  "allgemein": {
+    "smalltalk": "Servus.",
+    "versteinert": [
+      "…",
+      "(Starrt ins Leere. Irgendwo spielt eine Gitarre.)",
+      "(Versteinert. Erwin hat wieder zugeschlagen.)",
+      "(Bewegt sich nicht. Nur ein Auge zuckt im Takt von 'Minor Swing'.)"
+    ],
+    "niedergequasselt": [
+      "Wa… was? Wer bist du? Wo bin ich?",
+      "(Schaut benommen. Carla hat ganze Arbeit geleistet.)",
+      "Graz… Rad… ich… Kopfweh."
+    ],
+    "grantig": [
+      "Lass mi in Ruh.",
+      "Heut ned.",
+      "Grrrr."
+    ],
+    "nass": [
+      "I bin waschelnass! Danke, Erdbeben.",
+      "Brrr. I tropf.",
+      "Schau ned so. Des is Brunnenwasser. Hoff i."
+    ],
+    "lachend": [
+      "HAHAHA! Die Nase! HAHAHA!",
+      "Hihihi, hör auf!",
+      "*prust*"
+    ],
+    "erledigt": [
+      "(Liegt am Boden und schaut in den Himmel.)",
+      "Marco… war des…?",
+      "Au."
+    ],
+    "panik": [
+      "AAAAH!",
+      "Ein Erdbeben! Rettet den Kaffee!",
+      "Lauf!"
+    ],
+    "grantigGespraech": [
+      "Geh, mit dem grantigen Andi daneben red i ned.",
+      "Da Andi schaut so grantig, i geh lieber.",
+      "Ned jetzt. Da Andi schaut, als würd er wen fressen."
+    ]
+  },
+  "carla": {
+    "falscheHinweise": [
+      "Dein Rad? Des hab i vorhin beim Museum gsehn! Glaub i. Vielleicht a ned.",
+      "Beim Deewan steht a türkises Rad! Sicher! Also, ziemlich sicher.",
+      "Die Kiwara ham a Rad mitgnommen. Oder war des a Scheibtruhe?",
+      "Ah, du suchst was? Hinter der Quelle! Da is immer alles."
+    ],
+    "falschGelaufen": "Carla rennt einem falschen Hinweis nach: −{n} Minuten."
   }
 }

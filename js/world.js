@@ -143,7 +143,9 @@ class WorldScene extends Phaser.Scene {
     for (const a of this.npcs) {
       if (!a.present || a === p) continue;
       if (a.noInteract) continue;
-      const d = dist(px, py, a.x, a.y - 6);
+      if (a.id === 'mascha' && (a.follow === p || G.figur === 'hubi')) continue;
+      let d = dist(px, py, a.x, a.y - 6);
+      if (a.follow === p || (a.follow && a.follow.follow === p)) d += 12; // Begleiter nachrangig
       if (d < R && d < bd) { bd = d; best = { actor: a, label: this.actorPrompt(a) }; }
     }
     const extra = (typeof Quests !== 'undefined' && Quests.interactables) ? Quests.interactables(this) : [];
