@@ -449,7 +449,7 @@ const UI = {
   // ---- Minispiel: Radl-Snake (bei Didi) – friss die Fahrräder! ----
   // Startet erst mit dem ersten Richtungsdruck. cb(gewonnen)
   minigameSnake(cb) {
-    const COLS = 16, ROWS = 12, CELL = 20;
+    const COLS = 16, ROWS = 12, CELL = 24;
     const goal = B('minispiele.snakeZiel', 8);
     let stepMs = B('minispiele.snakeStartMs', 240);
     const minStep = B('minispiele.snakeMinMs', 120);
@@ -468,8 +468,29 @@ const UI = {
       }
       return { x: 1, y: 1 };
     };
-    let bike = free();
-    const bikeImg = new Image(); bikeImg.src = this.itemIcon('rad');
+    const COLORS = ['#06d6a0', '#ef476f', '#ffd166', '#4cc9f0', '#f77f00', '#c77dff'];
+    const newBike = () => Object.assign(free(), { color: pick(COLORS) });
+    let bike = newBike();
+    // Ein richtiges Fahrrad: zwei Räder, Rahmen, Sattel, Lenker
+    const drawBike = (g, x, y, col) => {
+      const c = CELL, r = c * 0.2, wy = y + c * 0.7;
+      const w1 = x + c * 0.24, w2 = x + c * 0.76;
+      g.lineWidth = 2; g.strokeStyle = '#111';
+      g.beginPath(); g.arc(w1, wy, r, 0, Math.PI * 2); g.stroke();
+      g.beginPath(); g.arc(w2, wy, r, 0, Math.PI * 2); g.stroke();
+      g.strokeStyle = '#adb5bd'; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(w1 - r, wy); g.lineTo(w1 + r, wy); g.moveTo(w2 - r, wy); g.lineTo(w2 + r, wy); g.stroke();
+      const pedal = { x: x + c * 0.48, y: wy }, seat = { x: x + c * 0.4, y: y + c * 0.36 }, head = { x: x + c * 0.7, y: y + c * 0.34 };
+      g.strokeStyle = col; g.lineWidth = 2.5;
+      g.beginPath();
+      g.moveTo(w1, wy); g.lineTo(pedal.x, pedal.y); g.lineTo(head.x, head.y); g.lineTo(seat.x, seat.y); g.lineTo(w1, wy);
+      g.moveTo(pedal.x, pedal.y); g.lineTo(seat.x, seat.y);
+      g.moveTo(head.x, head.y); g.lineTo(w2, wy);
+      g.stroke();
+      g.fillStyle = '#111'; g.fillRect(seat.x - 3, seat.y - 3, 6, 2);           // Sattel
+      g.strokeStyle = '#111'; g.lineWidth = 2;
+      g.beginPath(); g.moveTo(head.x, head.y); g.lineTo(head.x + 2, head.y - 4); g.lineTo(head.x + 5, head.y - 4); g.stroke(); // Lenker
+    };
     const ctx = () => { const c = $('snC'); return c ? c.getContext('2d') : null; };
     const draw = () => {
       const g = ctx(); if (!g) return;
@@ -478,12 +499,9 @@ const UI = {
       g.fillStyle = '#343850';
       for (let y = 0; y < ROWS; y++) for (let x = (y % 2); x < COLS; x += 2) g.fillRect(x * CELL, y * CELL, CELL, CELL);
       g.strokeStyle = '#ef476f'; g.lineWidth = 4; g.strokeRect(2, 2, COLS * CELL - 4, ROWS * CELL - 4);
-      const pulse = 0.75 + Math.sin(Date.now() / 150) * 0.2;
-      g.fillStyle = '#ffd166'; g.globalAlpha = pulse;
-      g.beginPath(); g.arc(bike.x * CELL + CELL / 2, bike.y * CELL + CELL / 2, CELL / 2, 0, Math.PI * 2); g.fill();
-      g.globalAlpha = 1;
-      if (bikeImg.complete) g.drawImage(bikeImg, bike.x * CELL - 2, bike.y * CELL - 2, CELL + 4, CELL + 4);
-      else { g.fillStyle = '#06d6a0'; g.fillRect(bike.x * CELL + 4, bike.y * CELL + 4, CELL - 8, CELL - 8); }
+      { const k = 1.6, cx = bike.x * CELL + CELL / 2, cy = bike.y * CELL + CELL / 2;
+        g.save(); g.translate(cx, cy); g.scale(k, k); g.translate(-CELL / 2, -CELL / 2);
+        drawBike(g, 0, 0, bike.color); g.restore(); }
       snake.forEach((s, i) => {
         g.fillStyle = i === 0 ? '#ffd166' : (i % 2 ? '#2a9d8f' : '#21867a');
         g.fillRect(s.x * CELL + 1, s.y * CELL + 1, CELL - 2, CELL - 2);
@@ -510,7 +528,7 @@ const UI = {
         $('snB').textContent = '🚲 ' + eaten + '/' + goal;
         stepMs = Math.max(minStep, stepMs - B('minispiele.snakeSchnellerMs', 14));
         if (eaten >= goal) { draw(); finish(true); return; }
-        bike = free();
+        bike = newBike();
       } else snake.pop();
       draw();
       timer = setTimeout(tick, stepMs);
@@ -542,7 +560,6 @@ const UI = {
       press(Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'right' : 'left') : (dy > 0 ? 'down' : 'up'));
       e.preventDefault();
     }, { passive: false });
-    bikeImg.onload = draw;
     draw();
   },
 

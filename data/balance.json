@@ -244,9 +244,9 @@
     "feilschPerfekt": 0.35,
     "feilschGut": 0.2,
     "snakeZiel": 8,
-    "snakeStartMs": 240,
-    "snakeMinMs": 120,
-    "snakeSchnellerMs": 14
+    "snakeStartMs": 150,
+    "snakeMinMs": 80,
+    "snakeSchnellerMs": 9
   },
   "nacht": {
     "daemmerung": "19:00",
