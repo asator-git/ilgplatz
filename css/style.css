@@ -249,3 +249,11 @@ input.name {
   body.touch #bottomBox { bottom: 8px; width: min(46vw, 420px); }
   body.touch #dialog { bottom: 6px; width: min(62vw, 640px); min-height: 80px; }
 }
+
+/* Musik (YouTube-Player, klein oben rechts) */
+#musicBox { position: absolute; right: max(6px, env(safe-area-inset-right)); top: calc(max(6px, env(safe-area-inset-top)) + 44px); z-index: 60; pointer-events: auto; border: 2px solid #000; border-radius: 4px; overflow: hidden; box-shadow: 3px 3px 0 #0008; line-height: 0; opacity: .9; }
+#musicBox iframe { width: 200px; height: 113px; display: block; }
+@media (max-width: 700px) {
+  #musicBox { top: calc(max(6px, env(safe-area-inset-top)) + 116px); }
+  #musicBox iframe { width: 160px; height: 90px; }
+}

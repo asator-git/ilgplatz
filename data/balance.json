@@ -229,5 +229,10 @@
     "nacht": "21:00",
     "daemmerungDunkel": 0.25,
     "dunkel": 0.55
+  },
+  "musik": {
+    "youtubeId": "FIQAlpVSRcc",
+    "titel": "Der Nino aus Wien – Praterlied",
+    "lautstaerke": 45
   }
 }

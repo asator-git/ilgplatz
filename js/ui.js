@@ -27,6 +27,7 @@ const UI = {
     $('btnMute').addEventListener('click', (e) => { e.preventDefault(); Sfx.toggleMute(); this.syncMute(); });
     $('btnMute').addEventListener('touchstart', (e) => { e.preventDefault(); e.stopPropagation(); Sfx.unlock(); Sfx.toggleMute(); this.syncMute(); }, { passive: false });
     this.syncMute();
+    if (typeof Music !== 'undefined') Music.init();
     // Portraits für Menüs vorbereiten
     for (const id of Object.keys(CHAR_STYLES)) this.portraits[id] = textureDataURL(bootScene, 'ch_' + id, 0, 4);
     this.portraits.mascha = textureDataURL(bootScene, 'mascha', 0, 4);
@@ -372,17 +373,19 @@ const UI = {
       <div class="cards">${cards}</div>
       <div class="box"><h3>${escapeHtml(T('ui.steuerungTitel', null, 'Steuerung'))}</h3>${TL('ui.steuerung', ['Pfeiltasten/WASD: gehen', 'Leertaste: Aktion', 'E: Spezial', 'Esc: Pause']).map(escapeHtml).join('<br>')}</div>
       <div class="box"><h3>${escapeHtml(T('ui.highscoreTitel', null, 'Highscores'))}</h3>${this.highscoreHTML()}</div>
-      <div class="box" style="text-align:center"><button class="bigbtn alt" id="tMute">${Sfx.muted ? '♪ Ton: aus' : '♪ Ton: an'}</button></div>
+      <div class="box" style="text-align:center"><button class="bigbtn alt musicToggle" id="tMusic">${escapeHtml(Music.label())}</button> <button class="bigbtn alt" id="tMute">${Sfx.muted ? '♪ Ton: aus' : '♪ Ton: an'}</button></div>
     </div>`;
     let sel = 0;
     const mark = () => document.querySelectorAll('.card').forEach((c, i) => c.classList.toggle('sel', i === sel));
     this.showOverlay(html, 'title', (ev) => {
       if (ev === 'left' || ev === 'up') { sel = (sel + FIGUREN.length - 1) % FIGUREN.length; mark(); }
       if (ev === 'right' || ev === 'down') { sel = (sel + 1) % FIGUREN.length; mark(); }
-      if (ev === 'action' || ev === 'confirm') { Sfx.play('good'); startGame(FIGUREN[sel]); }
+      if (ev === 'action' || ev === 'confirm') { Music.resumeIfWanted(); Sfx.play('good'); startGame(FIGUREN[sel]); }
     });
     mark();
-    document.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => { Sfx.unlock(); Sfx.play('good'); startGame(c.dataset.id); }));
+    document.querySelectorAll('.card').forEach(c => c.addEventListener('click', () => { Sfx.unlock(); Music.resumeIfWanted(); Sfx.play('good'); startGame(c.dataset.id); }));
+    const mu = $('tMusic');
+    if (mu) mu.addEventListener('click', () => { Sfx.unlock(); Music.toggle(); });
     const m = $('tMute');
     if (m) m.addEventListener('click', () => { Sfx.unlock(); Sfx.toggleMute(); this.syncMute(); m.textContent = Sfx.muted ? '♪ Ton: aus' : '♪ Ton: an'; });
   },

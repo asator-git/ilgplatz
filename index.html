@@ -38,6 +38,7 @@
       </div>
       <div id="hudRight">
         <div class="hudBtns">
+          <button id="btnMusic" class="iconbtn off" tabindex="-1" aria-label="Musik">♫</button>
           <button id="btnMute" class="iconbtn" tabindex="-1" aria-label="Ton">♪</button>
           <button id="btnPause" class="iconbtn" tabindex="-1" aria-label="Pause">II</button>
         </div>
@@ -74,12 +75,14 @@
     <!-- Menüs / Minispiele -->
     <div id="overlay" class="hidden"></div>
     <div id="fade" class="hidden"></div>
+    <div id="musicBox" class="hidden"><div id="ytPlayer"></div></div>
     <div id="loading">Lade Ilgplatz…</div>
   </div>
 
   <script src="https://cdn.jsdelivr.net/npm/phaser@3.80.1/dist/phaser.min.js"></script>
   <script src="js/util.js"></script>
   <script src="js/audio.js"></script>
+  <script src="js/music.js"></script>
   <script src="js/textures.js"></script>
   <script src="js/map.js"></script>
   <script src="js/input.js"></script>

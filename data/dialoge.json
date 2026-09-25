@@ -8,7 +8,8 @@
     "steuerung": [
       "PC: Pfeiltasten / WASD = gehen · Leertaste = Aktion / weiter · E = Spezialfähigkeit · Esc = Pause",
       "Handy: Joystick links unten · A = Aktion · E = Spezialfähigkeit · II = Pause",
-      "Ziel: Um 23:00 mehr Ansehen haben als dein Rivale. Die Uhr läuft immer – auch beim Quatschen."
+      "Ziel: Um 23:00 mehr Ansehen haben als dein Rivale. Die Uhr läuft immer – auch beim Quatschen.",
+      "♫ oben rechts (oder am Startbildschirm): Hintergrundmusik – „Praterlied“ von Der Nino aus Wien, über YouTube."
     ],
     "highscoreTitel": "Ehrentafel vom Ilgplatz",
     "keineHighscores": "Noch niemand eingetragen. Der Platz wartet auf dich.",
@@ -1213,5 +1214,12 @@
       "text": "Ein Bildschirm! Du kannst nicht wegschauen.",
       "hinweis": "Gleich geht's weiter."
     }
+  },
+  "musik": {
+    "an": "Musik: an",
+    "aus": "Musik: aus",
+    "keinNetz": "YouTube ist nicht erreichbar – keine Musik.",
+    "gesperrt": "Das Lied darf leider nicht in fremde Seiten eingebettet werden.",
+    "fehler": "Musik konnte nicht geladen werden."
   }
 }

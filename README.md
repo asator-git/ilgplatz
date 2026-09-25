@@ -19,6 +19,7 @@ Sammle **Ansehen** im Grätzl – um 23:00 musst du mehr haben als der Titelvert
 | Aktion / Reden / weiter | Leertaste | roter Knopf **A** |
 | Spezialfähigkeit | **E** | blauer Knopf |
 | Pause | Esc | **II** oben rechts |
+| Musik an/aus | ♫ oben rechts oder am Startbildschirm | ♫ |
 | Dialog-Antwort | Pfeile + Leertaste oder Zahl 1–9 | antippen |
 
 ## So geht's
@@ -55,6 +56,12 @@ Sammle **Ansehen** im Grätzl – um 23:00 musst du mehr haben als der Titelvert
 - **Alle Zahlen (Zeiten, Punkte, Preise):** `data/balance.json`
 - Nach dem Ändern prüfen, ob die Datei noch gültiges JSON ist (z. B. auf jsonlint.com). Fehlende Einträge
   crashen das Spiel nicht – dann steht halt ein Ersatztext da.
+
+## Musik
+
+Hintergrundmusik: „Praterlied“ von Der Nino aus Wien, abgespielt über den offiziellen YouTube-Player
+(kleines Fenster oben rechts, braucht Internet). Anderes Lied: in `data/balance.json` unter `musik` die
+`youtubeId` (der Teil nach `watch?v=` im YouTube-Link) und den `titel` ändern.
 
 ## Technik
 
