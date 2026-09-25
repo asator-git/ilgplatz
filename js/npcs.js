@@ -82,14 +82,16 @@ const NPCs = {
 
   // Aktuelle Gesprächszeile für eine Figur
   lineFor(a) {
+    if (a.lineOverride) { const t = a.lineOverride(); if (t) return t; }
+    const id = a.dialogId || a.id;
     const sk = STATE_KEY[a.state];
     if (sk) {
-      const own = getPath(DATA.dialoge, 'npc.' + a.id + '.' + sk);
-      if (own) return TN('npc.' + a.id + '.' + sk, a.talkIdx++);
+      const own = getPath(DATA.dialoge, 'npc.' + id + '.' + sk);
+      if (own) return TN('npc.' + id + '.' + sk, a.talkIdx++);
       return TN('allgemein.' + sk, a.talkIdx++, null, '…');
     }
     if (a.data.crying) return TN('npc.lena.weinend', a.talkIdx++);
-    return TN('npc.' + a.id + '.normal', a.talkIdx++, null, T('allgemein.smalltalk'));
+    return TN('npc.' + id + '.normal', a.talkIdx++, null, T('allgemein.smalltalk'));
   },
 
   // Andi grantig in der Nähe? → Gespräche scheitern

@@ -596,5 +596,50 @@
       "I muss weiter. Mascha will hoam.",
       "So, Dienstschluss. Servus!"
     ]
+  },
+  "gegnerText": {
+    "nadjaJagt": "NADJA hat dich gesehen! Flücht ins Café – nur dort bist du sicher!",
+    "nadjaFrage": [
+      "Hast du Hubi gesehen?",
+      "Du. Ja, du. Wo ist Hubi?",
+      "Ich such den Hubi. Wo ist er?"
+    ],
+    "nadjaJa": "„Ja, im Café.“ (Verrat!)",
+    "nadjaNein": "„Nein.“",
+    "nadjaDanke": [
+      "Danke. Er wird sich freuen. Nicht.",
+      "Perfekt. Hubi, ich komme."
+    ],
+    "nadjaNeinAntwort": [
+      "Hm. Ich finde ihn. Ich finde ihn immer.",
+      "Lügst du mich an? … Egal. Ich hab Zeit."
+    ],
+    "verratKurz": "Verrat bei Nadja",
+    "hubiVerliert": "Hubi verliert {n} Ansehen!",
+    "marcoErledigt": [
+      "Ups.",
+      "Ich hab schon mal…",
+      "Der hat komisch gschaut."
+    ],
+    "marcoErledigtKurz": "Marco hat {name} erledigt",
+    "krankenhaus": "BUMM. Ein Auto im Kreisverkehr.\nDu wachst im Krankenhaus auf. Die Schwester sagt: „Scho wieder vom Ilgplatz?“\n({n} Spielminuten)",
+    "entlassen": "Entlassen. Schau beim nächsten Mal auf die Autos – am Zebrastreifen bleiben die stehen!",
+    "festgequatscht": "{name} quatscht dich fest",
+    "festgehalten": "{name} hat dich erwischt. „Wir müssen reden.“\n({n} Minuten Beziehungsgespräch…)",
+    "frei": "Endlich frei! Weg da, bevor die nächste kommt.",
+    "kiwaraKurz": "Kiwara-Kontrolle",
+    "kiwara_paket": "Kontrolle! Was is'n in dem Packerl? … Aha. AHA. Das nehmen wir mit. Und Sie sind uns bekannt.",
+    "kiwara_shit": "Kontrolle! Was riecht da so? … Na servas. Das beschlagnahmen wir. Schönen Abend noch.",
+    "versteinert": "VERSTEINERT! Erwin hat dir seine Gitarre erklärt. (20 Min.)",
+    "kotz": [
+      "Hoppla… *blubb*",
+      "Ui. Des war da Doppler.",
+      "*hicks* Oje."
+    ],
+    "ausgerutscht": [
+      "Uaaah! Grauslich!",
+      "In da Doppler-Lacke ausgrutscht. Pfui!",
+      "Mei Hosn!"
+    ]
   }
 }
