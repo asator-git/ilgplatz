@@ -147,60 +147,92 @@ const Enemies = {
     return false;
   },
 
+  // Nadja läuft NICHT hinterher: sie taucht auf, schlendert herum, und Hubi muss sich verstecken
   nadjaUpdate(n, dt) {
     const scene = this.scene, p = scene.player;
     n.extraIcon = null;
+    n.speed = B('gegner.exTempo', 34);
     if (this.marcoGuards(scene, n)) { n.path = null; const m = scene.actors.marco; return this.fleeFrom(n, m.x, m.y, dt); }
-    if (isCafeFloor(n.x, n.y) && !n.path && !n.data.huntHubi) { n.goToTile(LOC.cafeFront.x, LOC.cafeFront.y + 2); }
-    // Verrat: Nadja holt sich den NPC-Hubi
-    if (n.data.huntHubi) {
-      const h = scene.actors.hubi;
-      if (!h.present || h === p) { n.data.huntHubi = false; return false; }
-      const d = dist(n.x, n.y, h.x, h.y);
-      if (d < 12) {
-        n.data.huntHubi = false;
-        h.setState('held', B('gegner.nadjaFesthaltenMin', 20));
-        n.setState('held', B('gegner.nadjaFesthaltenMin', 20));
-        scene.say(n, T('npc.nadja.fang', null, 'HUBI. Wir müssen reden.'), 4000);
-        if (G.companion) Abilities.endCompanion(scene);
-        return true;
-      }
-      if (!n.path || G.realMs - (n.data.lastPath || 0) > 800) { n.data.lastPath = G.realMs; n.goToPx(h.x, h.y); }
-      n.moving = n.stepPath(dt) || n.stepToward(h.x, h.y, dt);
+    // Sie geht (Besuch vorbei)
+    if (n.data.leaving) {
+      const e = n.data.leaving;
+      if (n.atTile(e.x, e.y, 1)) { n.setPresent(false); n.data.leaving = null; n.path = null; return true; }
+      if (!n.path) n.goToTile(e.x, e.y);
+      n.moving = n.stepPath(dt) || n.stepToward(e.x * TILE + 8, e.y * TILE + 8, dt);
+      return true;
+    }
+    // Verrat: sie wartet vor dem Café auf Hubi
+    if (n.data.waitCafeUntil && G.minute < n.data.waitCafeUntil) {
+      const f = { x: LOC.cafeFront.x - 1, y: LOC.cafeFront.y + 1 };
+      if (!n.atTile(f.x, f.y, 1)) { if (!n.path) n.goToTile(f.x, f.y); n.moving = n.stepPath(dt); }
       n.extraIcon = 'ic_angry';
       return true;
     }
-    const d = dist(n.x, n.y, p.x, p.y);
-    if (G.figur === 'hubi') {
-      if (!this.catchable(scene)) { n.data.chasing = false; return false; }
-      const see = d < B('gegner.nadjaSichtRadius', 120) && lineOfSight(scene.grid, n.x, n.y - 4, p.x, p.y - 4);
-      if (see && !n.data.chasing) {
-        n.data.chasing = true;
-        scene.say(n, T('npc.nadja.fang', null, 'HUBI. Wir müssen reden.'), 2500);
-        UI.banner(T('gegnerText.nadjaJagt', null, 'NADJA hat dich gesehen! Flücht ins Café!'), 3000);
-        Sfx.play('siren');
-      }
-      if (n.data.chasing && d > B('gegner.nadjaSichtRadius', 120) * 1.7) { n.data.chasing = false; n.path = null; }
-      if (n.data.chasing) {
-        n.speed = B('gegner.nadjaTempo', 64);
-        if (d < 40) { n.path = null; n.moving = n.stepToward(p.x, p.y, dt); }
-        else {
-          if (!n.path || G.realMs - (n.data.lastPath || 0) > 500) { n.data.lastPath = G.realMs; n.goToPx(p.x, p.y - 2); }
-          n.moving = n.stepPath(dt);
-        }
-        n.extraIcon = 'ic_angry';
-        return true;
-      }
-      n.speed = B('gegner.exTempo', 40);
-      return false;
-    }
+    if (isCafeFloor(n.x, n.y) && !n.path) { n.goToTile(LOC.cafeFront.x - 1, LOC.cafeFront.y + 2); }
+    if (G.figur === 'hubi') return false;
     // Andere Figuren: „Hast du Hubi gesehen?“
+    const d = dist(n.x, n.y, p.x, p.y);
     if (G.minute >= n.data.nextAsk && d < 80 && this.catchable(scene)) {
       if (d < 16) { this.nadjaAsk(scene, n); return true; }
       n.path = null; n.moving = n.stepToward(p.x, p.y, dt);
       return true;
     }
     return false;
+  },
+
+  // Nadja kommt und geht in Wellen (ab 14 Uhr)
+  updateNadjaVisits(scene) {
+    const n = scene.actors.nadja;
+    const m = G.minute;
+    if (m < parseClock(B('gegner.nadjaAb', '14:00'), 840) || G.ended) return;
+    if (!G.flags.nadjaNext) G.flags.nadjaNext = m;
+    if (m < G.flags.nadjaNext) return;
+    if (!n.present) {
+      const ends = [LOC.streetEnds.hiller, LOC.streetEnds.feuerbach, LOC.streetEnds.schrotzberg];
+      const e = pick(ends);
+      n.setPresent(true); n.clearState(); n.setTile(e.x, e.y); n.data.leaving = null; n.idleUntil = 0;
+      G.flags.nadjaNext = m + rnd(B('gegner.nadjaBleibtMinMin', 30), B('gegner.nadjaBleibtMinMax', 50));
+      if (G.figur === 'hubi') { UI.banner(T('gegnerText.nadjaDa', null, 'NADJA ist am Platz! Versteck dich im Café, sonst kriegst du Liebeskummer!'), 4500); Sfx.play('siren'); }
+      else UI.toast(T('gegnerText.nadjaDaAndere', null, 'Nadja ist am Platz. Hubi versteckt sich im Café.'), '');
+    } else if (!n.data.leaving) {
+      n.data.leaving = pick([LOC.streetEnds.hiller, LOC.streetEnds.feuerbach, LOC.streetEnds.schrotzberg]);
+      n.path = null;
+      G.flags.nadjaNext = m + rnd(B('gegner.nadjaWegMinMin', 50), B('gegner.nadjaWegMinMax', 90));
+      if (G.figur === 'hubi') UI.toast(T('gegnerText.nadjaWeg', null, 'Nadja geht. Durchatmen, Hubi.'), 'good');
+    }
+  },
+
+  // Liebeskummer (Hubi in Nadjas Nähe) und NPC-Hubi versteckt sich
+  updateLiebeskummer(scene, dt) {
+    const n = scene.actors.nadja, p = scene.player, h = scene.actors.hubi;
+    const here = n.present && !n.data.leaving;
+    if (G.figur === 'hubi') {
+      const R = B('gegner.nadjaKummerRadius', 72);
+      const near = here && !G.ended && dist(n.x, n.y, p.x, p.y) < R && !isCafeFloor(p.x, p.y) && lineOfSight(scene.grid, n.x, n.y - 4, p.x, p.y - 4);
+      if (near && ['normal', 'wet', 'laughing'].includes(p.state)) {
+        p.setState('liebeskummer');
+        scene.addRep(-B('gegner.nadjaKummerSofort', 5), T('gegnerText.liebeskummerKurz', null, 'Liebeskummer'));
+        scene.say(p, TN('npc.hubi.liebeskummer', p.talkIdx++), 2500);
+        this.kummerAcc = 0;
+      }
+      if (p.state === 'liebeskummer') {
+        if (near) {
+          p.data.kummerEnd = G.realMs + B('gegner.nadjaKummerNachSek', 4) * 1000;
+          this.kummerAcc = (this.kummerAcc || 0) + dt / (B('zeit.sekundenProStunde', 240) * 1000 / 60) * G.speed;
+          if (this.kummerAcc >= 1) { this.kummerAcc -= 1; scene.addRep(-B('gegner.nadjaKummerProMin', 2), T('gegnerText.liebeskummerKurz', null, 'Liebeskummer'), { silent: G.rep <= 0 }); }
+          if (Math.random() < dt / 3000) scene.say(p, TN('npc.hubi.liebeskummer', p.talkIdx++), 2000);
+        } else if (G.realMs > (p.data.kummerEnd || 0)) { p.clearState(); UI.toast(T('gegnerText.kummerVorbei', null, 'Puh. Der Liebeskummer lässt nach.'), 'good'); }
+      }
+    } else if (h && h !== p && !h.follow) {
+      // NPC-Hubi flüchtet ins Café, solange Nadja da ist
+      if (here && !h.data.versteckt && h.state === 'normal') {
+        h.data.versteckt = true;
+        const seat = LOC.cafeSeats[1];
+        h.override = { tx: seat.x, ty: seat.y, until: 99999 }; h.path = null;
+        scene.say(h, TN('npc.hubi.verstecken', h.talkIdx++), 2500);
+      }
+      if (!here && h.data.versteckt) { h.data.versteckt = false; h.override = null; h.path = null; h.idleUntil = 0; }
+    }
   },
 
   nadjaAsk(scene, n) {
@@ -212,7 +244,11 @@ const Enemies = {
           scene.addRep(B('gegner.nadjaVerratAnsehen', 20), T('gegnerText.verratKurz', null, 'Verrat bei Nadja'));
           if (G.rivalId === 'hubi') { G.rivalAdj -= B('gegner.nadjaVerratHubi', 30); UI.toast(T('gegnerText.hubiVerliert', { n: B('gegner.nadjaVerratHubi', 30) }, 'Hubi verliert {n} Ansehen!'), 'good'); }
           UI.dialog([{ who: n.name, text: T('gegnerText.nadjaDanke', null, 'Danke. Er wird sich freuen. Nicht.') }]);
-          if (hubiNpc && scene.actors.hubi.present) n.data.huntHubi = true;
+          if (hubiNpc) {
+            n.data.waitCafeUntil = G.minute + B('gegner.nadjaWartenMin', 25);
+            const h = scene.actors.hubi;
+            if (h.present && h !== scene.player) { h.setState('liebeskummer', B('gegner.nadjaKummerNpcMin', 30)); scene.say(h, TN('npc.hubi.liebeskummer', h.talkIdx++), 3000); }
+          }
         } },
         { label: T('gegnerText.nadjaNein', null, '„Nein.“'), fn: () => UI.dialog([{ who: n.name, text: T('gegnerText.nadjaNeinAntwort', null, 'Hm. Ich finde ihn. Ich finde ihn immer.') }]) }
       ]
@@ -371,10 +407,8 @@ const Enemies = {
     if (typeof Specials !== 'undefined') Specials.update(scene, dt);
     const m = G.minute;
     // Anwesenheit nach Uhrzeit
-    const nadja = scene.actors.nadja;
-    if (!nadja.present && m >= parseClock(B('gegner.nadjaAb', '14:00'), 840) && !G.ended) {
-      nadja.setPresent(true); nadja.setTile(LOC.spawns.nadja.x, LOC.spawns.nadja.y);
-    }
+    this.updateNadjaVisits(scene);
+    this.updateLiebeskummer(scene, dt);
     const kAb = parseClock(B('gegner.kiwaraAb', '19:00'), 1140), kV = parseClock(B('gegner.kiwaraVerstaerktAb', '21:00'), 1260);
     for (let i = 1; i <= 4; i++) {
       const k = scene.actors['kiwara' + i];
@@ -388,9 +422,8 @@ const Enemies = {
       for (const a of scene.npcs) {
         if (!a.present || a.isImmobile()) continue;
         const d = dist(a.x, a.y, p.x, p.y);
-        if (a.isEx && G.figur === 'hubi' && d < 10 && G.realMs > (a.data.nextChase || 0) && G.realMs > (a.data.fleeUntil || 0)) {
-          if (a.isNadja) this.holdPlayer(scene, a, B('gegner.nadjaFesthaltenMin', 20), B('gegner.nadjaVerlust', 25));
-          else this.holdPlayer(scene, a, B('gegner.exFesthaltenMin', 15), B('gegner.exVerlust', 10));
+        if (a.isEx && !a.isNadja && G.figur === 'hubi' && d < 10 && G.realMs > (a.data.nextChase || 0) && G.realMs > (a.data.fleeUntil || 0)) {
+          this.holdPlayer(scene, a, B('gegner.exFesthaltenMin', 15), B('gegner.exVerlust', 10));
           break;
         }
         if (a.isEx && !a.isNadja && G.figur !== 'hubi' && d < 14 && G.realMs > (a.data.blockTalk || 0)) {

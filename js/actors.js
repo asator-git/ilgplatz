@@ -11,9 +11,9 @@ const LABEL_STYLE = {
 // Zustände, in denen man sich nicht bewegen kann
 const IMMOBILE = { stone: 1, talked: 1, down: 1, held: 1, frozen: 1, slipped: 1, glued: 1, hospital: 1, sitting: 0 };
 // Zustände, die Mascha heilen kann
-const HEALABLE = { stone: 1, talked: 1, grantig: 1 };
+const HEALABLE = { stone: 1, talked: 1, grantig: 1, liebeskummer: 1 };
 
-const STATE_ICON = { stone: 'ic_stone', talked: 'ic_swirl', grantig: 'ic_angry', wet: 'ic_drop', laughing: 'ic_laugh', down: 'ic_zzz', flee: 'ic_fear', frozen: 'ic_camera', held: 'ic_swirl', panic: 'ic_fear' };
+const STATE_ICON = { liebeskummer: 'ic_broken', stone: 'ic_stone', talked: 'ic_swirl', grantig: 'ic_angry', wet: 'ic_drop', laughing: 'ic_laugh', down: 'ic_zzz', flee: 'ic_fear', frozen: 'ic_camera', held: 'ic_swirl', panic: 'ic_fear' };
 
 class Actor {
   constructor(scene, id, opts) {
@@ -139,6 +139,7 @@ class Actor {
   curSpeed() {
     let s = this.speed;
     if (this.state === 'wet') s *= 0.5;
+    if (this.state === 'liebeskummer') s *= B('gegner.nadjaKummerTempo', 0.55);
     if (this.state === 'panic' || this.state === 'flee') s *= 1.6;
     return s;
   }
@@ -198,6 +199,7 @@ class Actor {
     if (this.state === 'stone') this.sprite.setTint(0x9a9a9a);
     else if (this.state === 'wet') this.sprite.setTint(0x9ad0ff);
     else if (this.state === 'grantig') this.sprite.setTint(0xffa0a0);
+    else if (this.state === 'liebeskummer') this.sprite.setTint(0xc8b6ff);
     else if (this.state === 'frozen') this.sprite.setTint(0xe0e0ff);
     else if (this.flash && G.realMs < this.flash) this.sprite.setTint(0xffffaa);
     else this.sprite.clearTint();

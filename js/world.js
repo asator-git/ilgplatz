@@ -375,7 +375,7 @@ class WorldScene extends Phaser.Scene {
   refreshHUD() {
     const p = this.player;
     let status = '';
-    const stTxt = { stone: 'versteinert', talked: 'benommen', grantig: 'grantig', wet: 'nass', held: 'festgequatscht', frozen: 'eingefroren', slipped: 'ausgerutscht', glued: 'angepickt', hospital: 'Krankenhaus', laughing: 'lacht' };
+    const stTxt = { liebeskummer: 'Liebeskummer!', stone: 'versteinert', talked: 'benommen', grantig: 'grantig', wet: 'nass', held: 'festgequatscht', frozen: 'eingefroren', slipped: 'ausgerutscht', glued: 'angepickt', hospital: 'Krankenhaus', laughing: 'lacht' };
     if (p.state !== 'normal') status = T('zustaende.' + p.state, null, stTxt[p.state] || p.state);
     if (p.stoneBar > 0.02 && p.state !== 'stone') status = T('ui.versteinerung', { n: Math.round(p.stoneBar * 100) }, 'Versteinerung {n}%');
     // Nächster Rang
@@ -417,6 +417,13 @@ class WorldScene extends Phaser.Scene {
     p.moving = false;
     if (!UI.isBlocking() && !p.isImmobile() && !G.ended) {
       const a = Input.axis();
+      if (p.state === 'liebeskummer' && (a.x || a.y)) {
+        // Ganz von der Rolle: Hubi torkelt
+        const w = Math.sin(G.realMs / 180) * B('gegner.nadjaKummerTorkeln', 0.7);
+        const c = Math.cos(w), s2 = Math.sin(w);
+        const ax = a.x * c - a.y * s2, ay = a.x * s2 + a.y * c;
+        a.x = ax; a.y = ay;
+      }
       if (a.x || a.y) {
         const sp = p.curSpeed() * dt / 1000;
         const nx = p.x + a.x * sp, ny = p.y + a.y * sp;

@@ -58,7 +58,7 @@
       "name": "Hubi",
       "info": "Wohnt ewig hier. Der wahre Bürgermeister. Datet ständig wen.",
       "staerke": "Mascha ist immer dabei: E = bellen (Exen flüchten) oder kuscheln (heilt versteinerte, grantige, benommene Leute).",
-      "schwaeche": "Die Exen jagen nur ihn. Ab 14 Uhr ist Nadja hinter ihm her – sicher ist er nur im Café."
+      "schwaeche": "Die Exen jagen nur ihn. Ab 14 Uhr taucht immer wieder Nadja auf – kommt sie ihm zu nah, kriegt er Liebeskummer und verliert Ansehen. Versteck dich im Café!"
     },
     "andi": {
       "name": "Andi",
@@ -124,7 +124,8 @@
     "slipped": "ausgerutscht",
     "glued": "angepickt",
     "hospital": "im Krankenhaus",
-    "laughing": "lacht"
+    "laughing": "lacht",
+    "liebeskummer": "Liebeskummer!"
   },
   "npc": {
     "hubi": {
@@ -157,6 +158,17 @@
         "DANKE! Endlich zeigt wer den Leuten das echte Klo!",
         "Du bist a Held! Mei Büro bleibt trocken!",
         "I könnt di bussln! Mach i aber ned."
+      ],
+      "liebeskummer": [
+        "Nadja… 💔",
+        "Warum is sie SO schön…",
+        "I kann ned… i muss… wo war i?",
+        "Mei Herz… mei Ansehen… mei alles…"
+      ],
+      "verstecken": [
+        "NADJA! I bin im Café!",
+        "Sag ihr ned, dass i da bin!",
+        "Versteckt. Ganz normal. Nix zu sehen."
       ]
     },
     "andi": {
@@ -417,9 +429,9 @@
     "nadja": {
       "name": "Nadja",
       "normal": [
-        "HUBI. Wir müssen reden. … Ah, du bist gar ned der Hubi.",
-        "Ich hab Zeit. Ich hab so viel Zeit.",
-        "Nadja vergisst nicht. Nadja vergibt nicht. Nadja wartet."
+        "Ich bin nur zufällig da. Ganz zufällig.",
+        "Ist der Hubi eh ned da? Gut. Egal. Ist mir egal.",
+        "Nadja vergisst nicht. Nadja schaut nur."
       ],
       "fang": [
         "HUBI. Wir müssen reden.",
@@ -837,7 +849,6 @@
     ]
   },
   "gegnerText": {
-    "nadjaJagt": "NADJA hat dich gesehen! Flücht ins Café – nur dort bist du sicher!",
     "nadjaFrage": [
       "Hast du Hubi gesehen?",
       "Du. Ja, du. Wo ist Hubi?",
@@ -885,7 +896,12 @@
       "DU! Bleib stehen!",
       "Hubi! Wir müssen reden!"
     ],
-    "exWarnung": "{name} hat dich entdeckt! Lauf – oder E: Mascha bellt sie weg."
+    "exWarnung": "{name} hat dich entdeckt! Lauf – oder E: Mascha bellt sie weg.",
+    "nadjaDa": "NADJA ist am Platz! Versteck dich im Café – kommt sie dir zu nah, kriegst du Liebeskummer!",
+    "nadjaDaAndere": "Nadja ist am Platz. Hubi versteckt sich im Café.",
+    "nadjaWeg": "Nadja geht. Durchatmen, Hubi.",
+    "liebeskummerKurz": "Liebeskummer",
+    "kummerVorbei": "Puh. Der Liebeskummer lässt nach."
   },
   "items": {
     "americano": "Americano",
@@ -1394,8 +1410,8 @@
     },
     "nadja": {
       "ankuendigung": "Um {zeit}: Jemand ist im Anmarsch. Jemand Gefährliches.",
-      "start": "Nadja ist am Platz. Sie sucht Hubi. Sie wird dich fragen.",
-      "startHubi": "NADJA ist am Platz. Wenn sie dich sieht, rennt sie. Nur im Café bist du sicher!",
+      "start": "Nadja taucht ab jetzt immer wieder am Platz auf. Hubi versteckt sich dann im Café. Sie wird dich fragen, wo er ist.",
+      "startHubi": "NADJA taucht ab jetzt immer wieder auf! Kommt sie dir zu nah, kriegst du Liebeskummer, torkelst und verlierst Ansehen. Versteck dich im Café, bis sie wieder geht!",
       "name": "Nadja kommt"
     },
     "konzert": {
