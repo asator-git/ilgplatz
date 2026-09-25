@@ -34,7 +34,14 @@
       "Die Zeit läuft immer: in Gesprächen, Minispielen und sogar im Krankenhaus. Quatschen kostet."
     ],
     "tratsch": "Tratsch",
-    "tschuess": "Pfiat di."
+    "tschuess": "Pfiat di.",
+    "nochZeit": "noch {h}:{m} h",
+    "rang": "{rang}",
+    "naechsterRang": "→ {rang} ab {n}",
+    "naechstesEvent": "{zeit}: {name}",
+    "du": "Du: {n}",
+    "fuehrung": "Du führst mit {n}! Bleib dran bis 23:00.",
+    "rueckstand": "Dir fehlen {n} auf {rivale} – mach Aufträge (gelbes !)."
   },
   "raenge": {
     "zuagraster": "Zuagraster",
@@ -640,7 +647,13 @@
       "Uaaah! Grauslich!",
       "In da Doppler-Lacke ausgrutscht. Pfui!",
       "Mei Hosn!"
-    ]
+    ],
+    "exEntdeckt": [
+      "HUUUBIII!",
+      "DU! Bleib stehen!",
+      "Hubi! Wir müssen reden!"
+    ],
+    "exWarnung": "{name} hat dich entdeckt! Lauf – oder E: Mascha bellt sie weg."
   },
   "items": {
     "americano": "Americano",
@@ -1051,8 +1064,8 @@
   },
   "intro": [
     "Es ist 8 Uhr früh am Ilgplatz. Die Blutpflaumen leuchten, die Quelle plätschert, und der Americano kostet schon wieder mehr als gestern.",
-    "Heute wird abgerechnet: Um 23 Uhr zählt das Grätzl. Wer mehr Ansehen hat als {rivale}, ist Bürgermeister vom Stuwerviertel. {rivale} wohnt hier seit Ewigkeiten – sein Ansehen wächst von ganz allein.",
-    "Erster Schritt: Geh ins Café und red mit Daniel. Der gelbe Pfeil zeigt dir den Weg. Leute mit einem gelben ! haben Aufträge für dich."
+    "Heute ist Abrechnung: Oben in der Mitte siehst du das DUELL – dein Ansehen (grün) gegen {rivale} (rot). {rivale} wohnt ewig hier, sein Ansehen wächst von allein. Wer um 23 Uhr vorne liegt, ist Bürgermeister vom Stuwerviertel.",
+    "Ansehen kriegst du für Aufträge: Leute mit gelbem ! haben welche. Dein aktueller Auftrag steht unten (▶), der gelbe Pfeil zeigt den Weg. Links oben: Uhr, Geld und das nächste Tages-Event. Erster Schritt: Geh ins Café und red mit Daniel."
   ],
   "figurTipp": {
     "hubi": "Tipp: E = Mascha bellt (Exen flüchten) oder kuschelt Versteinerte gesund.",
@@ -1067,7 +1080,8 @@
     "americano": {
       "ankuendigung": "Um {zeit}: Hubi braucht seinen Americano! Halt dich bereit.",
       "start": "COUNTDOWN! Hubi braucht bis 11:05 seinen Americano – er muss mit Mascha Gassi! Kauf einen im Café und bring ihn auf die Wiese.",
-      "startHubi": "COUNTDOWN! Du brauchst bis 11:05 deinen Americano! Mascha wartet auf der Wiese – hol dir den Kaffee und sei pünktlich bei ihr."
+      "startHubi": "COUNTDOWN! Du brauchst bis 11:05 deinen Americano! Mascha wartet auf der Wiese – hol dir den Kaffee und sei pünktlich bei ihr.",
+      "name": "Americano-Countdown"
     },
     "erdbeben": {
       "text": "ERDBEBEN! Hubi ohne Kaffee ist eine Naturgewalt. Die Bänke fliegen, die Quelle spritzt!",
@@ -1077,18 +1091,21 @@
     "andi": {
       "ankuendigung": "Um {zeit}: Andis Magen meldet sich…",
       "start": "Andi hat HUNGER! Bring ihm in 20 Minuten was vom Deewan, sonst wird er grantig.",
-      "startSelbst": "Dein Magen knurrt wie ein Moped! Iss in den nächsten 20 Minuten was, sonst wirst du grantig."
+      "startSelbst": "Dein Magen knurrt wie ein Moped! Iss in den nächsten 20 Minuten was, sonst wirst du grantig.",
+      "name": "Andi hat Hunger"
     },
     "nadja": {
       "ankuendigung": "Um {zeit}: Jemand ist im Anmarsch. Jemand Gefährliches.",
       "start": "Nadja ist am Platz. Sie sucht Hubi. Sie wird dich fragen.",
-      "startHubi": "NADJA ist am Platz. Wenn sie dich sieht, rennt sie. Nur im Café bist du sicher!"
+      "startHubi": "NADJA ist am Platz. Wenn sie dich sieht, rennt sie. Nur im Café bist du sicher!",
+      "name": "Nadja kommt"
     },
     "konzert": {
       "ankuendigung": "Um {zeit}: Erwins Gipsy-Konzert auf der Mittelwiese! Abstand halten!",
       "start": "ERWINS GIPSY-KONZERT! Sein Versteinerungsradius ist dreimal so groß. Wer auf der Wiese steht, versteinert – Mascha kann sie retten (+10 pro Person).",
       "ende": "Das Konzert ist aus. Die Versteinerten warten auf Mascha…",
-      "erwinWeg": "Erwin ist zum Konzert abgerauscht – Auftrag erledigt!"
+      "erwinWeg": "Erwin ist zum Konzert abgerauscht – Auftrag erledigt!",
+      "name": "Erwins Gipsy-Konzert"
     },
     "doppler": {
       "ankuendigung": "Um {zeit}: Besuch mit Doppler kündigt sich an…",
@@ -1100,13 +1117,15 @@
       "daniel": "DIE da? In MEINER Society?! Für euch kostet heute alles mehr!",
       "teurer": "Daniel ist sauer: Preise +50 % für den Rest des Tages.",
       "bankKurz": "Doppler-Frau aufs Bankerl",
-      "bankDanke": "A Bankerl! Du bist a Schatz! *schnarch*"
+      "bankDanke": "A Bankerl! Du bist a Schatz! *schnarch*",
+      "name": "Doppler-Frau"
     },
     "zuhaelter": {
       "ankuendigung": "Um {zeit}: Die Zuhälter kehren zurück. Wie jedes Jahr.",
       "start": "RÜCKKEHR DER ZUHÄLTER! Vor der Schlosserei wird mit Ketten gerauft. Geh außen herum!",
       "ende": "Die Zuhälter sind abgezogen. Bis nächstes Jahr.",
-      "zuschauer": "Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee."
+      "zuschauer": "Früher war das da alles Rotlicht. Jetzt kommen die Bobos und trinken 6-Euro-Kaffee.",
+      "name": "Rückkehr der Zuhälter"
     },
     "nacht": {
       "ankuendigung": "Um {zeit} wird's Nacht im Stuwerviertel.",
@@ -1114,7 +1133,8 @@
       "zitatWer": "Nino aus Wien",
       "zitat": [
         "„Im Stuwerviertel in da Nocht.\nDie Kiwara sand immer woch.\nDes Dezentral hod meistens offen.\nAm Stern woins da an Shit verkaufen.“"
-      ]
+      ],
+      "name": "Die Nacht"
     },
     "finale": {
       "ankuendigung": "Um {zeit}: Das große Finale!",
@@ -1139,11 +1159,13 @@
       "marcoWache": "Ich pass auf.",
       "kiwaraKurz": "Kiwara beim Tesla",
       "kiwara": "Halt! Sachbeschädigung! Das gibt a Anzeige! Und Sie, Herr Marco, Sie kennen wir eh.",
-      "reifenGlueck": "Pssssst… Keiner hat was gesehen. Der Tesla steht schief."
+      "reifenGlueck": "Pssssst… Keiner hat was gesehen. Der Tesla steht schief.",
+      "name": "Finale"
     },
     "abrechnung": {
       "ankuendigung": "Um {zeit} wird abgerechnet! Letzte Chance!",
-      "text": "23:00 – Abrechnung am Ilgplatz.\nDas Grätzl zählt…"
+      "text": "23:00 – Abrechnung am Ilgplatz.\nDas Grätzl zählt…",
+      "name": "Abrechnung"
     }
   },
   "ende": {
@@ -1156,5 +1178,40 @@
     "nameEingeben": "Dein Name für die Ehrentafel:",
     "speichern": "Eintragen",
     "nochmal": "Nochmal – mit anderer Figur"
+  },
+  "warten": {
+    "ausreden": [
+      "Äh… i muss… mei Hund…",
+      "Du, i hab grad an Termin!",
+      "Mascha muss aufs Klo!",
+      "Da hinten brennt's!",
+      "Mei Handy läutet!"
+    ],
+    "held": {
+      "titel": "{name} quatscht dich fest!",
+      "text": "„Wir müssen reden.“",
+      "hinweis": "Hämmer auf Leertaste / A – erfind Ausreden, dann kommst schneller weg!"
+    },
+    "stone": {
+      "titel": "Versteinert!",
+      "text": "Erwin hat dir seine Gitarre erklärt. Du bist zu Stein erstarrt.",
+      "hinweis": "Die Zeit läuft im Zeitraffer weiter. Tipp: Halt Abstand zum gelben Kreis um Erwin!",
+      "hinweisHubi": "Drück E – Mascha schleckt dich wach!"
+    },
+    "hospital": {
+      "titel": "Im Krankenhaus",
+      "text": "BUMM – ein Auto im Kreisverkehr. Die Schwester: „Scho wieder vom Ilgplatz?“",
+      "hinweis": "Tipp: Über die Straße nur am Zebrastreifen – da bleiben die Autos stehen."
+    },
+    "glued": {
+      "titel": "Am Boden angepickt!",
+      "text": "Du klebst im Café am Boden. Das ganze Grätzl feiert dich.",
+      "hinweis": "Jetzt nur noch warten bis zur Abrechnung um 23:00."
+    },
+    "frozen": {
+      "titel": "Nur kurz was checken…",
+      "text": "Ein Bildschirm! Du kannst nicht wegschauen.",
+      "hinweis": "Gleich geht's weiter."
+    }
   }
 }

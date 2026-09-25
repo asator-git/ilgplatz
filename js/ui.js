@@ -66,13 +66,24 @@ const UI = {
   updateHUD(st) {
     const set = (id, v) => { if (this.lastHud[id] !== v) { this.lastHud[id] = v; $(id).textContent = v; } };
     set('hudClock', clockStr(st.minute));
-    set('hudRank', rankFor(st.rep));
-    set('hudRep', T('ui.ansehen', { n: Math.round(st.rep) }, 'Ansehen: {n}'));
     set('hudMoney', euro(st.money));
-    set('hudRival', T('ui.rivale', { name: st.rivalName, n: Math.round(st.rivalRep) }, '{name}: {n}'));
-    $('hudRival').classList.toggle('behind', st.rep > st.rivalRep);
-    const maxRep = Math.max(800, st.rivalRep + 100, st.rep + 50);
-    $('hudRepBar').style.width = clamp(st.rep / maxRep * 100, 0, 100) + '%';
+    // Tagesfortschritt
+    const dayFrac = clamp((st.minute - st.startMinute) / (st.endMinute - st.startMinute), 0, 1);
+    $('hudDayBar').style.width = (dayFrac * 100) + '%';
+    const left = Math.max(0, st.endMinute - st.minute);
+    set('hudDayText', T('ui.nochZeit', { h: Math.floor(left / 60), m: String(Math.floor(left % 60)).padStart(2, '0') }, 'noch {h}:{m} h'));
+    // Rang + nächster Rang
+    set('hudRank', T('ui.rang', { rang: rankFor(st.rep) }, 'Rang: {rang}') + (st.nextRank ? ' · ' + st.nextRank : ''));
+    set('hudNext', st.nextEvent || '');
+    // Duell
+    const me = Math.round(st.rep), ri = Math.round(st.rivalRep);
+    set('duelMe', T('ui.du', { n: me }, 'Du: {n}'));
+    set('duelRival', T('ui.rivale', { name: st.rivalName, n: ri }, '{name}: {n}'));
+    $('duelMeBar').style.width = clamp(me / Math.max(1, me + ri) * 100, 2, 98) + '%';
+    const diff = me - ri;
+    set('duelInfo', diff > 0 ? T('ui.fuehrung', { n: diff, rivale: st.rivalName }, 'Du führst mit {n}! Halt durch bis 23:00.')
+      : T('ui.rueckstand', { n: -diff, rivale: st.rivalName }, 'Dir fehlen {n} Ansehen auf {rivale} – mach Aufträge!'));
+    $('duel').classList.toggle('lead', diff > 0);
     set('hudStatus', st.status || '');
     const hb = $('hudHunger');
     if (st.hunger === null || st.hunger === undefined) hb.classList.add('hidden');
@@ -112,7 +123,7 @@ const UI = {
     el.innerHTML = '';
     list.slice(0, 3).forEach(q => {
       const d = document.createElement('div');
-      d.className = 'quest' + (q.must ? ' must' : '');
+      d.className = 'quest' + (q.must ? ' must' : '') + (q.now ? ' now' : '');
       d.innerHTML = `<span><span class="qt">${escapeHtml(q.title)}:</span> ${escapeHtml(q.text)}</span>` + (q.timer ? `<span class="timer">${escapeHtml(q.timer)}</span>` : '');
       el.appendChild(d);
     });
@@ -133,6 +144,33 @@ const UI = {
   },
 
   setSpecialLabel(t) { const b = $('btnE'); if (b.textContent !== t) b.textContent = t; },
+
+  // Große Einblendung bei Ansehen-Änderungen
+  pop(text, cls) {
+    const el = $('pop');
+    el.className = cls || '';
+    el.textContent = text;
+    void el.offsetWidth;
+    el.classList.remove('hidden');
+    const d = $('duel'); d.classList.remove('flash'); void d.offsetWidth; d.classList.add('flash');
+    clearTimeout(this.popTimer);
+    this.popTimer = setTimeout(() => el.classList.add('hidden'), 1700);
+  },
+
+  // Warte-Anzeige (statt schwarzem Bildschirm)
+  showWait(o) {
+    $('waitTitle').textContent = o.title || '';
+    $('waitText').textContent = o.text || '';
+    $('waitHint').textContent = o.hint || '';
+    $('wait').classList.toggle('dark', !!o.dark);
+    $('wait').classList.remove('hidden');
+    this.waitShown = true;
+  },
+  updateWait(frac, text) {
+    $('waitBar').style.width = clamp(frac * 100, 0, 100) + '%';
+    if (text !== undefined && this.lastWaitText !== text) { this.lastWaitText = text; $('waitText').textContent = text; }
+  },
+  hideWait() { if (this.waitShown) { $('wait').classList.add('hidden'); this.waitShown = false; this.lastWaitText = null; } },
 
   toast(text, cls) {
     const el = document.createElement('div');
@@ -304,6 +342,8 @@ const UI = {
     $('banner').classList.add('hidden');
     $('toasts').innerHTML = '';
     document.querySelectorAll('.sms').forEach(e => e.remove());
+    this.hideWait();
+    $('pop').classList.add('hidden');
     this.lastHud = {};
   },
 

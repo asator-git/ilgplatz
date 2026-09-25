@@ -181,7 +181,7 @@ const Quests = {
       const d = QDEF[id];
       const st = G.q[id];
       const h = d && d.hud ? d.hud(scene, st) : { text: '' };
-      out.push({ title: QT(id, 'titel', null, id), text: fmt(h.text || ''), must: this.isMust(id), timer: h.timer || '' });
+      out.push({ title: QT(id, 'titel', null, id), text: fmt(h.text || ''), must: this.isMust(id), timer: h.timer || '', now: out.length === 0 });
     }
     // Angebote als Hinweis ergänzen
     if (out.length < 3) {

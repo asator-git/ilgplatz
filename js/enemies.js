@@ -13,7 +13,7 @@ const Enemies = {
     this.scene = scene;
     this.cars = [];
     this.puddles = [];
-    this.pimpCd = 0; this.slipCd = 0;
+    this.pimpCd = 0; this.slipCd = 0; this.exWarnCd = 0;
     const px = (t) => ({ x: t.x * TILE + 8, y: t.y * TILE + 13 });
     const add = (id, opts) => {
       const a = new Actor(scene, id, opts);
@@ -121,7 +121,16 @@ const Enemies = {
     if (G.figur !== 'hubi') return false;
     if (G.realMs < (a.data.nextChase || 0) || !this.catchable(scene)) { if (a.data.chasing) { a.data.chasing = false; a.path = null; } return false; }
     const d = dist(a.x, a.y, p.x, p.y);
-    if (d < B('gegner.exJagdRadius', 90) && lineOfSight(scene.grid, a.x, a.y - 4, p.x, p.y - 4)) {
+    if (d < B('gegner.exJagdRadius', 70) && lineOfSight(scene.grid, a.x, a.y - 4, p.x, p.y - 4)) {
+      if (!a.data.chasing) {
+        // Vorwarnung, damit man versteht, was passiert
+        scene.say(a, T('gegnerText.exEntdeckt', null, 'HUUUBIII!'), 1800);
+        if (G.realMs > (this.exWarnCd || 0)) {
+          this.exWarnCd = G.realMs + 15000;
+          UI.toast(T('gegnerText.exWarnung', { name: a.name }, '{name} hat dich entdeckt! Lauf – oder E: Mascha bellt sie weg.'), 'bad');
+          Sfx.play('announce');
+        }
+      }
       a.data.chasing = true;
       if (d < 40) { a.path = null; a.moving = a.stepToward(p.x, p.y, dt); }
       else {
@@ -310,12 +319,11 @@ const Enemies = {
     p.setState('hospital', B('spieler.krankenhausMin', 30));
     p.sprite.setVisible(false); p.label.setVisible(false);
     if (scene.hasItem('paket')) { scene.takeItem('paket'); if (typeof Quests !== 'undefined' && Quests.onItemLost) Quests.onItemLost(scene, 'paket'); }
-    UI.fade(T('gegnerText.krankenhaus', { n: B('spieler.krankenhausMin', 30) }, 'BUMM. Auto. Du wachst im Krankenhaus auf. ({n} Spielminuten)'));
+
     p.onStateEnd = (old) => {
       if (old !== 'hospital') return;
       p.onStateEnd = null;
       p.sprite.setVisible(true); p.label.setVisible(true);
-      UI.unfade();
       scene.teleportPlayer(LOC.spawnMeadow.x, LOC.spawnMeadow.y);
       UI.toast(T('gegnerText.entlassen', null, 'Entlassen. Schau beim nächsten Mal auf die Autos!'), '');
     };
@@ -333,11 +341,11 @@ const Enemies = {
     Sfx.play('bad');
     const lines = TL('npc.' + a.id + '.fang', ['HUBI! Wir müssen reden.']);
     scene.say(a, lines[0], 5000);
-    UI.fade(T('gegnerText.festgehalten', { name: a.name, n: Math.round(minutes) }, '{name} hat dich erwischt. „Wir müssen reden.“ ({n} Minuten…)') + '\n\n' + lines.slice(1).join('\n'));
+    p.data.heldBy = a;
     p.onStateEnd = (old) => {
       if (old !== 'held') return;
       p.onStateEnd = null;
-      UI.unfade();
+      p.data.heldBy = null;
       a.clearState();
       a.data.fleeUntil = G.realMs + 4000;
       UI.toast(T('gegnerText.frei', null, 'Endlich frei!'), 'good');

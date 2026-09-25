@@ -4,11 +4,13 @@
     "sekundenProStunde": 240,
     "start": "08:00",
     "ende": "23:00",
-    "warteTurbo": 5,
+    "warteTurbo": 8,
     "gespraechMin": 1,
     "ankuendigungVorlaufMin": 20
   },
-  "kamera": { "kachelnSichtbar": 12 },
+  "kamera": {
+    "kachelnSichtbar": 12
+  },
   "spieler": {
     "tempo": 72,
     "startGeld": 40,
@@ -17,19 +19,38 @@
     "krankenhausMin": 30,
     "nassMin": 12
   },
-  "rivale": { "start": 150, "proStunde": 10 },
+  "rivale": {
+    "start": 150,
+    "proStunde": 10
+  },
   "raenge": [
-    { "ab": 0, "id": "zuagraster" },
-    { "ab": 200, "id": "stammgast" },
-    { "ab": 450, "id": "graetzlkaiser" },
-    { "ab": 750, "id": "anwaerter" }
+    {
+      "ab": 0,
+      "id": "zuagraster"
+    },
+    {
+      "ab": 200,
+      "id": "stammgast"
+    },
+    {
+      "ab": 450,
+      "id": "graetzlkaiser"
+    },
+    {
+      "ab": 750,
+      "id": "anwaerter"
+    }
   ],
   "preise": {
     "americano": 4.8,
     "steigerungProzent": 20,
     "steigerungAlleStunden": 2,
     "kipferlFaktor": 0.6,
-    "deewan": [0, 5, 15],
+    "deewan": [
+      0,
+      5,
+      15
+    ],
     "marco": 50,
     "kleber": 30,
     "spritzer": 4,
@@ -61,19 +82,49 @@
     "hinweisFalschMin": 6
   },
   "figuren": {
-    "hubi": { "bellenRadius": 80, "bellenFliehenSek": 20, "bellenCooldownSek": 6, "kuschelRadius": 30 },
-    "andi": { "gespraechFaktor": 1.5, "hungerStunden": 3, "grantigVerlustProMin": 5, "kipferlSaettigung": 60, "grantigRadius": 48 },
-    "carla": { "quasselRadius": 26, "quasselSek": 30, "quasselCooldownSek": 8, "verliertAlleMin": 45 },
-    "juliette": { "auftragFaktor": 1.25, "dialogFaktor": 2 },
-    "markus": { "terminalRadius": 20, "einfrierenSek": 5, "terminalCooldownSek": 45, "hackBonusGeld": 10, "hackBonusAnsehen": 10 },
-    "jewi": { "fotoRadius": 70, "fotoEinfrierenSek": 8, "fotoCooldownSek": 5, "beweisfotoAnsehen": 40 }
+    "hubi": {
+      "bellenRadius": 80,
+      "bellenFliehenSek": 20,
+      "bellenCooldownSek": 6,
+      "kuschelRadius": 30
+    },
+    "andi": {
+      "gespraechFaktor": 1.5,
+      "hungerStunden": 3,
+      "grantigVerlustProMin": 5,
+      "kipferlSaettigung": 60,
+      "grantigRadius": 48
+    },
+    "carla": {
+      "quasselRadius": 26,
+      "quasselSek": 30,
+      "quasselCooldownSek": 8,
+      "verliertAlleMin": 45
+    },
+    "juliette": {
+      "auftragFaktor": 1.25,
+      "dialogFaktor": 2
+    },
+    "markus": {
+      "terminalRadius": 20,
+      "einfrierenSek": 5,
+      "terminalCooldownSek": 45,
+      "hackBonusGeld": 10,
+      "hackBonusAnsehen": 10
+    },
+    "jewi": {
+      "fotoRadius": 70,
+      "fotoEinfrierenSek": 8,
+      "fotoCooldownSek": 5,
+      "beweisfotoAnsehen": 40
+    }
   },
   "gegner": {
-    "exTempo": 40,
-    "exJagdRadius": 90,
+    "exTempo": 34,
+    "exJagdRadius": 70,
     "exFesthaltenMin": 15,
     "exVerlust": 10,
-    "exPauseSek": 40,
+    "exPauseSek": 90,
     "exBlockSpruchSek": 6,
     "nadjaAb": "14:00",
     "nadjaTempo": 64,
@@ -102,7 +153,8 @@
     "kiwaraVerlust": 30,
     "autoAnzahl": 2,
     "autoTempo": 30,
-    "zuhaelterWegSchleudern": 3
+    "zuhaelterWegSchleudern": 3,
+    "ausredeMin": 1.5
   },
   "auftraege": {
     "maxOffen": 3,

@@ -103,6 +103,17 @@ class WorldScene extends Phaser.Scene {
     if (G.ended) return;
     if (ev === 'pause') { this.togglePause(); return; }
     if (G.paused) return;
+    // Festgequatscht: Ausreden erfinden verkürzt das Gespräch
+    const p = this.player;
+    if (p.state === 'held' && (ev === 'action' || ev === 'special') && !UI.isBlocking()) {
+      p.stateUntilMin -= B('gegner.ausredeMin', 1.5);
+      Sfx.play('blip');
+      const a = p.data.heldBy;
+      if (a) this.say(a, TN('npc.' + a.id + '.fang', (a.talkIdx++)), 1500);
+      this.say(p, T('warten.ausreden', null, 'Äh… i muss… mei Hund…'), 900);
+      if (p.state === 'held' && G.minute >= p.stateUntilMin) p.updateState();
+      return;
+    }
     if (ev === 'action') this.doAction();
     if (ev === 'special') this.doSpecial();
   }
@@ -210,6 +221,7 @@ class WorldScene extends Phaser.Scene {
       const txt = (v > 0 ? '+' : '') + v + ' ' + T('ui.ansehenKurz', null, 'Ansehen') + (reason ? ' – ' + reason : '');
       UI.toast(txt, v > 0 ? 'good' : 'bad');
       this.floatText(this.player.x, this.player.y - 30, (v > 0 ? '+' : '') + v, v > 0 ? '#06d6a0' : '#ef476f');
+      if (Math.abs(v) >= 5) UI.pop((v > 0 ? '+' : '') + v + ' ' + T('ui.ansehenKurz', null, 'Ansehen') + (v > 0 ? '!' : ''), v > 0 ? 'good' : 'bad');
       if (v > 0 && !opts.quiet) Sfx.play(v >= 25 ? 'good' : 'coin'); else if (v < 0) Sfx.play('bad');
     }
     return real;
@@ -282,6 +294,7 @@ class WorldScene extends Phaser.Scene {
     if (typeof Quests !== 'undefined' && Quests.update) Quests.update(this, dt);
     if (typeof Events !== 'undefined' && Events.update) Events.update(this, dt);
     this.updateBubbles();
+    this.updateWait();
 
     // Brunnen-Animation
     this.fountainT += dt;
@@ -324,13 +337,50 @@ class WorldScene extends Phaser.Scene {
     for (const g of this.glows) g.setAlpha(ga * (0.9 + Math.sin(G.realMs / 300 + g.x) * 0.1));
   }
 
+  // Warte-Anzeige: zeigt klar, was los ist, wie lange es dauert und was man tun kann
+  updateWait() {
+    const p = this.player;
+    const st = p.state;
+    const WAIT = { held: 1, stone: 1, hospital: 1, glued: 1, frozen: 1 };
+    if (!WAIT[st] || G.ended) { if (this.waitState) { this.waitState = null; UI.hideWait(); } return; }
+    if (this.waitState !== st) {
+      this.waitState = st;
+      this.waitStartMin = G.minute; this.waitStartMs = G.realMs;
+      const who = p.data.heldBy ? p.data.heldBy.name : '';
+      let hint = T('warten.' + st + '.hinweis', { name: who }, '');
+      if (st === 'stone') hint = (G.figur === 'hubi' && typeof Abilities !== 'undefined' && Abilities.maschaWithPlayer(this))
+        ? T('warten.stone.hinweisHubi', null, 'Drück E – Mascha schleckt dich wach!') : T('warten.stone.hinweis', null, 'Die Zeit läuft im Zeitraffer weiter.');
+      UI.showWait({ title: T('warten.' + st + '.titel', { name: who }, st), text: T('warten.' + st + '.text', { name: who }, ''), hint, dark: st === 'hospital' });
+    }
+    let frac;
+    if (p.stateUntilMin) frac = (p.stateUntilMin - G.minute) / Math.max(0.01, p.stateUntilMin - this.waitStartMin);
+    else if (p.stateUntilMs) frac = (p.stateUntilMs - G.realMs) / Math.max(1, p.stateUntilMs - this.waitStartMs);
+    else frac = 1;
+    let text;
+    if (st === 'held' && p.data.heldBy && Math.floor(G.realMs / 1800) !== this.waitLineIdx) {
+      this.waitLineIdx = Math.floor(G.realMs / 1800);
+      text = '„' + TN('npc.' + p.data.heldBy.id + '.fang', this.waitLineIdx) + '“';
+    }
+    UI.updateWait(frac, text);
+  }
+
   refreshHUD() {
     const p = this.player;
     let status = '';
     const stTxt = { stone: 'versteinert', talked: 'benommen', grantig: 'grantig', wet: 'nass', held: 'festgequatscht', frozen: 'eingefroren', slipped: 'ausgerutscht', glued: 'angepickt', hospital: 'Krankenhaus', laughing: 'lacht' };
     if (p.state !== 'normal') status = T('zustaende.' + p.state, null, stTxt[p.state] || p.state);
     if (p.stoneBar > 0.02 && p.state !== 'stone') status = T('ui.versteinerung', { n: Math.round(p.stoneBar * 100) }, 'Versteinerung {n}%');
-    UI.updateHUD({ minute: G.minute, rep: G.rep, money: G.money, rivalName: G.rivalName, rivalRep: G.rivalRep, hunger: G.hunger, inv: G.inv, status });
+    // Nächster Rang
+    let nextRank = '';
+    const ranks = B('raenge', []);
+    if (Array.isArray(ranks)) { const n = ranks.find(r => r.ab > G.rep); if (n) nextRank = T('ui.naechsterRang', { rang: T('raenge.' + n.id, null, n.id), n: n.ab }, '{rang} ab {n}'); }
+    // Nächstes Tages-Event
+    let nextEvent = '';
+    if (typeof Events !== 'undefined' && Events.list) {
+      const e = Events.list.find(x => !x.fired && !x.silent && x.t > G.minute);
+      if (e) nextEvent = T('ui.naechstesEvent', { zeit: clockStr(e.t), name: T('events.' + e.id + '.name', null, e.id) }, 'Um {zeit}: {name}');
+    }
+    UI.updateHUD({ minute: G.minute, startMinute: G.startMinute, endMinute: G.endMinute, rep: G.rep, money: G.money, rivalName: G.rivalName, rivalRep: G.rivalRep, hunger: G.hunger, inv: G.inv, status, nextRank, nextEvent });
     if (typeof Quests !== 'undefined' && Quests.hudList) UI.setQuests(Quests.hudList(this));
   }
 
