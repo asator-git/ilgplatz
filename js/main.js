@@ -12,8 +12,9 @@ function viewSize() {
 class BootScene extends Phaser.Scene {
   constructor() { super('Boot'); }
   preload() {
-    this.load.json('dialoge', 'data/dialoge.json');
-    this.load.json('balance', 'data/balance.json');
+    const v = window.ASSET_V ? '?v=' + window.ASSET_V : '';
+    this.load.json('dialoge', 'data/dialoge.json' + v);
+    this.load.json('balance', 'data/balance.json' + v);
     this.load.on('loaderror', (f) => { console.warn('Konnte nicht laden:', f && f.key); });
   }
   create() {

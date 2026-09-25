@@ -43,4 +43,6 @@ tools/smoke.mjs     Headless-Test (Playwright, optional)
 - Headless: `node tools/smoke.mjs` (braucht Playwright in /tmp/pwtest).
 
 ## Deployment
+Vor jedem Commit `python3 tools/stamp.py` ausführen (Versionsnummer an allen Dateien → kein alter Browser-Cache).
+
 GitHub Pages aus `main` (Root). `.nojekyll` vorhanden.
