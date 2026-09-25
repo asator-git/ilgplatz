@@ -1,0 +1,1641 @@
+{
+  "_info": "ALL texts of the game. Placeholders in {curly braces} are replaced automatically: {spieler}, {rivale}, {preis} (current Americano price) and, depending on the spot, others. Lists [ ... ] = one entry is picked at random or in order.",
+  "ui": {
+    "titel": "Mayor of the Stuwerviertel",
+    "untertitel": "A Day at Ilgplatz",
+    "waehleFigur": "Who are you today? Pick someone:",
+    "steuerungTitel": "Controls",
+    "steuerung": [
+      "PC: arrow keys / WASD = walk · Space = action / continue · E = special ability · Esc = pause",
+      "Phone: joystick bottom left · A = action · E = special ability · II = pause",
+      "Goal: have more Reputation than your rival at 23:00. The clock never stops – not even while you're chatting.",
+      "♫ top right (or on the start screen): background music – “Praterlied” by Der Nino aus Wien, via YouTube."
+    ],
+    "highscoreTitel": "Ilgplatz Hall of Fame",
+    "keineHighscores": "Nobody here yet. The square is waiting for you.",
+    "ansehen": "Reputation {n}",
+    "ansehenKurz": "Reputation",
+    "rivale": "{name}: {n}",
+    "weitereAuftraege": "+{n} more tasks",
+    "reden": "Talk: {name}",
+    "leertaste": "Space",
+    "zuWenigGeld": "Not enough money! You need {preis}.",
+    "bekommen": "Pocketed: {item}",
+    "verloren": "Lost: {item}",
+    "versteinerung": "Petrified {n}%",
+    "pause": "Pause",
+    "weiter": "Continue",
+    "neustart": "Restart (back to character select)",
+    "anleitungTitel": "How to Play",
+    "anleitung": [
+      "It's 8 in the morning on Ilgplatz. At 23:00 the votes are counted: whoever has more Reputation in the neighbourhood than the reigning champ becomes Mayor of the Stuwerviertel.",
+      "You earn Reputation for tasks (shown at the bottom, the yellow arrow points the way), for gossiping (+2, once per hour per person) and for the big events of the day. People with a yellow ! have a task for you.",
+      "Watch out for: Hubi's exes, Nadja, Erwin (petrifies you with guitar monologues), Marco (shoves you away), the Kiwara (from 19:00) and the cars on the roundabout. Never walk into the café without money!",
+      "Every character has a strength (E key) and a weakness. Petrified, grumpy or talked-to-death people can only be saved by Mascha – Hubi's dog.",
+      "Time always runs: in conversations, minigames and even in hospital. Chatting costs you."
+    ],
+    "tratsch": "Gossip",
+    "tschuess": "Laters.",
+    "nochZeit": "{h}:{m} h left",
+    "rang": "{rang}",
+    "naechsterRang": "→ {rang} at {n}",
+    "naechstesEvent": "{zeit}: {name}",
+    "du": "You: {n}",
+    "fuehrung": "You're ahead by {n}! Hold on till 23:00.",
+    "rueckstand": "You're {n} behind {rivale} – do tasks (yellow !).",
+    "aktuellerAuftrag": "Current Task",
+    "buero": "Hubi's Office",
+    "wc": "WC",
+    "tonAn": "♪ Sound: on",
+    "tonAus": "♪ Sound: off",
+    "smsVon": "Text from {name}",
+    "hunger": "Hunger"
+  },
+  "raenge": {
+    "zuagraster": "Blow-in",
+    "stammgast": "Regular",
+    "graetzlkaiser": "Neighbourhood Emperor",
+    "anwaerter": "Mayor Candidate"
+  },
+  "figuren": {
+    "hubi": {
+      "name": "Hubi",
+      "info": "Has lived here forever. The real mayor. Always dating someone.",
+      "staerke": "Mascha is always with him: E = bark (exes flee) or cuddle (heals petrified, grumpy and dazed people).",
+      "schwaeche": "The exes only hunt him. From 14:00 Nadja keeps showing up – if she gets too close, he gets heartbroken and loses Reputation. Hide in the café!"
+    },
+    "andi": {
+      "name": "Andi",
+      "info": "Calls himself the Mayor of the Stuwerviertel.",
+      "staerke": "Mayor's charm: +50 % Reputation from conversations.",
+      "schwaeche": "Hunger bar! Empty = grumpy: conversations fail, −5 Reputation per minute until he eats (E = snack)."
+    },
+    "carla": {
+      "name": "Carla",
+      "info": "Andi's girlfriend, fresh from Graz. Scatterbrained, believes everyone.",
+      "staerke": "Talk 'em down (E): anyone next to her is helpless for 30 sec. – even Marco.",
+      "schwaeche": "Drops something from her bag every 45 min. and falls for false tips. Own side quest: her stolen bike."
+    },
+    "juliette": {
+      "name": "Juliette",
+      "info": "French, ex-barista at the café, knows everyone.",
+      "staerke": "Everyone loves her: tasks give +25 % Reputation, Daniel buys her a coffee once a day.",
+      "schwaeche": "Talks too much: conversations take twice as long."
+    },
+    "markus": {
+      "name": "Markus",
+      "info": "Juliette's boyfriend. From Styria. AI nerd.",
+      "staerke": "Hacking (E at a terminal): minigame – success halves Daniel's prices or gives a bonus.",
+      "schwaeche": "Gets stuck on screens: walking past a terminal freezes him for 5 sec."
+    },
+    "jewi": {
+      "name": "Jewi",
+      "info": "Photographer, at the café twice a week.",
+      "staerke": "Photo (E): freezes enemies for 8 sec. Evidence photo of the locksmith with the “parcels” = +40.",
+      "schwaeche": "Daniel doesn't like her: coffee costs her 50 % more."
+    }
+  },
+  "spezial": {
+    "hubi": "Mascha",
+    "andi": "Snack",
+    "carla": "Chatter",
+    "juliette": "Bisou",
+    "markus": "Hack",
+    "jewi": "Photo",
+    "mascha": "Mascha"
+  },
+  "orte": {
+    "cafe": "The Good Coffee Society",
+    "radbande": "Radbande",
+    "schlosserei": "Locksmith",
+    "museum": "Circus & Clown Museum",
+    "deewan": "Deewan",
+    "dezentral": "Dezentral",
+    "stern": "← Praterstern (Stern)",
+    "slady": "Painter Slady",
+    "maradona": "Pizzeria Maradona",
+    "buffalo": "Buffalo Hot Wings",
+    "buero": "Hubi's Office",
+    "wc": "WC"
+  },
+  "zustaende": {
+    "stone": "petrified",
+    "talked": "dazed",
+    "grantig": "grumpy",
+    "wet": "soaked",
+    "held": "cornered",
+    "frozen": "glued to a screen",
+    "slipped": "slipped",
+    "glued": "glued down",
+    "hospital": "in hospital",
+    "laughing": "laughing",
+    "liebeskummer": "Heartbroken!"
+  },
+  "npc": {
+    "hubi": {
+      "name": "Hubi",
+      "normal": [
+        "Servus! I've lived here forever. Those trees? Practically watered 'em myself.",
+        "Man, I'm gluing myself to the ground! At these coffee prices, what else can ya do?",
+        "See the blonde over there? No, don't look! That's an ex.",
+        "Mascha, sit! … Fine, don't then.",
+        "And the Tesla tyres? Just quickly… Just let a bit of air out…",
+        "You don't become mayor. You ARE mayor. Like me.",
+        "Got a date today. Well, three. Gonna be tight.",
+        "Andi says he's mayor. Andi also says he likes tofu.",
+        "Another one wanting to use my office as a loo! It's an OFFICE! Erwin's piano is in there!",
+        "Everyone wants to pee in my office right of the café. The real loo's in the corner! THE CORNER!"
+      ],
+      "grantig": [
+        "Without an Americano I'm not a person.",
+        "Not today. Mascha and I are sulking."
+      ],
+      "gassi": [
+        "Out walkies. Mascha's got a meeting with a tree."
+      ],
+      "buero": [
+        "THIS IS MY OFFICE! Not a loo!",
+        "No! There's a piano in there, not a toilet!",
+        "Again! The loo is in the CORNER!"
+      ],
+      "dankbar": [
+        "THANK YOU! Finally someone shows people the real loo!",
+        "You're a hero! My office stays dry!",
+        "I could kiss ya! But I won't."
+      ],
+      "liebeskummer": [
+        "Nadja… 💔",
+        "Why is she SO beautiful…",
+        "I can't… I must… where was I?",
+        "My heart… my reputation… my everything…"
+      ],
+      "verstecken": [
+        "NADJA! I'm in the café!",
+        "Don't tell her I'm here!",
+        "Hiding. Totally normal. Nothing to see."
+      ]
+    },
+    "andi": {
+      "name": "Andi",
+      "normal": [
+        "Hiya! I'm the Mayor of the Stuwerviertel. Unofficially. But with a chain.",
+        "Man, I'm gluing myself to the ground! Seriously, I've seen glue at the locksmith's.",
+        "And the Tesla tyres? Just quickly… Hubi's keeping watch.",
+        "Got anything to eat? Just asking. No pressure.",
+        "Hubi thinks he's mayor. Cute.",
+        "Wanna campaign? Start at Deewan. People there are honest.",
+        "Carla lost her bike. Again. Well, for the first time, but it feels like again."
+      ],
+      "grantig": [
+        "I'm HUNGRY. Don't talk to me.",
+        "No food, no jokes. Simple as that.",
+        "If one more person says 'oat milk'…",
+        "Grrr. Deewan. Now."
+      ]
+    },
+    "carla": {
+      "name": "Carla",
+      "normal": [
+        "My BIKE. My beloved bike. Bought from Didi. Gone.",
+        "In Graz my bike never went missing. OK, in Graz I didn't have a bike.",
+        "Is it true the locksmith launders money? Where's he keep the washing machine?",
+        "Someone told me the fountain grants wishes. I threw in 2 euros. Now I'm 2 euros poorer.",
+        "I've got lost three times today. And I live here.",
+        "Know where my bike is? No, don't tell me, let me guess: Michi's!",
+        "Andi says Vienna's like Graz, only bigger. I say it's like Graz, only pricier."
+      ]
+    },
+    "juliette": {
+      "name": "Juliette",
+      "normal": [
+        "Putain, Daniel again. He raised the prices while I was talking.",
+        "Bonjour! Ah, you know Kathi? Of course you know Kathi. Everyone knows Kathi.",
+        "I made coffee here for three years. I know things. Terrible things. About oat milk.",
+        "Markus says an AI could do my job. I say: then let the AI talk to Daniel. Bon courage.",
+        "Oh là là, Erwin's coming. Quick, keep talking, or he'll notice we have time!",
+        "In Paris a coffee cost 2 euros. OK, that was 2009. But still: Putain.",
+        "Know what the problem with the Stuwerviertel is? Nothing. That's the problem. You never want to leave."
+      ]
+    },
+    "markus": {
+      "name": "Markus",
+      "normal": [
+        "We could automate that.",
+        "Know what we could do here? Automate. The whole square.",
+        "The roundabout is basically just a while(true) loop with cars.",
+        "I trained an AI to predict Erwin's guitar solos. It switched itself off.",
+        "Back home in Styria we've got a pumpkin-seed-oil API. Could automate that here too.",
+        "Just checking something… … … Sorry, what'd you say?",
+        "Daniel raises prices every two hours. That's not a café, that's a cron job."
+      ]
+    },
+    "jewi": {
+      "name": "Jewi",
+      "normal": [
+        "Wait, don't move! … Too late. You blinked.",
+        "Daniel looks at me like I photographed his Tesla. I did.",
+        "The light here at five p.m.? Divine. The people at five? Mixed.",
+        "I'm only here twice a week. That's enough to know everything.",
+        "The locksmith has 'parcels'. I have photos. Just saying.",
+        "The cherry plums are the prettiest thing on the square. Right after my lens.",
+        "Got therapy later. Need a coffee first. It's part of the therapy.",
+        "My therapist says I should look through the lens less. I took her picture."
+      ],
+      "vorTherapie": [
+        "Quick coffee before therapy.",
+        "Caffeine before feelings. That's my method.",
+        "Therapy without coffee? Unthinkable."
+      ],
+      "gehtTherapie": "Right, therapy. See you later!",
+      "nachTherapie": "Therapy was… intense. Now I need light and subjects."
+    },
+    "mascha": {
+      "name": "Mascha",
+      "normal": [
+        "Woof!",
+        "*wags*",
+        "*sniffs your shoe*",
+        "Woof woof! (Translation: Got any Leberkäse?)",
+        "*rolls onto her back and demands belly rubs*"
+      ]
+    },
+    "daniel": {
+      "name": "Daniel",
+      "normal": [
+        "The Americano costs {preis} today. Inflation, you know.",
+        "Oat milk is 80 cents extra. That's not greed, that's sustainability.",
+        "Just fired someone by text again. Efficient, right?",
+        "Later I'm going for a Tesla drive with my wife. If you see Marco: he's on watch.",
+        "We're not a café. We're a Society. That's why it costs more."
+      ],
+      "unfreundlich": [
+        "Ah. You. Coffee's {preis} for you. Because I like you so much.",
+        "Regulars pay less. You're not a regular. Do the maths.",
+        "Please don't photograph my portafilters. They're private."
+      ],
+      "grantig": [
+        "Out. Everyone. No, stay, but pay first."
+      ]
+    },
+    "lena": {
+      "name": "Lena",
+      "weinend": [
+        "*sniff* Daniel fired me by text. By TEXT! With a thumbs-up emoji!",
+        "*sob* Three years of milk foam. And then: 'Thanks for everything 👍'.",
+        "I just wanted one coffee I don't have to make myself…"
+      ],
+      "normal": [
+        "Thanks, really. You're a good one.",
+        "I'm opening my own café now. With normal prices. Revolutionary, I know.",
+        "If Daniel fires someone by text again, I'll text him back. With two thumbs."
+      ]
+    },
+    "didi": {
+      "name": "Didi",
+      "normal": [
+        "Servus! Radbande – we fix anything with two wheels. And sometimes cars, when no one's looking.",
+        "Carla? Sold her a bike. A good one. Now someone else has it.",
+        "Chain oiled, soul oiled. That's how I roll.",
+        "Got five more bikes here with a screw loose. Like Erwin.",
+        "The Stuwerviertel without bikes would be like Hubi without exes. Unthinkable."
+      ]
+    },
+    "schlosser": {
+      "name": "The Locksmith",
+      "normal": [
+        "Locks, keys, parcels. Don't ask what's inside.",
+        "I'm a locksmith. Officially. Says so on the door.",
+        "Money laundering? Me? Only thing I wash is my hands. Of it.",
+        "Looking for a job? Carrying parcels. Good pay. No questions.",
+        "The Kiwara? Don't know 'em. Never seen 'em. Who's that?"
+      ]
+    },
+    "michi": {
+      "name": "Michi",
+      "normal": [
+        "What has three noses and never laughs? … Time. Think about it.",
+        "Circus teaches you: fly high, fall in the net. No net? You fall into the Stuwerviertel.",
+        "The circus ring is round. The square is round. Coincidence? I think not.",
+        "A clown without a nose is just a man in make-up. Remember that.",
+        "The elephant never forgets. Daniel never forgets what you owe him.",
+        "Laugh and you lose. Don't laugh, you lose too. That's circus."
+      ]
+    },
+    "koch": {
+      "name": "Deewan Cook",
+      "normal": [
+        "Welcome to Deewan! Pay what you want. But we see what you want.",
+        "Today dal, tomorrow dal, day after: surprise! Also dal.",
+        "Pay as you wish. Not pay as you dash.",
+        "Andi's been in three times today. Says he's 'campaigning'.",
+        "Spicy? Everything here is spicy. Except the prices."
+      ],
+      "traurig": [
+        "(The cook looks at you sadly. So sadly the dal goes cold.)"
+      ]
+    },
+    "stern1": {
+      "name": "Guy from the Stern",
+      "normal": [
+        "Whatcha lookin' at? Ah, you're from round here. Fine.",
+        "Used to be more going on here. Now it's just Bobos with cargo bikes.",
+        "I'm just standin' here. Standin' ain't illegal.",
+        "The Stern's got five points. I know 'em all."
+      ],
+      "nacht": [
+        "Psst. Need anything? Just askin'.",
+        "Tonight's a good night. For business."
+      ]
+    },
+    "stern2": {
+      "name": "Other Guy",
+      "normal": [
+        "The locksmith sent you? Hand it over.",
+        "No parcel, no talk.",
+        "What? Nah. Nothin'. Keep walkin'."
+      ]
+    },
+    "bobo": {
+      "name": "Bobo",
+      "normal": [
+        "Is the coffee here Fair Trade? No? Whatever, I'll take two.",
+        "I bought a period flat here. The neighbourhood is so… authentic.",
+        "My cargo bike is called Gustav. He's vegan.",
+        "Know any good yoga round here? No? It's so raw here. I love it.",
+        "Six euros for an Americano? That's fair. For me.",
+        "We started a petition for more raised beds. And fewer… you know."
+      ],
+      "verjagen": [
+        "Excuse me, but this is OUR neighbourhood now.",
+        "We've planned a daycare here. So… if you don't mind?",
+        "I've called the property management three times. This is our Grätzl now!",
+        "A concept store's opening here soon. Byeee!"
+      ],
+      "danach": [
+        "Another bit of quality of life.",
+        "Now an oat flat white.",
+        "The Grätzl's getting so nice and quiet.",
+        "Posting this in the neighbourhood group right now."
+      ]
+    },
+    "sandra": {
+      "name": "Sandra",
+      "normal": [
+        "Hubi? He texted me 'Good morning' for three weeks. At two in the afternoon.",
+        "Tell Hubi I've still got his T-shirt. I burned it.",
+        "If you see Hubi, tell him: Sandra is over it. COMPLETELY."
+      ],
+      "fang": [
+        "HUBI! Sit down. We need to talk about us.",
+        "Know what you did to me? Well? WELL? This'll take a while.",
+        "And then you said you'd call! And then? NOTHING!"
+      ]
+    },
+    "bianca": {
+      "name": "Bianca",
+      "normal": [
+        "Hubi said he'd get in touch. That was 2019.",
+        "The dog was the only reason I stayed.",
+        "I'm not checking if Hubi's here. Just looking around. Totally by chance."
+      ],
+      "fang": [
+        "Hubi! What a coincidence! I was ONLY waiting for you.",
+        "Remember our first date? I do. Every minute. Now I'll tell you all about it.",
+        "You still owe me a pizza. And an explanation. Explanation first."
+      ]
+    },
+    "kathi": {
+      "name": "Kathi",
+      "normal": [
+        "I know Hubi. Everyone knows Hubi. That's the problem.",
+        "If you see Hubi: I am NOT here.",
+        "Juliette knows me. Juliette knows everyone. Creepy."
+      ],
+      "fang": [
+        "HUUUBIII! We stayed friends, right? RIGHT?",
+        "I've got a therapist. She wants to meet you. I'll tell you everything she said. All of it.",
+        "Stop right there! I've got a list with bullet points!"
+      ]
+    },
+    "melli": {
+      "name": "Melli",
+      "normal": [
+        "Hubi and me, that was something special. He said so. To all of us.",
+        "I've got a list. Hubi's on it. Right at the top. With exclamation marks.",
+        "If you're friends with Hubi, I feel sorry for you."
+      ],
+      "fang": [
+        "Hubi, you rascal! Now I've got you!",
+        "We had something special! You, me and the other four!",
+        "I did our horoscope. Sit down, it's a long one."
+      ]
+    },
+    "nadja": {
+      "name": "Nadja",
+      "normal": [
+        "I'm only here by chance. Totally by chance.",
+        "Hubi's not around, is he? Good. Whatever. I don't care.",
+        "Nadja does not forget. Nadja just watches."
+      ],
+      "fang": [
+        "HUBI. We need to talk.",
+        "Sit down. No, stand. No, sit down. HUBI.",
+        "Two years, Hubi. TWO YEARS. And now we're going through every single month."
+      ]
+    },
+    "erwin": {
+      "name": "Erwin",
+      "normal": [
+        "Do you know gypsy jazz?",
+        "Do you know gypsy jazz? Django Reinhardt. Two fingers. TWO!",
+        "My guitar is a Selmer copy, handmade by a man in Ottakring who told me a guitar is like a woman, and I said: then I'd rather have two guitars.",
+        "…and then I said, that's not a pompe, that's LA pompe, you get me, the rhythm, bam-ba-bam-ba, and the right hand, the right hand has to be loose like a wet dishrag, but a motivated dishrag, you get me?",
+        "…like I said, Django, 1928, the caravan's on fire, the hand's burned, and still, STILL, and I always tell my students this, well, I don't have students, but if I did I'd say: change your strings every three weeks, unless you're an artist, then never, because the sound, the sound of old strings, it's like patina on a church bell in…",
+        "…and that's why I never change sides, or strings, or sides of strings, get it, wordplay, ha, and then in Samois-sur-Seine, the festival, I was almost there, well, I almost would've been, 2004, but the train, the train to Paris, and then in Paris the guitar I didn't buy because the seller said it was too good for me, and I said NOTHING is too good for me, except maybe…",
+        "(Erwin has been talking for twenty minutes. You've forgotten your own name. Somewhere a star dies. Erwin is explaining the difference between two picks that look identical.)"
+      ],
+      "konzert": [
+        "And now, ladies and gentlemen: 'Minor Swing'. The 45-minute version.",
+        "I wrote the next piece myself. It's called 'Erwin'. It goes on a while."
+      ],
+      "themen": [
+        "The guitar has to be PERFECTLY in tune. A quarter tone off and the whole La Pompe is a disaster. A DISASTER.",
+        "I tune before every song. And after every song. And sometimes during. People don't get it.",
+        "You know what's the worst? When the G string is two cents flat. Two cents! You can hear that! I can hear that!",
+        "I've got three tuners. One for tuning, one for checking, and one in case the other two are lying.",
+        "The humidity today is no joke. 61 percent. My guitar is suffering. I'm suffering with it.",
+        "Django played with two fingers. I play with five and I'm still not happy. That says it all, really.",
+        "Gypsy jazz is like cooking. Except you don't eat. And it takes longer. Much longer.",
+        "Seen my carbon bike? 7.2 kilos. With bottle. Without bottle 6.9. Know what that means on a climb? EVERYTHING.",
+        "Carbon is stiffer than aluminium, but it dampens. That's not a contradiction, that's physics. Want me to explain? I'll explain.",
+        "I swapped the bottle cage screws for titanium. Saves eleven grams. Eleven! That's almost two picks!",
+        "My bike never leans against a wall. You don't lean carbon. You HANG carbon.",
+        "People ask why I ride a 6000-euro bike to the supermarket. I ask back: why not?",
+        "Didi wanted to touch my bike. I said: gloves only. He laughed. I didn't.",
+        "My car has to go back to Burgenland for repairs. There's a mechanic who gets it. Only him. Ferdl.",
+        "The car makes a noise. Like a 'kchk-kchk'. In Burgenland they say that's the car's character.",
+        "It's 80 kilometres to Burgenland. Can't take the car, it's broken. So I ride the bike there to pick it up. Logical.",
+        "Ferdl in Burgenland only does repairs on Tuesdays. And only if it's not raining. And only if he feels like it. Today he doesn't.",
+        "I made the car a playlist. Only Django. It starts more often since. I think.",
+        "Ulli reads me ChatGPT chats. With feedback. About me. Point by point. Point 14 was 'tune guitar less often'. Outrageous.",
+        "Ulli wants me to drive her. To willhaben pickups. But my car is in Burgenland. SHE DOESN'T GET IT.",
+        "Ulli and I are broken up. Or together. Hang on, let me check my phone. … Together. I think.",
+        "ChatGPT says I should be 'more emotionally present'. I wrote back: Do you know gypsy jazz? It never replied.",
+        "My piano's in Hubi's office. It's safe there. Except from people who think it's a loo.",
+        "The piano needs tuning too. But I don't do that myself. That's a piano, not a guitar. I have respect.",
+        "I used to play at Dezentral. Until Bernd started breathing fire. Musically it was still a good night.",
+        "The Bobos want me to play quieter. I already play quietly. Just long.",
+        "Daniel told me not to stand in front of the café. I'm not standing. I'm lingering. There's a difference."
+      ],
+      "themenKurz": [
+        "Do you know gypsy jazz?",
+        "My carbon bike: 7.2 kilos! With bottle!",
+        "The guitar must be PERFECTLY in tune!",
+        "A quarter tone off is a DISASTER!",
+        "My car has to go back to Burgenland…",
+        "Ferdl in Burgenland only fixes on Tuesdays.",
+        "Ulli read me ChatGPT again…",
+        "Titanium screws! Eleven grams saved!",
+        "My piano's in Hubi's office.",
+        "Two cents flat! I can hear that!",
+        "Django only had two fingers!",
+        "61 percent humidity… my poor guitar.",
+        "You don't lean carbon. You HANG carbon.",
+        "Am I with Ulli? Hang on…",
+        "Bam-ba-bam-ba… La Pompe!",
+        "The car goes 'kchk-kchk'.",
+        "Who's got my tuner? The second one!",
+        "I'm just lingering. Not standing."
+      ],
+      "antwortUlli": [
+        "But ChatGPT doesn't know my guitar!",
+        "I am listening! … What did you say?",
+        "I-statement: I need to tune my guitar.",
+        "The car's in Burgenland, Ulli! In BURGENLAND!"
+      ],
+      "wiederZusammen": [
+        "Ulli! I always knew it.",
+        "Fine. But the guitar stays."
+      ],
+      "getrennt": [
+        "Then go! I've got my guitar anyway!",
+        "At least the guitar understands me. When it's in tune."
+      ]
+    },
+    "marco": {
+      "name": "Marco",
+      "normal": [
+        "Go away.",
+        "Tesla. Mine.",
+        "I once…",
+        "No.",
+        "Hm.",
+        "You. Away. Now."
+      ],
+      "angeheuert": [
+        "I'll watch.",
+        "Who? Him? … I once…",
+        "You pay. I come.",
+        "Hm. Good."
+      ],
+      "bier": [
+        "Beer. Good.",
+        "Wings. Beer. Quiet.",
+        "Don't sit here.",
+        "Buffalo. Mine."
+      ],
+      "wild": [
+        "I ONCE…!",
+        "WHO'S GOT MY BEER?!",
+        "COME AT ME!",
+        "BUFFALO IS MINE!"
+      ],
+      "nass": [
+        "BRRR!",
+        "Cold!",
+        "Hey… that's cold…",
+        "Hm… sleepy…"
+      ]
+    },
+    "kiwara": {
+      "name": "Kiwara",
+      "normal": [
+        "Good evening. General pedestrian check.",
+        "Move along, please. Nothing to see here.",
+        "We are always awake. Says so in the song.",
+        "Seen anything suspicious today? Apart from the coffee prices?"
+      ]
+    },
+    "zuhaelter": {
+      "name": "Pimp",
+      "normal": [
+        "Beat it!",
+        "None of your business!",
+        "This is a private conversation. With chains."
+      ]
+    },
+    "doppler": {
+      "name": "Doppler Lady",
+      "normal": [
+        "Hello sweetie! Fancy a sip? It's a two-litre, there's enough for everyone!",
+        "Hehe, the square is spinning. Or is that me?",
+        "I'm so happy today! *hic*",
+        "Where's a bench? I need a bench."
+      ]
+    },
+    "rasiererin": {
+      "name": "The Shaver",
+      "normal": [
+        "Ah, a visitor. Sit down. I'm just shaving my legs.",
+        "The water's cold, but honest. Like me.",
+        "I used to be a dancer. In the Prater. Don't believe me? Doesn't matter.",
+        "If you listen, I'll tell you why the moon over the Stuwerviertel always hangs a bit crooked."
+      ]
+    },
+    "bernd": {
+      "name": "Bernd (Dezentral)",
+      "normal": [
+        "WHAT?",
+        "Closed. CLOSED. Can you read?",
+        "I founded Dezentral. Not so you could talk to me.",
+        "Don't talk. Keep walking.",
+        "My mood? It's in the cellar. And the cellar's closed."
+      ],
+      "offen": [
+        "Now it's open. Don't get excited.",
+        "In or out. Don't stand in the door.",
+        "Spritzers, yes. Smiles, no."
+      ],
+      "gereizt": [
+        "You. Annoying.",
+        "ONE more time…",
+        "I can feel it boiling inside me…"
+      ],
+      "wut": [
+        "RAAAAH!",
+        "FIRE AWAY!",
+        "I WARNED YOU!",
+        "GRUMPY IS A LIFESTYLE!",
+        "DEZENTRAL IS MINE!"
+      ]
+    },
+    "hausmasta": {
+      "name": "The Caretaker",
+      "normal": [
+        "Grüß Gott! I'm the caretaker of the building where Carla and Andi live. *munch*",
+        "The bins are a disaster again today. *munch*",
+        "Who parked a bike in the stairwell again? … Ah, Carla. Fair enough.",
+        "I greet everyone. That's my job. And eating. That's my hobby.",
+        "Seen the lift today? Me neither. It's broken. Since 2019."
+      ],
+      "gruss": [
+        "Grüß Gott, {name}!",
+        "Servus, {name}! *munch*",
+        "My respects, {name}!",
+        "Hello, {name}! Bon appétit!",
+        "Morning, {name}! Or is it lunchtime? Whatever, I'm eating."
+      ],
+      "mampf": [
+        "*munch*",
+        "*smack* Leberkäse.",
+        "*chew* Good roll, this.",
+        "*munch munch*"
+      ]
+    },
+    "pizzaiolo": {
+      "name": "Pizzaiolo Diego",
+      "normal": [
+        "Pizzeria Maradona! The Hand of God kneaded this dough.",
+        "Maradona scored a goal with his hand. I make pizza with my hand. Both are art.",
+        "Pineapple on pizza? Not here. It's a matter of honour.",
+        "Marco always orders from Buffalo next door. Traitor."
+      ]
+    },
+    "wingswirt": {
+      "name": "Wings Boss",
+      "normal": [
+        "Buffalo Hot Wings! Hot, hotter, Stuwerviertel.",
+        "Marco's here almost every day anyway. Beer, wings, beer.",
+        "Finish the extra-hot wings and you get a photo on the wall. So far: nobody.",
+        "Plenty of napkins. Trust me, you'll need them."
+      ]
+    },
+    "slady": {
+      "name": "Painter Slady",
+      "normal": [
+        "Painter Slady, Ilgplatz 7. We paint everything. Except deadlines.",
+        "White isn't just white. There are 400 whites. I know them all.",
+        "Got a sec? I need someone to hold my ladder.",
+        "Daniel wants his café in 'oat-milk beige'. I said: that's not a colour, that's a lifestyle."
+      ],
+      "malen": [
+        "Almost done…",
+        "Left side a bit higher… there.",
+        "Hold still!",
+        "This'll be a masterpiece."
+      ]
+    },
+    "ulli": {
+      "name": "Ulli",
+      "normal": [
+        "Erwin and me? Complicated. Today. Tomorrow maybe simple again.",
+        "I asked ChatGPT if Erwin is the one. It said: 'That depends.' Typical.",
+        "Can you drive? Erwin can't, his car's in Burgenland. Again.",
+        "willhaben has such lovely stuff. You just have to pick it up. That's the catch."
+      ],
+      "chatgpt": [
+        "Erwin, listen, I'll read you what ChatGPT says: 'Your partner could listen more actively.' See?",
+        "'Point 3: Talk less about guitars, more about feelings.' ChatGPT said that, not me.",
+        "ChatGPT says you should use 'I-statements'. So: I want you to drive me to the willhaben pickup.",
+        "'Feedback in five points' – Erwin, sit down, this'll take a while."
+      ],
+      "allein": [
+        "Broken up. Again. But this time for real. I think.",
+        "I need someone to fetch my willhaben stuff. Without drama.",
+        "Erwin will text me again any minute. Wanna bet?"
+      ],
+      "wiederZusammen": [
+        "Erwin! Come here, we're back together!",
+        "Ok, ok. Last chance, Erwin. Really the last one."
+      ],
+      "getrennt": [
+        "IT'S OVER, ERWIN! Over!",
+        "I can't stand you and your guitar!"
+      ]
+    },
+    "gast": {
+      "name": "Bobo",
+      "normal": [
+        "Excuse me, where's the loo around here?",
+        "I really need to…",
+        "Is this the WC? It says 'Office'…"
+      ],
+      "klo": [
+        "Is this the loo? It says 'Office'…",
+        "Hello? Loo? Anyone?",
+        "I need to go SO badly. Is this the WC?"
+      ],
+      "danke": [
+        "Ah! Thanks! Urgent!",
+        "You're a hero!",
+        "Finally!"
+      ],
+      "aufgeben": [
+        "Never mind then…",
+        "I'll go to the museum. They must have one."
+      ]
+    },
+    "verkaeufer": {
+      "name": "Bobo (willhaben)",
+      "normal": [
+        "The Kallax was just decor in the loft. Basically new.",
+        "The lamp doesn't match our Japandi style anymore.",
+        "The yoga mat? Used once. For an Instagram photo.",
+        "Price is fixed. Well, okay, there's always a bit of wiggle room."
+      ]
+    },
+    "sw": {
+      "name": "Sex Worker",
+      "normal": [
+        "I've stood here for thirty years. The Bobos for three weeks.",
+        "This used to be a red-light district. Now it's an oat-milk district.",
+        "The cops know me by my first name. The Bobos don't even say hello.",
+        "Wanna know something about the neighbourhood? Ask me. Not the one with the cargo bike."
+      ],
+      "antwort": [
+        "Your neighbourhood? Sweetie, I was here before you.",
+        "Go buy yourself an oat latte and leave me alone.",
+        "Gentrification has a name: you.",
+        "Fine. I'll go. But I'll be back – like every year."
+      ],
+      "zurueck": [
+        "I'm back. Surprise.",
+        "The Bobos come and go. I stay.",
+        "Did I miss anything? A new concept store? Oh, bravo."
+      ]
+    }
+  },
+  "allgemein": {
+    "smalltalk": "Servus.",
+    "versteinert": [
+      "…",
+      "(Staring into space. Somewhere a guitar is playing.)",
+      "(Petrified. Erwin struck again.)",
+      "(Not moving. Just one eye twitching in time to 'Minor Swing'.)"
+    ],
+    "niedergequasselt": [
+      "Wh… what? Who are you? Where am I?",
+      "(Looks dazed. Carla did a thorough job.)",
+      "Graz… bike… I… headache."
+    ],
+    "grantig": [
+      "Leave me alone.",
+      "Not today.",
+      "Grrrr."
+    ],
+    "nass": [
+      "I'm soaked to the bone! Thanks, earthquake.",
+      "Brrr. I'm dripping.",
+      "Don't look at me like that. It's fountain water. I hope."
+    ],
+    "lachend": [
+      "HAHAHA! The nose! HAHAHA!",
+      "Hihihi, stop it!",
+      "*snort*"
+    ],
+    "erledigt": [
+      "(Lying on the ground, staring at the sky.)",
+      "Marco… was that…?",
+      "Ow."
+    ],
+    "panik": [
+      "AAAAH!",
+      "An earthquake! Save the coffee!",
+      "Run!"
+    ],
+    "grantigGespraech": [
+      "Nah, not talking with grumpy Andi standing right there.",
+      "Andi looks so grumpy, I'd better go.",
+      "Not now. Andi looks like he's about to eat someone."
+    ]
+  },
+  "carla": {
+    "falscheHinweise": [
+      "Your bike? I saw it by the museum earlier! I think. Maybe not.",
+      "There's a turquoise bike at Deewan! Definitely! Well, pretty definitely.",
+      "The Kiwara took a bike away. Or was it a wheelbarrow?",
+      "Oh, looking for something? Behind the fountain! Everything's always there."
+    ],
+    "falschGelaufen": "Carla chases a false tip: −{n} minutes."
+  },
+  "mascha": {
+    "geheilt": [
+      "Oh, Mascha! Thank you! I was totally gone.",
+      "Mascha! You little angel!",
+      "*gets licked* Ew. And thanks."
+    ],
+    "selbst": "Mascha licks your face. You're back!",
+    "rettungKonzert": "Concert victim rescued",
+    "rettung": "Mascha helps",
+    "bellen": [
+      "WOOF! WOOF!",
+      "BARK! BARK! BARK!",
+      "GRRR-WOOF!"
+    ]
+  },
+  "spezialText": {
+    "warten": "Hang on, just a sec…",
+    "keineMascha": "Mascha isn't with you right now!",
+    "exenFliehen": "{n} ex(es) run for it!",
+    "nixZumEssen": "Nothing to snack on. Off to Deewan or the café!",
+    "mampf": [
+      "Munch. Now I'm human again.",
+      "Mmmh. The mayor is back in office.",
+      "*smack* What'd you say? Whatever, I'm full."
+    ],
+    "niemandDa": "Nobody around to chat at.",
+    "quasseln": [
+      "And then in Graz, I, well actually my aunt, and the bike, and then the Schlossberg…",
+      "Do you know what's happened to me today already? So: first…",
+      "Do you know Graz? No? Then I'll tell you everything. EVERYTHING."
+    ],
+    "bisou": [
+      "Bisou, bisou, {name}!",
+      "Ah, {name}! Comment ça va? Bisou!"
+    ],
+    "bisouLeer": "Bisou… to nobody. Tant pis.",
+    "bisouAntwort": [
+      "Oh là là!",
+      "Hihi, merci!",
+      "Bisou back!"
+    ],
+    "keinTerminal": "No terminal nearby. They're next to the shops.",
+    "schonGehackt": "You already hacked that terminal. Could automate it, but not twice.",
+    "hackFail": "ACCESS DENIED. Try again.",
+    "hackCafe": "HACKED! Daniel's prices are halved for an hour.",
+    "hackKurz": "Hack",
+    "hackLaden": "Shop hacked: {laden}",
+    "fotoLeer": "Lovely photo of Ilgplatz. Sadly nobody in it to get annoyed.",
+    "fotoOpfer": [
+      "Hey! No photos!",
+      "My face! My face!",
+      "Delete that right now!"
+    ],
+    "andiGrantig": "Andi is GRUMPY! Eat something (E), or you lose Reputation every minute!",
+    "grantigKurz": "grumpy",
+    "carlaVerliert": "Whoopsie! Carla lost something: {item}",
+    "nurKurz": [
+      "Just checking something real quick…",
+      "Hang on, there's an update…",
+      "Ooh, a new paper on transformers…"
+    ]
+  },
+  "begleiter": {
+    "entlassen": "Thanks, Hubi. You can go.",
+    "holen": "Hubi, come along – with Mascha! (−{n} Reputation)",
+    "gefallen": "Favour",
+    "ja": [
+      "Sure. Mascha, heel!",
+      "Alright. But only 'cause it's you."
+    ],
+    "ende": [
+      "Gotta go. Mascha wants to go home.",
+      "Right, end of shift. Servus!"
+    ]
+  },
+  "gegnerText": {
+    "nadjaFrage": [
+      "Have you seen Hubi?",
+      "You. Yes, you. Where is Hubi?",
+      "I'm looking for Hubi. Where is he?"
+    ],
+    "nadjaJa": "“Yes, in the café.” (Betrayal!)",
+    "nadjaNein": "“No.”",
+    "nadjaDanke": [
+      "Thanks. He'll be thrilled. Not.",
+      "Perfect. Hubi, here I come."
+    ],
+    "nadjaNeinAntwort": [
+      "Hm. I'll find him. I always find him.",
+      "Are you lying to me? … Whatever. I've got time."
+    ],
+    "verratKurz": "Snitched to Nadja",
+    "hubiVerliert": "Hubi loses {n} Reputation!",
+    "marcoErledigt": [
+      "Oops.",
+      "I've done this before…",
+      "He looked at me funny."
+    ],
+    "marcoErledigtKurz": "Marco took out {name}",
+    "krankenhaus": "BAM. A car on the roundabout.\nYou wake up in hospital. The nurse says: “Ilgplatz again, is it?”\n({n} game minutes)",
+    "entlassen": "Discharged. Next time watch the cars – they stop at the zebra crossing!",
+    "festgequatscht": "{name} has you cornered",
+    "festgehalten": "{name} caught you. “We need to talk.”\n({n} minutes of relationship talk…)",
+    "frei": "Free at last! Get out before the next one shows up.",
+    "kiwaraKurz": "Kiwara check",
+    "kiwara_paket": "Police check! What's in the parcel then? … I see. I SEE. We'll be taking that. And you're known to us.",
+    "kiwara_shit": "Police check! What's that smell? … Well, well. We're confiscating that. Have a nice evening.",
+    "versteinert": "PETRIFIED! Erwin explained his guitar to you. (20 min.)",
+    "kotz": [
+      "Whoops… *blurgh*",
+      "Oof. That was the Doppler.",
+      "*hic* Oh dear."
+    ],
+    "ausgerutscht": [
+      "Waaah! Gross!",
+      "Slipped in the Doppler puddle. Yuck!",
+      "My trousers!"
+    ],
+    "exEntdeckt": [
+      "HUUUBIII!",
+      "YOU! Stop right there!",
+      "Hubi! We need to talk!"
+    ],
+    "exWarnung": "{name} spotted you! Run – or E: Mascha barks her away.",
+    "nadjaDa": "NADJA is on the square! Hide in the café – if she gets too close, you'll be heartbroken!",
+    "nadjaDaAndere": "Nadja is on the square. Hubi hides in the café.",
+    "nadjaWeg": "Nadja leaves. Breathe, Hubi.",
+    "liebeskummerKurz": "Heartbroken",
+    "kummerVorbei": "Phew. The heartbreak is fading."
+  },
+  "items": {
+    "americano": "Americano",
+    "essen": "Deewan food",
+    "kipferl": "Kipferl",
+    "paket": "Locksmith's parcel",
+    "nase": "Clown nose",
+    "kamera": "Jewi's camera",
+    "karton": "Cardboard box",
+    "stift": "Marker",
+    "transparent": "Banner",
+    "kleber": "Glue",
+    "shit": "“Shit” from the Stern",
+    "rad": "Carla's bike",
+    "beweisfoto": "Evidence photo",
+    "lieferung": "Delivery (hot!)",
+    "laptop": "Laptop",
+    "pizza": "Pizza Maradona",
+    "wings": "Buffalo Wings",
+    "semmel": "Caretaker's sausage roll",
+    "wasserpistole": "Water pistol (ice water)",
+    "kallax": "IKEA Kallax (used)",
+    "lampe": "Vintage floor lamp",
+    "yogamatte": "Yoga mat (barely used)"
+  },
+  "quests": {
+    "neu": "New job: {titel}",
+    "erledigt": "Job done: {titel}",
+    "angebotLabel": "Job: {titel}",
+    "annehmen": "Sure, I'm on it!",
+    "spaeter": "Maybe later.",
+    "zuViele": "You've already got 3 jobs open. Finish something first!",
+    "angebotHud": "Offer",
+    "angebotHudText": "{name} has something for you: {titel} (!)",
+    "beweisfoto": "Proof photo of the Locksmith!",
+    "beweisfotoText": "Gotcha – parcel in hand! That's your proof photo.",
+    "keinBeweis": "No proof in this one – his hands are empty. Wait till he's packing (the crate next to him).",
+    "start": {
+      "titel": "Good Morning, Ilgplatz",
+      "hud": "Go into the café and talk to Daniel.",
+      "daniel": [
+        "Good morning! Welcome to The Good Coffee Society.",
+        "The Americano costs {preis} today. Inflation, you know how it is. It goes up every two hours – that's the free market.",
+        "And please: never come in without money. Never. I have a reputation to lose. And so do you."
+      ],
+      "danielJuliette": [
+        "Juliette! Ma chérie! I haven't seen you in ages!",
+        "You learned milk foam from me. I learned swearing from you. Fair trade.",
+        "One coffee on the house today. Once. Otherwise the Americano is {preis}."
+      ],
+      "danielJewi": [
+        "Oh. You. The photographer.",
+        "For you the Americano is {preis} today. Regulars' discount is for regulars only.",
+        "And please don't photograph my portafilters. They're private."
+      ],
+      "fertig": "Let the day begin! Look for people with a yellow ! over their heads."
+    },
+    "americano": {
+      "titel": "Americano for Hubi",
+      "hudKaufen": "Buy an Americano from Daniel ({preis})!",
+      "hudZuHubi": "Take the Americano to Hubi on the lawn!",
+      "hudZuMascha": "Hurry back to Mascha on the lawn!",
+      "erfolg": "Just in time! Hubi takes Mascha for her walk.",
+      "erfolgDialog": [
+        "Ahhh. Americano. Now I'm human again.",
+        "Cheers, mate! Mascha and me are off for walkies. The square is saved."
+      ],
+      "erfolgHubi": [
+        "Ahhh. Americano. Mascha, we're right on time!",
+        "*Mascha wags proudly*"
+      ],
+      "zuSpaet": "TOO LATE! Hubi has no coffee…"
+    },
+    "andi": {
+      "titel": "Andi Is Hungry",
+      "hudSelbst": "Your stomach's growling! Eat something (E) before you get grumpy.",
+      "hudHolen": "Get food at Deewan (or a croissant at the café) for Andi!",
+      "hudBringen": "Bring Andi the food – he's sitting in the café!",
+      "hudSpaet": "Andi is grumpy! Get him some food anyway.",
+      "hudSpaetBringen": "Andi is grumpy! Bring him the food.",
+      "geben": "Here, Andi, eat something!",
+      "danke": [
+        "*munch* Oh yes. OH YES.",
+        "Now I'm the Mayor again. Cheers, mate!"
+      ],
+      "verpasst": "Andi is GRUMPY! Conversations near him fail.",
+      "verpasstKurz": "Andi starves",
+      "selbstVerpasst": "Ate too late. The Mayor is grumpy."
+    },
+    "rad": {
+      "titel": "Carla's Bike",
+      "angebot": [
+        "My BIKE. My beloved bike. Bought from Didi. Gone.",
+        "Can you help me? Didi might know something. He always knows something about bikes."
+      ],
+      "hud_michi": "Someone said Michi knows where your bike is. Ask him!",
+      "hud_quelle": "Michi says: \"Where the water never sleeps.\" Search at the fountain!",
+      "hud_didi": "Ask Didi at Radbande about the bike.",
+      "hud_schlosser": "Didi says the Locksmith knows something. Ask him!",
+      "hudBeweis": "The Locksmith denies it! Ask Jewi for a proof photo.",
+      "hudBeweisCarla": "The Locksmith denies it! Talk his ear off (E) and ask again.",
+      "hudBeweisJewi": "The Locksmith denies it! Photograph him (E) while he's packing a parcel.",
+      "hud_stern": "The bike is at the Stern! Go get it.",
+      "hud_zurueck": "Bring Carla her bike back!",
+      "hud_zurueckCarla": "Take the bike to Didi so he can put a lock on it!",
+      "frageMichi": "Michi, do you know anything about my bike?",
+      "michi": [
+        "A bike has two wheels. A unicycle has one. A clown has none.",
+        "Your bike is where the water never sleeps. … Or was that my key? Whatever. Go to the fountain."
+      ],
+      "sucheQuelle": "Search for the bike",
+      "quelle": [
+        "Nothing. Just water. And a fag end. And a 20-cent coin.",
+        "Maybe I should've just asked Didi right away…"
+      ],
+      "frageDidi": "Didi, do you know anything about Carla's bike?",
+      "didi": [
+        "The turquoise one? Good bike, that. Sold it to her.",
+        "Yesterday I saw the Locksmith pushing a bike just like it round the corner. Go ask him."
+      ],
+      "frageSchlosser": "Where's Carla's bike, Locksmith?",
+      "leugnet": [
+        "What bike? I don't know any bike. I only know locks.",
+        "Proof? Got any proof? Didn't think so."
+      ],
+      "gestaendnisFoto": [
+        "… Where'd you get that photo?! That's an invasion of privacy!",
+        "Fine, fine! The bike's at the Stern. I was just… keeping it safe. Better safe than sorry."
+      ],
+      "gestaendnisQuassel": [
+        "PLEASE. Stop talking. I'll tell you everything!",
+        "The bike's at the Stern! Take it, but STOP GOING ON ABOUT GRAZ!"
+      ],
+      "frageJewi": "Jewi, got a photo of the Locksmith with a bike?",
+      "jewiFoto": [
+        "Of course. I have a photo of everyone. Three of the Locksmith, even.",
+        "Here. That's him with a turquoise bike. Proof."
+      ],
+      "nehmen": "Take Carla's bike",
+      "genommen": "Got Carla's bike! Well… pushing it.",
+      "zurueckgeben": "Here's your bike!",
+      "ende_carla": [
+        "MY BIKE! My beloved bike! You're the best! Whatever, you're the best!",
+        "I'm telling everyone. In Graz AND in Vienna."
+      ],
+      "ende_didi": [
+        "There it is! I'll put a proper lock on it right away.",
+        "And you, Carla: next time don't park at the Stern."
+      ],
+      "verloren": "The bike's gone… it's probably back at the Stern."
+    },
+    "schrauben": {
+      "titel": "Bike Snake",
+      "label": "Play Bike Snake (+15 reputation, +10 €)",
+      "intro": "My bikes have done a runner! Eat 'em all – er, I mean: catch 'em! Bike Snake!",
+      "erfolg": "All bikes caught! Didi is thrilled.",
+      "fail": "Crash! Try again."
+    },
+    "paket": {
+      "titel": "A Parcel for the Locksmith",
+      "angebot": [
+        "You look like someone who can carry a parcel.",
+        "Take this to the Stern – all the way down Obermüllnerstraße, towards Praterstern. To the guy there. 25 euros. No questions. And if you see the Kiwara: you don't know me."
+      ],
+      "hud": "Take the parcel to the guy at the Stern (far west, towards Praterstern).",
+      "hudKiwara": "Take the parcel to the Stern – careful, the Kiwara are on patrol!",
+      "abgeben": "Parcel from the Locksmith",
+      "uebergabe": [
+        "Good. You didn't see nothing.",
+        "And I never saw you."
+      ],
+      "verloren": "Parcel lost!"
+    },
+    "nase": {
+      "titel": "Michi's Clown Nose",
+      "angebot": [
+        "The world is serious. That's why noses exist.",
+        "Put on this nose and make three people laugh. Whoever doesn't laugh loses. Except Marco. Marco always wins."
+      ],
+      "hud": "Make people laugh (talk to them): {n}/{max}",
+      "hudVerloren": "Nose lost! Get a new one from Michi.",
+      "neueNase": "Michi, I lost the nose…",
+      "aufsetzen": "Put on the clown nose: go on, laugh!",
+      "lachen": [
+        "HAHAHA! The nose!",
+        "Hee hee! Stop it!",
+        "PFFFT! What is THAT?!",
+        "Hahaha, you look just like Michi!"
+      ],
+      "marco": "No.",
+      "erfolg": "Three people laughed! Michi is proud of you."
+    },
+    "barista": {
+      "titel": "The Weeping Ex-Barista",
+      "angebot": [
+        "*sniff* Daniel fired me by text. With a thumbs-up emoji.",
+        "All I want is a coffee I don't have to make myself. And for someone to give him a piece of their mind."
+      ],
+      "hud": "Coffee for Lena {c} · Confront Daniel {t}",
+      "kaffee": "Buy Lena a coffee",
+      "kaffeeFehlt": "You need an Americano from Daniel first.",
+      "kaffeeDanke": [
+        "For me? *sniff* Thank you!",
+        "First time in three years I'm drinking a coffee I didn't make myself."
+      ],
+      "kaffeeKurz": "Coffee for Lena",
+      "zurRede": "Why did you fire Lena by text?!",
+      "danielAusrede": "That wasn't firing. That was a… career reorientation. By text. With emoji. Modern, you know.",
+      "hoeflich": "\"Daniel, that wasn't fair. Think about it.\" (polite)",
+      "hoeflichAntwort": "Hm. Maybe. I'll think about it. Over an Americano.",
+      "hoeflichKurz": "polite",
+      "derb": "\"You're an arsehole, Daniel. An overpriced one, too.\" (rude)",
+      "derbAntwort": "WHAT?! Everything costs you 30 percent more from now on! Out! No, stay – pay first.",
+      "derbKurz": "rude",
+      "derbPreise": "Daniel's prices for you: +30 %",
+      "fertig": "Lena is smiling again!"
+    },
+    "baden": {
+      "titel": "Bath Time for Mascha",
+      "angebot": [
+        "Mascha stinks. Well, she smells… of adventure.",
+        "Will you come with me and Mascha to the fountain? She loves a bath!"
+      ],
+      "hud": "Lead Mascha to the fountain and bathe her (action at the fountain).",
+      "hudHolen": "Fetch Hubi and Mascha (talk to Hubi).",
+      "nochmal": "Come on, let's go give Mascha a bath!",
+      "label": "Bathe Mascha",
+      "suess": [
+        "Awwww, so cute!",
+        "Look, the doggy's having a bath!",
+        "I'm dying, that's SO cute!"
+      ],
+      "erfolg": "Mascha is clean. Everyone thinks it's adorable!"
+    },
+    "demo": {
+      "titel": "Protest Against Coffee Prices",
+      "angebot": [
+        "Right, I'm gluing myself to the pavement! … But first: PROTEST!",
+        "We need a banner. Cardboard from Deewan, a marker from Michi. Then stand in front of the café with it. Daniel's gonna lose it!"
+      ],
+      "hudBasteln": "Make a banner: cardboard (Deewan) {k} · marker (Michi) {s}",
+      "hudStehen": "Stand in front of the café with the banner! {n}/{max} min.",
+      "karton": "Got an old cardboard box for me?",
+      "kartonText": "Take it. Just don't protest against me!",
+      "stift": "Can I borrow a marker?",
+      "stiftText": "A marker writes. A clown stays silent. Take it.",
+      "gebastelt": "Banner done: \"COFFEE AIN'T A LUXURY!\"",
+      "ruf": [
+        "COFFEE AIN'T A LUXURY!",
+        "SIX EUROS? NO THANKS!",
+        "WE ARE THE NEIGHBOURHOOD!",
+        "AMERICANOS FOR ALL!"
+      ],
+      "danielTobt": "WHAT IS THIS?! That's MY pavement!",
+      "sms": "Anyone protesting outside my café pays double from tomorrow. Kind regards, Daniel",
+      "erfolg": "Protest a success! Daniel is fuming, the neighbourhood cheers."
+    },
+    "steckdose": {
+      "titel": "Markus' Power Socket",
+      "angebot": [
+        "My laptop is dead. Zero percent. I feel naked.",
+        "Can you find me a socket? There must be power somewhere on this square. We could automate that, but not without power, obviously."
+      ],
+      "hud": "Find a power socket (supposedly at the Clown Museum, right next to the café).",
+      "hudSelbst": "Laptop dead! Find a power socket (at the museum?).",
+      "hudZurueck": "Tell Markus where the socket is.",
+      "label": "Check socket",
+      "gefunden": "Socket found! Tell Markus.",
+      "melden": "Markus! Socket at the museum!",
+      "danke": [
+        "Power! POWER! You're my hero.",
+        "We could automate that. You know, you always finding me sockets."
+      ],
+      "selbst": [
+        "*plugs in* 1 percent. 2 percent. Life returns.",
+        "We could automate that."
+      ]
+    },
+    "gruesse": {
+      "titel": "Juliette Knows Everyone",
+      "angebot": [
+        "Ah, you're walking around anyway? Parfait!",
+        "Please say hi to a few people from me. I can't make it today, I still have to do three bisous and one round of swearing."
+      ],
+      "hud": "Say hi from Juliette to: {namen}",
+      "label": "Juliette says hi!",
+      "labelSelbst": "Bisou! Just wanted to say hello!",
+      "antwort": [
+        "Ah, Juliette! Say hi back!",
+        "Juliette! She really does know everyone.",
+        "Oh, greetings from Juliette? How sweet!",
+        "Tell her to drop by again sometime!"
+      ],
+      "kurz": "Hi",
+      "erfolg": "Everyone greeted! Juliette really does know everyone."
+    },
+    "foto": {
+      "titel": "Jewi's Photo Assignment",
+      "angebot": [
+        "I need three subjects for my exhibition: 'Ilgplatz – Between Plum and Tesla'.",
+        "The fountain, a purple-leaf plum tree and the black Tesla. Here, take my camera. Watch out for Marco."
+      ],
+      "hud": "Photograph: fountain {q} · plum tree {p} · Tesla {t}",
+      "hudKamera": "Camera lost! Ask Jewi for a new one.",
+      "neueKamera": "Jewi, I've… misplaced the camera.",
+      "label_quelle": "Photo: fountain",
+      "label_pflaume": "Photo: plum tree",
+      "label_tesla": "Photo: Tesla",
+      "klick_quelle": "Click! The fountain sparkles.",
+      "klick_pflaume": "Click! Dark red like a glass of Zweigelt.",
+      "klick_tesla": "Click! Black, shiny, guarded.",
+      "marco": "Tesla. MINE. Go away.",
+      "erfolg": "All shots in the can! Jewi is thrilled."
+    },
+    "erwin": {
+      "titel": "Distract Erwin",
+      "angebot": [
+        "Erwin is standing outside my café again, explaining his guitar to everyone. The customers are turning to stone!",
+        "Lure him away. Far away. Get close and he'll follow you. But careful you don't turn to stone yourself."
+      ],
+      "hud": "Go to Erwin outside the café so he follows you.",
+      "hudLocken": "Lure Erwin away from the café: {n}/{max} tiles. Watch the bar!",
+      "folgt": "Where you off to? Wait, I've got more to tell you about Django!",
+      "wartet": [
+        "Hey! I wasn't finished!",
+        "Wait! The bridge is still coming!",
+        "You're missing the best bit!"
+      ],
+      "ende": "Where'd my audience go?",
+      "erfolg": "Erwin is far from the café. Daniel breathes a sigh of relief."
+    },
+    "lieferung": {
+      "titel": "Deewan Delivery",
+      "angebot": [
+        "Three meals, three benches. People are waiting!",
+        "Take them to three different benches on the square – your pick. You've got one minute, then it's cold. Cold dal is sad dal."
+      ],
+      "hud": "Deliver the meals to three different benches ({n}/3)",
+      "label": "Deliver food",
+      "geliefert": "Delivered ({n}/3)",
+      "erfolg": "Everything arrived hot! The cook is beaming.",
+      "kalt": "Too late – the food's gone cold!"
+    },
+    "bernd": {
+      "titel": "Bernd Breathes Fire!",
+      "hud": "Dodge the fireballs! Hits: {n}"
+    },
+    "marcoWild": {
+      "titel": "Marco Goes Berserk",
+      "hudHolen": "Marco is throwing beer bottles! Get the water pistol from the Kiwara.",
+      "hud": "Cool Marco down with ice water (Space / A): {n}/{max} hits"
+    },
+    "ulli": {
+      "titel": "Help Ulli with willhaben",
+      "angebot": [
+        "Erwin can't drive me – his car's in Burgenland again. Typical.",
+        "Could you pick up three things from willhaben for me? A Kallax, a floor lamp and a yoga mat. Here's 30 euros. And HAGGLE! Whatever's left is yours."
+      ],
+      "budgetKurz": "Ulli's budget",
+      "hud": "willhaben run: Kallax {k} · lamp {l} · yoga mat {y} – haggle!",
+      "hudZurueck": "Got everything! Take the stuff to Ulli.",
+      "feilschen": "Pick up {item} – haggle! (asking {preis})",
+      "verkauft": [
+        "Enjoy!",
+        "A deal's a deal.",
+        "And please leave a good review!"
+      ],
+      "abgeben": "Here's your willhaben stuff!",
+      "danke": [
+        "You're SO much more reliable than Erwin!",
+        "And you haggled {n} off? ChatGPT couldn't have done better."
+      ],
+      "erfolg": "Ulli is happy! Haggled off: {n}"
+    },
+    "leiter": {
+      "titel": "Slady: Hold the Ladder",
+      "angebot": [
+        "I gotta paint the façade up there. Hold the ladder for me a sec?",
+        "Just stand next to me and don't wobble. Three minutes. 10 euros."
+      ],
+      "hud": "Hold Slady's ladder – stand still next to him: {n}/{max} min.",
+      "wackelt": [
+        "DON'T WOBBLE!",
+        "Steady! STEADY!",
+        "Wobble and I'll paint you!"
+      ],
+      "erfolg": "Wall painted! Slady is pleased."
+    }
+  },
+  "quelle": {
+    "label": "Fountain",
+    "frage": "The fountain babbles invitingly. Hop in?",
+    "rein": "In you go! (−{n} Reputation)",
+    "nein": "Better not.",
+    "kurz": "Bathed in the fountain",
+    "grauslich": [
+      "Gross!",
+      "Yuck!",
+      "It's a fountain, not a bathtub!",
+      "Oida, NO!"
+    ]
+  },
+  "shops": {
+    "americanoGratis": "Americano (free – on the house for Juliette)",
+    "gratisDanke": "For you, ma chérie. Once. Don't tell anyone.",
+    "americano": "Americano ({preis})",
+    "americanoKurz": "Americano",
+    "bitteschoen": [
+      "There you go. Tips are extra.",
+      "Here you are. Oat milk would've been 80 cents.",
+      "Enjoy. It costs more than it's worth."
+    ],
+    "kipferl": "Kipferl ({preis})",
+    "kipferlKurz": "Kipferl",
+    "deewanEssen": "Get food – pay what you want",
+    "deewanFrage": "Pay as you wish! What's it worth to you?",
+    "deewanPreis0": "I'm paying nothing. ({preis})",
+    "deewanPreis1": "I'll pay {preis}.",
+    "deewanPreis2": "I'll pay {preis}. The dal is worth it!",
+    "deewanKurz": "Deewan",
+    "deewanDanke": [
+      "Oh! Thank you, my friend!",
+      "You're a good person. Have some papadam!"
+    ],
+    "deewanNormal": "Fine. Enjoy your meal!",
+    "grosszuegig": "generous",
+    "geizig": "stingy",
+    "andiHinweis": "Tip: press E = snack",
+    "marcoEntlassen": "Marco, go home. Thanks.",
+    "marcoTschuess": "Hm.",
+    "marcoAnheuern": "Hire Marco as bodyguard ({preis})",
+    "marcoKurz": "Marco",
+    "marcoJa": "Good. I'll come. Anyone who looks at you… I've done this before…",
+    "marcoHinweis": "Marco protects you from exes and Nadja. But every now and then he “takes someone out”…",
+    "spritzer": "A Spritzer, please ({preis})",
+    "spritzerKurz": "Spritzer",
+    "dezentralKurz": "At the Dezentral",
+    "spritzerText": [
+      "Cheers. Now you're one of us.",
+      "Bottoms up. You're officially a night owl now."
+    ],
+    "shitAnnehmen": "“Some shit? … Yeah, hand it over.”",
+    "shitAblehnen": "“Nah thanks, I'm good.”",
+    "shitDanke": "Sorted. And don't let the Kiwara catch you.",
+    "shitOk": "Suit yourself.",
+    "sternKurz": "Respect at the Stern",
+    "zuhoeren": "Sit down and listen",
+    "zuhoerenKurz": "Listened",
+    "rasiererinGeschichte": [
+      "Know why the moon hangs crooked over the Stuwerviertel?",
+      "'Cause every night it leans down over the Stern to check if the Kiwara are awake. And they're always awake.",
+      "And I sit here shaving my legs, 'cause a lady is a lady. Even at midnight. Even at the fountain.",
+      "Thanks for listening, sweetie. Hardly anyone does that these days."
+    ],
+    "raus": [
+      "No money? In MY Society? Out!",
+      "No money, no coffee, no seat. Out!"
+    ],
+    "rausKurz": "Broke in the café",
+    "pizza": "Pizza Maradona ({preis})",
+    "pizzaKurz": "Pizza",
+    "wings": "Buffalo Wings ({preis})",
+    "wingsKurz": "Wings",
+    "bier": "A beer ({preis})",
+    "bierKurz": "Beer",
+    "prost": [
+      "Cheers! *hic*",
+      "Prost!",
+      "Ahh. Beer."
+    ],
+    "bierAnsehen": "A round with the regulars",
+    "semmel": "Got anything to eat for me?",
+    "semmelText": "Course I do! A sausage roll. I've got three anyway."
+  },
+  "intro": [
+    "It's 8 in the morning on Ilgplatz. The plum trees are glowing, the fountain is babbling, and the Americano costs more than yesterday. Again.",
+    "Today is judgement day: at the top centre you see the DUEL – your Reputation (green) vs. {rivale} (red). {rivalInfo} Whoever is ahead at 23:00 becomes Mayor of the Stuwerviertel.",
+    "You earn Reputation for tasks: people with a yellow ! have some. Your current task is shown at the bottom (▶), the yellow arrow shows the way. Top left: clock, money and the next event of the day. First step: go into the café and talk to Daniel."
+  ],
+  "figurTipp": {
+    "hubi": "Tip: E = Mascha barks (exes flee) or cuddles petrified people back to health.",
+    "andi": "Tip: keep an eye on your hunger bar. Food at Deewan and the café, E = snack.",
+    "carla": "Tip: E = talk 'em down. Even works on the locksmith…",
+    "juliette": "Tip: Daniel gives you a free Americano. But keep it short!",
+    "markus": "Tip: E at a terminal (next to the shops) = hack. But don't walk past too close…",
+    "jewi": "Tip: E = photo. Freezes enemies. Locksmith with parcel = evidence photo!"
+  },
+  "events": {
+    "nass": "Soaked! Half speed.",
+    "americano": {
+      "ankuendigung": "At {zeit}: Hubi needs his Americano! Be ready.",
+      "start": "COUNTDOWN! Hubi needs his Americano by 11:05 – he has to walk Mascha! Buy one at the café and bring it to the lawn.",
+      "startHubi": "COUNTDOWN! You need your Americano by 11:05! Mascha is waiting on the lawn – grab your coffee and meet her on time.",
+      "name": "Americano Countdown"
+    },
+    "erdbeben": {
+      "text": "EARTHQUAKE! Hubi without coffee is a force of nature. Benches fly, the fountain sprays!",
+      "kurz": "Earthquake",
+      "hubi": "NO COFFEE! NO MERCY!"
+    },
+    "andi": {
+      "ankuendigung": "At {zeit}: Andi's stomach speaks up…",
+      "start": "Andi is HUNGRY! Bring him something from Deewan within 20 minutes, or he'll get grumpy.",
+      "startSelbst": "Your stomach is growling like a moped! Eat something in the next 20 minutes, or you'll get grumpy.",
+      "name": "Andi is Hungry"
+    },
+    "nadja": {
+      "ankuendigung": "At {zeit}: someone is on the way. Someone dangerous.",
+      "start": "From now on Nadja keeps turning up on the square. Hubi hides in the café when she does. She'll ask you where he is.",
+      "startHubi": "From now on NADJA keeps turning up! If she gets too close, you get heartbroken, stagger and lose Reputation. Hide in the café until she leaves!",
+      "name": "Nadja's Coming"
+    },
+    "konzert": {
+      "ankuendigung": "At {zeit}: Erwin's gypsy jazz concert on the centre lawn! Keep your distance!",
+      "start": "ERWIN'S GYPSY JAZZ CONCERT! His petrification radius is three times bigger. Anyone on the lawn turns to stone – Mascha can save them (+10 per person).",
+      "ende": "The concert's over. The petrified are waiting for Mascha…",
+      "erwinWeg": "Erwin has rushed off to his concert – task done!",
+      "name": "Erwin's Gypsy Jazz Concert"
+    },
+    "doppler": {
+      "ankuendigung": "At {zeit}: a visitor with a Doppler is on the way…",
+      "start": "The Doppler Lady is here! Two litres of wine, lots of love, not much stomach. Mind the puddles! Lead her to a bench.",
+      "fuehren": "Come on, I'll take you somewhere.",
+      "jaa": "Ooh, a gentleman! *hic*",
+      "hinweis": "Lead her to a bench (+25) or into the café (+40, but Daniel will be furious).",
+      "cafeKurz": "Doppler Lady in the café",
+      "daniel": "HER? In MY Society?! Everything costs more for you lot today!",
+      "teurer": "Daniel is furious: prices +50 % for the rest of the day.",
+      "bankKurz": "Doppler Lady on a bench",
+      "bankDanke": "A bench! You're a treasure! *snore*",
+      "name": "Doppler Lady"
+    },
+    "zuhaelter": {
+      "ankuendigung": "At {zeit}: the pimps return. Like every year.",
+      "start": "RETURN OF THE PIMPS! There's a chain brawl in front of the locksmith. Go around!",
+      "ende": "The pimps have cleared off. Until next year.",
+      "zuschauer": "This used to be all red-light round here. Now the Bobos come and drink 6-euro coffee.",
+      "name": "Return of the Pimps"
+    },
+    "nacht": {
+      "ankuendigung": "At {zeit} night falls on the Stuwerviertel.",
+      "start": "Night on Ilgplatz. The Dezentral is open, the Kiwara are out in double numbers, and someone's selling something at the Stern.",
+      "zitatWer": "Der Nino aus Wien",
+      "zitat": [
+        "„Im Stuwerviertel in da Nocht.\nDie Kiwara sand immer woch.\nDes Dezentral hod meistens offen.\nAm Stern woins da an Shit verkaufen.“\n\n“In the Stuwerviertel at night.\nThe Kiwara are always awake.\nThe Dezentral is mostly open.\nAt the Stern they want to sell you shit.”"
+      ],
+      "name": "The Night"
+    },
+    "finale": {
+      "ankuendigung": "At {zeit}: the grand finale!",
+      "startGut": "FINALE! You've got enough Reputation: get glue from the locksmith and glue yourself to the café floor! (Or, with Marco: the Tesla tyres…)",
+      "startSchwach": "FINALE! The locksmith only sells glue from 450 Reputation. Maybe you can still make it – or hire Marco and deal with the Tesla…",
+      "kleben": "Glue yourself to the floor!",
+      "kleberKaufen": "Buy glue ({preis})",
+      "kleberZuWenig": "Glue only from {n} Reputation. “Nobody even knows you yet.”",
+      "kleberKurz": "Glue",
+      "kleberText": "Superglue. Holds forever. Don't ask what I need it for.",
+      "klebenKurz": "Glued to the floor",
+      "sms": "I hereby terminate the floor. With immediate effect. Regards, Daniel",
+      "jubel": [
+        "BRAVO!",
+        "THE FLOOR IS OURS!",
+        "Coffee is not a luxury!",
+        "For he's a jolly good fellow!"
+      ],
+      "klebenBanner": "You're glued to the floor! The whole café is cheering!",
+      "reifen": "Slash the Tesla's tyres",
+      "reifenKurz": "Tesla tyres",
+      "marcoWache": "I'll keep watch.",
+      "kiwaraKurz": "Kiwara at the Tesla",
+      "kiwara": "Stop! Criminal damage! You're getting reported! And you, Mr Marco, we know you already.",
+      "reifenGlueck": "Psssssst… Nobody saw a thing. The Tesla's listing to one side.",
+      "name": "Finale"
+    },
+    "abrechnung": {
+      "ankuendigung": "At {zeit} the votes are counted! Last chance!",
+      "text": "23:00 – Judgement at Ilgplatz.\nThe neighbourhood is counting…",
+      "name": "The Reckoning"
+    }
+  },
+  "ende": {
+    "sieg": "MAYOR OF THE STUWERVIERTEL!",
+    "niederlage": "Close, but no Kipferl…",
+    "vergleich": "You: {du} – {rivale}: {r}",
+    "siegText": "The neighbourhood has spoken: you are Mayor of the Stuwerviertel! The chain of office gleams, Mascha barks, and even Daniel lowers his prices for a second. For one.",
+    "niederlageText": "{rivale} raises the Americano with a grin: “You don't become mayor. You ARE mayor.” Tomorrow's another day at Ilgplatz.",
+    "statistik": "Tasks done: {n} · Rank: {rang}",
+    "nameEingeben": "Your name for the Hall of Fame:",
+    "speichern": "Sign in",
+    "nochmal": "Again – with another character"
+  },
+  "warten": {
+    "ausreden": [
+      "Uh… I have to… my dog…",
+      "Oh, I've got an appointment right now!",
+      "Mascha needs the loo!",
+      "Something's on fire over there!",
+      "My phone's ringing!"
+    ],
+    "held": {
+      "titel": "{name} has you cornered!",
+      "text": "“We need to talk.”",
+      "hinweis": "Hammer Space / A – make up excuses to get away faster!"
+    },
+    "stone": {
+      "titel": "Petrified!",
+      "text": "Erwin explained his guitar to you. You've turned to stone.",
+      "hinweis": "Time keeps running in fast-forward. Tip: keep away from the yellow circle around Erwin!",
+      "hinweisHubi": "Press E – Mascha licks you awake!"
+    },
+    "hospital": {
+      "titel": "In Hospital",
+      "text": "BAM – a car on the roundabout. The nurse: “Ilgplatz again, is it?”",
+      "hinweis": "Tip: only cross the road at the zebra crossing – the cars stop there."
+    },
+    "glued": {
+      "titel": "Glued to the floor!",
+      "text": "You're stuck to the café floor. The whole neighbourhood is celebrating you.",
+      "hinweis": "Now just wait for the reckoning at 23:00."
+    },
+    "frozen": {
+      "titel": "Just checking something real quick…",
+      "text": "A screen! You can't look away.",
+      "hinweis": "Back in a moment."
+    }
+  },
+  "musik": {
+    "an": "Music: on",
+    "aus": "Music: off",
+    "keinNetz": "Can't reach YouTube – no music.",
+    "gesperrt": "Sorry, this song can't be embedded on other sites.",
+    "fehler": "Music couldn't be loaded."
+  },
+  "rivalInfo": {
+    "hubi": "Hubi has lived here forever and is the reigning champ – his Reputation grows all by itself.",
+    "andi": "Andi calls himself the Mayor of the Stuwerviertel – and because he tells everyone, his Reputation grows all by itself. Show him who really lives here!"
+  },
+  "strassen": {
+    "hiller": "Hillerstraße",
+    "feuerbach": "Feuerbachstraße",
+    "obermuellner": "Obermüllnerstraße → Praterstern",
+    "schrotzberg": "Schrotzbergstraße"
+  },
+  "buero": {
+    "tuer": [
+      "Hubi's office. Small, but his.",
+      "Inside: Erwin's piano. And boxes. And a sign: 'NO TOILET!!!'"
+    ],
+    "wc": "The real loo. In the corner between the café and the museum. Cleaner than expected."
+  },
+  "klo": {
+    "zeigen": "The real loo is right next door, in the corner!",
+    "kurz": "Showed the way to the loo",
+    "dankKurz": "Hubi is grateful",
+    "kurzHubi": "Peace at the office",
+    "hubiSelbst": "Someone outside your office looking for the loo again!",
+    "bonusKurz": "Hubi's eternal gratitude",
+    "bonusBanner": "Hubi is SUPER grateful: “You're my loo hero!”"
+  },
+  "bernd": {
+    "wirdGrantiger": "Bernd is getting grumpier ({n}/{max})",
+    "start": "BERND IS DEADLY GRUMPY! He's breathing fire like a dragon – dodge the fireballs! (You're safe in the café.)",
+    "brueller": "RAAAAH!",
+    "getroffen": "Singed",
+    "ende": "Pfff. Get out of my sun.",
+    "gut": "Survived Bernd! Barely singed.",
+    "schlecht": "Survived – but singed {n}×."
+  },
+  "marco": {
+    "start": "MARCO HAD TOO MUCH BEER! He's throwing bottles outside Buffalo – the Kiwara are on their way!",
+    "brueller": "I'VE DONE THIS BEFORE…!",
+    "getroffen": "Beer bottle",
+    "zuWeit": "Too far away – get closer to Marco!",
+    "kiwaraHilfe": "You there! Help us out! Here, a water pistol with ice water – cool the gentleman down! (Space / A to squirt)",
+    "erfolg": "Marco has cooled off and is sleeping it off. The Kiwara say thanks!",
+    "verpasst": "The Kiwara caught Marco themselves – without you."
+  },
+  "ulli": {
+    "wiederZusammen": "Erwin and Ulli are back together! (For how long?)",
+    "getrennt": "Erwin and Ulli have split up. Again."
+  },
+  "minispiele": {
+    "feilschen": {
+      "titel": "willhaben haggling: {item}",
+      "hilfe": "Press A / Space when the needle is in the green zone – centre = perfect!",
+      "runde": "Round {n}/{max}",
+      "bieten": "BID!",
+      "perfekt": "PERFECT! “Alright, 'cause it's you.”",
+      "gut": "Good! “Fine, a bit lower.”",
+      "daneben": "Missed! “Nah, no way.”",
+      "deal": "Deal: {preis}"
+    },
+    "snake": {
+      "titel": "Bike Snake",
+      "hilfe": "Eat {n} bikes! Steer with arrow keys / WASD, on phone swipe or use the arrows. Don't hit the wall or yourself!",
+      "start": "Press a direction to start!",
+      "los": "Go!",
+      "gewonnen": "All bikes eaten! Didi is thrilled.",
+      "crash": "Bam! Crash."
+    }
+  }
+}

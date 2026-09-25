@@ -19,7 +19,8 @@ Auftraggeber ist Andreas (kein Programmierer) – keine Rückfragen, einfache ro
 ```
 index.html          Einstieg, lädt Phaser + js/*
 css/style.css       Overlay-UI
-data/dialoge.json   ALLE Texte (Dialoge, Aufträge, Events, UI)
+data/dialoge.json   ALLE Texte (Dialoge, Aufträge, Events, UI) – Deutsch (Standard)
+data/dialoge_en.json  dieselben Texte auf Englisch (gleiche Struktur! neue Schlüssel immer in beiden anlegen)
 data/balance.json   ALLE Zahlen (Zeiten, Punkte, Preise)
 js/util.js          T(), B(), Helfer, globaler Spielzustand G
 js/audio.js         Soundeffekte (Web Audio)

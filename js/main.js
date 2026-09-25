@@ -14,11 +14,14 @@ class BootScene extends Phaser.Scene {
   preload() {
     const v = window.ASSET_V ? '?v=' + window.ASSET_V : '';
     this.load.json('dialoge', 'data/dialoge.json' + v);
+    this.load.json('dialoge_en', 'data/dialoge_en.json' + v);
     this.load.json('balance', 'data/balance.json' + v);
     this.load.on('loaderror', (f) => { console.warn('Konnte nicht laden:', f && f.key); });
   }
   create() {
-    DATA.dialoge = this.cache.json.get('dialoge') || {};
+    DATA.texte.de = this.cache.json.get('dialoge') || {};
+    DATA.texte.en = this.cache.json.get('dialoge_en') || {};
+    Lang.init();
     DATA.balance = this.cache.json.get('balance') || {};
     const go = () => {
       generateAllTextures(this);

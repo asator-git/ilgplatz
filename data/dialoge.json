@@ -45,7 +45,11 @@
     "rueckstand": "Dir fehlen {n} auf {rivale} – mach Aufträge (gelbes !).",
     "aktuellerAuftrag": "Aktueller Auftrag",
     "buero": "Hubis Büro",
-    "wc": "WC"
+    "wc": "WC",
+    "tonAn": "♪ Ton: an",
+    "tonAus": "♪ Ton: aus",
+    "smsVon": "SMS von {name}",
+    "hunger": "Hunger"
   },
   "raenge": {
     "zuagraster": "Zuagraster",

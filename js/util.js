@@ -3,7 +3,24 @@
 // ---------------------------------------------------------------
 'use strict';
 
-const DATA = { dialoge: {}, balance: {} };
+const DATA = { dialoge: {}, balance: {}, texte: { de: {}, en: {} } };
+
+// Sprache: Deutsch ist Standard, Englisch wählbar (gemerkt im localStorage)
+const Lang = {
+  cur: 'de',
+  init() {
+    let l = null;
+    try { l = window.localStorage.getItem('ilgplatz_lang'); } catch (e) { /* egal */ }
+    if (URLP.lang) l = URLP.lang;
+    this.set(l === 'en' ? 'en' : 'de', true);
+  },
+  set(l, silent) {
+    this.cur = (l === 'en' && DATA.texte.en && DATA.texte.en.ui) ? 'en' : 'de';
+    DATA.dialoge = DATA.texte[this.cur] && Object.keys(DATA.texte[this.cur]).length ? DATA.texte[this.cur] : DATA.texte.de;
+    try { document.documentElement.lang = this.cur; } catch (e) { /* egal */ }
+    if (!silent) { try { window.localStorage.setItem('ilgplatz_lang', this.cur); } catch (e) { /* egal */ } }
+  }
+};
 const TILE = 16;
 
 // URL-Parameter (Debug): ?figur=hubi&speed=20&start=14:00
@@ -81,7 +98,7 @@ function shuffle(arr) {
   return a;
 }
 function dist(ax, ay, bx, by) { return Math.hypot(ax - bx, ay - by); }
-function euro(x) { return (Math.round(x * 100) / 100).toFixed(2).replace('.', ',') + ' €'; }
+function euro(x) { const v = (Math.round(x * 100) / 100).toFixed(2); return Lang.cur === 'en' ? '€' + v : v.replace('.', ',') + ' €'; }
 function clockStr(min) {
   const m = Math.max(0, Math.floor(min));
   const h = Math.floor(m / 60) % 24;

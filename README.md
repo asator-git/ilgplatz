@@ -67,9 +67,14 @@ Buffalo Hot Wings (Schrotzbergstraße 1). Zwischen Café und Museum: Hubis Büro
 15:00 Erwins Gipsy-Konzert · 17:00 Doppler-Frau · 19:00 Rückkehr der Zuhälter ·
 21:00 Nacht (Dezentral offen, Kiwara doppelt) · 22:00 Finale (Kleber ab 450 Ansehen) · 23:00 Abrechnung.
 
+## Sprache / Language
+
+Standard ist Deutsch. Am Startbildschirm oben kann man auf **English** umschalten (wird gemerkt).
+Direkter Link zur englischen Version: `…/ilgplatz/?lang=en`
+
 ## Texte & Zahlen ändern (ohne Programmieren)
 
-- **Alle Texte / Dialoge / Schmäh:** `data/dialoge.json`
+- **Alle Texte / Dialoge / Schmäh:** `data/dialoge.json` (Deutsch) und `data/dialoge_en.json` (Englisch – gleicher Aufbau)
   Einfach die Sätze zwischen den Anführungszeichen ändern. Listen `[ "…", "…" ]` = mehrere Varianten.
   Platzhalter wie `{preis}`, `{rivale}`, `{spieler}`, `{name}` bitte stehen lassen.
 - **Alle Zahlen (Zeiten, Punkte, Preise):** `data/balance.json`

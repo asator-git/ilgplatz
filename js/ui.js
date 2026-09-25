@@ -28,12 +28,21 @@ const UI = {
     $('btnMute').addEventListener('touchstart', (e) => { e.preventDefault(); e.stopPropagation(); Sfx.unlock(); Sfx.toggleMute(); this.syncMute(); }, { passive: false });
     this.syncMute();
     if (typeof Music !== 'undefined') Music.init();
+    this.applyStaticTexts();
     // Portraits für Menüs vorbereiten
     for (const id of Object.keys(CHAR_STYLES)) this.portraits[id] = textureDataURL(bootScene, 'ch_' + id, 0, 4);
     this.portraits.mascha = textureDataURL(bootScene, 'mascha', 0, 4);
   },
 
   syncMute() { $('btnMute').classList.toggle('off', Sfx.muted); },
+
+  // Texte, die direkt im HTML stehen
+  applyStaticTexts() {
+    const h = document.querySelector('#hudHunger span');
+    if (h) h.textContent = T('ui.hunger', null, 'Hunger');
+    document.title = T('ui.titel', null, 'Bürgermeister vom Stuwerviertel') + ' – ' + T('ui.untertitel', null, 'Ein Tag am Ilgplatz');
+    this.portraitsDone = true;
+  },
 
   // ---- Eingabe-Routing ----
   onInput(ev, arg) {
@@ -201,7 +210,7 @@ const UI = {
   sms(from, text, ms) {
     const el = document.createElement('div');
     el.className = 'sms';
-    el.innerHTML = `<b>✉ SMS von ${escapeHtml(from)}</b>${escapeHtml(text)}`;
+    el.innerHTML = `<b>✉ ${escapeHtml(T('ui.smsVon', { name: from }, 'SMS von {name}'))}</b>${escapeHtml(text)}`;
     $('ui').appendChild(el);
     setTimeout(() => { if (el.parentNode) el.parentNode.removeChild(el); }, ms || 4500);
   },
@@ -373,12 +382,13 @@ const UI = {
     const html = `<div class="menu">
       <div class="title">${escapeHtml(T('ui.titel', null, 'Bürgermeister vom Stuwerviertel'))}</div>
       <div class="subtitle">${escapeHtml(T('ui.untertitel', null, 'Ein Tag am Ilgplatz'))}</div>
-      ${DATA.dialoge && DATA.dialoge.ui ? '' : '<div class="box" style="color:#ef476f">Achtung: Die Texte (data/dialoge.json) konnten nicht geladen werden. Starte das Spiel bitte über einen Webserver, z. B. im Ordner: python3 -m http.server 8000 → http://localhost:8000</div>'}
+      <div class="langsw"><button class="bigbtn ${Lang.cur === 'de' ? 'sel' : 'alt'}" id="lDe">Deutsch</button><button class="bigbtn ${Lang.cur === 'en' ? 'sel' : 'alt'}" id="lEn">English</button></div>
+      ${DATA.dialoge && DATA.dialoge.ui ? '' : '<div class="box" style="color:#ef476f">Achtung / Warning: data/dialoge.json konnte nicht geladen werden / could not be loaded. Bitte über einen Webserver starten / please start via a web server: python3 -m http.server 8000 → http://localhost:8000</div>'}
       <div class="box" style="text-align:center">${escapeHtml(T('ui.waehleFigur', null, 'Wähle deine Figur:'))}</div>
       <div class="cards">${cards}</div>
       <div class="box"><h3>${escapeHtml(T('ui.steuerungTitel', null, 'Steuerung'))}</h3>${TL('ui.steuerung', ['Pfeiltasten/WASD: gehen', 'Leertaste: Aktion', 'E: Spezial', 'Esc: Pause']).map(escapeHtml).join('<br>')}</div>
       <div class="box"><h3>${escapeHtml(T('ui.highscoreTitel', null, 'Highscores'))}</h3>${this.highscoreHTML()}</div>
-      <div class="box" style="text-align:center"><button class="bigbtn alt musicToggle" id="tMusic">${escapeHtml(Music.label())}</button> <button class="bigbtn alt" id="tMute">${Sfx.muted ? '♪ Ton: aus' : '♪ Ton: an'}</button></div>
+      <div class="box" style="text-align:center"><button class="bigbtn alt musicToggle" id="tMusic">${escapeHtml(Music.label())}</button> <button class="bigbtn alt" id="tMute">${escapeHtml(Sfx.muted ? T('ui.tonAus', null, '♪ Ton: aus') : T('ui.tonAn', null, '♪ Ton: an'))}</button></div>
     </div>`;
     let sel = 0;
     const mark = () => document.querySelectorAll('.card').forEach((c, i) => c.classList.toggle('sel', i === sel));
@@ -392,7 +402,10 @@ const UI = {
     const mu = $('tMusic');
     if (mu) mu.addEventListener('click', () => { Sfx.unlock(); Music.toggle(); });
     const m = $('tMute');
-    if (m) m.addEventListener('click', () => { Sfx.unlock(); Sfx.toggleMute(); this.syncMute(); m.textContent = Sfx.muted ? '♪ Ton: aus' : '♪ Ton: an'; });
+    if (m) m.addEventListener('click', () => { Sfx.unlock(); Sfx.toggleMute(); this.syncMute(); m.textContent = Sfx.muted ? T('ui.tonAus', null, '♪ Ton: aus') : T('ui.tonAn', null, '♪ Ton: an'); });
+    const sw = (l) => () => { Sfx.unlock(); Lang.set(l); this.applyStaticTexts(); this.showTitle(); };
+    $('lDe').addEventListener('click', sw('de'));
+    $('lEn').addEventListener('click', sw('en'));
   },
 
   helpHTML() {
