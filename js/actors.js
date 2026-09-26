@@ -32,7 +32,7 @@ class Actor {
     this.baseSpeed = this.speed;
     this.sprite = scene.add.sprite(this.x, this.y, this.texKey, 0).setOrigin(0.5, 1);
     const zoom = (scene.cameras && scene.cameras.main) ? scene.cameras.main.zoom : 4;
-    this.label = scene.add.text(this.x, this.y - 25, opts.noLabel ? '' : this.name, LABEL_STYLE).setOrigin(0.5, 1).setResolution(Math.max(2, zoom));
+    this.label = scene.add.text(this.x, this.y - 25, opts.noLabel ? '' : this.name, LABEL_STYLE).setOrigin(0.5, 1).setResolution(Math.min(IS_ANDROID ? 3 : 8, Math.max(2, zoom)));
     if (opts.labelColor) this.label.setColor(opts.labelColor);
     this.icon = scene.add.image(this.x, this.y - 32, 'ic_excl').setVisible(false).setOrigin(0.5, 1);
     this.state = 'normal';

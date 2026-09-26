@@ -3,8 +3,9 @@
 // ---------------------------------------------------------------
 'use strict';
 
+// Android-Geräte haben oft hochauflösende Displays, aber wenig Grafikspeicher → sparsamer rendern
 function viewSize() {
-  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  const dpr = Math.min(window.devicePixelRatio || 1, IS_ANDROID ? 1.5 : 2);
   const w = Math.max(320, window.innerWidth || 800), h = Math.max(320, window.innerHeight || 600);
   return { w: Math.round(w * dpr), h: Math.round(h * dpr), dpr };
 }
@@ -59,10 +60,25 @@ function backToTitle() {
   UI.showTitle();
 }
 
+// Merkt sich, wenn WebGL am Gerät schon einmal abgestürzt ist → dann gleich Canvas verwenden
+function safeCanvas() { try { return window.localStorage.getItem('ilgplatz_canvas') === '1'; } catch (e) { return false; } }
+
+// Sichtbare Fehlermeldung statt schwarzem Bildschirm
+function showFatal(msg) {
+  const el = document.getElementById('loading');
+  if (!el) return;
+  el.classList.remove('hidden');
+  el.style.flexDirection = 'column'; el.style.padding = '20px'; el.style.textAlign = 'center'; el.style.lineHeight = '1.8';
+  el.innerHTML = '<div>Hoppla / Oops!</div><div style="font-size:10px;color:#fff8e7;margin:12px 0">' + escapeHtml(msg) + '</div>'
+    + '<button class="bigbtn" onclick="try{localStorage.setItem(\'ilgplatz_canvas\',\'1\')}catch(e){};location.reload()">Neu laden / Reload</button>';
+}
+window.addEventListener('error', (e) => { if (!window.GAME || !window.GAME.isBooted) showFatal((e && e.message) || 'Fehler beim Start'); });
+
 window.addEventListener('load', () => {
   const s = viewSize();
   const config = {
-    type: Phaser.AUTO,
+    // ?renderer=canvas erzwingt die einfache Darstellung (falls WebGL am Gerät Probleme macht)
+    type: (URLP.renderer === 'canvas' || safeCanvas()) ? Phaser.CANVAS : Phaser.AUTO,
     parent: 'game',
     backgroundColor: '#1b1b2f',
     pixelArt: true,
@@ -74,12 +90,24 @@ window.addEventListener('load', () => {
   };
   try {
     window.GAME = new Phaser.Game(config);
+    // WebGL-Kontext verloren (typisch Android beim App-Wechsel): speichern und neu laden
+    window.GAME.events.once('ready', () => {
+      const c = window.GAME.canvas;
+      if (!c) return;
+      c.addEventListener('webglcontextlost', (e) => {
+        e.preventDefault();
+        try { if (window.WORLD) SaveGame.save(window.WORLD); } catch (err) { /* egal */ }
+        try { window.localStorage.setItem('ilgplatz_canvas', '1'); } catch (err) { /* egal */ }
+        setTimeout(() => location.reload(), 300);
+      }, false);
+    });
   } catch (e) {
     const el = document.getElementById('loading');
     if (el) el.textContent = 'Fehler beim Start: ' + e.message;
     return;
   }
   Input.init();
+  setTimeout(() => { const el = document.getElementById('loading'); if (el && !el.classList.contains('hidden')) showFatal('Das Spiel lädt nicht. Bitte Internet prüfen und neu laden. / The game does not load – check your connection and reload.'); }, 15000);
   let rt = null;
   const onResize = () => {
     clearTimeout(rt);

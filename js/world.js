@@ -261,7 +261,7 @@ class WorldScene extends Phaser.Scene {
   // Anzeige-Helfer
   floatText(x, y, text, color) {
     const t = this.add.text(x, y, text, { fontFamily: '"Press Start 2P", monospace', fontSize: '6px', color: color || '#fff', stroke: '#000', strokeThickness: 2 })
-      .setOrigin(0.5, 1).setDepth(30000).setResolution(this.zoom || 4);
+      .setOrigin(0.5, 1).setDepth(30000).setResolution(Math.min(IS_ANDROID ? 3 : 8, this.zoom || 4));
     this.tweens.add({ targets: t, y: y - 16, alpha: 0, duration: 1400, onComplete: () => t.destroy() });
   }
 
@@ -272,7 +272,7 @@ class WorldScene extends Phaser.Scene {
     const t = this.add.text(actor.x, actor.y - 30, text, {
       fontFamily: '"Press Start 2P", monospace', fontSize: '4px', color: '#111', backgroundColor: '#fff8e7',
       padding: { x: 2, y: 2 }, wordWrap: { width: 90 }, align: 'center'
-    }).setOrigin(0.5, 1).setDepth(29000).setResolution(this.zoom || 4);
+    }).setOrigin(0.5, 1).setDepth(29000).setResolution(Math.min(IS_ANDROID ? 3 : 8, this.zoom || 4));
     actor.bubble = t;
     t.owner = actor;
     t.until = G.realMs + (ms || 2600);

@@ -22,6 +22,8 @@ const Lang = {
   }
 };
 const TILE = 16;
+const IS_ANDROID = /Android/i.test((typeof navigator !== 'undefined' && navigator.userAgent) || '');
+const TEXT_RES = IS_ANDROID ? 3 : 6; // Auflösung von Schildern/Texten (Android: sparsamer)
 
 // URL-Parameter (Debug): ?figur=hubi&speed=20&start=14:00
 const URLP = (() => {

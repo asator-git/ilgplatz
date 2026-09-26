@@ -421,7 +421,7 @@ function placeObjects(scene, grid) {
     const tx = scene.add.text((sh.door.x + 0.5) * TILE, sh.door.y * TILE - 2, label, {
       fontFamily: '"Press Start 2P", monospace', fontSize: isCafe ? '5px' : '6px', color: isCafe ? '#ffd166' : '#fff8e7',
       backgroundColor: isCafe ? '#1b1b2fdd' : '#3d2b1fcc', padding: { x: 2, y: 2 }
-    }).setOrigin(0.5, 1).setDepth(5000).setResolution(6);
+    }).setOrigin(0.5, 1).setDepth(5000).setResolution(TEXT_RES);
     objs.signs.push(tx);
   }
   const stern = scene.add.text(4 * TILE, 16 * TILE - 2, T('orte.stern', null, '← Praterstern'), {
@@ -431,7 +431,7 @@ function placeObjects(scene, grid) {
   for (const [t, key, fb, col] of [[LOC.office, 'orte.buero', 'Hubis Büro', '#fff8e7'], [LOC.wc, 'orte.wc', 'WC', '#90e0ef']]) {
     objs.signs.push(scene.add.text(t.x * TILE - 1, (t.y + 0.5) * TILE, T(key, null, fb), {
       fontFamily: '"Press Start 2P", monospace', fontSize: '4px', color: col, backgroundColor: '#1b1b2fdd', padding: { x: 1, y: 1 }
-    }).setOrigin(1, 0.5).setDepth(4950).setResolution(6));
+    }).setOrigin(1, 0.5).setDepth(4950).setResolution(TEXT_RES));
   }
   for (const st of STREETS) {
     if (st.id === 'obermuellner') continue; // dort hängt das Praterstern-Schild
@@ -440,7 +440,7 @@ function placeObjects(scene, grid) {
     const sx = (t.x + 0.5 + n.x * 4.2) * TILE, sy = (t.y + 0.5 + n.y * 4.2) * TILE;
     objs.signs.push(scene.add.text(sx, sy, T('strassen.' + st.id, null, st.name), {
       fontFamily: '"Press Start 2P", monospace', fontSize: '4px', color: '#ffffff', backgroundColor: '#1d3557dd', padding: { x: 2, y: 1 }
-    }).setOrigin(0.5).setDepth(4900).setResolution(6));
+    }).setOrigin(0.5).setDepth(4900).setResolution(TEXT_RES));
   }
   return objs;
 }
