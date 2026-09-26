@@ -294,7 +294,14 @@ function makeObjects(scene) {
     p(11, 4, 4, 2, c3); p(20, 8, 3, 2, c3); p(9, 10, 2, 2, c3);
     p(6, 19, 20, 3, shade(c1, -0.3));
   }, true);
-  tree('tree_plum', '#7b1e3a', '#a4264d', '#d45079');
+  tree('tree_plum', '#2d6a4f', '#40916c', '#52b788');
+  // Blütenkerzen der Rosskastanie
+  {
+    const t = scene.textures.get('tree_plum'), ctx = t.getContext();
+    const candle = (x, y) => { ctx.fillStyle = '#fff8e7'; ctx.fillRect(x, y, 2, 4); ctx.fillRect(x + 0.5, y - 1, 1, 1); ctx.fillStyle = '#ffadad'; ctx.fillRect(x, y + 2, 1, 1); };
+    [[8, 5], [14, 3], [20, 6], [11, 10], [18, 11], [24, 12], [7, 14], [15, 15], [22, 16]].forEach(([x, y]) => candle(x, y));
+    t.refresh();
+  }
   tree('tree_green', '#7ac74f', '#a1e06a', '#c9f59b');
   // Bank 48x14
   makeCanvasTex(scene, 'bench', 48, 14, (p) => {

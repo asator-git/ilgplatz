@@ -194,6 +194,15 @@
         "Ka Essen, ka Schmäh. So einfach is des.",
         "Wenn ma no amoi wer 'Hafermilch' sagt…",
         "Grrr. Deewan. Jetzt."
+      ],
+      "verliebt": [
+        "*Schmatz!* Schatzi! Du bist des Schönste am ganzen Ilgplatz. Nach mir. Na, VOR mir!",
+        "*Schmatz!* Mei Carla! I bin Bürgermeister, aber du bist die Bürgermeisterin von mei Herz.",
+        "*Schmatz!* Wennst mi so anschaust, vergiss i sogar mein Hunger. Fast.",
+        "*Schmatz!* Dein Rad find ma. Und wenn ned, kauf i dir zehn.",
+        "*Schmatz!* Graz hat di gschickt, damit i endlich glücklich bin.",
+        "Schatziii! ♥",
+        "Da is ja mei Carla! ♥"
       ]
     },
     "carla": {
@@ -206,6 +215,15 @@
         "Ich hab mich heut schon dreimal verlaufen. Und ich wohn da.",
         "Weißt du, wo mein Rad is? Nein, sag nix, ich rat: beim Michi!",
         "Der Andi sagt, Wien ist wie Graz, nur größer. Ich find, es ist wie Graz, nur teurer."
+      ],
+      "verliebt": [
+        "*Schmatz!* Andiii! Du bist so süß, wenn du grantig bist. Und wenn du ned grantig bist.",
+        "*Schmatz!* Mein Bürgermeister! In Graz gibt's so wen wie di ned.",
+        "*Schmatz!* Ich hab mich heut nur einmal verlaufen – weil ich an dich gedacht hab.",
+        "*Schmatz!* Hast du Hunger? Ich hab da irgendwo a Semmel. Glaub ich.",
+        "*Schmatz!* Mit dir brauch ich gar kein Rad. Aber ich will's trotzdem zurück.",
+        "Andiii! ♥",
+        "Mein Bürgermeister! ♥"
       ]
     },
     "juliette": {
@@ -240,7 +258,7 @@
         "Das Licht hier um fünf am Nachmittag? Göttlich. Die Leute um fünf? Gemischt.",
         "Ich bin nur zweimal die Woche hier. Das reicht, um alles zu wissen.",
         "Der Schlosser hat 'Pakete'. Ich hab Fotos. Sag ich nur.",
-        "Die Blutpflaumen sind das Schönste am Platz. Gleich nach meinem Objektiv.",
+        "Die Kastanien, wenn sie blühen? Das Schönste am Platz. Gleich nach meinem Objektiv.",
         "Ich hab heut noch Therapie. Vorher brauch ich einen Kaffee. Das ist Teil der Therapie.",
         "Meine Therapeutin sagt, ich soll weniger durch die Linse schauen. Ich hab sie fotografiert."
       ],
@@ -1240,17 +1258,17 @@
     "foto": {
       "titel": "Jewis Fotoauftrag",
       "angebot": [
-        "Ich brauch drei Motive für meine Ausstellung: 'Ilgplatz – Zwischen Pflaume und Tesla'.",
-        "Die Quelle, eine Blutpflaume und den schwarzen Tesla. Hier, nimm meine Kamera. Pass auf den Marco auf."
+        "Ich brauch drei Motive für meine Ausstellung: 'Ilgplatz – Zwischen Kastanie und Tesla'.",
+        "Die Quelle, eine blühende Kastanie und den schwarzen Tesla. Hier, nimm meine Kamera. Pass auf den Marco auf."
       ],
-      "hud": "Fotografiere: Quelle {q} · Blutpflaume {p} · Tesla {t}",
+      "hud": "Fotografiere: Quelle {q} · Kastanie {p} · Tesla {t}",
       "hudKamera": "Kamera verloren! Frag Jewi nach einer neuen.",
       "neueKamera": "Jewi, i hab die Kamera… verlegt.",
       "label_quelle": "Foto: Quelle",
-      "label_pflaume": "Foto: Blutpflaume",
+      "label_pflaume": "Foto: Kastanienbaum",
       "label_tesla": "Foto: Tesla",
       "klick_quelle": "Klick! Die Quelle glitzert.",
-      "klick_pflaume": "Klick! Dunkelrot wie ein Zweigelt.",
+      "klick_pflaume": "Klick! Die Kastanie blüht wie im Prater.",
       "klick_tesla": "Klick! Schwarz, glänzend, bewacht.",
       "marco": "Tesla. MEINS. Weg.",
       "erfolg": "Alle Motive im Kasten! Jewi ist begeistert."
@@ -1416,7 +1434,7 @@
     "semmelText": "Na freilich! A Wurstsemmel. I hab eh drei."
   },
   "intro": [
-    "Es ist 8 Uhr früh am Ilgplatz. Die Blutpflaumen leuchten, die Quelle plätschert, und der Americano kostet schon wieder mehr als gestern.",
+    "Es ist 8 Uhr früh am Ilgplatz. Die Kastanien blühen, die Quelle plätschert, und der Americano kostet schon wieder mehr als gestern.",
     "Heute ist Abrechnung: Oben in der Mitte siehst du das DUELL – dein Ansehen (grün) gegen {rivale} (rot). {rivalInfo} Wer um 23 Uhr vorne liegt, ist Bürgermeister vom Stuwerviertel.",
     "Ansehen kriegst du für Aufträge: Leute mit gelbem ! haben welche. Dein aktueller Auftrag steht unten (▶), der gelbe Pfeil zeigt den Weg. Links oben: Uhr, Geld und das nächste Tages-Event. Erster Schritt: Geh ins Café und red mit Daniel."
   ],
@@ -1651,5 +1669,12 @@
     "fehler": "Speichern ging leider nicht.",
     "geladen": "Weiter geht's um {zeit}!",
     "autoHinweis": "Das Spiel speichert auch automatisch. Beim nächsten Start: „Weiterspielen“."
+  },
+  "liebe": {
+    "schmatz": [
+      "*Schmatz!*",
+      "*Schmatz schmatz!*",
+      "*Bussi!*"
+    ]
   }
 }

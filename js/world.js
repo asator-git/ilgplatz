@@ -48,6 +48,7 @@ class WorldScene extends Phaser.Scene {
     this.grid = buildGrid();
     renderMap(this, this.grid);
     this.objs = placeObjects(this, this.grid);
+    sanitizeLocations(this.grid);
     this.fountainT = 0;
     this.hudT = 0;
     this.targetT = 0;
@@ -428,6 +429,11 @@ class WorldScene extends Phaser.Scene {
     p.updateState();
     // Sicherheitsnetz: Lähmende Zustände ohne Ablaufzeit gibt es nicht → sofort lösen
     if (p.isImmobile() && !p.stateUntilMin && !p.stateUntilMs) { p.clearState(); p.onStateEnd = null; UI.unfade(); }
+    // Sicherheitsnetz: Figur steckt in einer Wand/Bank → aufs nächste freie Feld
+    if (!p.isImmobile() && p.sprite.visible && !this.tweens.isTweening(p)) {
+      if (this.playerBlocked(p.x, p.y)) { this.stuckMs = (this.stuckMs || 0) + dt; if (this.stuckMs > 300) { this.stuckMs = 0; this.teleportPlayer(p.tx, p.ty); } }
+      else this.stuckMs = 0;
+    }
     // Sicherheitsnetz: Dialog offen, aber unsichtbar → schließen
     if (UI.dlg && document.getElementById('dialog').classList.contains('hidden')) UI.closeAllDialogs();
     p.moving = false;
@@ -507,9 +513,16 @@ class WorldScene extends Phaser.Scene {
 
   // Spieler an eine freie Stelle setzen
   teleportPlayer(tx, ty) {
-    const f = randomWalkableNear(this.grid, tx, ty, 0);
-    this.player.setPos(f.x * TILE + 8, f.y * TILE + 14);
-    this.cameras.main.centerOn(this.player.x, this.player.y);
+    const p = this.player;
+    const g = this.grid;
+    const ok = (x, y) => x >= 0 && y >= 0 && x < MAP_W && y < MAP_H && !g.solid[y][x] && !this.playerBlocked(x * TILE + 8, y * TILE + 13);
+    let best = null;
+    for (let r = 0; r <= 8 && !best; r++)
+      for (let dy = -r; dy <= r && !best; dy++) for (let dx = -r; dx <= r && !best; dx++)
+        if (Math.max(Math.abs(dx), Math.abs(dy)) === r && ok(tx + dx, ty + dy)) best = { x: tx + dx, y: ty + dy };
+    if (!best) best = { x: LOC.start.x, y: LOC.start.y };
+    p.setPos(best.x * TILE + 8, best.y * TILE + 13);
+    this.cameras.main.centerOn(p.x, p.y);
   }
 
   // Tagesende

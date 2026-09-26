@@ -151,7 +151,8 @@ const NPCs = {
     if (blocked) {
       text = T('allgemein.grantigGespraech', null, 'Geh, lass mi in Ruh.');
     } else {
-      text = this.lineFor(a);
+      text = (typeof Specials !== 'undefined' && Specials.isLoverTalk(a) && a.state === 'normal') ? TN('npc.' + a.id + '.verliebt', a.talkIdx++) : this.lineFor(a);
+      if (typeof Specials !== 'undefined' && Specials.isLoverTalk(a)) Specials.kiss(scene, a);
       // +2 Ansehen, einmal pro Spielstunde pro NPC
       const hour = Math.floor(G.minute / 60);
       const canRep = a.state === 'normal' && a.talkRep !== false && ['friend', 'shop', 'extra', 'dog'].includes(a.kind);

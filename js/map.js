@@ -445,5 +445,21 @@ function placeObjects(scene, grid) {
   return objs;
 }
 
+// Nach placeObjects(): alle festen Punkte, die jetzt in Bank/Baum/Terminal liegen, auf das nächste freie Feld schieben
+function sanitizeLocations(grid) {
+  const free = (x, y) => x >= 0 && y >= 0 && x < MAP_W && y < MAP_H && !grid.solid[y][x] && ![TI.ROAD, TI.ZEBRA, TI.ZEBRA_H].includes(grid.ground[y][x]);
+  const fix = (p) => {
+    if (!p || !grid.solid[p.y] || !grid.solid[p.y][p.x]) return;
+    for (let r = 1; r <= 6; r++)
+      for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++)
+        if (Math.max(Math.abs(dx), Math.abs(dy)) === r && free(p.x + dx, p.y + dy)) { p.x += dx; p.y += dy; return; }
+  };
+  for (const k of ['start', 'cafeFront', 'marcoHome', 'opaSpot', 'spawnMeadow', 'hubiWait', 'concert', 'bikeSpot', 'marcoBar', 'socketFront']) fix(LOC[k]);
+  [LOC.meadow, LOC.cafeSeats, LOC.wander, LOC.sternSpots, LOC.swSpots, LOC.mapEdgeSpots].forEach(list => (list || []).forEach(fix));
+  for (const k in LOC.spawns) { const v = LOC.spawns[k]; (Array.isArray(v) ? v : [v]).forEach(fix); }
+  for (const k in LOC.streetEnds || {}) fix(LOC.streetEnds[k]);
+  (LOC.benchSeats || []).forEach(s => fix(s.front));
+}
+
 // Node-Export für Tests
 if (typeof module !== 'undefined') module.exports = { buildGrid, findPath, LOC, MAP_W, MAP_H, STREETS };

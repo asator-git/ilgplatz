@@ -194,6 +194,15 @@
         "No food, no jokes. Simple as that.",
         "If one more person says 'oat milk'…",
         "Grrr. Deewan. Now."
+      ],
+      "verliebt": [
+        "*Smooch!* Sweetheart! You're the prettiest thing on the whole of Ilgplatz. After me. No – BEFORE me!",
+        "*Smooch!* My Carla! I'm the mayor, but you're the mayoress of my heart.",
+        "*Smooch!* When you look at me like that I even forget I'm hungry. Almost.",
+        "*Smooch!* We'll find your bike. And if we don't, I'll buy you ten.",
+        "*Smooch!* Graz sent you so I'd finally be happy.",
+        "Sweetieee! ♥",
+        "There's my Carla! ♥"
       ]
     },
     "carla": {
@@ -206,6 +215,15 @@
         "I've got lost three times today. And I live here.",
         "Know where my bike is? No, don't tell me, let me guess: Michi's!",
         "Andi says Vienna's like Graz, only bigger. I say it's like Graz, only pricier."
+      ],
+      "verliebt": [
+        "*Smooch!* Andiii! You're so cute when you're grumpy. And when you're not grumpy.",
+        "*Smooch!* My mayor! There's no one like you in Graz.",
+        "*Smooch!* I only got lost once today – because I was thinking of you.",
+        "*Smooch!* Are you hungry? I've got a bread roll somewhere. I think.",
+        "*Smooch!* With you I don't even need a bike. But I still want it back.",
+        "Andiii! ♥",
+        "My mayor! ♥"
       ]
     },
     "juliette": {
@@ -240,7 +258,7 @@
         "The light here at five p.m.? Divine. The people at five? Mixed.",
         "I'm only here twice a week. That's enough to know everything.",
         "The locksmith has 'parcels'. I have photos. Just saying.",
-        "The cherry plums are the prettiest thing on the square. Right after my lens.",
+        "The chestnut trees in bloom? Prettiest thing on the square. Right after my lens.",
         "Got therapy later. Need a coffee first. It's part of the therapy.",
         "My therapist says I should look through the lens less. I took her picture."
       ],
@@ -1240,17 +1258,17 @@
     "foto": {
       "titel": "Jewi's Photo Assignment",
       "angebot": [
-        "I need three subjects for my exhibition: 'Ilgplatz – Between Plum and Tesla'.",
-        "The fountain, a purple-leaf plum tree and the black Tesla. Here, take my camera. Watch out for Marco."
+        "I need three subjects for my exhibition: 'Ilgplatz – Between Chestnut and Tesla'.",
+        "The fountain, a blossoming chestnut tree and the black Tesla. Here, take my camera. Watch out for Marco."
       ],
-      "hud": "Photograph: fountain {q} · plum tree {p} · Tesla {t}",
+      "hud": "Photograph: fountain {q} · chestnut tree {p} · Tesla {t}",
       "hudKamera": "Camera lost! Ask Jewi for a new one.",
       "neueKamera": "Jewi, I've… misplaced the camera.",
       "label_quelle": "Photo: fountain",
-      "label_pflaume": "Photo: plum tree",
+      "label_pflaume": "Photo: chestnut tree",
       "label_tesla": "Photo: Tesla",
       "klick_quelle": "Click! The fountain sparkles.",
-      "klick_pflaume": "Click! Dark red like a glass of Zweigelt.",
+      "klick_pflaume": "Click! The chestnut's blooming like in the Prater.",
       "klick_tesla": "Click! Black, shiny, guarded.",
       "marco": "Tesla. MINE. Go away.",
       "erfolg": "All shots in the can! Jewi is thrilled."
@@ -1416,7 +1434,7 @@
     "semmelText": "Course I do! A sausage roll. I've got three anyway."
   },
   "intro": [
-    "It's 8 in the morning on Ilgplatz. The plum trees are glowing, the fountain is babbling, and the Americano costs more than yesterday. Again.",
+    "It's 8 in the morning on Ilgplatz. The chestnut trees are in bloom, the fountain is babbling, and the Americano costs more than yesterday. Again.",
     "Today is judgement day: at the top centre you see the DUEL – your Reputation (green) vs. {rivale} (red). {rivalInfo} Whoever is ahead at 23:00 becomes Mayor of the Stuwerviertel.",
     "You earn Reputation for tasks: people with a yellow ! have some. Your current task is shown at the bottom (▶), the yellow arrow shows the way. Top left: clock, money and the next event of the day. First step: go into the café and talk to Daniel."
   ],
@@ -1651,5 +1669,12 @@
     "fehler": "Sorry, saving didn't work.",
     "geladen": "Back at it – it's {zeit}!",
     "autoHinweis": "The game also saves automatically. Next time, just hit “Continue”."
+  },
+  "liebe": {
+    "schmatz": [
+      "*Smooch!*",
+      "*Smooch smooch!*",
+      "*Kiss!*"
+    ]
   }
 }

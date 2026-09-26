@@ -459,7 +459,37 @@ const Specials = {
     }
   },
 
+  // ---- Andi ♥ Carla ----
+  hearts(scene, x, y, n) {
+    for (let i = 0; i < (n || 7); i++) {
+      const h = scene.add.image(x + rnd(-6, 6), y + rnd(-4, 4), 'ic_heart').setDepth(29800).setScale(rnd(0.7, 1.2));
+      scene.tweens.add({ targets: h, x: h.x + rnd(-18, 18), y: h.y - rnd(22, 40), alpha: 0, scale: h.scale * 1.4, duration: rnd(900, 1500), delay: i * 60, ease: 'Sine.easeOut', onComplete: () => h.destroy() });
+    }
+  },
+
+  updateLovers(scene) {
+    const a = scene.actors.andi, c = scene.actors.carla;
+    if (!a || !c || !a.present || !c.present || G.ended) return;
+    if (dist(a.x, a.y, c.x, c.y) < B('liebe.abstand', 24) && G.realMs > (this.loveCd || 0) && !a.isImmobile() && !c.isImmobile()) {
+      this.loveCd = G.realMs + B('liebe.pauseSek', 8) * 1000;
+      this.hearts(scene, (a.x + c.x) / 2, Math.min(a.y, c.y) - 22, 9);
+      scene.say(a, TN('npc.andi.verliebt', a.talkIdx++), 2200);
+      scene.say(c, TN('npc.carla.verliebt', c.talkIdx++), 2200);
+      Sfx.play('laugh');
+    }
+  },
+
+  // Wenn Andi mit Carla redet (oder umgekehrt): Schmatzer!
+  isLoverTalk(a) { return (G.figur === 'andi' && a.id === 'carla') || (G.figur === 'carla' && a.id === 'andi'); },
+  kiss(scene, a) {
+    const p = scene.player;
+    this.hearts(scene, (a.x + p.x) / 2, Math.min(a.y, p.y) - 22, 12);
+    scene.say(p, T('liebe.schmatz', null, '*Schmatz!*'), 1800);
+    Sfx.play('laugh');
+  },
+
   update(scene, dt) {
+    this.updateLovers(scene);
     this.updateHausmasta(scene);
     this.updateBobos(scene);
     this.updateJewi(scene);

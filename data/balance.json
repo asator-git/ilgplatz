@@ -333,5 +333,9 @@
   },
   "speichern": {
     "autoSek": 20
+  },
+  "liebe": {
+    "abstand": 24,
+    "pauseSek": 8
   }
 }
